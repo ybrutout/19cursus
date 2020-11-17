@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isaplha.c                                       :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ctpy.h>
-#include 
+#include <ctype.h>
+#include <stdio.h>
 
 int		ft_isalpha(int c)
 {
@@ -30,5 +30,11 @@ int		main(void)
 	a = 166;
 	b = 92;
 
-	printf()
+	printf("essais : %d \n", ft_isalpha(c));
+	printf("essais : %d \n", ft_isalpha(a));
+	printf("essais : %d \n", ft_isalpha(b));
+	printf("vrai : %d \n", isalpha(c));
+	printf("vrai : %d \n", isalpha(a));
+	printf("vrai : %d \n", isalpha(b));
+	return (0);
 }
