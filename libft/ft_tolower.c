@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/17 12:01:38 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/17 12:24:27 by ybrutout         ###   ########.fr       */
+/*   Created: 2020/11/17 12:21:41 by ybrutout          #+#    #+#             */
+/*   Updated: 2020/11/17 12:29:37 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <ctype.h> 
 
-int		ft_toupper(int c)
+int		ft_tolower(int c)
 {
-	if(c >= 'a' && c <= 'z')
-		c = (c - 32);
+	if(c >= 'A' && c <= 'Z')
+		c = (c + 32);
 	return (c);
 }
 
@@ -28,20 +28,20 @@ int		main(void)
 	int d;
 	int e; 
 
-	a = 97;
-	b = 122;
-	c = 106;
+	a = 65;
+	b = 90;
+	c = 74;
 	d = 96;
-	e = -2147483648;
-	printf("faux : %d \n", ft_toupper(a));
-	printf("faux : %d \n", ft_toupper(b));
-	printf("faux : %d \n", ft_toupper(c));
-	printf("faux : %d \n", ft_toupper(d));
-	printf("faux : %d \n", ft_toupper(e));
-	printf("vrai : %d \n", toupper(a));
-	printf("vrai : %d \n", toupper(b));
-	printf("vrai : %d \n", toupper(c));
-	printf("vrai : %d \n", toupper(d));
-	printf("vrai : %d \n", toupper(e));
+	e = 1;
+	printf("faux : %d \n", ft_tolower(a));
+	printf("faux : %d \n", ft_tolower(b));
+	printf("faux : %d \n", ft_tolower(c));
+	printf("faux : %d \n", ft_tolower(d));
+	printf("faux : %d \n", ft_tolower(e));
+	printf("vrai : %d \n", tolower(a));
+	printf("vrai : %d \n", tolower(b));
+	printf("vrai : %d \n", tolower(c));
+	printf("vrai : %d \n", tolower(d));
+	printf("vrai : %d \n", tolower(e));
 	return (0);
 }
