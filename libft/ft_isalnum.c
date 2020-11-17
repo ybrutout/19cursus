@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:41:30 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/17 10:44:42 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/17 10:48:58 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 int		ft_isalnum(int c)
 {
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'))
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') \
+		|| (c >= '0' && c <= '9'))
 		return (1);
 	return (0);
 }
@@ -25,6 +26,10 @@ int		main(void)
 	int c;
 	int a;
 	int b;
+  	int e;
+	int f;
+	int g;
+	int h;
 
 	c = 110;
 	a = 166;
@@ -35,12 +40,6 @@ int		main(void)
 	printf("vrai : %d \n", isalnum(c));
 	printf("vrai : %d \n", isalnum(a));
 	printf("vrai : %d \n", isalnum(b));
-
-    int e;
-	int f;
-	int g;
-	int h;
-
 	e = 57;
 	f = 48;
 	g = 47;
