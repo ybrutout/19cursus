@@ -1,46 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/16 16:24:41 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/18 15:25:49 by ybrutout         ###   ########.fr       */
+/*   Created: 2020/11/18 13:12:54 by ybrutout          #+#    #+#             */
+/*   Updated: 2020/11/18 14:46:29 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
 
-void	*ft_memset(void *b, int c, size_t len)
+void	ft_bzero(char *s, size_t n)
 {
-	char *new_b;
-	size_t i; 
+	size_t	i;
+	char	*src;
 
 	i = 0;
-	new_b = (char *)b; 
-	while (i < len)
+	src = s;
+	while (i < n)
 	{
-		new_b[i] = c;
+		src[i] = 0;
 		i++;
 	}
-	
-	return (b);
 }
 
 int		main(void)
 {
-	char	src1[50] = "yannah loohan nahama";
-	char	src2[50] = "yannah loohan nahama";
-	int		c;
-	size_t	len;
+	char	src1[30] = "yannah loohan nahama";
+	char	src2[30] = "yannah loohan nahama";
+	size_t	n;
 
-	c = '-';
-	len = 2;
-	printf("avant memset : %s\n", src1);
-	printf("après memset : %s\n", ft_memset(src1, c, len));
-	printf("vrai avant memset : %s\n", src2);
-	printf("vrai après memset : %s\n", memset(src2, c, len));
-	return(0);
+	n = 2;
+	printf("avant ft : %s\n", src1);
+	ft_bzero(src1, n);
+	printf("après ft : %s \n", src1);
+	printf("avant vrai : %s\n", src2);
+	bzero(src2, n);
+	printf("après vrai : %s \n", src2);
+	return (0);
 }
