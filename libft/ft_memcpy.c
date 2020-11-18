@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:50:34 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/18 15:38:43 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/18 18:08:57 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 
 int		main(void)
 {
-	char 	dst[30] = "coucou comment ca va ?";
-	char 	dst2[30] = "coucou comment ca va ?";
-	char	src[30] = "yannah loohan nahama";
+	char 	dst[20] = "coucou comment ";
+	char 	dst2[20] = "coucou comment ";
+	//char	src[35] = "yannah et loohan et nahama";
 	size_t	n;
 
-	n = 20;
+	n = 10;
 	printf("F avant : %s\n", dst);
 	printf("V avant : %s\n", dst2);
-	ft_memcpy(dst, src, n);
-	memcpy(dst2, src, n);
+	ft_memcpy(dst, dst + 1, n);
+	memcpy(dst2, dst2 + 1, n);
 	printf("F apres : %s\n", dst);
 	printf("V apres : %s\n", dst2);
 	return (0);
