@@ -6,11 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 15:45:53 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/16 15:46:03 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/18 12:26:09 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strncmp(char *s1, char *s2, unsigned int n)
+int		ft_strncmp(char *s1, char *s2, int n)
 {
 	unsigned int i;
 
