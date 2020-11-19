@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 10:52:13 by ybrutout          #+#    #+#              #
-#    Updated: 2020/11/19 11:34:32 by ybrutout         ###   ########.fr        #
+#    Updated: 2020/11/19 12:28:10 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ SRC		=	ft_atoi.c \
 			ft_memchr.c \
 			ft_memcmp.c \
 			ft_memcpy.c \
-			ft_memmove.c \
 			ft_memset.c \
 			ft_strchr.c \
 			ft_strlcat.c \

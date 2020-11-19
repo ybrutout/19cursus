@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 16:29:56 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/19 11:57:06 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 12:27:51 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,4 @@ char    *ft_strrchr(const char *s, int c)
 	if (*src == (char)c)
 		return(src);
 	return ("\0");
-}
-
-int		main(void)
-{
-	char a[20] = "yannah";
-	char b[20] = "loohan";
-	char c[20] = "nahama";
-	int d = 0;
-	int e = 110;
-
-	printf("moi : %s\n", ft_strrchr(a, e));
-	printf("moi : %s\n", ft_strrchr(b, e));
-	printf("moi : %s\n", ft_strrchr(c, d));
-	printf("lui : %s\n", strrchr(a, e));
-	printf("lui : %s\n", strrchr(b, e));
-	printf("lui : %s\n", strrchr(c, d));
-	return (0);
 }

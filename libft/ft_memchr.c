@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 09:09:33 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/19 11:57:28 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 12:26:52 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,4 @@ void	*ft_memchr(const void *s, int c, size_t n)
 		i++;
 	}
 	return (NULL);
-}
-
-int		main(void)
-{
-	char	s[] = "yannahloohanetnahama";
-	int		c;
-	size_t	n;
-
-	c = 121;
-	n = 24;
-	printf("F new pointeur : %p\n", ft_memchr(s, c, n));
-	printf("V new pointeur : %p\n", memchr(s, c, n));
 }
