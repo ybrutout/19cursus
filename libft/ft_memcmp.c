@@ -6,12 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 09:43:09 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/19 10:07:54 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 11:57:26 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdio.h>
+#include "libft.h"
 
 int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {

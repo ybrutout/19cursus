@@ -6,12 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 16:05:29 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/18 17:04:23 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 11:57:30 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdio.h>
+#include "libft.h"
 
 void	*ft_memccpy(void *dst, const void *src,int c, size_t n)
 {

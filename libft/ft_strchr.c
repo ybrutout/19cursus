@@ -6,12 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 15:56:41 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/17 16:28:32 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 11:57:16 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {

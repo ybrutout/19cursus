@@ -6,12 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 12:21:41 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/17 12:29:37 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 11:57:04 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <ctype.h> 
+#include "libft.h"
 
 int		ft_tolower(int c)
 {

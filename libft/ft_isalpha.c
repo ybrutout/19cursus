@@ -6,12 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 17:29:55 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/17 10:31:58 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 11:57:39 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ctype.h>
-#include <stdio.h>
+#include "libft.h"
 
 int		ft_isalpha(int c)
 {

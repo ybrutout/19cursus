@@ -6,9 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 15:51:40 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/16 16:25:16 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 11:54:23 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 void	wh_space(char *str, int *i)
 {

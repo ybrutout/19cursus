@@ -6,12 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:28:12 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/17 10:44:05 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 11:57:34 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <ctype.h>
+#include "libft.h"
 
 int		ft_isdigit(int c)
 {

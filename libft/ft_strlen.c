@@ -6,12 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 15:42:48 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/19 10:21:30 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 11:57:10 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdio.h> 
+#include "libft.h"
 
 size_t		ft_strlen(const char *s)
 {

@@ -6,12 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 13:12:54 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/18 14:46:29 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 11:57:45 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
 void	ft_bzero(char *s, size_t n)
 {

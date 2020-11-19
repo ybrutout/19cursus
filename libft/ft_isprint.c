@@ -6,12 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:16:29 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/17 11:56:57 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 11:57:32 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <ctype.h>
+#include "libft.h"
 
 int     ft_isprint(int c)
 {

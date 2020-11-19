@@ -6,12 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:51:50 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/17 11:15:08 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 11:57:38 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <ctype.h>
+#include "libft.h"
 
 int		ft_isascii(int c)
 {

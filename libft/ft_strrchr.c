@@ -6,25 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 16:29:56 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/17 17:28:54 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 11:57:06 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <string.h>
-
-int		ft_strlen(char *str)
-{
-	long unsigned int i;
-
-	i = 0;
-	while (str[i])
-	{
-		i++;
-	}
-	return (i);
-}
 
 char    *ft_strrchr(const char *s, int c)
 {
