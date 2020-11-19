@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 16:29:56 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/19 11:57:06 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 14:22:34 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char    *ft_strrchr(const char *s, int c)
 	}
 	if (*src == (char)c)
 		return(src);
-	return ("\0");
+	return (0);
 }
 
 int		main(void)

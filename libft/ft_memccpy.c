@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 16:05:29 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/19 12:26:46 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 13:11:24 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*ft_memccpy(void *dst, const void *src,int c, size_t n)
 	while (i < n)
 	{
 		new_dst[i] = new_src[i];
-        if (new_src[i] == c)
+        if ((unsigned char) new_src[i] == (unsigned char) c)
         {
             i++;
             return (&dst[i]);

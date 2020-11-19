@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 16:05:29 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/19 11:57:30 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 13:10:59 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*ft_memccpy(void *dst, const void *src,int c, size_t n)
 	while (i < n)
 	{
 		new_dst[i] = new_src[i];
-        if (new_src[i] == c)
+        if ((unsigned char) new_src[i] == (unsigned char) c)
         {
             i++;
             return (&dst[i]);
@@ -42,8 +42,8 @@ int     main(void)
     int     c;
     size_t  n;
 
-    c = 'b';
-    n = 6;
+    c = 'v';
+    n = 8;
     printf("F avant : %s\n", dst);
     printf("V avant : %s\n", dst1);
     printf("F retour : %s\n",ft_memccpy (dst, src, c, n));

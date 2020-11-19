@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 15:45:53 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/19 11:57:08 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 12:33:23 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_strncmp(char *s1, char *s2, int n)
 {
-	unsigned int i;
+	int i;
 
 	i = 0;
 	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i] && i < n)

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 16:38:01 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/19 12:17:55 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 12:39:57 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <ctype.h>
+# include <stdio.h>
 
 int				ft_atoi(char *str);
 int				ft_isalnum(int c);
