@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 16:29:56 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/19 12:27:51 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 14:50:25 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ char    *ft_strrchr(const char *s, int c)
 
 	src = (char *)s;
     i = ft_strlen(src) - 1;
-	while (src[i])
+	if (c == 0)
+		return(src + i + 1);
+	while (i >= 0)
 	{
 		if ( src[i] == (char)c)
-			return (&src[i]);
+			return (src + i);
 		i--;
 	}
-	if (*src == (char)c)
-		return(src);
-	return ("\0");
+	return (0);
 }

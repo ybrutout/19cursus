@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 15:42:48 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/19 11:57:10 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/19 14:39:06 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,4 @@ size_t		ft_strlen(const char *s)
 		i++;
 	}
 	return (i);
-}
-
-int		main(void)
-{
-	char s[] = "\t";
-
-	printf("F longueur ; %lu\n", ft_strlen(s));
-	printf("V longueur ; %lu\n", strlen(s));
-	return(0);
 }
