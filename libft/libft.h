@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 16:38:01 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/19 16:18:47 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/20 16:39:34 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@ void			*ft_memset(void *b, int c, size_t len);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 
-unsigned int    ft_strlcat(char *dest, char *src, unsigned int size);
-
 size_t			ft_strlen(const char *s);
 size_t	        ft_strlcpy(char *dest, const char *src, size_t dstsize);
+size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
 
 #endif

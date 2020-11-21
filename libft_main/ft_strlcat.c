@@ -3,52 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 15:50:31 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/19 11:57:14 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/21 11:47:30 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void			ft_size(char *dest, char *src, int *i, int *j)
+size_t		ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	while (dest[*i] != '\0')
-	{
-		i++;
-	}
-	while (src[*j] != '\0')
+	size_t	i;
+	size_t	j;
+	size_t	size;
+
+	if (ft_strlen(dst) < dstsize)
+		size = ft_strlen(src) + ft_strlen(dst);
+	else
+		size = dstsize + ft_strlen(src);
+	j = 0;
+	while (dst[j] && dstsize)
 	{
 		j++;
+		dstsize--;
 	}
-}
-
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
-{
-	int	sd;
-	int	ssrc;
-	int	i;
-	int	j;
-	int	size_try;
-
-	sd = 0;
-	ssrc = 0;
-	j = 0;
-	ft_size(dest, src, &sd, &ssrc);
-	i = sd;
-	if ((int)size >= sd + ssrc - 1)
+	i = 0;
+	while (src[i] && i < dstsize - 1 && dstsize)
 	{
-		while (src[j])
-		{
-			dest[sd] = src[j];
-			sd++;
-			j++;
-		}
-		dest[sd] = '\0';
-		size_try = i + ssrc;
+		dst[j + i] = src[i];
+		i++;
 	}
-	else
-		size_try = ssrc + i - 1;
-	return (size_try);
+	if (dstsize)
+		dst[j + i] = '\0';
+	return (size);
 }
