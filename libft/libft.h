@@ -6,7 +6,7 @@
 /*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 16:38:01 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/20 16:39:34 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2020/11/23 13:38:21 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <string.h>
 # include <ctype.h>
 
-int				ft_atoi(char *str);
+int				ft_atoi(const char *str);
 int				ft_isalnum(int c);
 int				ft_isalpha(int c);
 int				ft_isascii(int c);
@@ -37,6 +37,7 @@ void			*ft_memset(void *b, int c, size_t len);
 
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
+char            *ft_strnstr(const char *haystack, const char *needle, size_t len);
 
 size_t			ft_strlen(const char *s);
 size_t	        ft_strlcpy(char *dest, const char *src, size_t dstsize);
