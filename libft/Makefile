@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
+#    By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 10:52:13 by ybrutout          #+#    #+#              #
-#    Updated: 2020/11/19 12:28:10 by ybrutout         ###   ########.fr        #
+#    Updated: 2020/11/23 13:58:54 by yannahbruto      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC		=	ft_atoi.c \
 			ft_strlcpy.c \
 			ft_strlen.c \
 			ft_strncmp.c \
+			ft_strnstr.c \
 			ft_strrchr.c \
 			ft_tolower.c \
 			ft_toupper.c \
