@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 15:45:53 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/19 15:37:33 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/23 13:44:27 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
