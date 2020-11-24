@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 15:42:48 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/19 12:32:04 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/24 12:54:39 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t		ft_strlen(const char *s)
 	size_t	i;
 
 	s1 = (char *)s;
-	i =0;
+	i = '\0';
 	while (s1[i])
 	{
 		i++;

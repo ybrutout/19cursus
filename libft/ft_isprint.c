@@ -6,15 +6,15 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:16:29 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/19 12:26:40 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/24 12:49:23 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int     ft_isprint(int c)
+int		ft_isprint(int c)
 {
 	if (c >= 32 && c <= 126)
-		return(1);
+		return (1);
 	return (0);
 }

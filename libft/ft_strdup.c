@@ -1,40 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/24 10:31:48 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/24 12:51:57 by ybrutout         ###   ########.fr       */
+/*   Created: 2020/11/24 12:32:25 by ybrutout          #+#    #+#             */
+/*   Updated: 2020/11/24 12:34:15 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *b, const void *a, size_t n)
+char	*ft_strdup(const char *s1)
 {
-	unsigned char	*src;
-	char			*dest;
-	int				i;
+	char	*new_s1;
+	int		i;
 
-	i = -1;
-	src = (unsigned char*)a;
-	dest = (char*)b;
-	if (a == 0 && b == 0)
-		return (NULL);
-	else if (dest > (char*)src)
-	{
-		while (n > 0)
-		{
-			--n;
-			dest[n] = src[n];
-		}
-	}
-	else if (dest < (char*)src)
-	{
-		while ((size_t)++i < n)
-			dest[i] = src[i];
-	}
-	return (dest);
+	i = ft_strlen(s1) + 1;
+	new_s1 = malloc(sizeof(char) * i);
+	if (!(new_s1))
+		return (0);
+	ft_memcpy(new_s1, s1, i);
+	return (new_s1);
 }

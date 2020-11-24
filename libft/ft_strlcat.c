@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 15:50:31 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/21 11:44:15 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2020/11/24 12:54:12 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
