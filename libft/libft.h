@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 16:38:01 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/24 12:34:05 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/24 15:22:19 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 char	        *ft_strnstr(const char *s1, const char *s2, size_t n);
 char			*ft_strdup(const char *s1);
+char			*ft_substr(char const *s, unsigned int start, size_t len);
 
 size_t			ft_strlen(const char *s);
 size_t	        ft_strlcpy(char *dest, const char *src, size_t dstsize);
