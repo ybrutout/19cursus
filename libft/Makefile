@@ -6,7 +6,7 @@
 #    By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 10:52:13 by ybrutout          #+#    #+#              #
-#    Updated: 2020/11/24 20:00:31 by yannahbruto      ###   ########.fr        #
+#    Updated: 2020/11/24 20:11:44 by yannahbruto      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC		=	ft_atoi.c \
 			ft_memmove.c \
 			ft_memset.c \
 			ft_putchar_fd.c \
+			ft_putendl_fd.c \
 			ft_putstr_fd.c \
 			ft_strchr.c \
 			ft_strdup.c \
