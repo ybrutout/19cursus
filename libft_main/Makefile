@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 10:52:13 by ybrutout          #+#    #+#              #
-#    Updated: 2020/11/24 16:46:34 by ybrutout         ###   ########.fr        #
+#    Updated: 2020/11/24 18:53:51 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC		=	ft_atoi.c \
 			ft_strlen.c \
 			ft_strncmp.c \
 			ft_strrchr.c \
+			ft_strtrim \
 			ft_tolower.c \
 			ft_toupper.c \
 
