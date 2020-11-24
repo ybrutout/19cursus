@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 16:38:01 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/24 10:58:56 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/24 16:45:40 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	        *ft_calloc(size_t count, size_t size);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 char	        *ft_strnstr(const char *haystack, const char *needle, size_t len);
+char			*ft_strjoin(char const *s1, char const *s2);
 
 unsigned int    ft_strlcat(char *dest, char *src, unsigned int size);
 
