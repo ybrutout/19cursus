@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
+#    By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 10:52:13 by ybrutout          #+#    #+#              #
-#    Updated: 2020/11/24 18:41:13 by ybrutout         ###   ########.fr        #
+#    Updated: 2020/11/24 20:00:31 by yannahbruto      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ SRC		=	ft_atoi.c \
 			ft_memcpy.c \
 			ft_memmove.c \
 			ft_memset.c \
+			ft_putchar_fd.c \
+			ft_putstr_fd.c \
 			ft_strchr.c \
 			ft_strdup.c \
 			ft_strjoin.c \

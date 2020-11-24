@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/24 18:57:26 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/24 19:47:25 by yannahbruto      ###   ########.fr       */
+/*   Created: 2020/11/24 19:55:20 by yannahbruto       #+#    #+#             */
+/*   Updated: 2020/11/24 20:06:51 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+void    ft_putstr_fd(char *s, int fd)
 {
-	if (fd >= 0)
-		write(fd, &c, 1);
+    int i;
+
+    i = 0;
+    if (fd >= 0)
+    {
+        while(s[i])
+        {
+            ft_putchar_fd(s[i], fd);
+            i++;
+        }
+    }
 }
