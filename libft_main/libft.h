@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 16:38:01 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/23 11:23:31 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2020/11/24 10:58:56 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <string.h>
 # include <ctype.h>
 # include <stdio.h>
+# include <limits.h>
+# include <stdlib.h>
 
 int				ft_atoi(const char *str);
 int				ft_isalnum(int c);
@@ -35,6 +37,7 @@ void			*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void			*ft_memchr(const void *s, int c, size_t n);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
 void			*ft_memset(void *b, int c, size_t len);
+void	        *ft_calloc(size_t count, size_t size);
 
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);

@@ -3,71 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 15:51:40 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/21 12:04:02 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2020/11/24 10:30:27 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	wh_space(char *str, int *i)
+int			ft_atoi(const char *str)
 {
-	int a;
+	unsigned long long int	number;
+	int						sign;
+	char					*new_str;
 
-	a = *i;
-	while ((str[a] >= 9 && str[a] <= 13) || str[a] == ' ')
-	{
-		a++;
+	sign = 1;
+	number = 0;
+	new_str = (char *)str;
+	while ((*new_str >= 9 && *new_str <= 13) || *new_str == ' ')
+		new_str++;
+	if (*new_str == '-')
+	{	
+		sign *= -1;
+		new_str++;
 	}
-	*i = a;
+	else if (*new_str == '+')
+		new_str++;
+	while (*new_str >= '0' && *new_str <= '9')
+	{
+		number = 10 * number + (*new_str - '0');
+		if (number >= LLONG_MAX && sign == -1)
+			return (0);
+		else if (number >= LLONG_MAX && sign == 1)
+			return (-1);
+		new_str++;
+	}
+	return (number * sign);
 }
 
-void	nb_signe(char *str, int *i, int *j)
-{
-	int a;
-	int b;
-
-	a = *i;
-	b = *j;
-	while (str[a] == '-' || str[a] == '+')
-	{
-		if (str[a] == '-')
-		{
-			b++;
-			a++;
-		}
-		else
-		{
-			a++;
-		}
-	}
-	*i = a;
-	*j = b;
-}
-
-int		ft_atoi(const char *str)
-{
-	int i;
-	int j;
-	int n;
-	char *new_str;
-
-	i = 0;
-	j = 0;
-	new_str = (char *) str;
-	wh_space(new_str, &i);
-	nb_signe(new_str, &i, &j);
-	n = 0;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		n = n * 10 + str[i] - '0';
-		i++;
-	}
-	if (j % 2 == 1)
-	{
-		n = n * -1;
-	}
-	return (n);
-}

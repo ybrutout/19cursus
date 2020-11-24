@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 10:52:13 by ybrutout          #+#    #+#              #
-#    Updated: 2020/11/19 11:34:32 by ybrutout         ###   ########.fr        #
+#    Updated: 2020/11/24 11:52:39 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ FLAG	=	-Wall -Wextra -Werror
 
 SRC		=	ft_atoi.c \
 			ft_bzero.c \
+			ft_calloc.c \
 			ft_isalnum.c \
 			ft_isalpha.c \
 			ft_isascii.c \

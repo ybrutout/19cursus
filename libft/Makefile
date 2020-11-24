@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+         #
+#    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 10:52:13 by ybrutout          #+#    #+#              #
-#    Updated: 2020/11/23 13:58:54 by yannahbruto      ###   ########.fr        #
+#    Updated: 2020/11/24 11:55:29 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ FLAG	=	-Wall -Wextra -Werror
 
 SRC		=	ft_atoi.c \
 			ft_bzero.c \
+			ft_calloc.c \
 			ft_isalnum.c \
 			ft_isalpha.c \
 			ft_isascii.c \
@@ -25,6 +26,7 @@ SRC		=	ft_atoi.c \
 			ft_memchr.c \
 			ft_memcmp.c \
 			ft_memcpy.c \
+			ft_memmove.c \
 			ft_memset.c \
 			ft_strchr.c \
 			ft_strlcat.c \
