@@ -6,7 +6,7 @@
 /*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 08:43:57 by yannahbruto       #+#    #+#             */
-/*   Updated: 2020/11/25 09:12:28 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2020/11/25 09:17:31 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ size_t	ft_strnbr(int n)
 		n = n / 10;
 		i++;
 	}
+	i = i + 1;
 	return (i);
 }
 
