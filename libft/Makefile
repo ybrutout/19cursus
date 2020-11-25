@@ -6,7 +6,7 @@
 #    By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 10:52:13 by ybrutout          #+#    #+#              #
-#    Updated: 2020/11/24 20:11:44 by yannahbruto      ###   ########.fr        #
+#    Updated: 2020/11/25 09:06:49 by yannahbruto      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC		=	ft_atoi.c \
 			ft_isascii.c \
 			ft_isdigit.c \
 			ft_isprint.c \
+			ft_itoa.c \
 			ft_memccpy.c \
 			ft_memchr.c \
 			ft_memcmp.c \
@@ -30,6 +31,7 @@ SRC		=	ft_atoi.c \
 			ft_memset.c \
 			ft_putchar_fd.c \
 			ft_putendl_fd.c \
+			ft_putnbr_fd.c \
 			ft_putstr_fd.c \
 			ft_strchr.c \
 			ft_strdup.c \
