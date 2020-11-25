@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/25 08:43:57 by yannahbruto       #+#    #+#             */
-/*   Updated: 2020/11/25 11:05:16 by ybrutout         ###   ########.fr       */
+/*   Created: 2020/11/25 10:41:21 by ybrutout          #+#    #+#             */
+/*   Updated: 2020/11/25 11:06:44 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,13 @@ char			*ft_itoa(int n)
 		new_n = new_n / 10;
 	}
 	return (c);
+}
+
+int					main(void)
+{
+	char *i3;
+
+	i3 = ft_itoa(-2147483647);
+	printf("-0 ; %s\n", i3);
+	return (0);
 }
