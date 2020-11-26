@@ -6,16 +6,16 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 11:25:54 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/26 09:01:09 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/26 14:56:53 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			ft_count_sep(char *s, char c)
+static unsigned int		ft_count_sep(char const *s, char c)
 {
-	int		i;
-	int		count;
+	unsigned int		i;
+	unsigned int		count;
 
 	i = 0;
 	count = 0;
@@ -27,16 +27,15 @@ int			ft_count_sep(char *s, char c)
 	}
 	if (s[0] != c)
 		count++;
-	count = count + 1;
 	return (count);
 }
 
-int			ft_count_ch(char *s, char c)
+static int				ft_count_ch(char const *s, char c)
 {
 	int		i;
 
 	i = 0;
-	while (s[i] != c)
+	while (s[i] != c && s[i])
 	{
 		i++;
 	}
@@ -45,53 +44,60 @@ int			ft_count_ch(char *s, char c)
 	return (i);
 }
 
-void		ft_free(char **new, int j)
+static char				ft_free(char **new, int j)
 {
-	while (j)
+	while (j >= 0)
 	{
 		free(&new[j]);
 		j--;
 	}
 	free(new);
+	return (0);
 }
 
-char		**ft_split(char const *s, char c)
+static int				ft_str(char const *s, char c, char **new, int nb_word)
 {
-	int		nb_word;
-	int		i;
-	int		j;
 	int		nb_ch;
-	char	**new;
-	char	*new_s;
+	int		j;
+	int		i;
 
-	if (!s)
-		return (NULL);
-	new_s = (char *)s;
-	nb_word = ft_count_sep(new_s, c);
-	i = 0;
 	j = 0;
-	new = malloc(sizeof(char *) * nb_word);
-	if (!new)
-		return (NULL);
-	while (s[i] && j < nb_word)
+	i = -1;
+	while (s[++i] && j <= nb_word)
 	{
-		nb_ch = ft_count_ch(&new_s[i], c);
+		nb_ch = ft_count_ch(&s[i], c);
 		if (nb_ch > 0)
 		{
 			new[j] = malloc(sizeof(char) * nb_ch);
 			if (!new[j])
 			{
 				ft_free(new, j);
-				return (NULL);
+				return (0);
 			}
-			ft_strlcpy(new[j], &new_s[i], nb_ch);
-			i = i + nb_ch;
+			ft_strlcpy(new[j], &s[i], nb_ch);
+			i = i + nb_ch - 1;
 			nb_ch = 0;
 			j++;
 		}
-		else
-			i++;
 	}
-	new[nb_word - 1] = NULL;
+	return (1);
+}
+
+char					**ft_split(char const *s, char c)
+{
+	unsigned int		nb_word;
+	unsigned int		i;
+	char				**new;
+
+	if (!s)
+		return (NULL);
+	nb_word = ft_count_sep(s, c);
+	new = malloc(sizeof(char *) * nb_word + 1);
+	if (!new)
+		return (NULL);
+	i = ft_str(s, c, new, nb_word);
+	if (i == 0)
+		return (NULL);
+	new[nb_word] = NULL;
 	return (new);
 }
