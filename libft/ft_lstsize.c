@@ -1,45 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/24 17:44:49 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/26 15:18:00 by ybrutout         ###   ########.fr       */
+/*   Created: 2020/11/26 16:24:43 by ybrutout          #+#    #+#             */
+/*   Updated: 2020/11/26 16:29:05 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_ifsep(char const s1, char const *s2)
+int			ft_lstsize(t_list *lst)
 {
-	size_t	i;
+	int		i;
 
 	i = 0;
-	while (s2[i])
+	while (lst->next)
 	{
-		if (s1 == s2[i])
-			return (1);
 		i++;
+		lst = lst->next;
 	}
-	return (0);
-}
-
-char	*ft_strtrim(char const *s1, char const *set)
-{
-	size_t	i;
-	size_t	j;
-	char	*new_s;
-
-	if (!s1)
-		return (0);
-	i = 0;
-	j = ft_strlen(s1) - 1;
-	while (ft_ifsep(s1[i], set) && s1[i])
-		i++;
-	while (j > i && ft_ifsep(s1[j], set))
-		j--;
-	new_s = ft_substr(s1, i, (j - i + 1));
-	return (new_s);
+	return (i);
 }

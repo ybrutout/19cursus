@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 10:52:13 by ybrutout          #+#    #+#              #
-#    Updated: 2020/11/26 09:42:12 by ybrutout         ###   ########.fr        #
+#    Updated: 2020/11/26 16:04:38 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,21 +49,25 @@ SRC		=	ft_atoi.c \
 			ft_tolower.c \
 			ft_toupper.c \
 
+SRC2 =
+
 OBJ		=	$(SRC:.c=.o)
+OBJ2	=	$(SRC2:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
-	@echo "$(NAME) created"
 	@ranlib $(NAME)
-	@echo "$(NAME) indexed"
 
 %.o: %.c
 	@gcc $(FLAG) -c $< -o $@
 
+bonus:
+	@gcc $(FLAG)
+
 clean:
-	@rm -f $(OBJ)
+	@rm -f $(OBJ) $(OBJ2)
 	@echo "OBJ deleted"
 
 fclean: clean
