@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 08:43:57 by yannahbruto       #+#    #+#             */
-/*   Updated: 2020/11/26 15:17:14 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/11/27 09:16:41 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static long int		ft_strnbr(long int n)
+static long int			ft_strnbr(long int n)
 {
 	long int	i;
 
@@ -31,7 +31,7 @@ static long int		ft_strnbr(long int n)
 	return (i);
 }
 
-char			*ft_itoa(int n)
+char					*ft_itoa(int n)
 {
 	char		*c;
 	long int	size;

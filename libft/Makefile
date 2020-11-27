@@ -6,13 +6,15 @@
 #    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 10:52:13 by ybrutout          #+#    #+#              #
-#    Updated: 2020/11/26 16:04:38 by ybrutout         ###   ########.fr        #
+#    Updated: 2020/11/27 14:52:24 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libft.a
 
 FLAG	=	-Wall -Wextra -Werror
+
+CC		=	gcc
 
 SRC		=	ft_atoi.c \
 			ft_bzero.c \
@@ -49,30 +51,34 @@ SRC		=	ft_atoi.c \
 			ft_tolower.c \
 			ft_toupper.c \
 
-SRC2 =
+SRC2 	=	ft_lstadd_back.c \
+			ft_lstadd_front.c \
+			ft_lstclear.c \
+			ft_lstdelone.c \
+			ft_lstiter.c \
+			ft_lstlast.c \
+			ft_lstmap.c \
+			ft_lstnew.c \
+			ft_lstsize.c \
 
 OBJ		=	$(SRC:.c=.o)
 OBJ2	=	$(SRC2:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@ar rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
-
-%.o: %.c
-	@gcc $(FLAG) -c $< -o $@
+$(NAME):$(OBJ)
+	$(CC) $(FLAG) -c $(SRC)
+	@ar r $(NAME) $(OBJ)
 
 bonus:
-	@gcc $(FLAG)
+	$(CC) $(FLAG) -c $(SRC2)
+	@ar r $(NAME) $(OBJ2)
 
 clean:
 	@rm -f $(OBJ) $(OBJ2)
-	@echo "OBJ deleted"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(NAME) deleted"
 
 re: fclean all
 

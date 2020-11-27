@@ -1,26 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/26 16:24:43 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/27 11:54:37 by ybrutout         ###   ########.fr       */
+/*   Created: 2020/11/27 14:21:40 by ybrutout          #+#    #+#             */
+/*   Updated: 2020/11/27 14:55:10 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			ft_lstsize(t_list *lst)
+t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int		i;
+	t_list	*n_lst;
+	t_list	*n_tmp;
 
-	i = 0;
+	if (!lst || !f)
+		return (NULL);
+	n_lst = ft_lstnew(f(lst->content));
+	if (!n_lst)
+	{
+		ft_lstclear(&lst, del);
+		return (NULL);
+	}
+	lst = lst->next;
 	while (lst)
 	{
+		n_tmp = ft_lstnew(f(lst->content));
+		if (!n_tmp)
+		{
+			ft_lstclear(&lst, del);
+			ft_lstclear(&n_tmp, del);
+		}
 		lst = lst->next;
-		i++;
+		ft_lstadd_back(&n_lst, n_tmp);
 	}
-	return (i);
+	return (n_lst);
 }
