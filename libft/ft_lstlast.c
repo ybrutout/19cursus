@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 11:55:07 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/27 12:00:57 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/12/05 10:40:00 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 t_list				*ft_lstlast(t_list *lst)
 {
 	if (!lst)
-		return (0);
+		return (lst);
 	while (lst->next)
 		lst = lst->next;
-	return (lst);
+	return (lst); 
 }
