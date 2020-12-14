@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/27 11:33:09 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/12/05 10:32:57 by yannahbruto      ###   ########.fr       */
+/*   Created: 2020/12/14 10:15:37 by ybrutout          #+#    #+#             */
+/*   Updated: 2020/12/14 10:15:50 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

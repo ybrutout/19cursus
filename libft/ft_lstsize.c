@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/26 16:24:43 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/12/05 10:37:01 by yannahbruto      ###   ########.fr       */
+/*   Created: 2020/12/14 10:17:12 by ybrutout          #+#    #+#             */
+/*   Updated: 2020/12/14 10:17:14 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

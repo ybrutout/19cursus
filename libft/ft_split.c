@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 11:25:54 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/26 14:56:53 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/12/14 10:30:16 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,13 @@ char					**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
+	if (!s[0])
+	{
+		if (!(new = malloc(sizeof(char *))))
+			return (NULL);
+		new[0] = 0;
+		return (new);
+	}
 	nb_word = ft_count_sep(s, c);
 	new = malloc(sizeof(char *) * nb_word + 1);
 	if (!new)

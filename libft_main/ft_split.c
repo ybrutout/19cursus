@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 12:05:14 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/26 14:07:48 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/12/14 10:19:18 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,26 @@ int						main(void)
 
 int						main(void)
 {
-	char				*string = "hello>comment>ca>va>?";
+	char				*string = "\0";
+	char				c;
+	char				**new;
+	int					i;
+
+	c = '>';
+	i = 0;
+	new = ft_split(string, c);
+
+	while (new[i])
+	{
+		printf("str : %s\n", new[i]);
+		i++;
+	}
+	return (0);
+}
+
+int						main(void)
+{
+	char				*string = "\0";
 	char				c;
 	char				**new;
 	int					i;
