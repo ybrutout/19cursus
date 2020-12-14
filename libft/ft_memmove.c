@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 10:31:48 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/24 12:51:57 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/12/14 17:26:50 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	*ft_memmove(void *b, const void *a, size_t n)
 	int				i;
 
 	i = -1;
-	src = (unsigned char*)a;
-	dest = (char*)b;
+	src = (unsigned char *)a;
+	dest = (char *)b;
 	if (a == 0 && b == 0)
 		return (NULL);
-	else if (dest > (char*)src)
+	else if (dest > (char *)src)
 	{
 		while (n > 0)
 		{
@@ -31,7 +31,7 @@ void	*ft_memmove(void *b, const void *a, size_t n)
 			dest[n] = src[n];
 		}
 	}
-	else if (dest < (char*)src)
+	else if (dest <= (char *)src)
 	{
 		while ((size_t)++i < n)
 			dest[i] = src[i];
