@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 09:41:04 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/26 09:41:51 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/12/14 13:58:48 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	char			*new;
 
 	i = 0;
-	if (s)
+	if (s && f)
 	{
-		new = malloc(sizeof(char) * (ft_strlen(s) + 1));
+		new = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
 		if (new == NULL)
 			return (NULL);
 		while (s[i])

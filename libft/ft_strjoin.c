@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 17:17:40 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/24 17:37:47 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/12/14 12:43:09 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!s1 || !s2)
 		return (0);
 	size = ft_strlen(s1) + ft_strlen(s2);
-	new_s = malloc(sizeof(char) * (size + 1));
+	new_s = (char *)malloc(sizeof(char) * (size + 1));
 	if (!(new_s))
 		return (0);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 08:43:57 by yannahbruto       #+#    #+#             */
-/*   Updated: 2020/11/27 09:16:41 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/12/14 12:40:45 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char					*ft_itoa(int n)
 
 	new_n = n;
 	size = ft_strnbr(new_n);
-	c = malloc(sizeof(char) * size);
+	c = (char *)malloc(sizeof(char) * size);
 	if (!c)
 		return (NULL);
 	if (new_n < 0)

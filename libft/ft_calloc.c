@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 11:54:44 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/24 14:54:24 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/12/14 11:42:00 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	char	*new_mem;
+	void	*new_mem;
 
 	new_mem = malloc(size * count);
 	if (!(new_mem))

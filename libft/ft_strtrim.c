@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 17:44:49 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/11/27 09:17:07 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/12/14 12:14:27 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char			*ft_strtrim(char const *s1, char const *set)
 	char	*new_s;
 
 	if (!s1)
-		return (0);
+		return (NULL);
 	i = 0;
 	j = ft_strlen(s1) - 1;
 	while (ft_ifsep(s1[i], set) && s1[i])

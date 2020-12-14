@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 11:25:54 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/12/14 10:30:16 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/12/14 11:37:32 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int				ft_str(char const *s, char c, char **new, int nb_word)
 		nb_ch = ft_count_ch(&s[i], c);
 		if (nb_ch > 0)
 		{
-			new[j] = malloc(sizeof(char) * nb_ch);
+			new[j] = (char **)malloc(sizeof(char) * nb_ch);
 			if (!new[j])
 			{
 				ft_free(new, j);
@@ -93,13 +93,13 @@ char					**ft_split(char const *s, char c)
 		return (NULL);
 	if (!s[0])
 	{
-		if (!(new = malloc(sizeof(char *))))
+		if (!(new = (char **)malloc(sizeof(char *))))
 			return (NULL);
 		new[0] = 0;
 		return (new);
 	}
 	nb_word = ft_count_sep(s, c);
-	new = malloc(sizeof(char *) * nb_word + 1);
+	new = (char **)malloc(sizeof(char *) * nb_word + 1);
 	if (!new)
 		return (NULL);
 	i = ft_str(s, c, new, nb_word);

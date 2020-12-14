@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/24 15:21:32 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/12/14 13:59:02 by ybrutout         ###   ########.fr       */
+/*   Created: 2020/12/14 11:54:15 by ybrutout          #+#    #+#             */
+/*   Updated: 2020/12/14 11:54:19 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void				ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	char	*new_s;
+	while (lst && f)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
+}
 
-	if (!(s))
-		return (0);
-	new_s = (char *)malloc(sizeof(char) * (len + 1));
-	if (!(new_s))
-		return (0);
-	if (start >= ft_strlen(s))
-		return (new_s);
-	ft_memcpy(new_s, &s[start], len);
-	new_s[len] = '\0';
-	return (new_s);
+int					main(void)
+{
+	t_list			*new;
+
+	new = ft_lstnew("hello");
+	ft_lstiter(new, NULL);
+	return (0);
 }
