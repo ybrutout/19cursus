@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 14:21:40 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/12/14 12:00:34 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/12/15 10:31:32 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 
 	if (!lst || !f)
 		return (NULL);
-	n_lst = ft_lstnew(f(lst->content));
-	if (!n_lst)
+	if (!(n_lst = ft_lstnew(f(lst->content))))
 	{
 		ft_lstclear(&lst, del);
 		return (NULL);
@@ -28,9 +27,11 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	lst = lst->next;
 	while (lst)
 	{
-		n_tmp = ft_lstnew(f(lst->content));
-		if (!n_tmp)
-			ft_lstclear(&n_tmp, del);
+		if (!(n_tmp = ft_lstnew(f(lst->content))))
+		{
+			ft_lstclear(&n_lst, del);
+			return (NULL);
+		}
 		lst = lst->next;
 		ft_lstadd_back(&n_lst, n_tmp);
 	}

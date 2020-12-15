@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 16:38:01 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/12/14 17:52:47 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/12/15 09:37:37 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdlib.h>
-
 
 typedef struct	s_list
 {
