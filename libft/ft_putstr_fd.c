@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 19:55:20 by yannahbruto       #+#    #+#             */
-/*   Updated: 2020/11/25 11:11:24 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/12/16 16:51:28 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putstr_fd(char *s, int fd)
 	int i;
 
 	i = 0;
-	if (s != NULL)
+	if (s && fd >= 0)
 	{
 		while (s[i])
 		{

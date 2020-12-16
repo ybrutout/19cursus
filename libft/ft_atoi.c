@@ -6,12 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 15:51:40 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/12/15 12:54:36 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/12/16 16:35:32 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 int		ft_atoi(const char *str)
 {

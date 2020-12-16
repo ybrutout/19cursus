@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 20:09:54 by yannahbruto       #+#    #+#             */
-/*   Updated: 2020/12/14 12:07:19 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/12/16 16:50:31 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	if (s != NULL)
-		ft_putstr_fd(s, fd);
+	if (!s || fd < 0)
+		return ;
+	write(fd, s, ft_strlen(s));
 	write(fd, "\n", 1);
 }
