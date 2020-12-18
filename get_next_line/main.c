@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/17 11:09:50 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/12/18 10:22:56 by ybrutout         ###   ########.fr       */
+/*   Created: 2020/12/18 10:20:01 by ybrutout          #+#    #+#             */
+/*   Updated: 2020/12/18 10:21:31 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdio.h>
+#include "get_next_line.h"
 
-int			get_next_line(int fd, char **line);
+int	main(void)
+{
+	char	*str;
+	int		fd;
+	int		size;
+	int		i;
 
-#endif
+	i = -1;
+	size = 18;
+	if (!(fd = open("test_hummus.txt", O_RDONLY)))
+		return (-1);
+	str = NULL;
+	while (++i < size)
+	{
+		get_next_line(fd, &str);
+		printf("%s\n", str);
+	}
+	close(fd);
+	return (0);
+}
