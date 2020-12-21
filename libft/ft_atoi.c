@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 15:51:40 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/12/16 18:48:16 by ybrutout         ###   ########.fr       */
+/*   Updated: 2020/12/21 16:15:35 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,3 @@ int		ft_atoi(const char *str)
 	}
 	return (number * sign);
 }
-
-int		main(void)
-{
-	printf("%d\n", ft_atoi(4294967295));
-}
-
-
