@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 10:20:01 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/04 12:33:03 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/04 18:37:44 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,24 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-int			main(void)
+int main(void)
 {
-	
+	int		fd;
+	char	*str = NULL;
+	int		i;
+	int 	j;
+
+	i = 1;
+	j = 1;
+	if ((fd = open("test2.txt", O_RDONLY)) < 0)
+		return (1);
+	while (j < 20)
+	{
+		i = get_next_line(fd, &str);
+		printf("%d.%d : %s\n", j, i, str);
+		j++;
+	}
+	if ((close(fd)) < 0)
+		return (1);
+	return (0);
 }

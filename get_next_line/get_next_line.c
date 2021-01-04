@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 10:49:39 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/04 14:11:14 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/04 18:32:46 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,30 @@ int					get_next_line(int fd, char **line)
 	char			*buffer;
 	static char		*save;
 	int				reader;
+	int				i;
 
+	i = 0;
 	if (fd < 0 || !line )
 		return(-1);
 	if (!(buffer = (char*)malloc(sizeof(char) * (BUFFER_SIZE +1))))
 		return (-1);
 	reader = 1;
+	while ((gnl_cmp(save, '\n')) <= 0 || reader != 0 || !save)
+	{
+		if ((reader = read(fd, buffer, BUFFER_SIZE)) < 0)
+			return(-1);
+		save = gnl_strjoin(save, buffer);
+	}
 	if (gnl_cmp(save, '\n') > 0)
 	{
-		gnl_strcpy(save, line);
+		*line = gnl_strdup(save, '\n');
 		gnl_sve(save);
+		return (1);
 	}
-	while (reader > 0)
+	if (reader == 0)
 	{
-		reader = read(fd, buffer, BUFFER_SIZE);
+		*line = gnl_strdup(save, 0);
+		return (0);
 	}
+	return (-1);
 }

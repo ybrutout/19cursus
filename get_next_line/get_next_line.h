@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 11:09:50 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/04 14:18:55 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/04 18:16:21 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,16 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
- BUFFER_SIZE = 10;
 int					get_next_line(int fd, char **line);
 int					gnl_cmp(char *str, char c);
 void				gnl_sve(char *save);
-void				gnl_strcpy(char *save, char **line);
+char				*gnl_strdup(const char *save, char c);
+char				*gnl_strjoin(char const *s1, char const *s2);
+size_t				ft_strlen(const char *s);
+
+#endif
+
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 10
 
 #endif
