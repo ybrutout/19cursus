@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 11:09:50 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/12/28 13:53:51 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/04 14:18:55 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 # include <fcntl.h>
 
  BUFFER_SIZE = 10;
-int			get_next_line(int fd, char **line);
-char		*gnl_strjoin(char const *s1, char const *s2);
+int					get_next_line(int fd, char **line);
+int					gnl_cmp(char *str, char c);
+void				gnl_sve(char *save);
+void				gnl_strcpy(char *save, char **line);
 
 #endif

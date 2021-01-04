@@ -6,52 +6,46 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 10:49:39 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/12/28 14:31:25 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/04 14:11:14 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char					*ft_error(int fd, char **line)
+int					gnl_cmp(char *str, char c)
 {
-	char				*buffer;
+	size_t			i;
 
-	if (fd < 0 || !line || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
-		return (NULL);
-	if(!(buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
-		return (NULL);
-	return(buffer);
-}
-
-char				*gnl_linecpy(char *line, char save)
-{
-
+	i = 0;
+	if (!str || !c)
+		return(0);
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return(0);
 }
 
 int					get_next_line(int fd, char **line)
 {
-	static char		*save;
-	long long int	size;
 	char			*buffer;
+	static char		*save;
+	int				reader;
 
-	size = 1;
-	if(!(buffer = ft_error(fd, line)))
-		return(NULL);
-	while (save != 0 && size != 0)
+	if (fd < 0 || !line )
+		return(-1);
+	if (!(buffer = (char*)malloc(sizeof(char) * (BUFFER_SIZE +1))))
+		return (-1);
+	reader = 1;
+	if (gnl_cmp(save, '\n') > 0)
 	{
-		if ((size = read(fd, buffer, BUFFER_SIZE)) == -1)
-		{
-			free(buffer);
-			return (-1);
-		}
-		buffer[size] = 0;
-		if (!(save = gnl_strjoin(save, buffer)))
-			return(0);
+		gnl_strcpy(save, line);
+		gnl_sve(save);
 	}
-	free(buffer);
-	if (!(*line = gnl_linecpy))
+	while (reader > 0)
 	{
-
+		reader = read(fd, buffer, BUFFER_SIZE);
 	}
-
 }
