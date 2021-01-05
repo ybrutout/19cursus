@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 10:49:39 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/05 14:50:31 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/05 16:26:40 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,31 +33,29 @@ int					get_next_line(int fd, char **line)
 	char			*buffer;
 	static char		*save;
 	ssize_t			reader;
-	int				i;
 
-	i = 0;
 	if (fd < 0 || fd > OPEN_MAX || !line  || BUFFER_SIZE < 1)
 		return(-1);
 	if (!(buffer = (char*)malloc(sizeof(char) * (BUFFER_SIZE +1))))
 		return (-1);
 	reader = BUFFER_SIZE + 1;
-	while ((i = gnl_cmp(save, '\n')) == 0 && (reader > 0 || !save || !reader))
+	while (gnl_cmp(save, '\n') == 0 && reader > 0)
 	{
 		if ((reader = read(fd, buffer, BUFFER_SIZE)) < 0)
 			return(-1);
-		save = gnl_strjoin(save, buffer, reader);
+		buffer[reader] = 0;
+		save = gnl_strjoin(save, buffer);
 	}
 	if (reader < BUFFER_SIZE)
 	{
 		*line = gnl_strdup(save, '\0');
-		gnl_sve(save, '\0');
+		free((void*)save);
 		return (0);
 	}
 	if (gnl_cmp(save, '\n') > 0)
 	{
 		*line = gnl_strdup(save, '\n');
 		gnl_sve(save, '\n');
-		printf("save = %s\n", save);
 		return (1);
 	}
 	return (-1);

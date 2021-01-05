@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 11:12:22 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/05 14:53:19 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/05 16:29:50 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,14 @@ void		gnl_sve(char *save, char c)
 	save[j] = 0;
 }
 
-char	*gnl_strjoin(char const *s1, char const *s2, int reader)
+char	*gnl_strjoin(char const *s1, char const *s2)
 {
 	char	*new_s;
 	size_t	i;
 	size_t	size;
 	size_t	j;
 
-	if (reader != BUFFER_SIZE)
-		size = ft_strlen(s1) + reader;
-	else if (s1)
-		size = ft_strlen(s1) + ft_strlen(s2);
-	else
-		size = ft_strlen(s2);
-	printf("size = %zu\n", size);
+	size = ft_strlen(s1) + ft_strlen(s2);
 	if (!(new_s = (char *)malloc(sizeof(char) * (size + 1))))
 		return (0);
 	i = 0;
@@ -80,6 +74,8 @@ size_t		ft_strlen(const char *s)
 	char	*s1;
 	size_t	i;
 
+	if (!s)
+		return (0);
 	s1 = (char *)s;
 	i = 0;
 	while (s1[i])
