@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 10:20:01 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/05 16:06:21 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/06 17:15:15 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int main(void)
 
 	i = 1;
 	j = 1;
-	if ((fd = open("tests_hummus.txt", O_RDONLY)) < 0)
+	if ((fd = open("test2.txt", O_RDONLY)) < 0)
 		return (1);
-	while (j < 25)
+	while (j < 20)
 	{
 		i = get_next_line(fd, &str);
-		printf("%d.%d :%s\n", j, i, str);
+		printf("%d.%d :%s---\n", j, i, str);
 		j++;
 	}
 	if ((close(fd)) < 0)

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 10:49:39 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/05 16:26:40 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/06 16:02:59 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,12 @@ int					get_next_line(int fd, char **line)
 		buffer[reader] = 0;
 		save = gnl_strjoin(save, buffer);
 	}
-	if (reader < BUFFER_SIZE)
-	{
-		*line = gnl_strdup(save, '\0');
-		free((void*)save);
+	free((void*) buffer);
+	*line = gnl_strdup(save, '\n');
+	save = gnl_sve(save, '\n');
+	if (reader == 0 && !save)
 		return (0);
-	}
-	if (gnl_cmp(save, '\n') > 0)
-	{
-		*line = gnl_strdup(save, '\n');
-		gnl_sve(save, '\n');
+	if (*line)
 		return (1);
-	}
 	return (-1);
 }

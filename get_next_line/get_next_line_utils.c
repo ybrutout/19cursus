@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 11:12:22 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/05 16:29:50 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/06 16:03:11 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ char		*gnl_strdup(const char *save, char c)
 	char	*new_s1;
 	int		i;
 
-	i = ft_strlen(save) + 1;
-	if (!(new_s1 = (char *)malloc(sizeof(char) * i)))
-		return (0);
 	i = 0;
-	while (save[i] != c)
+	while(save[i] != c && save[i])
+		i++;
+	if (!(new_s1 = (char *)malloc(sizeof(char) * i + 1)))
+			return (0);
+	i = 0;
+	while (save[i] != c && save[i])
 	{
 		new_s1[i] = save[i];
 		i++;
@@ -30,21 +32,30 @@ char		*gnl_strdup(const char *save, char c)
 	return (new_s1);
 }
 
-void		gnl_sve(char *save, char c)
+char		*gnl_sve(char *save, char c)
 {
 	int 	i;
 	int		j;
+	char 	*new_s1;
+	int		size;
 
 	i = 0;
 	j = 0;
-	while (save[i] != c && save[i])
+	while(save[i] != c && save[i])
 		i++;
+	size = ft_strlen(&save[i]);
+	if (!(new_s1 = (char *)malloc(sizeof(char) * size + 1)))
+		return (0);
 	while (save[++i])
 	{
-		save[j] = save[i];
+		new_s1[j] = save[i];
 		j++;
 	}
-	save[j] = 0;
+	new_s1[j] = 0;
+	free(save);
+	if (!new_s1[0])
+		return (NULL);
+	return(new_s1);
 }
 
 char	*gnl_strjoin(char const *s1, char const *s2)

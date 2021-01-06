@@ -34,3 +34,43 @@ while (gnl_cmp(save, '\n') < 0)
 			return (1);
 		}
 	}
+
+
+int					get_next_line(int fd, char **line)
+{
+	char			*buffer;
+	static char		*save;
+	ssize_t			reader;
+
+	if (fd < 0 || fd > OPEN_MAX || !line  || BUFFER_SIZE < 1)
+		return(-1);
+	if (!(buffer = (char*)malloc(sizeof(char) * (BUFFER_SIZE +1))))
+		return (-1);
+	reader = BUFFER_SIZE + 1;
+	printf("reader avant = %zu\n", reader);
+	while (gnl_cmp(save, '\n') == 0 && reader > 0)
+	{
+		if ((reader = read(fd, buffer, BUFFER_SIZE)) < 0)
+			return(-1);
+		printf("reader pendant = %zu\n", reader);
+		buffer[reader] = 0;
+		save = gnl_strjoin(save, buffer);
+	}
+	printf("save = '%s'\n", save);
+	printf("reader = %zu\n", reader);
+	if (reader < BUFFER_SIZE)
+	{
+		*line = gnl_strdup(save, '\0');
+		free((void*)save);
+		printf("save apres = '%s'\n", save);
+		return (0);
+	}
+	if (gnl_cmp(save, '\n') > 0)
+	{
+		*line = gnl_strdup(save, '\n');
+		gnl_sve(save, '\n');
+		printf("save apres = '%s'\n", save);
+		return (1);
+	}
+	return (-1);
+}
