@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 11:25:54 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/07 11:46:07 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/07 12:09:37 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int				ft_str(char const *s, char c, char **new, int nb_word)
 			new[j] = (char *)malloc(sizeof(char) * nb_ch);
 			if (!new[j])
 			{
-				ft_free(new, j - 1);
+				ft_free(new, j);
 				return (0);
 			}
 			ft_strlcpy(new[j], &s[i], nb_ch);
