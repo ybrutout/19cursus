@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 11:25:54 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/12/28 14:53:11 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/07 11:54:44 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int				ft_str(char const *s, char c, char **new, int nb_word)
 
 	j = 0;
 	i = 0;
-	while (s[i] && j <= nb_word)
+	while (s[i++] && j <= nb_word)
 	{
 		nb_ch = ft_count_ch(&s[i], c);
 		if (nb_ch > 0)
@@ -78,7 +78,6 @@ static int				ft_str(char const *s, char c, char **new, int nb_word)
 			i = i + nb_ch - 1;
 			nb_ch = 0;
 			j++;
-			i++;
 		}
 	}
 	return (1);
