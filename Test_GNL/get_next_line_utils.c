@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 11:12:22 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/07 15:50:06 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/11 12:32:22 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,13 @@ char		*gnl_sve(char *save, char c)
 	size = ft_strlen(&save[i]);
 	if (!(new_s1 = (char *)malloc(sizeof(char) * size + 1)))
 		return (0);
-	while (save[++i])
+	if (save[i] == c)
+		i++;
+	while (save[i])
 	{
 		new_s1[j] = save[i];
 		j++;
+		i++;
 	}
 	new_s1[j] = 0;
 	free(save);
@@ -67,7 +70,11 @@ char	*gnl_strjoin(char const *s1, char const *s2)
 
 	size = ft_strlen(s1) + ft_strlen(s2);
 	if (!(new_s = (char *)malloc(sizeof(char) * (size + 1))))
+	{
+		if(s1)
+			free((void *)s1);
 		return (0);
+	}
 	i = 0;
 	j = 0;
 	if (s1)
