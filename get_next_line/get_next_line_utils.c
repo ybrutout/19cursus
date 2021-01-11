@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 11:12:22 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/11 15:57:12 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/11 18:08:23 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char		*gnl_strdup(char *save, char c)
 	int		i;
 
 	i = 0;
-	while(save[i] != c && save[i])
+	while (save[i] != c && save[i])
 		i++;
 	if (!(new_s1 = (char *)malloc(sizeof(char) * i + 1)))
 	{
@@ -35,16 +35,28 @@ char		*gnl_strdup(char *save, char c)
 	return (new_s1);
 }
 
+int			gnl_if_free(char *s1, int j, char *s2)
+{
+	s1[j] = 0;
+	free(s2);
+	if (!s1[0])
+	{
+		free((void *)s1);
+		return (0);
+	}
+	return (1);
+}
+
 char		*gnl_sve(char *save, char c)
 {
-	int 	i;
+	int		i;
 	int		j;
-	char 	*new_s1;
+	char	*new_s1;
 	int		size;
 
 	i = 0;
 	j = 0;
-	while(save[i] != c && save[i])
+	while (save[i] != c && save[i])
 		i++;
 	size = ft_strlen(&save[i]);
 	if (!(new_s1 = (char *)malloc(sizeof(char) * size + 1)))
@@ -60,17 +72,11 @@ char		*gnl_sve(char *save, char c)
 		j++;
 		i++;
 	}
-	new_s1[j] = 0;
-	free(save);
-	if (!new_s1[0])
-	{
-		free((void *)new_s1);
-		return (NULL);
-	}
-	return(new_s1);
+	i = gnl_if_free(new_s1, j, save);
+	return (i ? new_s1 : 0);
 }
 
-char	*gnl_strjoin(char *s1, char *s2)
+char		*gnl_strjoin(char *s1, char *s2)
 {
 	char	*new_s;
 	size_t	i;
@@ -80,9 +86,9 @@ char	*gnl_strjoin(char *s1, char *s2)
 	size = ft_strlen(s1) + ft_strlen(s2);
 	if (!(new_s = malloc(sizeof(char) * (size + 1))))
 	{
-		if(s1)
+		if (s1)
 			free((void *)s1);
-		free((void *)s2);
+		free(s2);
 		return (0);
 	}
 	i = 0;
@@ -90,6 +96,7 @@ char	*gnl_strjoin(char *s1, char *s2)
 	if (s1)
 		while (i < ft_strlen(s1))
 			new_s[i++] = s1[j++];
+	free((void *)s1);
 	j = 0;
 	while (i < size)
 		new_s[i++] = s2[j++];

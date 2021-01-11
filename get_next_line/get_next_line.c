@@ -6,37 +6,55 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 10:49:39 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/11 16:33:01 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/11 18:17:08 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int					gnl_cmp(char *str, char c)
+int				gnl_cmp(char *str, char c)
 {
-	size_t			i;
+	size_t		i;
 
 	i = 0;
 	if (!str)
-		return(0);
+		return (0);
 	while (str[i])
 	{
 		if (str[i] == c)
 			return (1);
 		i++;
 	}
-	return(0);
+	return (0);
 }
 
-int					get_next_line(int fd, char **line)
+char			*gnl_error(int fd, char **line)
 {
-	char			*buffer;
-	static char		*save;
-	ssize_t			reader;
+	char		*buffer;
 
-	if (fd < 0 || fd > OPEN_MAX || !line  || BUFFER_SIZE < 1)
-		return(-1);
-	if (!(buffer = (char*)malloc(sizeof(char) * (BUFFER_SIZE +1))))
+	if (fd < 0 || fd > OPEN_MAX || !line || BUFFER_SIZE < 1)
+		return (NULL);
+	if (!(buffer = (char*)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
+		return (NULL);
+	return (buffer);
+}
+
+ssize_t			gnl_return(char *save, ssize_t reader, char **line)
+{
+	if (!save && reader == 0)
+		return (0);
+	if (*line)
+		return (1);
+	return (-1);
+}
+
+int				get_next_line(int fd, char **line)
+{
+	char		*buffer;
+	static char	*save;
+	ssize_t		reader;
+
+	if (!(buffer = gnl_error(fd, line)))
 		return (-1);
 	reader = 1;
 	while (!gnl_cmp(save, '\n') && reader > 0)
@@ -44,19 +62,17 @@ int					get_next_line(int fd, char **line)
 		if ((reader = read(fd, buffer, BUFFER_SIZE)) < 0)
 		{
 			free((void*)buffer);
-			return(-1);
+			return (-1);
 		}
 		buffer[reader] = 0;
-		if(!(save = gnl_strjoin(save, buffer)))
+		if (!(save = gnl_strjoin(save, buffer)))
 			return (-1);
 	}
-	free((void*) buffer);
+	free((void *)buffer);
 	if (!(*line = gnl_strdup(save, '\n')))
-		return(-1);
+		return (-1);
 	save = gnl_sve(save, '\n');
-	if (!save && reader == 0)
-		return(0);
-	if (*line)
-		return (1);
-	return (-1);
+	if ((reader = gnl_return(save, reader, line)) == 0)
+		return (0);
+	return ((reader > 0) ? 1 : -1);
 }
