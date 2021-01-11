@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 11:09:50 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/07 16:05:21 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/11 15:45:48 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 int					get_next_line(int fd, char **line);
 int					gnl_cmp(char *str, char c);
 char				*gnl_sve(char *save, char c);
-char				*gnl_strdup(const char *save, char c);
-char				*gnl_strjoin(char const *s1, char const *s2);
+char				*gnl_strdup(char *save, char c);
+char				*gnl_strjoin(char *s1, char *s2);
 size_t				ft_strlen(const char *s);
 
 #endif

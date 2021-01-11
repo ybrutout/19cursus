@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 10:49:39 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/11 12:21:33 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/11 16:33:01 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ int					get_next_line(int fd, char **line)
 	if (!save && reader == 0)
 		return(0);
 	if (*line)
-	{
 		return (1);
-	}
 	return (-1);
 }
