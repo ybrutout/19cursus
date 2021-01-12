@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 10:15:22 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/12/16 15:35:58 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/12 16:36:20 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void				ft_lstadd_back(t_list **alst, t_list *new)
 {
 	t_list			*nw;
 
-	nw = *alst;
 	if (!alst)
 		return ;
 	if (!*alst)
@@ -24,6 +23,7 @@ void				ft_lstadd_back(t_list **alst, t_list *new)
 		*alst = new;
 		return ;
 	}
+	nw = *alst;
 	while (nw->next)
 		nw = nw->next;
 	nw->next = new;

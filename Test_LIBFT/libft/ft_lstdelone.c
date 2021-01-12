@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 12:57:04 by ybrutout          #+#    #+#             */
-/*   Updated: 2020/12/16 16:34:31 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/12 16:36:47 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	ft_lstdelone(t_list *alst, void (*del)(void*))
 {
 	t_list *tmp;
 
-	tmp = alst->next;
 	if (!del || !alst)
 		return ;
+	tmp = alst->next;
 	del(alst->content);
 }

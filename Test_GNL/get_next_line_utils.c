@@ -6,22 +6,25 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 11:12:22 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/11 12:32:22 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/12 17:50:24 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char		*gnl_strdup(const char *save, char c)
+char		*gnl_strdup(char *save, char c)
 {
 	char	*new_s1;
 	int		i;
 
 	i = 0;
-	while(save[i] != c && save[i])
+	while (save[i] != c && save[i])
 		i++;
 	if (!(new_s1 = (char *)malloc(sizeof(char) * i + 1)))
-			return (0);
+	{
+		free((void *)save);
+		return (NULL);
+	}
 	i = 0;
 	while (save[i] != c && save[i])
 	{
@@ -32,20 +35,35 @@ char		*gnl_strdup(const char *save, char c)
 	return (new_s1);
 }
 
+int			gnl_if_free(char *s1, int j, char *s2)
+{
+	s1[j] = 0;
+	free(s2);
+	if (!s1[0])
+	{
+		free((void *)s1);
+		return (0);
+	}
+	return (1);
+}
+
 char		*gnl_sve(char *save, char c)
 {
-	int 	i;
+	int		i;
 	int		j;
-	char 	*new_s1;
+	char	*new_s1;
 	int		size;
 
 	i = 0;
 	j = 0;
-	while(save[i] != c && save[i])
+	while (save[i] != c && save[i])
 		i++;
 	size = ft_strlen(&save[i]);
 	if (!(new_s1 = (char *)malloc(sizeof(char) * size + 1)))
-		return (0);
+	{
+		free((void *)save);
+		return (NULL);
+	}
 	if (save[i] == c)
 		i++;
 	while (save[i])
@@ -54,14 +72,11 @@ char		*gnl_sve(char *save, char c)
 		j++;
 		i++;
 	}
-	new_s1[j] = 0;
-	free(save);
-	if (!new_s1[0])
-		return (NULL);
-	return(new_s1);
+	i = gnl_if_free(new_s1, j, save);
+	return (i ? new_s1 : 0);
 }
 
-char	*gnl_strjoin(char const *s1, char const *s2)
+char		*gnl_strjoin(char *s1, char *s2)
 {
 	char	*new_s;
 	size_t	i;
@@ -69,10 +84,11 @@ char	*gnl_strjoin(char const *s1, char const *s2)
 	size_t	j;
 
 	size = ft_strlen(s1) + ft_strlen(s2);
-	if (!(new_s = (char *)malloc(sizeof(char) * (size + 1))))
+	if (!(new_s = malloc(sizeof(char) * (size + 1))))
 	{
-		if(s1)
+		if (s1)
 			free((void *)s1);
+		free(s2);
 		return (0);
 	}
 	i = 0;
@@ -80,6 +96,7 @@ char	*gnl_strjoin(char const *s1, char const *s2)
 	if (s1)
 		while (i < ft_strlen(s1))
 			new_s[i++] = s1[j++];
+	free((void *)s1);
 	j = 0;
 	while (i < size)
 		new_s[i++] = s2[j++];

@@ -1,0 +1,3 @@
+[submodule "logutil"]
+	path = logutil
+	url = https://github.com/Estecka/c-logutil.git
