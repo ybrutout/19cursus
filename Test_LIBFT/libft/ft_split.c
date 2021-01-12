@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 11:25:54 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/12 16:35:00 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/12 16:00:44 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char			**ft_split(char const *s, char c)
 	while (++i < ft_nb_wrd(s, c))
 	{
 		j = 0;
-		if (!(new_s[i] = malloc(ft_next_wrd(s, c, k) + 1)))
+		if (!(new_s[i] = malloc((s, c, k) + 1)))
 			return (ft_free(new_s, i));
 		while (s[k] != '\0' && s[k] == c)
 			k++;

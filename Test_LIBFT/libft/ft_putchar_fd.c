@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/27 12:57:04 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/12 16:36:47 by ybrutout         ###   ########.fr       */
+/*   Created: 2020/12/14 10:17:55 by ybrutout          #+#    #+#             */
+/*   Updated: 2020/12/14 10:17:57 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *alst, void (*del)(void*))
+void	ft_putchar_fd(char c, int fd)
 {
-	t_list *tmp;
-
-	if (!del || !alst)
-		return ;
-	tmp = alst->next;
-	del(alst->content);
+	if (fd > -1)
+		write(fd, &c, 1);
 }

@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/27 12:57:04 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/12 16:36:47 by ybrutout         ###   ########.fr       */
+/*   Created: 2020/11/16 15:42:48 by ybrutout          #+#    #+#             */
+/*   Updated: 2020/12/14 14:18:48 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *alst, void (*del)(void*))
+size_t		ft_strlen(const char *s)
 {
-	t_list *tmp;
+	char	*s1;
+	size_t	i;
 
-	if (!del || !alst)
-		return ;
-	tmp = alst->next;
-	del(alst->content);
+	s1 = (char *)s;
+	i = 0;
+	while (s1[i])
+	{
+		i++;
+	}
+	return (i);
 }

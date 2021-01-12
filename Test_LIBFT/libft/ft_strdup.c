@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/27 12:57:04 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/12 16:36:47 by ybrutout         ###   ########.fr       */
+/*   Created: 2020/11/24 12:32:25 by ybrutout          #+#    #+#             */
+/*   Updated: 2020/12/14 12:42:54 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *alst, void (*del)(void*))
+char	*ft_strdup(const char *s1)
 {
-	t_list *tmp;
+	char	*new_s1;
+	int		i;
 
-	if (!del || !alst)
-		return ;
-	tmp = alst->next;
-	del(alst->content);
+	i = ft_strlen(s1) + 1;
+	new_s1 = (char *)malloc(sizeof(char) * i);
+	if (!(new_s1))
+		return (0);
+	ft_memcpy(new_s1, s1, i);
+	return (new_s1);
 }

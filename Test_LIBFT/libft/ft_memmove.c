@@ -1,23 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/27 12:57:04 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/12 16:36:47 by ybrutout         ###   ########.fr       */
+/*   Created: 2020/11/24 10:31:48 by ybrutout          #+#    #+#             */
+/*   Updated: 2020/12/14 17:26:50 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *alst, void (*del)(void*))
+void	*ft_memmove(void *b, const void *a, size_t n)
 {
-	t_list *tmp;
+	unsigned char	*src;
+	char			*dest;
+	int				i;
 
-	if (!del || !alst)
-		return ;
-	tmp = alst->next;
-	del(alst->content);
+	i = -1;
+	src = (unsigned char *)a;
+	dest = (char *)b;
+	if (a == 0 && b == 0)
+		return (NULL);
+	else if (dest > (char *)src)
+	{
+		while (n > 0)
+		{
+			--n;
+			dest[n] = src[n];
+		}
+	}
+	else if (dest <= (char *)src)
+	{
+		while ((size_t)++i < n)
+			dest[i] = src[i];
+	}
+	return (dest);
 }

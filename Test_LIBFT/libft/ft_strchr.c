@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/27 12:57:04 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/12 16:36:47 by ybrutout         ###   ########.fr       */
+/*   Created: 2020/11/17 15:56:41 by ybrutout          #+#    #+#             */
+/*   Updated: 2020/11/24 12:53:35 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *alst, void (*del)(void*))
+char	*ft_strchr(const char *s, int c)
 {
-	t_list *tmp;
+	char	*src;
+	int		i;
 
-	if (!del || !alst)
-		return ;
-	tmp = alst->next;
-	del(alst->content);
+	src = (char *)s;
+	i = '\0';
+	while (src[i])
+	{
+		if (src[i] == (char)c)
+			return (&src[i]);
+		i++;
+	}
+	if (src[i] == (unsigned char)c)
+		return (&src[i]);
+	return (0);
 }
