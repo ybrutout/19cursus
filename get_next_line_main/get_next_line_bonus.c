@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/17 10:49:39 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/11 18:17:08 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/01/13 10:20:54 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/01/13 16:15:30 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int				gnl_cmp(char *str, char c)
 {
@@ -48,16 +48,35 @@ ssize_t			gnl_return(char *save, ssize_t reader, char **line)
 	return (-1);
 }
 
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	char		*new_dst;
+	const char	*new_src;
+	size_t		i;
+
+	if (dst == NULL && src == NULL)
+		return (NULL);
+	new_dst = (char *)dst;
+	new_src = (const char *)src;
+	i = 0;
+	while (i < n)
+	{
+		new_dst[i] = new_src[i];
+		i++;
+	}
+	return (dst);
+}
+
 int				get_next_line(int fd, char **line)
 {
 	char		*buffer;
-	static char	*save;
+	static char	*save[OPEN_MAX];
 	ssize_t		reader;
 
 	if (!(buffer = gnl_error(fd, line)))
 		return (-1);
 	reader = 1;
-	while (!gnl_cmp(save, '\n') && reader > 0)
+	while (!gnl_cmp(save[fd], '\n') && reader > 0)
 	{
 		if ((reader = read(fd, buffer, BUFFER_SIZE)) < 0)
 		{
@@ -65,14 +84,14 @@ int				get_next_line(int fd, char **line)
 			return (-1);
 		}
 		buffer[reader] = 0;
-		if (!(save = gnl_strjoin(save, buffer)))
+		if (!(save[fd] = gnl_strjoin(save[fd], buffer)))
 			return (-1);
 	}
 	free((void *)buffer);
-	if (!(*line = gnl_strdup(save, '\n')))
+	if (!(*line = gnl_strdup(save[fd], '\n')))
 		return (-1);
-	save = gnl_sve(save, '\n');
-	if ((reader = gnl_return(save, reader, line)) == 0)
+	save[fd] = gnl_sve(save[fd], '\n');
+	if ((reader = gnl_return(save[fd], reader, line)) == 0)
 		return (0);
 	return ((reader > 0) ? 1 : -1);
 }

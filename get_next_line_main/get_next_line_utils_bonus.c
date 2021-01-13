@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/17 11:12:22 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/13 15:34:59 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/01/13 10:23:31 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/01/13 15:57:41 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char		*gnl_strdup(char *save, char c)
 {
