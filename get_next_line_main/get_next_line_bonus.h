@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 10:24:41 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/13 17:02:45 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/13 16:13:37 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ void				*ft_memcpy(void *dst, const void *src, size_t n);
 #endif
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1
+# define BUFFER_SIZE 10
 
 #endif

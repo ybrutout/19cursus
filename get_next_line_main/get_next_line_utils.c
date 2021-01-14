@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 11:12:22 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/13 15:34:59 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/14 11:01:08 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char		*gnl_strjoin(char *s1, char *s2)
 	size_t	size;
 
 	size = ft_strlen(s1) + ft_strlen(s2);
-	if (!(new_s = malloc(sizeof(char) * (size +1))))
+	if (!(new_s = malloc(sizeof(char) * (size + 1))))
 	{
 		if (s1)
 			free((void *)s1);

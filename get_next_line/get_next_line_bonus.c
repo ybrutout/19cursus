@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 10:20:54 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/13 17:17:11 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/01/14 11:01:32 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ ssize_t			gnl_return(char *save, ssize_t reader, char **line)
 	return (-1);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void			*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	char		*new_dst;
 	const char	*new_src;
@@ -75,7 +75,6 @@ int				get_next_line(int fd, char **line)
 
 	if (!(buffer = gnl_error(fd, line)))
 		return (-1);
-	write(1, "je suis la \n", 12);
 	reader = 1;
 	while (!gnl_cmp(save[fd], '\n') && reader > 0)
 	{
