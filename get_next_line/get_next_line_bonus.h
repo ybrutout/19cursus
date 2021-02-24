@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 10:24:41 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/13 16:13:37 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/02/24 14:22:12 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-# include <stdio.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include <fcntl.h>
 
 int					get_next_line(int fd, char **line);
 int					gnl_cmp(char *str, char c);

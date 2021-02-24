@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 10:23:31 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/14 11:01:20 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/02/24 14:21:31 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ char		*gnl_sve(char *save, char c)
 	j = 0;
 	while (save[i] != c && save[i])
 		i++;
+	if (save[i] == c)
+		i++;
 	size = ft_strlen(&save[i]);
 	if (!(new_s1 = malloc(sizeof(char) * size + 1)))
 	{
 		free((void *)save);
 		return (NULL);
 	}
-	if (save[i] == c)
-		i++;
 	while (save[i])
 	{
 		new_s1[j] = save[i];

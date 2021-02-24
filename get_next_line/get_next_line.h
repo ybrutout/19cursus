@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 11:09:50 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/13 15:32:40 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/02/24 14:22:19 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-# include <stdio.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include <fcntl.h>
 
 int					get_next_line(int fd, char **line);
 int					gnl_cmp(char *str, char c);
@@ -34,6 +32,6 @@ void				*ft_memcpy(void *dst, const void *src, size_t n);
 #endif
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1
+# define BUFFER_SIZE 10
 
 #endif
