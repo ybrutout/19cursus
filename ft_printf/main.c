@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 11:48:17 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/03/04 12:01:05 by mushu            ###   ########.fr       */
+/*   Updated: 2021/03/04 13:03:26 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int			main()
 	char		d;
 	char 		b;
 	char 		a;
-	char		c;
+	int			c;
 
 	d = 'a';
 	a = 'b';
 	b = 'c';
-	c = 'd';
-	ft_printf("hello comment ca va ? %c %c %c %c \n", d, a, b, c);
+	c = 10;
+	ft_printf("hello comment ca va ? %c %c %c %d \n", d, a, b, c);
 }

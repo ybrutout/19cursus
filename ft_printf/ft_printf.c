@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 13:42:21 by mushu             #+#    #+#             */
-/*   Updated: 2021/03/04 12:22:34 by mushu            ###   ########.fr       */
+/*   Updated: 2021/03/04 13:01:57 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,27 @@
 int					ft_printf(const char *format, ...)
 {
 	int				i;
-	char 			c;
+	char			c;
 	va_list			arg;
 
 	i = 0;
 	va_start(arg, format);
 	while (format[i])
 	{
-		if(format[i] == '%')
+		if (format[i] == '%')
 		{
-			if (format[i + 1] == 'c')
+			i++;
+			if (format[i] == '%')
+				write(1, "%", 1);
+			else if (format[i] == 'c')
 			{
-				c = va_arg(arg, char);
-				write(1, c, 1);
+				c = va_arg(arg, int);
+				write(1, &c, 1);
+			}
+			else if (format[i] == 'd')
+			{
+				c = va_arg(arg, int);
+				write(1, &c, 1);
 			}
 		}
 		else
@@ -36,5 +44,5 @@ int					ft_printf(const char *format, ...)
 		}
 		i++;
 	}
-	return(0);
+	return (0);
 }
