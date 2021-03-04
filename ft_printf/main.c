@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   essais.c                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 11:48:17 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/01/14 12:07:33 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/03/04 12:01:05 by mushu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "ft_printf.h"
 
 int			main()
 {
-	printf(4);
-	return (0);
+	char		d;
+	char 		b;
+	char 		a;
+	char		c;
+
+	d = 'a';
+	a = 'b';
+	b = 'c';
+	c = 'd';
+	ft_printf("hello comment ca va ? %c %c %c %c \n", d, a, b, c);
 }
