@@ -6,28 +6,41 @@
 /*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 13:42:21 by mushu             #+#    #+#             */
-/*   Updated: 2021/03/04 18:27:42 by mushu            ###   ########.fr       */
+/*   Updated: 2021/03/05 17:39:31 by mushu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void				ft_write(char *str)
+int				ft_write(char *str, int a)
 {
 	int				i;
+	static int		ret;
 
 	i = 0;
-	while(str[i])
+	if (!ret)
+		ret = 0;
+	if (a == 1)
 	{
-		write(1, &str[i], 1);
-		i++;
+		while(str[i])
+		{
+			write(1, &str[i], 1);
+			i++;
+			ret++;
+		}
 	}
-
+	else if (a == 2)
+	{
+		write(1, str, 1);
+		ret++;
+	}
+	return(ret);
 }
 
 int					ft_printf(const char *format, ...)
 {
 	int				i;
+	int				ret;
 	char			*form;
 	va_list			arg;
 
@@ -40,7 +53,7 @@ int					ft_printf(const char *format, ...)
 			form++;
 			if (*form == '%')
 			{
-				ft_write(form);
+				ft_write(form, 2);
 				form++;
 			}
 			else
@@ -52,10 +65,11 @@ int					ft_printf(const char *format, ...)
 		}
 		else
 		{
-			write(1, form, 1);
+			ft_write(form, 2);
 			form++;
 		}
 	}
+	ret = ft_write(form, 0);
 	va_end(arg);
-	return (0);
+	return (ret);
 }

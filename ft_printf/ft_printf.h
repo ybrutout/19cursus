@@ -6,7 +6,7 @@
 /*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 13:44:12 by mushu             #+#    #+#             */
-/*   Updated: 2021/03/04 17:59:41 by mushu            ###   ########.fr       */
+/*   Updated: 2021/03/05 17:35:22 by mushu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,14 @@ typedef struct s_point
 
 int			ft_printf(const char *format, ...);
 int			ft_conv_type(char *form, va_list arg);
+int			ft_write(char *str, int a);
+int			ft_strlen_nb(int i);
 
 char		*ft_putnbr(int nb);
 char		*ft_conv_c(va_list arg);
 char		*ft_conv_d(int i);
+char		*ft_conv_s(char	*str);
 
-void		ft_write(char *str);
 void        ft_free(char **str);
 
 #endif
