@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   conversion.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/14 11:48:17 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/03/04 18:30:02 by mushu            ###   ########.fr       */
+/*   Created: 2021/03/04 14:17:52 by mushu             #+#    #+#             */
+/*   Updated: 2021/03/04 14:26:37 by mushu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			main()
+char	*ft_putnbr(int nb)
 {
-	char		a;
-	char 		b;
-	char 		c;
-	int			d;
+	long int a;
 
-	a = 'a';
-	b = 'b';
-	c = 'c';
-	d = 10;
-	ft_printf("%c | %c  | %c | %d \n", a, b, c, d);
+	a = nb;
+	if (a < 0)
+	{
+		ft_putchar('-');
+		a *= -1;
+	}
+	if (a >= 10)
+	{
+		ft_putnbr(a / 10);
+	}
+	ft_putchar(a % 10 + 48);
 }

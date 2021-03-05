@@ -3,46 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 13:42:21 by mushu             #+#    #+#             */
-/*   Updated: 2021/03/04 13:01:57 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/03/04 18:27:42 by mushu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+void				ft_write(char *str)
+{
+	int				i;
+
+	i = 0;
+	while(str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+
+}
+
 int					ft_printf(const char *format, ...)
 {
 	int				i;
-	char			c;
+	char			*form;
 	va_list			arg;
 
-	i = 0;
+	form = (char *)format;
 	va_start(arg, format);
-	while (format[i])
+	while (*form)
 	{
-		if (format[i] == '%')
+		if (*form == '%')
 		{
-			i++;
-			if (format[i] == '%')
-				write(1, "%", 1);
-			else if (format[i] == 'c')
+			form++;
+			if (*form == '%')
 			{
-				c = va_arg(arg, int);
-				write(1, &c, 1);
+				ft_write(form);
+				form++;
 			}
-			else if (format[i] == 'd')
+			else
 			{
-				c = va_arg(arg, int);
-				write(1, &c, 1);
+				if (!(i = ft_conv_type(form, arg)))
+					return (0);
+				form++;
 			}
 		}
 		else
 		{
-			write(1, &format[i], 1);
+			write(1, form, 1);
+			form++;
 		}
-		i++;
 	}
+	va_end(arg);
 	return (0);
 }
