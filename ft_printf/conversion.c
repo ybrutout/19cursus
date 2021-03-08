@@ -6,25 +6,47 @@
 /*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:17:52 by mushu             #+#    #+#             */
-/*   Updated: 2021/03/04 14:26:37 by mushu            ###   ########.fr       */
+/*   Updated: 2021/03/08 15:27:46 by mushu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-char	*ft_putnbr(int nb)
+static long int			ft_strnbr(long int n)
 {
-	long int a;
+	long int	i;
 
-	a = nb;
-	if (a < 0)
+	i = 0;
+	if (n < 0)
 	{
-		ft_putchar('-');
-		a *= -1;
+		i++;
+		n *= -1;
 	}
-	if (a >= 10)
+	while (n > 9)
 	{
-		ft_putnbr(a / 10);
+		n = n / 10;
+		i++;
 	}
-	ft_putchar(a % 10 + 48);
+	i = i + 2;
+	return (i);
+}
+
+char						*ft_itoa(int n)
+{
+	char					*c;
+	unsigned long long int	size;
+	unsigned long long int	new_n;
+
+	new_n = n;
+	size = ft_strnbr(new_n);
+	c = (char *)malloc(sizeof(char) * size);
+	if (!c)
+		return;
+	c[--size] = '\0';
+	if (new_n == 0)
+		c[0] = '0';
+	while (new_n)
+	{
+		c[--size] = new_n % 10 + 48;
+		new_n = new_n / 10;
+	}
+	return (c);
 }

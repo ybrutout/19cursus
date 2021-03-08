@@ -6,7 +6,7 @@
 /*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 13:42:21 by mushu             #+#    #+#             */
-/*   Updated: 2021/03/05 17:39:31 by mushu            ###   ########.fr       */
+/*   Updated: 2021/03/08 09:45:32 by mushu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int					ft_printf(const char *format, ...)
 				ft_write(form, 2);
 				form++;
 			}
-			else
+			else if(*form)
 			{
 				if (!(i = ft_conv_type(form, arg)))
 					return (0);
