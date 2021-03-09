@@ -6,7 +6,7 @@
 /*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 13:44:12 by mushu             #+#    #+#             */
-/*   Updated: 2021/03/08 18:28:26 by mushu            ###   ########.fr       */
+/*   Updated: 2021/03/09 15:02:34 by mushu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,14 @@
 
 typedef struct s_point
 {
-	int     d;
-	char    c;
+	int     width;
+	int		precision;
+	int		dot;
+	int		minus;
+	int		zero;
+	char    type;
 	char	*str;
+
 } t_point;
 
 int			ft_printf(const char *format, ...);
