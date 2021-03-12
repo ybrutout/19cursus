@@ -6,7 +6,7 @@
 /*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 13:44:12 by mushu             #+#    #+#             */
-/*   Updated: 2021/03/05 18:28:16 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2021/03/12 17:42:40 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,26 @@
 
 typedef struct s_point
 {
-	int     d;
-	char    c;
+	int     width;
+	int		precision;
+	int		dot;
+	int		minus;
+	int		zero;
+	char    type;
 	char	*str;
+
 } t_point;
 
 int			ft_printf(const char *format, ...);
 int			ft_conv_type(char *form, va_list arg);
 int			ft_write(char *str, int a);
-int			ft_strlen_nb(int i);
+int			ft_strlen_nb(long i, int base);
 
 char		*ft_putnbr(int nb);
 char		*ft_conv_c(va_list arg);
 char		*ft_conv_d(int i);
 char		*ft_conv_s(char	*str);
-void		ft_con_p(void *);
+char		*ft_conv_p(void *adress);
 
 void        ft_free(char **str);
 

@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conversion.c                                       :+:      :+:    :+:   */
+/*   flags.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/04 14:17:52 by mushu             #+#    #+#             */
-/*   Updated: 2021/03/04 14:26:37 by mushu            ###   ########.fr       */
+/*   Created: 2021/03/09 10:30:46 by mushu             #+#    #+#             */
+/*   Updated: 2021/03/09 15:18:54 by mushu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_putnbr(int nb)
+char             *ft_conv_flag(char *form, va_list arg)
 {
-	long int a;
+    t_point     conv;
 
-	a = nb;
-	if (a < 0)
+    if (*form == '-')
 	{
-		ft_putchar('-');
-		a *= -1;
+		conv.minus = 1;
 	}
-	if (a >= 10)
+	else if(*form == '0')
 	{
-		ft_putnbr(a / 10);
+		conv.zero = 1;
 	}
-	ft_putchar(a % 10 + 48);
+	else if (*form == '.')
+	{
+		conv.dot = 1;
+	}
+	else if (*form == '*')
+	{
+		conv.precision = 1;
+	}
 }
