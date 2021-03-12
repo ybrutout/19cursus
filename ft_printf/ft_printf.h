@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 13:44:12 by mushu             #+#    #+#             */
-/*   Updated: 2021/03/05 17:35:22 by mushu            ###   ########.fr       */
+/*   Updated: 2021/03/05 18:28:16 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char		*ft_putnbr(int nb);
 char		*ft_conv_c(va_list arg);
 char		*ft_conv_d(int i);
 char		*ft_conv_s(char	*str);
+void		ft_con_p(void *);
 
 void        ft_free(char **str);
 

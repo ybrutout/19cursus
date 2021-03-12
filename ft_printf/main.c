@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 11:48:17 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/03/05 17:37:13 by mushu            ###   ########.fr       */
+/*   Updated: 2021/03/05 23:15:18 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int			main()
 	b = 'b';
 	c = 'c';
 	d = 10;
-	ret = ft_printf("%c | %c  | %c | %d | %s\n", a, b, c, d, str);
-	ret2 = printf("%c | %c  | %c | %d | %s\n", a, b, c, d, str);
+	ret = ft_printf("%c | %c  | %c  | %d | %s | %p\n", a, b, c, d, str, str);
+	ret2 = printf("%c | %c  | %c  | %d | %s | %p\n", a, b, c, d, str, str);
 	printf("ret = %d\n", ret);
 	printf("ret2 = %d\n", ret2);
 	return (0);

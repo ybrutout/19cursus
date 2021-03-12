@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conversions_type.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:28:40 by mushu             #+#    #+#             */
-/*   Updated: 2021/03/05 17:44:12 by mushu            ###   ########.fr       */
+/*   Updated: 2021/03/05 18:37:45 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,11 @@ char			*ft_conv_s(char	*str)
 	return (nw_str);
 }
 
+void			ft_con_p(void * address)
+{	
+	printf("void * = %s\n", (char *)address);
+}
+
 int				ft_conv_type(char *form, va_list arg)
 {
 	t_point 	conv;
@@ -107,6 +112,10 @@ int				ft_conv_type(char *form, va_list arg)
 	{
 		if (!(conv.str = ft_conv_s(va_arg(arg, char*))))
 			return(0);
+	}
+	else if(*form == 'p')
+	{
+		ft_con_p(va_arg(arg, void*));
 	}
 	ft_write(conv.str, 1);
 	free(conv.str);
