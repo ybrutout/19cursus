@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conversions_type.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
+/*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:28:40 by mushu             #+#    #+#             */
-/*   Updated: 2021/03/12 17:42:38 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2021/03/25 12:14:18 by mushu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ int				ft_strlen(char *str)
 
 	i = 0;
 	while (str[i])
+	{
 		i++;
+	}
 	return (i);
 }
 
@@ -76,6 +78,7 @@ char			*ft_conv_c(va_list arg)
 
 char			*ft_conv_s(char	*str)
 {
+
 	char		*nw_str;
 	int			size;
 	int			i;
