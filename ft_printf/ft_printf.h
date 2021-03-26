@@ -6,7 +6,7 @@
 /*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 13:44:12 by mushu             #+#    #+#             */
-/*   Updated: 2021/03/25 11:17:13 by mushu            ###   ########.fr       */
+/*   Updated: 2021/03/26 16:35:01 by mushu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ int			ft_write(char *str, int a);
 int			ft_strlen_nb(long i, int base);
 int			ft_check_type(char c);
 int			ft_conv_flag(char *form);
+int			ft_conv_width(char *form);
 
 char		*ft_putnbr(int nb);
 char		*ft_conv_c(va_list arg);
 char		*ft_conv_d(int i);
 char		*ft_conv_s(char	*str);
 char		*ft_conv_p(void *adress);
+char		*ft_conv_d(int j);
 
 void        ft_free(char **str);
 

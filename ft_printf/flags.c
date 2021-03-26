@@ -6,7 +6,7 @@
 /*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 10:30:46 by mushu             #+#    #+#             */
-/*   Updated: 2021/03/25 12:57:01 by mushu            ###   ########.fr       */
+/*   Updated: 2021/03/26 16:39:34 by mushu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,3 +33,12 @@ int             ft_conv_flag(char *form)
 	return (j);
 }
 
+int				ft_conv_width(char *form)
+{
+	int			i;
+
+	i = 0;
+	while(*form >= '0' && *form <= '9')
+		i++;
+	return (i);
+}
