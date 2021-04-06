@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conversions_type.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:28:40 by mushu             #+#    #+#             */
-/*   Updated: 2021/03/25 12:14:18 by mushu            ###   ########.fr       */
+/*   Updated: 2021/04/06 11:01:12 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char			*ft_conv_d(int j)
 char			*ft_conv_c(va_list arg)
 {
 	char	*str;
-	
+
 	if (!(str = (char *)malloc(sizeof (char) * 2)))
 		return (NULL);
 	str[0] = va_arg(arg, int);
@@ -208,51 +208,50 @@ char				*ft_conv_X(int i)
 	return (str);
 }
 
-int				ft_conv_type(char *form, va_list arg)
+int				ft_conv_type(char *form, va_list arg, t_point *conv)
 {
-	t_point 	conv;
 
 	if (*form == 'c')
 	{
-		if (!(conv.str = ft_conv_c(arg)))
+		if (!((*conv).str = ft_conv_c(arg)))
 			return (0);
 	}
 	else if(*form == 'd' || *form == 'i')
 	{
-		if(!(conv.str = ft_conv_d(va_arg(arg, int))))
+		if(!((*conv).str = ft_conv_d(va_arg(arg, int))))
 			return (0);
 	}
 	else if (*form == 's')
 	{
-		if (!(conv.str = ft_conv_s(va_arg(arg, char*))))
+		if (!((*conv).str = ft_conv_s(va_arg(arg, char*))))
 			return(0);
 	}
 	else if (*form == 'p')
 	{
-		if (!(conv.str = ft_conv_p(va_arg(arg, void*))))
+		if (!((*conv).str = ft_conv_p(va_arg(arg, void*))))
 			return (0);
 	}
 	else if(*form == 'u')
 	{
-		if(!(conv.str = ft_conv_u(va_arg(arg, int))))
+		if(!((*conv).str = ft_conv_u(va_arg(arg, int))))
 			return (0);
-		
+
 	}
 	else if (*form == 'x')
 	{
-		if(!(conv.str = ft_conv_x(va_arg(arg, int))))
+		if(!((*conv).str = ft_conv_x(va_arg(arg, int))))
 			return (0);
 	}
 	else if (*form == 'X')
 	{
-		if(!(conv.str = ft_conv_X(va_arg(arg, int))))
+		if(!((*conv).str = ft_conv_X(va_arg(arg, int))))
 			return (0);
 	}
-	
-	if (*conv.str)
+	if (*(*conv).str)
 	{
-		ft_write(conv.str, 1);
-		free(conv.str);
+		ft_write((*conv).str, 1);
+		free((*conv).str);
+		ft_cln(conv);
 	}
 	return (1);
 }

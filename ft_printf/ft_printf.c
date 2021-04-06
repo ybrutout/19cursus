@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/03 13:42:21 by mushu             #+#    #+#             */
-/*   Updated: 2021/03/26 16:32:36 by mushu            ###   ########.fr       */
+/*   Created: 2021/04/06 09:26:47 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/04/06 11:05:54 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,33 @@ int				ft_write(char *str, int a)
 int					ft_check_type(char c)
 {
 	if (c == '-' ||  c == '0')
-	{
 		return (1);
-	}
 	if (c > '0' && c <= '9')
-	{
 		return(2);
-	}
-	if (c == 'd' || c == 'i' || c == 's' || c == 'p' || c == 'c' || c == 'x' || c == 'X' || c == 'u')
+	if (c == '*'|| c == '.')
 		return (3);
+	if (c == 'd' || c == 'i' || c == 's' || c == 'p' || c == 'c' || c == 'x' || c == 'X' || c == 'u')
+		return (4);
 	return (0);
+}
+
+void		ft_cln(t_point *conv)
+{
+	conv->dot = 0;
+	conv->minus = 0;
+	conv->precision = 0;
+	conv->width = 0;
+	conv->zero = 0;
 }
 
 int					ft_printf(const char *format, ...)
 {
 	int				i;
 	int				ret;
-	int 			type; 
+	int 			type;
 	char			*form;
 	va_list			arg;
+	t_point			conv;
 
 	form = (char *)format;
 	va_start(arg, format);
@@ -76,22 +84,27 @@ int					ft_printf(const char *format, ...)
 			{
 				if ((type = ft_check_type(*form)) == 1)
 				{
-					if (!(i = ft_conv_flag(form)))
-						return (0);
+					i = ft_conv_flag(form, &conv);
 					form = &form[i];
 				}
 				if((type = ft_check_type(*form)) == 2)
 				{
-					if (!(i = ft_conv_width(form)))
-						return (0);
+					i = ft_conv_width(form, &conv);
 					form = &form[i];
 				}
-				if((type = ft_check_type(*form)) == 3)
+				if ((type = ft_check_type(*form)) == 3)
 				{
-					if (!(i = ft_conv_type(form, arg)))
+					i = ft_conv_precision(form, &conv);
+					form = &form[i];
+				}
+				printf("minus = %d\n zero = %d \n precision = %d \n dot = %d \n", conv.minus, conv.zero, conv.precision, conv.dot);
+				if((type = ft_check_type(*form)) == 4)
+				{
+					if (!(i = ft_conv_type(form, arg, &conv)))
 						return (0);
 					form = &form[i];
 				}
+				printf("minus = %d\n zero = %d \n precision = %d \n dot = %d \n", conv.minus, conv.zero, conv.precision, conv.dot);
 			}
 		}
 		else

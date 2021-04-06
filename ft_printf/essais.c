@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   essais.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mushu <mushu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 10:41:52 by mushu             #+#    #+#             */
-/*   Updated: 2021/03/25 12:35:31 by mushu            ###   ########.fr       */
+/*   Updated: 2021/04/06 10:22:42 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int         main(void)
 	int				pos;
 	int				neg;
 	int				ret2;
-	char			*str = "hello comment ca va ? "; 
+	char			*str = "hello comment ca va ? ";
 
 	a = 'a';
 	d = 10;
