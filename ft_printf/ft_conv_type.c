@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:28:40 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/06 11:01:12 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/06 12:29:14 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,7 @@ int				ft_conv_type(char *form, va_list arg, t_point *conv)
 	}
 	if (*(*conv).str)
 	{
+		ft_change(conv);
 		ft_write((*conv).str, 1);
 		free((*conv).str);
 		ft_cln(conv);

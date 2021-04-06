@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:26:47 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/06 11:05:54 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/06 12:27:03 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,14 +97,12 @@ int					ft_printf(const char *format, ...)
 					i = ft_conv_precision(form, &conv);
 					form = &form[i];
 				}
-				printf("minus = %d\n zero = %d \n precision = %d \n dot = %d \n", conv.minus, conv.zero, conv.precision, conv.dot);
 				if((type = ft_check_type(*form)) == 4)
 				{
 					if (!(i = ft_conv_type(form, arg, &conv)))
 						return (0);
 					form = &form[i];
 				}
-				printf("minus = %d\n zero = %d \n precision = %d \n dot = %d \n", conv.minus, conv.zero, conv.precision, conv.dot);
 			}
 		}
 		else
