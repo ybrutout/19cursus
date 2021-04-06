@@ -6,26 +6,17 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 10:41:52 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/06 10:22:42 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/06 16:11:38 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-int         main(void)
+int	main(void)
 {
-    char			a;
-	int				d;
-	int				pos;
-	int				neg;
-	int				ret2;
-	char			*str = "hello comment ca va ? ";
+	int 	ret2;
 
-	a = 'a';
-	d = 10;
-	pos = 2147483647;
-	neg = -2147483648;
-	ret2 = printf("|%10c| |%010d| |%-10i| |%-10x| |%-10u| |%-10s| |%-10p| |%-10X| \n", a, d, pos, neg, neg, str, &a, pos);
+	ret2 = printf("|%.10s|\n", "coucou comment ca va ?");
 	printf("ret2 = %d\n", ret2);
 	return (0);
 

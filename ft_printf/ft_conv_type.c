@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conversions_type.c                                 :+:      :+:    :+:   */
+/*   ft_conv_type.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:28:40 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/06 12:29:14 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/06 15:35:02 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,6 @@ char				*ft_conv_x(int i)
 	return (str);
 }
 
-
 char				*ft_conv_X(int i)
 {
 	char			*str;
@@ -206,53 +205,4 @@ char				*ft_conv_X(int i)
 			str[--size] = nw_i + 55;
 	}
 	return (str);
-}
-
-int				ft_conv_type(char *form, va_list arg, t_point *conv)
-{
-
-	if (*form == 'c')
-	{
-		if (!((*conv).str = ft_conv_c(arg)))
-			return (0);
-	}
-	else if(*form == 'd' || *form == 'i')
-	{
-		if(!((*conv).str = ft_conv_d(va_arg(arg, int))))
-			return (0);
-	}
-	else if (*form == 's')
-	{
-		if (!((*conv).str = ft_conv_s(va_arg(arg, char*))))
-			return(0);
-	}
-	else if (*form == 'p')
-	{
-		if (!((*conv).str = ft_conv_p(va_arg(arg, void*))))
-			return (0);
-	}
-	else if(*form == 'u')
-	{
-		if(!((*conv).str = ft_conv_u(va_arg(arg, int))))
-			return (0);
-
-	}
-	else if (*form == 'x')
-	{
-		if(!((*conv).str = ft_conv_x(va_arg(arg, int))))
-			return (0);
-	}
-	else if (*form == 'X')
-	{
-		if(!((*conv).str = ft_conv_X(va_arg(arg, int))))
-			return (0);
-	}
-	if (*(*conv).str)
-	{
-		ft_change(conv);
-		ft_write((*conv).str, 1);
-		free((*conv).str);
-		ft_cln(conv);
-	}
-	return (1);
 }

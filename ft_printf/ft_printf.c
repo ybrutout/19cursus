@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:26:47 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/06 12:27:03 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/06 16:35:30 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,6 @@ int				ft_write(char *str, int a)
 	return(ret);
 }
 
-int					ft_check_type(char c)
-{
-	if (c == '-' ||  c == '0')
-		return (1);
-	if (c > '0' && c <= '9')
-		return(2);
-	if (c == '*'|| c == '.')
-		return (3);
-	if (c == 'd' || c == 'i' || c == 's' || c == 'p' || c == 'c' || c == 'x' || c == 'X' || c == 'u')
-		return (4);
-	return (0);
-}
-
 void		ft_cln(t_point *conv)
 {
 	conv->dot = 0;
@@ -63,7 +50,6 @@ int					ft_printf(const char *format, ...)
 {
 	int				i;
 	int				ret;
-	int 			type;
 	char			*form;
 	va_list			arg;
 	t_point			conv;
@@ -80,27 +66,26 @@ int					ft_printf(const char *format, ...)
 				ft_write(form, 2);
 				form++;
 			}
-			else
+			else if ((ft_check_form(*form)) > 0)
 			{
-				if ((type = ft_check_type(*form)) == 1)
+				if ((ft_check_form(*form)) == 1)
 				{
-					i = ft_conv_flag(form, &conv);
+					i = ft_check_flag(form, &conv);
 					form = &form[i];
 				}
-				if((type = ft_check_type(*form)) == 2)
+				if((ft_check_form(*form)) == 2)
 				{
-					i = ft_conv_width(form, &conv);
+					i = ft_check_width(form, &conv, arg);
 					form = &form[i];
 				}
-				if ((type = ft_check_type(*form)) == 3)
+				if ((ft_check_form(*form)) == 3)
 				{
-					i = ft_conv_precision(form, &conv);
+					i = ft_check_precision(form, &conv, arg);
 					form = &form[i];
 				}
-				if((type = ft_check_type(*form)) == 4)
+				if((ft_check_form(*form)) == 4)
 				{
-					if (!(i = ft_conv_type(form, arg, &conv)))
-						return (0);
+					i = ft_check_type(form, &conv);
 					form = &form[i];
 				}
 			}

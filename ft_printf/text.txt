@@ -1,0 +1,2 @@
+le - est obligatoirement en premiere position
+Le width equivaut a un minimum tandis que la precision equivaut a une longueure precise 

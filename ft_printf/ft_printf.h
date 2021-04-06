@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 13:44:12 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/06 11:01:07 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/06 15:27:02 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,19 @@ typedef struct s_point
 	int		dot;
 	int		minus;
 	int		zero;
-	char    type;
+	int    type;
 	char	*str;
 
 } t_point;
 
 int			ft_printf(const char *format, ...);
-int			ft_conv_type(char *form, va_list arg, t_point *conv);
+int			ft_check_type(char *form, t_point *conv);
 int			ft_write(char *str, int a);
 int			ft_strlen_nb(long i, int base);
-int			ft_check_type(char c);
-int			ft_conv_flag(char *form, t_point *conv);
-int			ft_conv_width(char *form, t_point *conv);
-int			ft_conv_precision(char *form, t_point *conv);
+int			ft_check_form(char c);
+int			ft_check_flag(char *form, t_point *conv);
+int			ft_check_width(char *form, t_point *conv, va_list arg);
+int			ft_check_precision(char *form, t_point *conv, va_list arg);
 
 char		*ft_putnbr(int nb);
 char		*ft_conv_c(va_list arg);
