@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:26:47 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/06 16:35:30 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/06 16:51:23 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int				ft_write(char *str, int a)
+int	ft_write(char *str, int a)
 {
 	int				i;
 	static int		ret;
@@ -22,7 +22,7 @@ int				ft_write(char *str, int a)
 		ret = 0;
 	if (a == 1)
 	{
-		while(str[i])
+		while (str[i])
 		{
 			write(1, &str[i], 1);
 			i++;
@@ -34,10 +34,10 @@ int				ft_write(char *str, int a)
 		write(1, str, 1);
 		ret++;
 	}
-	return(ret);
+	return (ret);
 }
 
-void		ft_cln(t_point *conv)
+void	ft_cln(t_point *conv)
 {
 	conv->dot = 0;
 	conv->minus = 0;
@@ -46,7 +46,41 @@ void		ft_cln(t_point *conv)
 	conv->zero = 0;
 }
 
-int					ft_printf(const char *format, ...)
+int	ft_printf2(char *form, t_point *conv, va_list arg)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	if ((ft_check_form(*form)) == 1)
+	{
+		i = ft_check_flag(form, &conv);
+		form = &form[i];
+		j = j + i;
+	}
+	if ((ft_check_form(*form)) == 2)
+	{
+		i = ft_check_width(form, &conv, arg);
+		form = &form[i];
+		j = j + i;
+	}
+	if ((ft_check_form(*form)) == 3)
+	{
+		i = ft_check_precision(form, &conv, arg);
+		form = &form[i];
+		j = j + i;
+	}
+	if ((ft_check_form(*form)) == 4)
+	{
+		i = ft_check_type(form, &conv);
+		form = &form[i];
+		j = j + i;
+	}
+	return (j);
+}
+
+int	ft_printf(const char *format, ...)
 {
 	int				i;
 	int				ret;
@@ -68,26 +102,8 @@ int					ft_printf(const char *format, ...)
 			}
 			else if ((ft_check_form(*form)) > 0)
 			{
-				if ((ft_check_form(*form)) == 1)
-				{
-					i = ft_check_flag(form, &conv);
-					form = &form[i];
-				}
-				if((ft_check_form(*form)) == 2)
-				{
-					i = ft_check_width(form, &conv, arg);
-					form = &form[i];
-				}
-				if ((ft_check_form(*form)) == 3)
-				{
-					i = ft_check_precision(form, &conv, arg);
-					form = &form[i];
-				}
-				if((ft_check_form(*form)) == 4)
-				{
-					i = ft_check_type(form, &conv);
-					form = &form[i];
-				}
+				i = ft_printf2(form, &conv, arg);
+				form = &form[i];
 			}
 		}
 		else
