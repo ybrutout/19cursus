@@ -1,4 +1,4 @@
-	if (*(*conv).str)
+	/*if (*(*conv).str)
 	{
 		ft_write(conv->str, 1);
 		free((*conv).str);

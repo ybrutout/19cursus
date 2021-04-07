@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:26:47 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/06 16:51:23 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/07 12:21:15 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,53 +37,32 @@ int	ft_write(char *str, int a)
 	return (ret);
 }
 
-void	ft_cln(t_point *conv)
+char	*ft_printf2(char *form, t_point *conv, va_list arg)
 {
-	conv->dot = 0;
-	conv->minus = 0;
-	conv->precision = 0;
-	conv->width = 0;
-	conv->zero = 0;
-}
-
-int	ft_printf2(char *form, t_point *conv, va_list arg)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	if ((ft_check_form(*form)) == 1)
+	form++;
+	if (*form == '%')
 	{
-		i = ft_check_flag(form, &conv);
-		form = &form[i];
-		j = j + i;
+		ft_write(form, 2);
+		form++;
 	}
-	if ((ft_check_form(*form)) == 2)
+	else if ((ft_check_form(*form)) > 0)
 	{
-		i = ft_check_width(form, &conv, arg);
-		form = &form[i];
-		j = j + i;
+		if ((ft_check_form(*form)) == 1)
+			form = &form[(ft_check_flag(form, conv))];
+		if ((ft_check_form(*form)) == 2)
+			form = &form[(ft_check_width(form, conv, arg))];
+		if ((ft_check_form(*form)) == 3)
+			form = &form[(ft_check_precision(form, conv, arg))];
+		if ((ft_check_form(*form)) == 4)
+			form = &form[(ft_check_type(form, conv))];
 	}
-	if ((ft_check_form(*form)) == 3)
-	{
-		i = ft_check_precision(form, &conv, arg);
-		form = &form[i];
-		j = j + i;
-	}
-	if ((ft_check_form(*form)) == 4)
-	{
-		i = ft_check_type(form, &conv);
-		form = &form[i];
-		j = j + i;
-	}
-	return (j);
+	else
+		return (NULL);
+	return (form);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	int				i;
-	int				ret;
 	char			*form;
 	va_list			arg;
 	t_point			conv;
@@ -94,17 +73,11 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*form == '%')
 		{
-			form++;
-			if (*form == '%')
-			{
-				ft_write(form, 2);
-				form++;
-			}
-			else if ((ft_check_form(*form)) > 0)
-			{
-				i = ft_printf2(form, &conv, arg);
-				form = &form[i];
-			}
+			form = ft_printf2(form, &conv, arg);
+			if (!form)
+				return (ft_write("error config %%\n", 1));
+			if (conv.type > 0)
+				;
 		}
 		else
 		{
@@ -112,7 +85,6 @@ int	ft_printf(const char *format, ...)
 			form++;
 		}
 	}
-	ret = ft_write(form, 0);
 	va_end(arg);
-	return (ret);
+	return (ft_write(form, 0));
 }
