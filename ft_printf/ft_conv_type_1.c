@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:28:40 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/07 13:00:28 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/07 14:56:52 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,28 +63,11 @@ char	*ft_conv_s(char	*str)
 	return (nw_str);
 }
 
-char	*ft_conv_p_1(void *adress)
-{
-	char					*c;
-	unsigned long long int	size;
-	unsigned long long int	new_n;
-	int						modulo;
-
-	new_n = (unsigned long long int)adress;
-	size = (ft_strlen_nb(new_n, 16)) + 3;
-	c = (char *)malloc(sizeof(char) * size);
-	if (!c)
-		return (NULL);
-	c[--size] = '\0';
-	c[0] = '0';
-	c[1] = 'x';
-	ft_conv_p_2(&modulo, new_n, size, c);
-	return (c);
-}
-
-static void	ft_conv_p_2(int	*modulo, unsigned long long int new_n, \
+static void	ft_conv_p_2(unsigned long long int new_n, \
 					unsigned long long int size, char *c)
 {
+	unsigned long long int	modulo;
+
 	while (new_n > 17)
 	{
 		modulo = new_n % 16;
@@ -102,3 +85,22 @@ static void	ft_conv_p_2(int	*modulo, unsigned long long int new_n, \
 			c[--size] = modulo + 87;
 	}
 }
+
+char	*ft_conv_p_1(void *adress)
+{
+	char					*c;
+	unsigned long long int	size;
+	unsigned long long int	new_n;
+
+	new_n = (unsigned long long int)adress;
+	size = (ft_strlen_nb(new_n, 16)) + 3;
+	c = (char *)malloc(sizeof(char) * size);
+	if (!c)
+		return (NULL);
+	c[--size] = '\0';
+	c[0] = '0';
+	c[1] = 'x';
+	ft_conv_p_2(new_n, size, c);
+	return (c);
+}
+
