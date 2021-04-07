@@ -6,11 +6,11 @@
 #    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/09 11:56:15 by mushu             #+#    #+#              #
-#    Updated: 2021/04/07 15:08:21 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/04/07 16:00:27 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = printf.a
+NAME = libftprintf.a
 
 CC = gcc
 
@@ -21,7 +21,7 @@ SRC =	ft_check.c\
 		ft_conv_type_2.c\
 		ft_printf.c\
 		ft_tools.c\
-		main.c\
+		main.c \
 
 OBJ = $(SRC:%.c=%.o)
 

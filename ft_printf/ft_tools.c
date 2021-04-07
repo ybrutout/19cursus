@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 15:17:37 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/07 15:01:20 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/07 17:51:18 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,24 @@ int	ft_strlen_nb(long i, int base)
 	}
 	len = len + 1;
 	return (len);
+}
+
+char	*ft_cpy(char *dst, char *src, int flag, int size, int width)
+{
+	int	i;
+	int	src_size;
+
+	i = 0;
+	src_size = ft_strlen(src);
+	dst[size--] = '\0';
+	if (flag == 0)
+	{
+		while (size >= 0)
+		{
+			if (src_size-- > -1)
+				dst[size--] = src[src_size--];
+			if ()
+				;
+		}
+	}
 }

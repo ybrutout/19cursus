@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:28:40 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/07 14:56:52 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/07 17:48:09 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ char	*ft_conv_d(int j)
 	return (str);
 }
 
-char	*ft_conv_c(va_list arg)
+char	*ft_conv_c(char c)
 {
 	char	*str;
 
 	str = (char *)malloc(sizeof (char) * 2);
 	if (!str)
 		return (NULL);
-	str[0] = va_arg(arg, int);
+	str[0] = c;
 	str[1] = '\0';
 	return (str);
 }
@@ -103,4 +103,3 @@ char	*ft_conv_p_1(void *adress)
 	ft_conv_p_2(new_n, size, c);
 	return (c);
 }
-

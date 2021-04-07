@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:26:47 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/07 12:21:15 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/07 17:19:48 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ int	ft_printf(const char *format, ...)
 			if (!form)
 				return (ft_write("error config %%\n", 1));
 			if (conv.type > 0)
-				;
+				if ((ft_conv_flags(arg, &conv)) == 0)
+					return (0);
 		}
 		else
 		{

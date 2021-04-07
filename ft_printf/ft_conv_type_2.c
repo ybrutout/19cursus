@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 12:25:30 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/07 14:55:09 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/07 15:49:32 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ char	*ft_conv_u(int i)
 
 static void	ft_conv_x_2(unsigned int nw_i, int size, char *str)
 {
+	unsigned int	modulo;
+
 	while (nw_i > 17)
 	{
-		unsigned int	modulo;
-
 		modulo = nw_i % 16;
 		if (modulo <= 9)
 			str[--size] = modulo + 48;
@@ -72,10 +72,10 @@ char	*ft_conv_x_1(int i)
 
 static void	ft_conv_X_2(unsigned int nw_i, int size, char *str)
 {
+	unsigned int	modulo;
+
 	while (nw_i > 17)
 	{
-		unsigned int modulo;
-
 		modulo = nw_i % 16;
 		if (modulo <= 9)
 			str[--size] = modulo + 48;
