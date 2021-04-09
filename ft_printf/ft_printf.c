@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:26:47 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/07 17:19:48 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/09 16:19:13 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	ft_write(char *str, int a)
 		while (str[i])
 		{
 			write(1, &str[i], 1);
-			i++;
 			ret++;
+			i++;
 		}
 	}
 	else if (a == 2)
@@ -39,18 +39,17 @@ int	ft_write(char *str, int a)
 
 char	*ft_printf2(char *form, t_point *conv, va_list arg)
 {
-	form++;
-	if (*form == '%')
-	{
-		ft_write(form, 2);
-		form++;
-	}
-	else if ((ft_check_form(*form)) > 0)
+	if ((ft_check_form(*form)) > 0)
 	{
 		if ((ft_check_form(*form)) == 1)
 			form = &form[(ft_check_flag(form, conv))];
 		if ((ft_check_form(*form)) == 2)
 			form = &form[(ft_check_width(form, conv, arg))];
+		if ((ft_check_form(*form)) == 5)
+		{
+			form++;
+			conv->type = 10;
+		}
 		if ((ft_check_form(*form)) == 3)
 			form = &form[(ft_check_precision(form, conv, arg))];
 		if ((ft_check_form(*form)) == 4)
@@ -67,24 +66,23 @@ int	ft_printf(const char *format, ...)
 	va_list			arg;
 	t_point			conv;
 
+	ft_cln(&conv);
 	form = (char *)format;
 	va_start(arg, format);
 	while (*form)
 	{
 		if (*form == '%')
 		{
+			form++;
 			form = ft_printf2(form, &conv, arg);
 			if (!form)
 				return (ft_write("error config %%\n", 1));
 			if (conv.type > 0)
 				if ((ft_conv_flags(arg, &conv)) == 0)
-					return (0);
+					return (ft_write("error maloc %%\n", 1));
 		}
 		else
-		{
-			ft_write(form, 2);
-			form++;
-		}
+			ft_write(form++, 2);
 	}
 	va_end(arg);
 	return (ft_write(form, 0));

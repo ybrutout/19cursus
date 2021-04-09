@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 15:17:37 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/07 17:51:18 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/09 15:01:05 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_cln(t_point *conv)
 	conv->precision = 0;
 	conv->width = 0;
 	conv->zero = 0;
+	conv->type = 0;
 }
 
 int	ft_strlen(char *str)
@@ -64,22 +65,45 @@ int	ft_strlen_nb(long i, int base)
 	return (len);
 }
 
-char	*ft_cpy(char *dst, char *src, int flag, int size, int width)
+char	*ft_cpy(char *dst, char *src, int flag, int size)
 {
 	int	i;
+	int	j;
 	int	src_size;
 
 	i = 0;
+	j = 0;
 	src_size = ft_strlen(src);
 	dst[size--] = '\0';
 	if (flag == 0)
 	{
 		while (size >= 0)
 		{
-			if (src_size-- > -1)
+			if (--src_size > -1)
 				dst[size--] = src[src_size--];
-			if ()
-				;
+			else if (src_size <= -1)
+				dst[size--] = ' ';
 		}
 	}
+	if (flag == 1)
+	{
+		while (i <= size)
+		{
+			if (src[j])
+				dst[i++] = src[j++];
+			else
+				dst[i++] = ' ';
+		}
+	}
+	if (flag == 2)
+	{
+		while (size >= 0)
+		{
+			if (--src_size > -1)
+				dst[size--] = src[src_size--];
+			else if (src_size <= -1)
+				dst[size--] = '0';
+		}
+	}
+	return (dst);
 }

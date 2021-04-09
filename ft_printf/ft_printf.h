@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 13:44:12 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/07 16:33:48 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/09 16:03:50 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int			ft_strlen_nb(long i, int base);
 int			ft_strlen(char *str);
 int			ft_conv_flags(va_list arg, t_point *conv);
 
+char		*ft_conv_flags_c(va_list arg, t_point *conv);
 char		*ft_putnbr(int nb);
 char		*ft_conv_c(char c);
 char		*ft_conv_d(int i);
@@ -51,6 +52,7 @@ char		*ft_conv_s(char	*str);
 char		*ft_conv_p_1(void *adress);
 char		*ft_conv_d(int j);
 char		*ft_conv_X_1(int i);
+char		*ft_cpy(char *dst, char *src, int flag, int size);
 
 void		ft_free(char **str);
 void		ft_cln(t_point *conv);

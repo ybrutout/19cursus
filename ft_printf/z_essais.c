@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 10:41:52 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/07 17:26:39 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/09 14:08:01 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(void)
 
 	c = 'a';
 
-	ret2 = printf("|%10c|\n", c);
+	ret2 = printf("|%5%|\n");
 	printf("ret2 = %d\n", ret2);
 	return (0);
 
