@@ -14,3 +14,14 @@ if(!((*conv).str = ft_conv_d(va_arg(arg, int))))
 			printf("precision = %d\n", conv.precision);
 			printf("type = %d\n", conv.type);
 			printf("str = %s\n", conv.str);*/
+
+		/*while (str[i] || i == 0)
+		{
+			if (str[i] == 0 && i == 0)
+			{
+				write(1, 0, 1);
+			}
+			write(1, &str[i], 1);
+			ret++;
+			i++;
+		}*/

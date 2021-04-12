@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 15:17:37 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/09 15:01:05 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/12 11:52:13 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,44 +65,48 @@ int	ft_strlen_nb(long i, int base)
 	return (len);
 }
 
-char	*ft_cpy(char *dst, char *src, int flag, int size)
+char	*ft_cpy(char *dst, int flag, t_point conv, int src_size)
 {
-	int	i;
-	int	j;
-	int	src_size;
+	int		i;
+	int		j;
+	char	*str;
 
 	i = 0;
 	j = 0;
-	src_size = ft_strlen(src);
-	dst[size--] = '\0';
+	str = conv.str;
+	dst[conv.width--] = '\0';
 	if (flag == 0)
 	{
-		while (size >= 0)
+		while (conv.width >= 0)
 		{
 			if (--src_size > -1)
-				dst[size--] = src[src_size--];
+				dst[conv.width--] = str[src_size--];
 			else if (src_size <= -1)
-				dst[size--] = ' ';
+			{
+				dst[conv.width--] = ' ';
+			}
 		}
 	}
 	if (flag == 1)
 	{
-		while (i <= size)
+		while (i <= conv.width)
 		{
-			if (src[j])
-				dst[i++] = src[j++];
+			if (src_size-- > 0)
+			{
+				dst[i++] = str[j++];
+			}
 			else
 				dst[i++] = ' ';
 		}
 	}
 	if (flag == 2)
 	{
-		while (size >= 0)
+		while (conv.width >= 0)
 		{
 			if (--src_size > -1)
-				dst[size--] = src[src_size--];
+				dst[conv.width--] = str[src_size--];
 			else if (src_size <= -1)
-				dst[size--] = '0';
+				dst[conv.width--] = '0';
 		}
 	}
 	return (dst);

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 13:44:12 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/09 16:03:50 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/12 11:18:35 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_point
 	int		zero;
 	int		type;
 	char	*str;
+	int		size;
 
 }	t_point;
 
@@ -52,7 +53,7 @@ char		*ft_conv_s(char	*str);
 char		*ft_conv_p_1(void *adress);
 char		*ft_conv_d(int j);
 char		*ft_conv_X_1(int i);
-char		*ft_cpy(char *dst, char *src, int flag, int size);
+char		*ft_cpy(char *dst, int flag, t_point conv, int src_size);
 
 void		ft_free(char **str);
 void		ft_cln(t_point *conv);

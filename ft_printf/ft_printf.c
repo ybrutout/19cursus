@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:26:47 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/09 16:19:13 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/12 10:48:06 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,17 @@ int	ft_write(char *str, int a)
 	i = 0;
 	if (!ret)
 		ret = 0;
-	if (a == 1)
+	if (a > 0)
 	{
-		while (str[i])
+		a--;
+		while (i <= a)
 		{
 			write(1, &str[i], 1);
 			ret++;
 			i++;
 		}
 	}
-	else if (a == 2)
+	else if (a == 0)
 	{
 		write(1, str, 1);
 		ret++;
@@ -67,6 +68,8 @@ int	ft_printf(const char *format, ...)
 	t_point			conv;
 
 	ft_cln(&conv);
+	if (!format)
+		return (0);
 	form = (char *)format;
 	va_start(arg, format);
 	while (*form)
@@ -82,8 +85,8 @@ int	ft_printf(const char *format, ...)
 					return (ft_write("error maloc %%\n", 1));
 		}
 		else
-			ft_write(form++, 2);
+			ft_write(form++, 0);
 	}
 	va_end(arg);
-	return (ft_write(form, 0));
+	return (ft_write(form, -1));
 }

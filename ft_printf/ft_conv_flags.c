@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 10:30:46 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/09 16:03:38 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/12 11:52:32 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*ft_conv_flags_c(va_list arg, t_point *conv)
 	char	*nw_str;
 
 	conv->str = ft_conv_c(va_arg(arg, int));
+	conv->size = 1;
 	if (!conv->str)
 		return (NULL);
 	if (conv->width >= 1)
@@ -25,15 +26,19 @@ char	*ft_conv_flags_c(va_list arg, t_point *conv)
 		if (!nw_str)
 			return (0);
 		if (conv->minus == 1)
-			ft_cpy(nw_str, conv->str, 1, conv->width);
+			ft_cpy(nw_str, 1, *conv, 1);
 		else if (conv->zero == 1)
-			ft_cpy(nw_str, conv->str, 2, conv->width);
+			ft_cpy(nw_str, 2, *conv, 1);
 		else
-			ft_cpy(nw_str, conv->str, 0, conv->width);
+			ft_cpy(nw_str, 0, *conv, 1);
 		free(conv->str);
+		conv->size = conv->width;
 	}
 	else
+	{
 		nw_str = conv->str;
+		conv->size = 1;
+	}
 	return (nw_str);
 }
 
@@ -53,11 +58,11 @@ char	*ft_conv_flags_prct(t_point *conv)
 		if (!nw_str)
 			return (0);
 		if (conv->minus == 1)
-			ft_cpy(nw_str, str, 1, conv->width);
+			ft_cpy(nw_str, 1, *conv, 1);
 		else if (conv->zero == 1)
-			ft_cpy(nw_str, str, 2, conv->width);
+			ft_cpy(nw_str, 2, *conv, 1);
 		else
-			ft_cpy(nw_str, str, 0, conv->width);
+			ft_cpy(nw_str, 0, *conv, 1);
 		free(str);
 	}
 	else
@@ -75,9 +80,9 @@ int	ft_conv_flags(va_list arg, t_point *conv)
 	}
 	if (conv->type == 10)
 	{
-		conv->str = ft_conv_flags_prct( conv);
+		conv->str = ft_conv_flags_prct(conv);
 	}
-	ft_write(conv->str, 1);
+	ft_write(conv->str, conv->size);
 	ft_cln(conv);
 	free(conv->str);
 	return (1);
