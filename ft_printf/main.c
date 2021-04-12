@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 11:48:17 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/12 11:44:22 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/12 15:09:11 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int			main()
 	//d = 11;
 	//pos = 2147483647;
 	//neg = -2147483648;
-	ret = ft_printf("%10c\n", '0');
-	ret2 = printf("%10c\n", '0');
+	ret = ft_printf("|%.s| |%.s|\n", "123", "4567");
+	ret2 = printf("|%.s| |%.s|\n", "123", "4567");
 	printf("ret = %d\n", ret);
 	printf("ret2 = %d\n", ret2);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:26:47 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/12 10:48:06 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/12 12:21:50 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_write(char *str, int a)
 			i++;
 		}
 	}
-	else if (a == 0)
+	else if (a == -1)
 	{
 		write(1, str, 1);
 		ret++;
@@ -85,8 +85,8 @@ int	ft_printf(const char *format, ...)
 					return (ft_write("error maloc %%\n", 1));
 		}
 		else
-			ft_write(form++, 0);
+			ft_write(form++, -1);
 	}
 	va_end(arg);
-	return (ft_write(form, -1));
+	return (ft_write(form, -2));
 }

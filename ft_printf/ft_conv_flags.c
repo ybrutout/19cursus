@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 10:30:46 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/12 11:52:32 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/12 15:50:46 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*ft_conv_flags_prct(t_point *conv)
 	{
 		nw_str = (char *)malloc(sizeof(char) * (conv->width) + 1);
 		if (!nw_str)
-			return (0);
+			return (NULL);
 		if (conv->minus == 1)
 			ft_cpy(nw_str, 1, *conv, 1);
 		else if (conv->zero == 1)
@@ -70,6 +70,50 @@ char	*ft_conv_flags_prct(t_point *conv)
 	return (nw_str);
 }
 
+void	ft_conv_flags_s(va_list arg, t_point *conv)
+{
+	char	*nw_str;
+	char	*tp_str;
+
+	conv->str = ft_conv_s(va_arg(arg, char *));
+	if (!conv->str)
+		return ;
+	if (conv->dot == 1 && conv->precision < ft_strlen(conv->str))
+	{
+		tp_str = (char *)malloc(sizeof(char) * (conv->precision) + 1);
+		if (!tp_str)
+			return ;
+		ft_cpy(tp_str, 10, *conv, conv->precision);
+		free(conv->str);
+		conv->str = tp_str;
+	}
+	if (conv->width >= 1)
+	{
+		nw_str = (char *)malloc(sizeof(char) * (conv->width) + 1);
+		if (!nw_str)
+			return ;
+		if (conv->minus == 1)
+			ft_cpy(nw_str, 1, *conv, ft_strlen(conv->str));
+		else
+		{
+			ft_cpy(nw_str, 0, *conv, ft_strlen(conv->str));
+		}
+		free(conv->str);
+		if (conv->width > ft_strlen(conv->str))
+			conv->size = conv->width;
+		else
+			conv->size = ft_strlen(conv->str);
+	}
+	else
+	{
+		nw_str = conv->str;
+		conv->size = ft_strlen(conv->str);
+	}
+	conv->str = nw_str;
+	//free(nw_str);
+	free(tp_str);
+}
+
 int	ft_conv_flags(va_list arg, t_point *conv)
 {
 	if (conv->type == 1)
@@ -81,6 +125,14 @@ int	ft_conv_flags(va_list arg, t_point *conv)
 	if (conv->type == 10)
 	{
 		conv->str = ft_conv_flags_prct(conv);
+		if (!conv->str)
+			return (0);
+	}
+	if (conv->type == 3)
+	{
+		ft_conv_flags_s(arg, conv);
+		if (!conv->str)
+			return(0);
 	}
 	ft_write(conv->str, conv->size);
 	ft_cln(conv);

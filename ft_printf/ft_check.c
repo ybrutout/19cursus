@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:27:29 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/09 15:30:05 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/12 13:46:25 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	ft_check_precision(char *form, t_point *conv, va_list arg)
 		form++;
 		if (*form == '*')
 		{
-			conv->width = va_arg(arg, int);
+			conv->precision = va_arg(arg, int);
 			i++;
 		}
 		while (*form >= '0' && *form <= '9')
@@ -118,7 +118,7 @@ int	ft_check_precision(char *form, t_point *conv, va_list arg)
 			if (*form == '0')
 				conv->precision = conv->precision * 10;
 			else
-				(*conv).precision = (*conv).precision + (*form - 48);
+				conv->precision = conv->precision + (*form - 48);
 			i++;
 			form++;
 		}

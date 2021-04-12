@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:28:40 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/09 16:19:48 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/12 13:33:08 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char	*ft_conv_s(char	*str)
 		return (NULL);
 	while (str[++i])
 		nw_str[i] = str[i];
+	nw_str[size] = '\0';
 	return (nw_str);
 }
 
