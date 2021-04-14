@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 10:30:46 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/12 16:27:06 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/14 14:52:10 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*ft_conv_flags_prct(t_point *conv)
 		return (NULL);
 	str[0] = '%';
 	str[1] = '\0';
+	conv->str = str;
 	if (conv->width >= 1)
 	{
 		nw_str = (char *)malloc(sizeof(char) * (conv->width) + 1);
@@ -64,9 +65,13 @@ char	*ft_conv_flags_prct(t_point *conv)
 		else
 			ft_cpy(nw_str, 0, *conv, 1);
 		free(str);
+		conv->size = conv->width;
 	}
 	else
-		nw_str = str;
+	{
+		conv->size = 1;
+		return(str);
+	}
 	return (nw_str);
 }
 
@@ -77,36 +82,35 @@ char	*ft_conv_flags_s(va_list arg, t_point *conv)
 	conv->str = ft_conv_s(va_arg(arg, char *));
 	if (!conv->str)
 		return (NULL);
+	printf("conv->str = %s\n", conv->str);
 	if (conv->dot == 1 && conv->precision < ft_strlen(conv->str))
 	{
-		nw_str = (char *)malloc(sizeof(char) * (conv->precision) + 1);
+		nw_str = malloc(sizeof(char) * (conv->precision + 1));
 		if (!nw_str)
 			return (NULL);
 		ft_cpy(nw_str, 10, *conv, conv->precision);
 		free(conv->str);
 		conv->str = nw_str;
 	}
-	if (conv->width >= 1)
+	if (conv->width > 0)
 	{
-		nw_str = (char *)malloc(sizeof(char) * (conv->width) + 1);
+		nw_str = malloc(sizeof(char) * (conv->width + 1));
 		if (!nw_str)
 			return (NULL);
 		if (conv->minus == 1)
 			ft_cpy(nw_str, 1, *conv, ft_strlen(conv->str));
 		else
-		{
 			ft_cpy(nw_str, 0, *conv, ft_strlen(conv->str));
-		}
-		free(conv->str);
 		if (conv->width > ft_strlen(conv->str))
 			conv->size = conv->width;
 		else
 			conv->size = ft_strlen(conv->str);
+		free(conv->str);
 	}
 	else
 	{
-		nw_str = conv->str;
-		conv->size = ft_strlen(nw_str);
+		conv->size = ft_strlen(conv->str);
+		return(conv->str);
 	}
 	return (nw_str);
 }
@@ -127,9 +131,9 @@ int	ft_conv_flags(va_list arg, t_point *conv)
 	}
 	if (conv->type == 3)
 	{
-		ft_conv_flags_s(arg, conv);
+		conv->str = ft_conv_flags_s(arg, conv);
 		if (!conv->str)
-			return(0);
+			return (0);
 	}
 	ft_write(conv->str, conv->size);
 	ft_cln(conv);

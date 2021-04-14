@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:28:40 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/12 13:33:08 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/14 14:45:32 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,42 @@ char	*ft_conv_c(char c)
 	return (str);
 }
 
+char	*ft_conv_s_null(char *str)
+{
+	char	*nw_str;
+
+	if (!str)
+	{
+		nw_str = malloc(sizeof(char) * 7);
+		if (!nw_str)
+			return(0);
+		nw_str[0] = '(';
+		nw_str[1] = 'n';
+		nw_str[2] = 'u';
+		nw_str[3] = 'l';
+		nw_str[4] = 'l';
+		nw_str[5] = ')';
+		nw_str[6] = '\0';
+		return (nw_str);
+	}
+	return (NULL);
+}
+
 char	*ft_conv_s(char	*str)
 {
 	char		*nw_str;
 	int			size;
 	int			i;
 
+	if (!str)
+	{
+		str = ft_conv_s_null(str);
+		if (!str)
+			return(NULL);
+	}
 	size = ft_strlen(str);
 	i = -1;
-	nw_str = (char *)malloc(sizeof(char) * size + 1);
+	nw_str = (char *)malloc(sizeof(char) * (size + 1));
 	if (!nw_str)
 		return (NULL);
 	while (str[++i])

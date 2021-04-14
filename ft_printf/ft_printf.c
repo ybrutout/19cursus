@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:26:47 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/12 12:21:50 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/14 13:32:45 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,10 @@ int	ft_printf(const char *format, ...)
 			if (!form)
 				return (ft_write("error config %%\n", 1));
 			if (conv.type > 0)
+			{
 				if ((ft_conv_flags(arg, &conv)) == 0)
 					return (ft_write("error maloc %%\n", 1));
+			}
 		}
 		else
 			ft_write(form++, -1);
