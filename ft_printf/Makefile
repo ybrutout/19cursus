@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/09 11:56:15 by mushu             #+#    #+#              #
-#    Updated: 2021/04/09 11:19:53 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/04/14 14:49:16 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libftprintf.a
 
 CC = gcc
 
-FLAGS = -Wall -Werror -Wextra -c
+FLAGS =  -c
 
 SRC =	ft_check.c\
 		ft_conv_flags.c \
@@ -43,6 +43,10 @@ fclean: 	clean
 re: fclean all
 
 a: re
+	@$(CC) -o a.out $(OBJ)
+	@./a.out
+
+b: re
 	@$(CC) -o a.out $(OBJ)
 	@./a.out
 

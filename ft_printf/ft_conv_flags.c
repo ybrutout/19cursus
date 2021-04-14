@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 10:30:46 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/14 14:52:10 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/14 15:53:55 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,13 @@ char	*ft_conv_flags_prct(t_point *conv)
 char	*ft_conv_flags_s(va_list arg, t_point *conv)
 {
 	char	*nw_str;
+	char	*tp;
 
-	conv->str = ft_conv_s(va_arg(arg, char *));
+	tp = va_arg(arg, char *);
+	conv->str = ft_conv_s(tp);
 	if (!conv->str)
 		return (NULL);
-	printf("conv->str = %s\n", conv->str);
-	if (conv->dot == 1 && conv->precision < ft_strlen(conv->str))
+	if (conv->dot == 1 && conv->precision < ft_strlen(conv->str) && tp)
 	{
 		nw_str = malloc(sizeof(char) * (conv->precision + 1));
 		if (!nw_str)

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 13:44:12 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/12 15:46:10 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/14 15:35:57 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,11 @@ char		*ft_conv_p_1(void *adress);
 char		*ft_conv_d(int j);
 char		*ft_conv_X_1(int i);
 char		*ft_cpy(char *dst, int flag, t_point conv, int src_size);
+char		*ft_strdup(char *s1);
 
 void		ft_free(char **str);
 void		ft_cln(t_point *conv);
+
+void		*ft_memcpy(void *dst, void *src, size_t n);
 
 #endif
