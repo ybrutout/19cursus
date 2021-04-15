@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 10:30:46 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/15 12:41:03 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/15 14:43:42 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ void	ft_conv_flags_c(int c, t_point *conv)
 	{
 		if (conv->minus == 1)
 		{
-			ft_write(&c, 1);
+			ft_write(c, 1);
 			while (conv->width-- != 1)
-				ft_write(" ", 1);
+				ft_write(' ', 1);
 		}
 		else
 		{
 			while (conv->width-- != 1)
-				ft_write(" ", 1);
-			ft_write(&c, 1);
+				ft_write(' ', 1);
+			ft_write(c, 1);
 		}
 	}
 	else
-		ft_write(&c, 1);
+		ft_write(c, 1);
 }
 
 void	ft_conv_flags_pc(t_point *conv)
@@ -39,47 +39,53 @@ void	ft_conv_flags_pc(t_point *conv)
 	{
 		if (conv->minus == 1)
 		{
-			ft_write("%%", 1);
+			ft_write('%', 1);
 			while (conv->width-- != 1)
-				ft_write(" ", 1);
+				ft_write(' ', 1);
 		}
 		else if (conv->zero == 1)
 		{
 			while (conv->width-- != 1)
-				ft_write("0", 1);
-			ft_write("%%", 1);
+				ft_write('0', 1);
+			ft_write('%', 1);
 		}
 		else
 		{
 			while (conv->width-- != 1)
-				ft_write(" ", 1);
-			ft_write("%%", 1);
+				ft_write(' ', 1);
+			ft_write('%', 1);
 		}
 	}
 	else
-		ft_write("%%", 1);
+		ft_write('%', 1);
 }
 
 void	ft_conv_flags_s_width(char *str, t_point *conv)
 {
+	int	i;
+
+	i = 0;
 	conv->width = conv->width - conv->size;
 	if (conv->minus == 1)
 	{
-		ft_write(str, conv->size);
+		while (conv->size-- != 0)
+			ft_write(str[i++], 1);
 		while (conv->width-- != 0)
-			ft_write(" ", 1);
+			ft_write(' ', 1);
 	}
 	else if (conv->zero == 1)
 	{
 		while (conv->width-- != 0)
-			ft_write("0", 1);
-		ft_write(str, conv->size);
+			ft_write('0', 1);
+		while (conv->size-- != 0)
+			ft_write(str[i++], 1);
 	}
 	else
 	{
 		while (conv->width-- != 0)
-			ft_write(" ", 1);
-		ft_write(str, conv->size);
+			ft_write(' ', 1);
+		while (conv->size-- != 0)
+			ft_write(str[i++], 1);
 	}
 }
 
@@ -97,7 +103,13 @@ void	ft_conv_flags_s(char *str, t_point *conv)
 	if (conv->width > conv->size)
 		ft_conv_flags_s_width(str, conv);
 	else
-		ft_write(str, conv->size);
+	{
+		while (conv->size != 0)
+		{
+			ft_write(str[i++], 1);
+			conv->size--;
+		}
+	}
 }
 
 int	ft_conv_flags(va_list arg, t_point *conv)

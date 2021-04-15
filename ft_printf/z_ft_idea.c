@@ -23,7 +23,8 @@ if(!((*conv).str = ft_conv_d(va_arg(arg, int))))
 			printf("width = %d\n", conv->width);
 			printf("dot = %d\n", conv->dot);
 			printf("precision = %d\n", conv->precision);
-			printf("type = %d\n", conv->type);*/
+			printf("type = %d\n", conv->type);
+			printf("size = %d\n", conv->size);*/
 
 		/*while (str[i] || i == 0)
 		{

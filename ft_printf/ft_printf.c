@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:26:47 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/15 12:36:10 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/15 13:50:59 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_write(void *str, int a)
+int	ft_write(char str, int a)
 {
 	int				i;
 	static int		ret;
@@ -22,13 +22,8 @@ int	ft_write(void *str, int a)
 		ret = 0;
 	if (a > 0)
 	{
-		a--;
-		while (i <= a)
-		{
-			write(1, &str[i], 1);
-			ret++;
-			i++;
-		}
+		write(1, &str, 1);
+		ret++;
 	}
 	else if (a == -2)
 	{
@@ -87,9 +82,9 @@ int	ft_printf(const char *format, ...)
 				return (0);
 		}
 		else
-			ft_write(form++, 1);
+			ft_write(*form++, 1);
 	}
 	va_end(arg);
-	ret = ft_write(form, -2);
+	ret = ft_write(*form, -2);
 	return (ret);
 }
