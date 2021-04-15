@@ -15,6 +15,16 @@ if(!((*conv).str = ft_conv_d(va_arg(arg, int))))
 			printf("type = %d\n", conv.type);
 			printf("str = %s\n", conv.str);*/
 
+
+
+
+/*				printf("\nminus = %d\n", conv->minus);
+			printf("zero = %d\n", conv->zero);
+			printf("width = %d\n", conv->width);
+			printf("dot = %d\n", conv->dot);
+			printf("precision = %d\n", conv->precision);
+			printf("type = %d\n", conv->type);*/
+
 		/*while (str[i] || i == 0)
 		{
 			if (str[i] == 0 && i == 0)

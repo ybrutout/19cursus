@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:27:29 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/14 12:47:43 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/15 12:17:25 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,10 @@ int	ft_check_width(char *form, t_point *conv, va_list arg)
 		while (*form >= '0' && *form <= '9')
 		{
 			if (conv->width == 0)
-				conv->width = conv->width + (*form - 48);
+				conv->width = conv->width + (*form++ - 48);
 			else
-				conv->width = (conv->width * 10) + (*form - 48);
+				conv->width = (conv->width * 10) + (*form++ - 48);
 			i++;
-			form++;
 		}
 	}
 	return (i);

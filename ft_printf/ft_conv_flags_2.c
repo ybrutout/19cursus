@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   z_essais.c                                         :+:      :+:    :+:   */
+/*   ft_conv_flags_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/09 10:41:52 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/15 11:59:14 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/04/15 12:41:19 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/04/15 12:44:09 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "ft_printf.h"
 
-int	main(void)
+void	ft_conv_flags_d(int i, t_point *conv)
 {
-	int 	ret2;
-	char	c;
-
-	c = 'a';
-
-	ret2 = printf("hello, |%s.|\n", NULL);
-	printf("ret2 = %d\n", ret2);
-	return (0);
-
+	if (conv->width > 0)
+	{
+		
+	}
 }

@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:26:47 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/14 13:32:45 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/15 12:36:10 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_write(char *str, int a)
+int	ft_write(void *str, int a)
 {
 	int				i;
 	static int		ret;
@@ -30,16 +30,18 @@ int	ft_write(char *str, int a)
 			i++;
 		}
 	}
-	else if (a == -1)
+	else if (a == -2)
 	{
-		write(1, str, 1);
-		ret++;
+		i = ret;
+		ret = 0;
+		return (i);
 	}
-	return (ret);
+	return (1);
 }
 
 char	*ft_printf2(char *form, t_point *conv, va_list arg)
 {
+	form++;
 	if ((ft_check_form(*form)) > 0)
 	{
 		if ((ft_check_form(*form)) == 1)
@@ -58,6 +60,9 @@ char	*ft_printf2(char *form, t_point *conv, va_list arg)
 	}
 	else
 		return (NULL);
+	if (conv->type > 0)
+		if ((ft_conv_flags(arg, conv)) == 0)
+			return (0);
 	return (form);
 }
 
@@ -66,6 +71,7 @@ int	ft_printf(const char *format, ...)
 	char			*form;
 	va_list			arg;
 	t_point			conv;
+	int				ret;
 
 	ft_cln(&conv);
 	if (!format)
@@ -76,19 +82,14 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*form == '%')
 		{
-			form++;
 			form = ft_printf2(form, &conv, arg);
 			if (!form)
-				return (ft_write("error config %%\n", 1));
-			if (conv.type > 0)
-			{
-				if ((ft_conv_flags(arg, &conv)) == 0)
-					return (ft_write("error maloc %%\n", 1));
-			}
+				return (0);
 		}
 		else
-			ft_write(form++, -1);
+			ft_write(form++, 1);
 	}
 	va_end(arg);
-	return (ft_write(form, -2));
+	ret = ft_write(form, -2);
+	return (ret);
 }
