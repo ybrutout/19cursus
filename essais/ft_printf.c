@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:26:47 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/19 15:27:41 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/15 09:03:09 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_write(char str, int a)
+int	ft_write(char *str, int a)
 {
 	int				i;
 	static int		ret;
@@ -22,21 +22,24 @@ int	ft_write(char str, int a)
 		ret = 0;
 	if (a > 0)
 	{
-		write(1, &str, 1);
+		a--;
+		while (i <= a)
+		{
+			write(1, &str[i], 1);
+			ret++;
+			i++;
+		}
+	}
+	else if (a == -1)
+	{
+		write(1, str, 1);
 		ret++;
 	}
-	else if (a == -2)
-	{
-		i = ret;
-		ret = 0;
-		return (i);
-	}
-	return (1);
+	return (ret);
 }
 
 char	*ft_printf2(char *form, t_point *conv, va_list arg)
 {
-	form++;
 	if ((ft_check_form(*form)) > 0)
 	{
 		if ((ft_check_form(*form)) == 1)
@@ -52,12 +55,14 @@ char	*ft_printf2(char *form, t_point *conv, va_list arg)
 			form = &form[(ft_check_precision(form, conv, arg))];
 		if ((ft_check_form(*form)) == 4)
 			form = &form[(ft_check_type(form, conv))];
+		if ((ft_check_form(*form)) == 5)
+		{
+			form++;
+			conv->type = 10;
+		}
 	}
 	else
 		return (NULL);
-	if (conv->type > 0)
-		if ((ft_conv_flags(arg, conv)) == 0)
-			return (0);
 	return (form);
 }
 
@@ -66,7 +71,6 @@ int	ft_printf(const char *format, ...)
 	char			*form;
 	va_list			arg;
 	t_point			conv;
-	int				ret;
 
 	ft_cln(&conv);
 	if (!format)
@@ -77,14 +81,16 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*form == '%')
 		{
-			form = ft_printf2(form, &conv, arg);
+			form = ft_printf2(++form, &conv, arg);
 			if (!form)
-				return (0);
+				return (ft_write("error config %%\n", 1));
+			if (conv.type > 0)
+				if ((ft_conv_flags(arg, &conv)) == 0)
+					return (ft_write("error maloc %%\n", 1));
 		}
 		else
-			ft_write(*form++, 1);
+			ft_write(form++, -1);
 	}
 	va_end(arg);
-	ret = ft_write(*form, -2);
-	return (ret);
+	return (ft_write(form, -2));
 }

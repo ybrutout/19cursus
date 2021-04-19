@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 10:30:46 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/15 14:43:42 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/19 15:28:43 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,14 +116,15 @@ int	ft_conv_flags(va_list arg, t_point *conv)
 {
 	if (conv->type == 1)
 		ft_conv_flags_c(va_arg(arg, int), conv);
-	if (conv->type == 10)
-		ft_conv_flags_pc(conv);
+	if (conv->type == 2)
+		ft_conv_flags_d(va_arg(arg, int), conv);
 	if (conv->type == 3)
 		ft_conv_flags_s(va_arg(arg, char *), conv);
-	if (conv->type == 2)
-	{
-		ft_conv_flags_d(va_arg(arg, int), conv);
-	}
+	if (conv->type == 4)
+		ft_conv_flags_p(va_arg(arg, void *), conv);
+	if (conv->type == 10)
+		ft_conv_flags_pc(conv);
 	ft_cln(conv);
+
 	return (1);
 }

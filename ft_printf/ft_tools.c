@@ -6,25 +6,22 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 15:17:37 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/15 15:58:51 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/19 16:20:13 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putnbr(int nb)
+void	ft_putnbr(unsigned long int nb, int base, char *str_base)
 {
-	long long int	i;
-
-	i = (long long int)nb;
-	if (i < 0)
+	if (nb < 0)
 	{
 		ft_write('-', 1);
-		i = i * -1;
+		nb = nb * -1;
 	}
-	if (i >= 10)
-		ft_putnbr(i / 10);
-	ft_write((i % 10 + '0'), 1);
+	if ((int)nb >= base)
+		ft_putnbr((nb / base), base, str_base);
+	ft_write(str_base[nb % base], 1);
 }
 
 void	ft_cln(t_point *conv)
@@ -50,7 +47,7 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_strlen_nb(long i)
+int	ft_strlen_nb(long i, int base)
 {
 	long int	len;
 
@@ -60,9 +57,9 @@ int	ft_strlen_nb(long i)
 		i *= -1;
 		len++;
 	}
-	while (i > 9)
+	while (i > (base - 1))
 	{
-		i = i / 10;
+		i = i / base;
 		len++;
 	}
 	len = len + 1;

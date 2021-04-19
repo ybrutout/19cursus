@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conv_flags_2.c                                  :+:      :+:    :+:   */
+/*   ft_conv_flags_d.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/19 14:35:00 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/19 16:57:55 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/04/15 12:41:19 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/04/19 16:15:27 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_conv_flags_p_minus(unsigned long long int nw_ad, t_point *conv)
+void	ft_conv_flags_d_minus(int sign, unsigned int nb, t_point *conv)
 {
 	if (conv->dot != 2)
 	{
+		if (sign == 1)
+			ft_write('-', 1);
 		while (conv->precision-- != 0)
 			ft_write('0', 1);
-		ft_write('0', 1);
-		ft_write('x', 1);
-		ft_putnbr(nw_ad, 16, "0123456789abcdef");
+		ft_putnbr(nb, 10, "0123456789");
 	}
 	else
 		ft_write(' ', 1);
@@ -28,90 +28,91 @@ void	ft_conv_flags_p_minus(unsigned long long int nw_ad, t_point *conv)
 		ft_write(' ', 1);
 }
 
-void	ft_conv_flags_p_zero(unsigned long long int nw_ad, t_point *conv)
+void	ft_conv_flags_d_zero(int sign, unsigned int nb, t_point *conv)
 {
 	if (conv->dot == 1)
 		while (conv->width-- > 0)
 			ft_write(' ', 1);
+	if (sign == 1)
+		ft_write('-', 1);
 	while (conv->width-- > 0)
 		ft_write('0', 1);
 	while (conv->precision-- != 0)
 		ft_write('0', 1);
-	ft_write('0', 1);
-	ft_write('x', 1);
-	ft_putnbr(nw_ad, 16, "0123456789abcdef");
+	ft_putnbr(nb, 10, "0123456789");
 }
 
-void	ft_conv_flags_p_width(unsigned long long int nw_ad, t_point *conv)
+void	ft_conv_flags_d_width(unsigned int nb, int sign, t_point *conv)
 {
+	if (sign == 1)
+		conv->size++;
 	conv->width = conv->width - (conv->size + conv->precision);
 	if (conv->minus == 1)
-		ft_conv_flags_p_minus(nw_ad, conv);
+		ft_conv_flags_d_minus(sign, nb, conv);
 	else if (conv->zero == 1)
-		ft_conv_flags_p_zero(nw_ad, conv);
+		ft_conv_flags_d_zero(sign, nb, conv);
 	else
 	{
 		while (conv->width-- > 0)
 			ft_write(' ', 1);
 		if (conv->dot != 2)
 		{
+			if (sign == 1)
+				ft_write('-', 1);
 			while (conv->precision-- != 0)
 				ft_write('0', 1);
-			ft_write('0', 1);
-			ft_write('x', 1);
-			ft_putnbr(nw_ad, 16, "0123456789abcdef");
+			ft_putnbr(nb, 10, "0123456789");
 		}
 		else
-		{
 			ft_write(' ', 1);
-			ft_write('0', 1);
-			ft_write('x', 1);
-		}
 	}
 }
 
-void	ft_conv_flags_p_dot(unsigned long long int nw_ad, t_point *conv)
+void	ft_conv_flags_d_dot(unsigned int nb, int sign, t_point *conv)
 {
 	if (conv->precision > conv->size)
 		conv->precision = conv->precision - conv->size;
-	else if (conv->precision == 0 && nw_ad == 0)
+	else if (conv->precision == 0 && nb == 0)
 		conv->dot = 2;
 	else
 		conv->precision = 0;
 	if (conv->width > (conv->precision + conv->size))
-		ft_conv_flags_p_width(nw_ad, conv);
+		ft_conv_flags_d_width(nb, sign, conv);
 	else
 	{
 		if (conv->dot != 2)
 		{
+			if (sign == 1)
+				ft_write('-', 1);
 			while (conv->precision-- != 0)
 				ft_write('0', 1);
-			ft_write('0', 1);
-			ft_write('x', 1);
-			ft_putnbr(nw_ad, 16, "0123456789abcedf");
-		}
-		else
-		{
-			ft_write('0', 1);
-			ft_write('x', 1);
+			ft_putnbr(nb, 10, "0123456789");
 		}
 	}
 }
 
-void	ft_conv_flags_p(void *adress, t_point *conv)
+void	ft_conv_flags_d(int i, t_point *conv)
 {
-	unsigned long long int	nw_ad;
+	unsigned int	nb;
+	int				sign;
 
-	nw_ad = (unsigned long long int) adress;
-	conv->size = (ft_strlen_nb(nw_ad, 16) + 2);
+	sign = 0;
+	if (i < 0)
+	{
+		nb = i * -1;
+		sign = 1;
+	}
+	else
+		nb = i;
+	conv->size = ft_strlen_nb(nb, 10);
 	if (conv->dot == 1)
-		ft_conv_flags_p_dot(nw_ad, conv);
-	else if (conv->width > conv->size)
-		ft_conv_flags_p_width(nw_ad, conv);
+		ft_conv_flags_d_dot(nb, sign, conv);
+	else if (conv->width > 0)
+		ft_conv_flags_d_width(nb, sign, conv);
 	else
 	{
-		ft_write('0', 1);
-		ft_write('x', 1);
-		ft_putnbr(nw_ad, 16, "0123456789abcdef");
+		if (sign == 1)
+			ft_write('-', 1);
+		ft_putnbr(nb, 10, "0123456789");
 	}
 }
