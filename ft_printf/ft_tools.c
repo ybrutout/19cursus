@@ -6,20 +6,20 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 15:17:37 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/19 16:20:13 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/20 14:22:12 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putnbr(unsigned long int nb, int base, char *str_base)
+void	ft_putnbr(unsigned long long int nb, int base, char *str_base)
 {
 	if (nb < 0)
 	{
 		ft_write('-', 1);
 		nb = nb * -1;
 	}
-	if ((int)nb >= base)
+	if (nb >= base)
 		ft_putnbr((nb / base), base, str_base);
 	ft_write(str_base[nb % base], 1);
 }
@@ -47,9 +47,9 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_strlen_nb(long i, int base)
+int	ft_strlen_nb(long long int i, int base)
 {
-	long int	len;
+	long long int	len;
 
 	len = 0;
 	if (i < 0)

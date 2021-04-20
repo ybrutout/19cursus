@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:26:47 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/19 15:27:41 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/20 14:44:53 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,15 @@ char	*ft_printf2(char *form, t_point *conv, va_list arg)
 			form++;
 			conv->type = 10;
 		}
-		if ((ft_check_form(*form)) == 3)
+		if ((ft_check_form(*form)) == 3 && conv->type != 10)
 			form = &form[(ft_check_precision(form, conv, arg))];
-		if ((ft_check_form(*form)) == 4)
+		if ((ft_check_form(*form)) == 4 && conv->type != 10)
 			form = &form[(ft_check_type(form, conv))];
 	}
 	else
 		return (NULL);
 	if (conv->type > 0)
-		if ((ft_conv_flags(arg, conv)) == 0)
-			return (0);
+		ft_conv_flags(arg, conv);
 	return (form);
 }
 

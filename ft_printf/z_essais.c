@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 10:41:52 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/19 14:33:02 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/20 12:05:11 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int	main(void)
 
 	c = 'a';
 
-	ret2 = printf("|%u|\n", 278);
-	ret2 = printf("|%u|\n", 278);
-	ret2 = printf("|%i|\n", 278);
+	ret2 = printf("%% *.5i 42 == |% *.5i| \n", 4, 42);
 	printf("ret2 = %d\n", ret2);
 	return (0);
 

@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conv_flags_d.c                                  :+:      :+:    :+:   */
+/*   ft_conv_flags_X_.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/15 12:41:19 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/20 16:15:47 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/04/20 10:49:08 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/04/20 10:54:33 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_conv_flags_d_minus(int sign, unsigned int nb, t_point *conv)
+void	ft_conv_flags_X__minus(unsigned long long int nb, t_point *conv)
 {
 	if (conv->dot != 2)
 	{
-		if (sign == 1)
-			ft_write('-', 1);
 		while (conv->precision-- != 0)
 			ft_write('0', 1);
-		ft_putnbr(nb, 10, "0123456789");
+		ft_putnbr(nb, 16, "0123456789ABCDEF");
 	}
 	else
 		ft_write(' ', 1);
@@ -28,50 +26,41 @@ void	ft_conv_flags_d_minus(int sign, unsigned int nb, t_point *conv)
 		ft_write(' ', 1);
 }
 
-void	ft_conv_flags_d_zero(int sign, unsigned int nb, t_point *conv)
+void	ft_conv_flags_X__zero(unsigned long long int nb, t_point *conv)
 {
-	if (conv->dot > 0)
+	if (conv->dot == 1)
 		while (conv->width-- > 0)
 			ft_write(' ', 1);
-	if (sign == 1)
-		ft_write('-', 1);
 	while (conv->width-- > 0)
 		ft_write('0', 1);
 	while (conv->precision-- != 0)
 		ft_write('0', 1);
-	if (conv->dot != 2)
-		ft_putnbr(nb, 10, "0123456789");
-	else
-		ft_write(' ', 1);
+	ft_putnbr(nb, 16, "0123456789ABCDEF");
 }
 
-void	ft_conv_flags_d_width(unsigned int nb, int sign, t_point *conv)
+void	ft_conv_flags_X__width(unsigned long long int nb, t_point *conv)
 {
-	if (sign == 1)
-		conv->size++;
 	conv->width = conv->width - (conv->size + conv->precision);
 	if (conv->minus == 1)
-		ft_conv_flags_d_minus(sign, nb, conv);
+		ft_conv_flags_X__minus(nb, conv);
 	else if (conv->zero == 1)
-		ft_conv_flags_d_zero(sign, nb, conv);
+		ft_conv_flags_X__zero(nb, conv);
 	else
 	{
 		while (conv->width-- > 0)
 			ft_write(' ', 1);
 		if (conv->dot != 2)
 		{
-			if (sign == 1)
-				ft_write('-', 1);
 			while (conv->precision-- != 0)
 				ft_write('0', 1);
-			ft_putnbr(nb, 10, "0123456789");
+			ft_putnbr(nb, 16, "0123456789ABCDEF");
 		}
 		else
 			ft_write(' ', 1);
 	}
 }
 
-void	ft_conv_flags_d_dot(unsigned long int nb, int sign, t_point *conv)
+void	ft_conv_flags_X__dot(unsigned long long int nb, t_point *conv)
 {
 	if (conv->precision > conv->size)
 		conv->precision = conv->precision - conv->size;
@@ -79,45 +68,26 @@ void	ft_conv_flags_d_dot(unsigned long int nb, int sign, t_point *conv)
 		conv->dot = 2;
 	else
 		conv->precision = 0;
-	if (conv->precision < 0)
-		conv->precision = conv->width;
 	if (conv->width > (conv->precision + conv->size))
-		ft_conv_flags_d_width(nb, sign, conv);
+		ft_conv_flags_X__width(nb, conv);
 	else
 	{
 		if (conv->dot != 2)
 		{
-			if (sign == 1)
-				ft_write('-', 1);
 			while (conv->precision-- != 0)
 				ft_write('0', 1);
-			ft_putnbr(nb, 10, "0123456789");
+			ft_putnbr(nb, 16, "0123456789ABCDEF");
 		}
 	}
 }
 
-void	ft_conv_flags_d(int i, t_point *conv)
+void	ft_conv_flags_X_(unsigned long long int nb, t_point *conv)
 {
-	unsigned int	nb;
-	int				sign;
-
-	sign = 0;
-	if (i < 0)
-	{
-		nb = i * -1;
-		sign = 1;
-	}
-	else
-		nb = i;
-	conv->size = ft_strlen_nb(nb, 10);
+	conv->size = ft_strlen_nb(nb, 16);
 	if (conv->dot == 1)
-		ft_conv_flags_d_dot(nb, sign, conv);
+		ft_conv_flags_X__dot(nb, conv);
 	else if (conv->width > 0)
-		ft_conv_flags_d_width(nb, sign, conv);
+		ft_conv_flags_X__width(nb, conv);
 	else
-	{
-		if (sign == 1)
-			ft_write('-', 1);
-		ft_putnbr(nb, 10, "0123456789");
-	}
+		ft_putnbr(nb, 16, "0123456789ABCDEF");
 }

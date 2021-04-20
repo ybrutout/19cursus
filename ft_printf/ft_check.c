@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:27:29 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/15 12:17:25 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/20 14:40:59 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ int	ft_check_flag(char *form, t_point *conv)
 	{
 		if (*form == '-')
 		{
-			(*conv).minus = 1;
+			conv->minus = 1;
 		}
 		else if (*form == '0')
 		{
-			(*conv).zero = 1;
+			conv->zero = 1;
 		}
 		j++;
 		form++;
@@ -88,10 +88,7 @@ int	ft_check_width(char *form, t_point *conv, va_list arg)
 	{
 		while (*form >= '0' && *form <= '9')
 		{
-			if (conv->width == 0)
-				conv->width = conv->width + (*form++ - 48);
-			else
-				conv->width = (conv->width * 10) + (*form++ - 48);
+			conv->width = (conv->width * 10) + (*form++ - 48);
 			i++;
 		}
 	}
@@ -105,7 +102,7 @@ int	ft_check_precision(char *form, t_point *conv, va_list arg)
 	i = 0;
 	if (*form == '.')
 	{
-		(*conv).dot = 1;
+		conv->dot = 1;
 		i++;
 		form++;
 		if (*form == '*')
@@ -115,12 +112,8 @@ int	ft_check_precision(char *form, t_point *conv, va_list arg)
 		}
 		while (*form >= '0' && *form <= '9')
 		{
-			if (*form == '0')
-				conv->precision = conv->precision * 10;
-			else
-				conv->precision = conv->precision + (*form - 48);
+			conv->precision = (conv->precision * 10) + (*form++ - 48);
 			i++;
-			form++;
 		}
 	}
 	return (i);
