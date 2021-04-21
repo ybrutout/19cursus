@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 10:30:46 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/20 15:07:44 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/21 10:34:39 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int	ft_conv_flags(va_list arg, t_point *conv)
 	if (conv->type == 4)
 		ft_conv_flags_p(va_arg(arg, void *), conv);
 	if (conv->type == 5)
-		ft_conv_flags_u(va_arg(arg, unsigned long long int), conv);
+		ft_conv_flags_u(va_arg(arg, unsigned int), conv);
 	if (conv->type == 6)
 		ft_conv_flags_x(va_arg(arg, unsigned int), conv);
 	if (conv->type == 7)

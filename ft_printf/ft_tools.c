@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 15:17:37 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/20 14:22:12 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/21 16:06:44 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,11 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_strlen_nb(long long int i, int base)
+int	ft_strlen_nb(unsigned long long int i, int base)
 {
 	long long int	len;
 
 	len = 0;
-	if (i < 0)
-	{
-		i *= -1;
-		len++;
-	}
 	while (i > (base - 1))
 	{
 		i = i / base;

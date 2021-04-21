@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 12:41:19 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/20 16:15:47 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/21 14:03:40 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_conv_flags_d_minus(int sign, unsigned int nb, t_point *conv)
 
 void	ft_conv_flags_d_zero(int sign, unsigned int nb, t_point *conv)
 {
-	if (conv->dot > 0)
+	if (conv->dot > 0 && conv->precision > 0)
 		while (conv->width-- > 0)
 			ft_write(' ', 1);
 	if (sign == 1)
@@ -73,15 +73,16 @@ void	ft_conv_flags_d_width(unsigned int nb, int sign, t_point *conv)
 
 void	ft_conv_flags_d_dot(unsigned long int nb, int sign, t_point *conv)
 {
+	if (conv->precision >= 0)
+		conv->zero = 0;
 	if (conv->precision > conv->size)
 		conv->precision = conv->precision - conv->size;
 	else if (conv->precision == 0 && nb == 0)
 		conv->dot = 2;
 	else
 		conv->precision = 0;
-	if (conv->precision < 0)
-		conv->precision = conv->width;
-	if (conv->width > (conv->precision + conv->size))
+	if ((conv->width > (conv->precision + conv->size)) || \
+		((conv->dot == 2) && (conv->width == conv->size)))
 		ft_conv_flags_d_width(nb, sign, conv);
 	else
 	{

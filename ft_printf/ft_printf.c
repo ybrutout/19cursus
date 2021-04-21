@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:26:47 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/20 14:44:53 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/21 16:19:58 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ char	*ft_printf2(char *form, t_point *conv, va_list arg)
 			form = &form[(ft_check_flag(form, conv))];
 		if ((ft_check_form(*form)) == 2)
 			form = &form[(ft_check_width(form, conv, arg))];
+		if ((ft_check_form(*form)) == 3)
+			form = &form[(ft_check_precision(form, conv, arg))];
 		if ((ft_check_form(*form)) == 5)
 		{
 			form++;
 			conv->type = 10;
 		}
-		if ((ft_check_form(*form)) == 3 && conv->type != 10)
-			form = &form[(ft_check_precision(form, conv, arg))];
 		if ((ft_check_form(*form)) == 4 && conv->type != 10)
 			form = &form[(ft_check_type(form, conv))];
 	}

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 16:37:16 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/20 14:56:22 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/21 13:59:08 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,17 @@ void	ft_conv_flags_x_minus(unsigned long long int nb, t_point *conv)
 
 void	ft_conv_flags_x_zero(unsigned long long int nb, t_point *conv)
 {
-	if (conv->dot == 1)
+	if (conv->dot > 0 && conv->precision > 0)
 		while (conv->width-- > 0)
 			ft_write(' ', 1);
 	while (conv->width-- > 0)
 		ft_write('0', 1);
 	while (conv->precision-- != 0)
 		ft_write('0', 1);
-	ft_putnbr(nb, 16, "0123456789abcdef");
+	if (conv->dot != 2)
+		ft_putnbr(nb, 16, "0123456789abcdef");
+	else
+		ft_write(' ', 1);
 }
 
 void	ft_conv_flags_x_width(unsigned long long int nb, t_point *conv)
@@ -62,13 +65,16 @@ void	ft_conv_flags_x_width(unsigned long long int nb, t_point *conv)
 
 void	ft_conv_flags_x_dot(unsigned long long int nb, t_point *conv)
 {
+	if (conv->precision >= 0)
+		conv->zero = 0;
 	if (conv->precision > conv->size)
 		conv->precision = conv->precision - conv->size;
 	else if (conv->precision == 0 && nb == 0)
 		conv->dot = 2;
 	else
 		conv->precision = 0;
-	if (conv->width > (conv->precision + conv->size))
+	if ((conv->width > (conv->precision + conv->size)) || \
+		((conv->dot == 2) && (conv->width ==  conv->size)))
 		ft_conv_flags_x_width(nb, conv);
 	else
 	{
