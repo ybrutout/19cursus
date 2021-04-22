@@ -6,11 +6,17 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 15:17:37 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/22 09:16:30 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/22 16:22:22 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	ft_0x(void)
+{
+	ft_write('0', 1);
+	ft_write('x', 1);
+}
 
 void	ft_putnbr(unsigned long long int nb, int base, char *str_base)
 {

@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/09 11:56:15 by mushu             #+#    #+#              #
-#    Updated: 2021/04/22 10:34:08 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/04/22 16:25:56 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libftprintf.a
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror -c
+FLAGS = -c
 
 SRC =	ft_check.c\
 		ft_conv_flags.c \
@@ -25,12 +25,13 @@ SRC =	ft_check.c\
 		ft_conv_flags_X_.c \
 		ft_printf.c\
 		ft_tools.c \
+		main.c
 
 OBJ = $(SRC:%.c=%.o)
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(OBJ)
 	@$(CC) $(FLAGS) $(SRC)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
@@ -42,5 +43,9 @@ fclean: 	clean
 	@rm -f $(NAME)
 
 re: fclean all
+
+a: $(NAME)
+	@$(CC) -o a.out $(OBJ)
+	@./a.out
 
 .PHONY:		all clean fclean re

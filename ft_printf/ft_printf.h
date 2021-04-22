@@ -6,20 +6,16 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 13:44:12 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/22 10:40:07 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/22 16:24:32 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdlib.h>
 # include <unistd.h>
-# include <limits.h>
-# include <sys/types.h>
-# include <sys/stat.h>
 # include <stdarg.h>
-# include <stdio.h>
+# include <stdlib.h>
 
 typedef struct s_point
 {
@@ -51,4 +47,5 @@ void		ft_conv_flags_u(unsigned int i, t_point *conv);
 void		ft_conv_flags_x(unsigned long long int nb, t_point *conv);
 void		ft_conv_flags_X_(unsigned long long int nb, t_point *conv);
 void		ft_putnbr(unsigned long long int nb, int base, char *str_base);
+void		ft_0x(void);
 #endif
