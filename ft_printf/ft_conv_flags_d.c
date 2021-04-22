@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 12:41:19 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/21 14:03:40 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/22 10:30:52 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_conv_flags_d_minus(int sign, unsigned int nb, t_point *conv)
+static void	ft_conv_flags_d_minus(int sign, unsigned int nb, t_point *conv)
 {
 	if (conv->dot != 2)
 	{
@@ -28,7 +28,7 @@ void	ft_conv_flags_d_minus(int sign, unsigned int nb, t_point *conv)
 		ft_write(' ', 1);
 }
 
-void	ft_conv_flags_d_zero(int sign, unsigned int nb, t_point *conv)
+static void	ft_conv_flags_d_zero(int sign, unsigned int nb, t_point *conv)
 {
 	if (conv->dot > 0 && conv->precision > 0)
 		while (conv->width-- > 0)
@@ -45,7 +45,7 @@ void	ft_conv_flags_d_zero(int sign, unsigned int nb, t_point *conv)
 		ft_write(' ', 1);
 }
 
-void	ft_conv_flags_d_width(unsigned int nb, int sign, t_point *conv)
+static void	ft_conv_flags_d_width(unsigned int nb, int sign, t_point *conv)
 {
 	if (sign == 1)
 		conv->size++;
@@ -71,7 +71,7 @@ void	ft_conv_flags_d_width(unsigned int nb, int sign, t_point *conv)
 	}
 }
 
-void	ft_conv_flags_d_dot(unsigned long int nb, int sign, t_point *conv)
+static void	ft_conv_flags_d_dot(unsigned long int nb, int sign, t_point *conv)
 {
 	if (conv->precision >= 0)
 		conv->zero = 0;

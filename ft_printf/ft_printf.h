@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 13:44:12 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/21 16:07:05 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/22 10:40:07 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,11 @@ int			ft_strlen_nb(unsigned long long int i, int base);
 int			ft_strlen(char *str);
 int			ft_conv_flags(va_list arg, t_point *conv);
 
-char		*ft_conv_d(int i);
-char		*ft_conv_s(char	*str);
-char		*ft_conv_p_1(void *adress);
-char		*ft_conv_d(int j);
-char		*ft_conv_X_1(int i);
-
 void		ft_cln(t_point *conv);
-void		ft_conv_flags_c(int c, t_point *conv);
-void		ft_conv_flags_pc(t_point *conv);
-void		ft_conv_flags_s(char *str, t_point *conv);
 void		ft_conv_flags_d(int i, t_point *conv);
-void		ft_putnbr(unsigned long long int nb, int base, char *str_base);
 void		ft_conv_flags_p(void *adress, t_point *conv);
 void		ft_conv_flags_u(unsigned int i, t_point *conv);
 void		ft_conv_flags_x(unsigned long long int nb, t_point *conv);
 void		ft_conv_flags_X_(unsigned long long int nb, t_point *conv);
+void		ft_putnbr(unsigned long long int nb, int base, char *str_base);
 #endif

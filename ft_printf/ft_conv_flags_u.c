@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 10:14:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/21 14:03:40 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/22 10:31:58 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_conv_flags_u_minus(unsigned long long int nb, t_point *conv)
+static void	ft_conv_flags_u_minus(unsigned long long int nb, t_point *conv)
 {
 	if (conv->dot != 2)
 	{
@@ -26,9 +26,9 @@ void	ft_conv_flags_u_minus(unsigned long long int nb, t_point *conv)
 		ft_write(' ', 1);
 }
 
-void	ft_conv_flags_u_zero(unsigned long long int nb, t_point *conv)
+static void	ft_conv_flags_u_zero(unsigned long long int nb, t_point *conv)
 {
-	if (conv->dot > 0&& conv->precision > 0)
+	if (conv->dot > 0 && conv->precision > 0)
 		while (conv->width-- > 0)
 			ft_write(' ', 1);
 	while (conv->width-- > 0)
@@ -41,7 +41,7 @@ void	ft_conv_flags_u_zero(unsigned long long int nb, t_point *conv)
 		ft_write(' ', 1);
 }
 
-void	ft_conv_flags_u_width(unsigned long long int nb, t_point *conv)
+static void	ft_conv_flags_u_width(unsigned long long int nb, t_point *conv)
 {
 	conv->width = conv->width - (conv->size + conv->precision);
 	if (conv->minus == 1)
@@ -63,7 +63,7 @@ void	ft_conv_flags_u_width(unsigned long long int nb, t_point *conv)
 	}
 }
 
-void	ft_conv_flags_u_dot(unsigned long long int nb, t_point *conv)
+static void	ft_conv_flags_u_dot(unsigned long long int nb, t_point *conv)
 {
 	if (conv->precision >= 0)
 		conv->zero = 0;
@@ -74,7 +74,7 @@ void	ft_conv_flags_u_dot(unsigned long long int nb, t_point *conv)
 	else
 		conv->precision = 0;
 	if ((conv->width > (conv->precision + conv->size)) || \
-		((conv->dot == 2) && (conv->width ==  conv->size)))
+		((conv->dot == 2) && (conv->width == conv->size)))
 		ft_conv_flags_u_width(nb, conv);
 	else
 	{

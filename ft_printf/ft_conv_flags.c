@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 10:30:46 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/21 10:34:39 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/22 10:33:36 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_conv_flags_c(int c, t_point *conv)
+static void	ft_conv_flags_c(int c, t_point *conv)
 {
 	if (conv->width > 1)
 	{
@@ -33,7 +33,7 @@ void	ft_conv_flags_c(int c, t_point *conv)
 		ft_write(c, 1);
 }
 
-void	ft_conv_flags_pc(t_point *conv)
+static void	ft_conv_flags_pc(t_point *conv)
 {
 	if (conv->width > 1)
 	{
@@ -60,7 +60,7 @@ void	ft_conv_flags_pc(t_point *conv)
 		ft_write('%', 1);
 }
 
-void	ft_conv_flags_s_width(char *str, t_point *conv)
+static void	ft_conv_flags_s_width(char *str, t_point *conv)
 {
 	int	i;
 
@@ -89,7 +89,7 @@ void	ft_conv_flags_s_width(char *str, t_point *conv)
 	}
 }
 
-void	ft_conv_flags_s(char *str, t_point *conv)
+static void	ft_conv_flags_s(char *str, t_point *conv)
 {
 	int	i;
 

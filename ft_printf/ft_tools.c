@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 15:17:37 by mushu             #+#    #+#             */
-/*   Updated: 2021/04/21 16:06:44 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/22 09:16:30 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 void	ft_putnbr(unsigned long long int nb, int base, char *str_base)
 {
+	unsigned long long int	nw_base;
+
+	nw_base = (unsigned long long int)base;
 	if (nb < 0)
 	{
 		ft_write('-', 1);
 		nb = nb * -1;
 	}
-	if (nb >= base)
+	if (nb >= nw_base)
 		ft_putnbr((nb / base), base, str_base);
 	ft_write(str_base[nb % base], 1);
 }
@@ -49,12 +52,14 @@ int	ft_strlen(char *str)
 
 int	ft_strlen_nb(unsigned long long int i, int base)
 {
-	long long int	len;
+	long long int			len;
+	unsigned long long int	nw_base;
 
 	len = 0;
-	while (i > (base - 1))
+	nw_base = (unsigned long long int)base;
+	while (i > (nw_base - 1))
 	{
-		i = i / base;
+		i = i / nw_base;
 		len++;
 	}
 	len = len + 1;

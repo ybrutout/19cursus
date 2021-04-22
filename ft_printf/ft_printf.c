@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:26:47 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/04/21 16:19:58 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/04/22 10:37:47 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_write(char str, int a)
 	return (1);
 }
 
-char	*ft_printf2(char *form, t_point *conv, va_list arg)
+static char	*ft_printf2(char *form, t_point *conv, va_list arg)
 {
 	form++;
 	if ((ft_check_form(*form)) > 0)
