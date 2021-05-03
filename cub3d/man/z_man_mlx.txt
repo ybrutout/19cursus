@@ -1,0 +1,71 @@
+MiniLibX 3 " 19 septembre 2002 ".
+NOM
+MiniLibX - Bibliothèque d'interface de fenêtre simple pour les étudiants
+SYNOPSYS
+#include <mlx.h>
+
+void * mlx_init() ;
+
+DESCRIPTION
+MiniLibX est un moyen facile de créer des logiciels graphiques, sans aucune connaissance de la programmation X-Window/X11 sous Unix/Linux,
+ni de la programmation AppKit sous MacOS. Il fournit la création de fenêtres simples, un outil de dessin, la gestion des images et des
+événements de base.
+
+Unix/Linux : CONCEPT DE X-WINDOW
+
+X-Window est un système graphique orienté réseau pour Unix.
+Il est basé sur deux parties principales :
+- 	D'un côté, votre logiciel veut dessiner quelque chose sur l'écran et/ou obtenir des entrées clavier et souris.
+- 	De l'autre côté, le serveur X gère l'écran, le clavier et la souris (il est souvent appelé "affichage").
+- 	Une connexion réseau doit être établie entre ces deux entités pour envoyer les ordres de dessin (du logiciel au X-Server),
+	et les événements clavier/souris (du X-Server au logiciel).
+- 	De nos jours, la plupart du temps, les deux fonctionnent sur le même ordinateur.
+
+MacOS : SERVEUR FENÊTRE ET GPU
+
+Votre logiciel interagit directement avec le serveur Window qui gère la cohabitation à l'écran avec d'autres logiciels et le système
+d'événements, et interagit avec le GPU pour gérer tout ce qui concerne le dessin.
+
+INCLURE LE FICHIER
+mlx.h doit être inclus pour une utilisation correcte de l'API MiniLibX.
+Il ne contient que des prototypes de fonctions, aucune structure n'est nécessaire.
+
+FONCTIONS DE LA BIBLIOTHÈQUE
+Tout d'abord, vous devez initialiser la connexion entre votre logiciel et l'écran.
+Une fois cette connexion établie, vous pourrez utiliser d'autres fonctions MiniLibX pour envoyer et recevoir les messages de l'écran,
+comme "je veux dessiner un pixel jaune dans cette fenêtre" ou "l'utilisateur a-t-il appuyé sur une touche ?".
+
+La fonction mlx_init va créer cette connexion. Aucun paramètre n'est nécessaire, et elle renvoie un identifiant "void *", utilisé pour
+les appels ultérieurs aux routines de la bibliothèque. Toutes les autres fonctions MiniLibX sont décrites dans les pages de manuel suivantes :
+
+mlx_new_window : gérer les fenêtres
+mlx_pixel_put : dessiner dans une fenêtre
+mlx_new_image : manipuler les images
+mlx_loop : gérer les événements clavier ou souris
+
+LIER MiniLibX
+Pour utiliser les fonctions de MiniLibX, vous devrez peut-être lier votre logiciel à plusieurs bibliothèques, dont la bibliothèque MiniLibX
+elle-même. Sous Unix/Linux, il suffit d'ajouter les arguments suivants au moment de la liaison :
+
+-lmlx -lXext -lX11
+
+Sous MacOS, la bibliothèque dynamique Metal trouvera d'elle-même les composants manquants :
+
+-lmlx
+
+et toujours sur MacOS, la version statique d'OpenGL aura besoin de :
+
+-lmlx -framework OpenGL -framework AppKit -lz
+
+Vous pouvez également avoir besoin de spécifier le chemin d'accès à ces bibliothèques, en utilisant l'option -L.
+
+
+VALEURS DE RETOUR
+Si mlx_init() ne parvient pas à établir la connexion avec l'écran, il renvoie NULL, sinon un pointeur non nul est renvoyé comme identifiant
+de connexion.
+
+VOIR AUSSI
+mlx_new_window(3), mlx_pixel_put(3), mlx_new_image(3), mlx_loop(3)
+
+AUTEUR
+Copyright ol@ - 2002-2019 - Olivier Crouzet
