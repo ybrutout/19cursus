@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:07:27 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/03 16:56:58 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/04 10:16:40 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct	s_ray
 {
 	void	*mlx_ptr;
 	void	*mlx_win;
+	int		player_posx;
+	int		player_posy;
 	t_image *nw_img;
 }				t_ray;
 
@@ -70,7 +72,18 @@ void	draw_player(t_ray *ray, int	x, int y)
 
 int		key_hook(int keycode, t_ray *ray)
 {
-	printf("%d\n", keycode);
+	draw_rectangle(ray);
+	printf("keycode == %d\n", keycode);
+	if (keycode == 126 && ray->player_posy > 50)
+		ray->player_posy -= 5;
+	else if (keycode == 125 && ray->player_posy < 1020)
+		ray->player_posy += 5;
+	else if (keycode == 123 && ray->player_posx > 50)
+		ray->player_posx -= 5;
+	else if (keycode == 124 && ray->player_posx < 1870)
+		ray->player_posx += 5;
+	draw_player(ray, ray->player_posx, ray->player_posy);
+	mlx_put_image_to_window(ray->mlx_ptr, ray->mlx_win, ray->nw_img->img, 0, 0);
 }
 
 int	main()
@@ -84,7 +97,8 @@ int	main()
 	ray->mlx_win = mlx_new_window(ray->mlx_ptr, 1920, 1080, "Cub3D");
 	ray->nw_img->img = mlx_new_image(ray->mlx_ptr, 1920, 1080);
 	ray->nw_img->addr = mlx_get_data_addr(ray->nw_img->img, &ray->nw_img->bits_per_pixel, &ray->nw_img->line_length, &ray->nw_img->endian);
+	ray->player_posx = 100;
+	ray->player_posy = 100;
 	mlx_hook(ray->mlx_win, 2, 1L<<0, key_hook, ray);
-	mlx_hook(ray->mlx_win, 17, 1L<<17, exit, NULL);
 	mlx_loop (ray->mlx_ptr);
 }
