@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:51:16 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/03 15:51:29 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/05 13:27:15 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,3 +119,7 @@ int	main()
 	mlx_loop (mlx);
 
 }
+
+/*if (argc == 1 || argc > 3)
+		return(write(1, "error of arg\n", 13));*/
+// C'est la securite pour voir qu'on a bien le bon nombre d'atgument

@@ -1,38 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   essais.c                                           :+:      :+:    :+:   */
+/*   draw_mini_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:07:27 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/04 10:16:40 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/06 13:05:44 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-
-typedef struct  s_image
-{
-    void        *img;
-    char        *addr;
-    int         bits_per_pixel;
-    int         line_length;
-    int         endian;
-}               t_image;
-
-typedef struct	s_ray
-{
-	void	*mlx_ptr;
-	void	*mlx_win;
-	int		player_posx;
-	int		player_posy;
-	t_image *nw_img;
-}				t_ray;
-
+#include "includes/cub3d.h"
 
 void            my_mlx_pixel_put(t_image *data, int x, int y, int color)
 {
@@ -84,21 +62,5 @@ int		key_hook(int keycode, t_ray *ray)
 		ray->player_posx += 5;
 	draw_player(ray, ray->player_posx, ray->player_posy);
 	mlx_put_image_to_window(ray->mlx_ptr, ray->mlx_win, ray->nw_img->img, 0, 0);
-}
-
-int	main()
-{
-	t_ray	*ray;
-	ray = malloc(sizeof(t_ray));
-	ray->nw_img = malloc(sizeof(t_image));
-	ray->mlx_ptr = mlx_init();
-	if (ray->mlx_ptr == (NULL))
-		return (write(1, "erreur d'initiation\n", 20));
-	ray->mlx_win = mlx_new_window(ray->mlx_ptr, 1920, 1080, "Cub3D");
-	ray->nw_img->img = mlx_new_image(ray->mlx_ptr, 1920, 1080);
-	ray->nw_img->addr = mlx_get_data_addr(ray->nw_img->img, &ray->nw_img->bits_per_pixel, &ray->nw_img->line_length, &ray->nw_img->endian);
-	ray->player_posx = 100;
-	ray->player_posy = 100;
-	mlx_hook(ray->mlx_win, 2, 1L<<0, key_hook, ray);
-	mlx_loop (ray->mlx_ptr);
+	return (1);
 }
