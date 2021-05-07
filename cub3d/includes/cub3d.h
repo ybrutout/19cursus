@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 15:28:12 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/06 16:06:11 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/07 11:58:58 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef	struct	s_struct
 
 int		key_hook(int keycode, t_ray *ray);
 int		check_arg(int argc, char **argv);
-int		check_file(int argc, char **argv);
+int		ft_parsing(int argc, char **argv);
 void	draw_player(t_ray *ray, int	x, int y);
 void	draw_rectangle(t_ray *ray);
 void    my_mlx_pixel_put(t_image *data, int x, int y, int color);

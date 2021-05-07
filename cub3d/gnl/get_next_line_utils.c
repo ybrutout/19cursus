@@ -6,11 +6,12 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 11:12:22 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/06 15:00:13 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/07 16:42:49 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
+#include "../includes/libft.h"
 
 char		*gnl_strdup(char *save, char c)
 {
