@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 16:38:01 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/07 16:41:32 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/11 14:18:13 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,7 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdlib.h>
-
-typedef struct	s_list
-{
-	char			*line;
-	struct s_list	*next;
-}				t_list;
+# include "cub3d.h"
 
 int				ft_atoi(const char *str);
 int				ft_isalnum(int c);

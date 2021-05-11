@@ -6,17 +6,19 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 11:17:22 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/07 11:58:46 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/11 15:46:31 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
+#include "includes/libft.h"
 
 int	main(int argc, char **argv)
 {
 	t_ray	*ray;
+	t_struc	cub;
 
-	if (ft_parsing(argc, argv) != 1)
+	if (ft_parsing(argc, argv, &cub) != 1)
 		return(0);
 	ray = malloc(sizeof(t_ray));
 	ray->nw_img = malloc(sizeof(t_image));
