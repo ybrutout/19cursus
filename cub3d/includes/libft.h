@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 16:38:01 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/11 14:18:13 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/12 14:05:19 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include "cub3d.h"
 
-int				ft_atoi(const char *str);
+int				ft_atoi(char **str);
 int				ft_isalnum(int c);
 int				ft_isalpha(int c);
 int				ft_isascii(int c);

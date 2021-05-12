@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/29 13:51:32 by ybrutout          #+#    #+#              #
-#    Updated: 2021/05/07 16:45:01 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/05/12 11:26:17 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,10 @@ SRC =	check_file.c \
 		cub3d.c \
 		gnl/get_next_line.c \
 		gnl/get_next_line_utils.c \
+		libft/ft_atoi.c \
 		libft/ft_lstnew.c \
 		libft/ft_lstadd_back.c \
+		check_line.c \
 
 SRCLIB = libmlx.a
 

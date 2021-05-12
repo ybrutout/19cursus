@@ -6,11 +6,12 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 10:49:39 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/11 14:39:25 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/12 09:44:56 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
+#include <stdio.h>
 
 int				gnl_cmp(char *str, char c)
 {

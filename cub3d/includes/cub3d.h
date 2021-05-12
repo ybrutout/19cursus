@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 15:28:12 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/11 15:46:43 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/12 15:27:55 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef	struct	s_struct
 	char	*path_we;
 	char	*path_ea;
 	char	*path_sprite;
+	t_list	*map;
 }				t_struc;
 
 typedef struct	s_list
@@ -67,6 +68,7 @@ typedef struct s_cub3d
 int		key_hook(int keycode, t_ray *ray);
 int		check_arg(int argc, char **argv);
 int		ft_parsing(int argc, char **argv, t_struc *cub);
+int		check_R(char *str, t_struc *cub);
 void	draw_player(t_ray *ray, int	x, int y);
 void	draw_rectangle(t_ray *ray);
 void    my_mlx_pixel_put(t_image *data, int x, int y, int color);
