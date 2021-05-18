@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 10:35:21 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/17 15:38:20 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/18 12:00:50 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_order(int **lst_sort, int argc)
+int	ft_order(int **lst_sort, int argc)
 {
 	int	i;
 	int	j;
@@ -27,15 +27,19 @@ void	ft_order(int **lst_sort, int argc)
 			lst_sort[0][i] = j;
 			i = 0;
 		}
+		if (lst_sort[0][i] == lst_sort[0][i + 1])
+			return (0);
 		else
 			i++;
 	}
 	i = 0;
+	return (1);
 }
 
-static int	ft_error(t_num *col_a, int *lst_sort, int b)
+static int	ft_error(t_num *col_a, t_num *colb, int *lst_sort, int b)
 {
 	ft_free(col_a);
+	ft_free(col_b);
 	free(lst_sort);
 	if (b == 1)
 		return (write(1, "problème de malloc\n", 19));
@@ -65,9 +69,11 @@ int	parsing(char **argv, t_num **col_a, t_num **col_b, int **lst_sort)
 	tmp = 0;
 	lst_tmp = ft_lstnew(&tmp);
 	if (!lst_tmp)
-		if ((ft_error(*col_a, *lst_sort, 1)) > 0)
+		if ((ft_error(*col_a, *col_b, *lst_sort, 1)) > 0)
 			return (1);
 	ft_lstadd_back(col_b, lst_tmp);
-	ft_order(lst_sort, i);
+	i = ft_order(lst_sort, i);
+	if (i == 0)
+
 	return (0);
 }
