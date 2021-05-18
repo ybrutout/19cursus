@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 10:35:21 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/18 12:00:50 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/18 13:36:34 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_order(int **lst_sort, int argc)
 	return (1);
 }
 
-static int	ft_error(t_num *col_a, t_num *colb, int *lst_sort, int b)
+static int	ft_error(t_num *col_a, t_num *col_b, int *lst_sort, int b)
 {
 	ft_free(col_a);
 	ft_free(col_b);
