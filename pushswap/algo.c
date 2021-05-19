@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:26:56 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/19 16:22:41 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/19 16:27:21 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ int	median(t_num **col_a, t_num **col_b, int **lst_sort, int nb)
 	int		len;
 	t_num	*nb_tmp;
 	t_num	*nb_tmp_b;
+	int		i;
 
+	i = 0;
 	index = init_new_lst(col_a, col_b, nb);
 	if ((ascending(col_a)) == 1)
 	{
@@ -87,7 +89,9 @@ int	median(t_num **col_a, t_num **col_b, int **lst_sort, int nb)
 		index->len_a = ft_lstsize(*col_a);
 		len = index->len_a;
 		*lst_sort = nw_lst_order(col_a, *lst_sort, index->len_a);
-		median = lst_sort[0][len/2];
+		median = lst_sort[0][(len/2)];
+		while ((*lst_sort)[i])
+			printf("lst == %d\n", (*lst_sort)[i++]);
 		printf("len == %d\n", len/2);
 		printf("median == %d\n", median);
 		while (len > 0)
