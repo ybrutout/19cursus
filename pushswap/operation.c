@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:38:30 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/18 11:48:09 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/19 10:54:26 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	push(t_num **col_a, t_num **col_b, int button)
 
 void	rotate(t_num **col_a, t_num **col_b, int button)
 {
-	t_num *tmp;
+	t_num	*tmp;
 
 	if ((*col_a)->next && (*col_a)->next->next)
 	{
@@ -76,5 +76,33 @@ void	rotate(t_num **col_a, t_num **col_b, int button)
 	{
 		rotate(col_b, col_a, 4);
 		write(1, "rr\n", 4);
+	}
+}
+
+void	reverse_rot(t_num **col_a, t_num **col_b, int button)
+{
+	t_num	*start;
+	t_num	*tmp;
+	int		len;
+
+	len = ft_lstsize(*col_a);
+	if ((*col_a)->next && (*col_a)->next->next)
+	{
+		start = *col_a;
+		while (len-- != 2)
+			start = start->next;
+		tmp = start->next;
+		start->next = NULL;
+		tmp->next = *col_a;
+		*col_a = tmp;
+	}
+	if (button == 1)
+		write(1, "rra\n", 4);
+	else if (button == 2)
+		write(1, "rrb\n", 4);
+	else if (button == 3)
+	{
+		reverse_rot(col_b, col_a, 4);
+		write(1, "rrr\n", 4);
 	}
 }

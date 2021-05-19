@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 08:50:46 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/17 15:30:00 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/19 10:32:45 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,17 @@ void	ft_lstadd_back(t_num **alst, t_num *new)
 	while (nw->next)
 		nw = nw->next;
 	nw->next = new;
+}
+
+int	ft_lstsize(t_num *lst)
+{
+	int		i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }

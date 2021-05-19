@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:07:09 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/18 11:56:49 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/19 11:09:59 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,4 +161,54 @@ int	main (int argc, char **argv)
 	}
 	printf("\n\nhey c'est la fin du push \n");*/
 
-	
+	//reverse rotate tests.
+	/*	printf("\nhey je suis au reverse rotate\n\n");
+	printf("ici c'est reverse rotate a\n");
+	reverse_rot(&col_a, &col_b, 1);
+	nb_tmp = col_a;
+	nb_tmp_b = col_b;
+	while (nb_tmp)
+	{
+		printf("lst_a == %d\n", nb_tmp->nb);
+		nb_tmp = nb_tmp->next;
+	}
+	printf("\n");
+	while (nb_tmp_b)
+	{
+		printf("lst_b == %d\n", nb_tmp_b->nb);
+		nb_tmp_b = nb_tmp_b->next;
+	}
+	printf("\n");
+	printf("ici c'est reverse rotate b\n");
+	reverse_rot(&col_b, &col_a, 2);
+	nb_tmp = col_a;
+	nb_tmp_b = col_b;
+	while (nb_tmp)
+	{
+		printf("lst_a == %d\n", nb_tmp->nb);
+		nb_tmp = nb_tmp->next;
+	}
+	printf("\n");
+	while (nb_tmp_b)
+	{
+		printf("lst_b == %d\n", nb_tmp_b->nb);
+		nb_tmp_b = nb_tmp_b->next;
+	}
+	printf("ici c'est reverse rotate a et b\n");
+	reverse_rot(&col_b, &col_a, 3);
+	nb_tmp = col_a;
+	nb_tmp_b = col_b;
+	while (nb_tmp)
+	{
+		printf("lst_a == %d\n", nb_tmp->nb);
+		nb_tmp = nb_tmp->next;
+	}
+	printf("\n");
+	while (nb_tmp_b)
+	{
+		printf("lst_b == %d\n", nb_tmp_b->nb);
+		nb_tmp_b = nb_tmp_b->next;
+	}
+	printf("\n\nhey c'est la fin du reverse rotate \n");*/
+
+

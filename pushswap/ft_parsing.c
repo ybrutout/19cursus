@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 10:35:21 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/18 13:36:34 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/19 10:23:05 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	parsing(char **argv, t_num **col_a, t_num **col_b, int **lst_sort)
 		tmp = ft_atoi(argv[i]);
 		lst_tmp = ft_lstnew(&tmp);
 		if (!lst_tmp)
-			if ((ft_error(*col_a, *lst_sort, 1)) > 0)
+			if ((ft_error(*col_a, *col_b, *lst_sort, 1)) > 0)
 				return (1);
 		ft_lstadd_back(col_a, lst_tmp);
 		lst_sort[0][i - 1] = tmp;
@@ -74,6 +74,9 @@ int	parsing(char **argv, t_num **col_a, t_num **col_b, int **lst_sort)
 	ft_lstadd_back(col_b, lst_tmp);
 	i = ft_order(lst_sort, i);
 	if (i == 0)
-
+	{
+		ft_error(*col_a, *col_b, *lst_sort, 2);
+			return (1);
+	}
 	return (0);
 }
