@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:08:27 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/19 14:16:26 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/19 15:25:25 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int			nb_min(t_num **col_a, int nb);
 int			nb_max(t_num **col_a, int nb);
 int			decreasing(t_num **col_b);
 int			ascending(t_num **col_a);
+int			ft_order(int **lst_sort, int argc);
+int			*nw_lst_order(t_num **col, int *lst_new, int len);
 
 t_col		*init_new_lst(t_num **col_a, t_num **col_b, int nb);
 

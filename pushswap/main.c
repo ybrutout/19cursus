@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:07:09 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/19 14:09:45 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/19 16:09:56 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ int	main (int argc, char **argv)
 
 	if (argc < 3)
 		return (write(1, "hey, j'ai pas assez d'argument !\n", 33));
-	lst_sort = malloc(sizeof(int) * (argc - 1));
+	lst_sort = malloc(sizeof(int));
+	lst_sort = nw_lst_order(&col_a, lst_sort, (argc - 1));
 	if (!lst_sort)
-		return (write(1, "probleme de malloc avec lst_sort\n", 35));
+		return (0);
 	if (parsing(argv, &col_a, &col_b, &lst_sort) == 1)
 		return (0);
 	//ici ca sers a rien juste pour les tests
@@ -55,7 +56,7 @@ int	main (int argc, char **argv)
 	ft_free(col_a);
 	ft_free(col_b);
 	free(lst_sort);
-	system("leaks push_swap");
+	//system("leaks push_swap");
 }
 
 //test pour voir si le swap fonctionne

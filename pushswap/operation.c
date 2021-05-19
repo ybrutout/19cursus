@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:38:30 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/19 13:56:47 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/19 16:02:24 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ void	push(t_num **col_a, t_num **col_b, int button)
 {
 	t_num	*tmp;
 
-	if (*col_b)
+	if (*col_a)
 	{
-		tmp = *col_b;
-		*col_b = (*col_b)->next;
-		tmp ->next = *col_a;
-		*col_a = tmp;
+		tmp = *col_a;
+		*col_a = (*col_a)->next;
+		tmp ->next = *col_b;
+		*col_b = tmp;
 	}
 	if (button == 1)
 		write(1, "pa\n", 3);
