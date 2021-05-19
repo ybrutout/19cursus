@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:38:30 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/19 10:54:26 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/19 13:56:47 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void 	swap(t_num **column)
 
 void	swap_button(t_num **col_a, t_num **col_b, int button)
 {
-	if ((*col_a)->next)
+	if (*col_a)
 		swap(col_a);
 	if (button == 1)
 		write(1, "sa\n", 3);
@@ -34,7 +34,7 @@ void	swap_button(t_num **col_a, t_num **col_b, int button)
 		write(1, "sb\n", 3);
 	else if (button == 3)
 	{
-		if ((*col_b)->next)
+		if (*col_b)
 			swap(col_b);
 		write(1, "ss\n", 3);
 	}
@@ -44,7 +44,7 @@ void	push(t_num **col_a, t_num **col_b, int button)
 {
 	t_num	*tmp;
 
-	if ((*col_b)->next)
+	if (*col_b)
 	{
 		tmp = *col_b;
 		*col_b = (*col_b)->next;
@@ -61,7 +61,7 @@ void	rotate(t_num **col_a, t_num **col_b, int button)
 {
 	t_num	*tmp;
 
-	if ((*col_a)->next && (*col_a)->next->next)
+	if (*col_a && (*col_a)->next)
 	{
 		tmp = *col_a;
 		*col_a = (*col_a)->next;
@@ -86,7 +86,7 @@ void	reverse_rot(t_num **col_a, t_num **col_b, int button)
 	int		len;
 
 	len = ft_lstsize(*col_a);
-	if ((*col_a)->next && (*col_a)->next->next)
+	if (*col_a && (*col_a)->next)
 	{
 		start = *col_a;
 		while (len-- != 2)

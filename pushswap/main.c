@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:07:09 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/19 11:09:59 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/19 14:09:45 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main (int argc, char **argv)
 	int			tmp;// n'est utile que pour les tests.
 	int			*lst_sort;
 
-	if (argc < 2)
+	if (argc < 3)
 		return (write(1, "hey, j'ai pas assez d'argument !\n", 33));
 	lst_sort = malloc(sizeof(int) * (argc - 1));
 	if (!lst_sort)
@@ -30,19 +30,18 @@ int	main (int argc, char **argv)
 		return (0);
 	//ici ca sers a rien juste pour les tests
 	nb_tmp = col_a;
-	nb_tmp_b = col_b;
+	if (col_b)
+		nb_tmp_b = col_b;
 	while (nb_tmp)
 	{
 		printf("lst_a == %d\n", nb_tmp->nb);
 		nb_tmp = nb_tmp->next;
 	}
-	while (nb_tmp_b && nb_tmp_b->next)
+	while (nb_tmp_b)
 	{
 		printf("lst_b == %d\n", nb_tmp_b->nb);
 		nb_tmp_b = nb_tmp->next;
 	}
-	if (!(nb_tmp_b->next))
-		printf("\nhey b n'existe pas\n\n");
 	tmp = 0;
 	while (lst_sort[tmp] && tmp < (argc - 1))
 	{
@@ -50,8 +49,12 @@ int	main (int argc, char **argv)
 		tmp++;
 	}
 	//jusque ici et c'est 20 lignes.
+	if ((median(&col_a, &col_b, &lst_sort, (argc - 1))) < 0)
+		if ((ft_error(col_a, col_b, lst_sort, 3)) > 0)
+			return (0);
 	ft_free(col_a);
 	ft_free(col_b);
+	free(lst_sort);
 	system("leaks push_swap");
 }
 

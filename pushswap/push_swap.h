@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:08:27 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/19 10:49:45 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/19 14:16:26 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,40 @@ typedef struct s_number
 	struct s_number	*next;
 }					t_num;
 
-int			ft_atoi(const char *str);
 t_num		*ft_lstnew(int *content);
+
+typedef struct		s_column
+{
+	struct s_number *col_a;
+	struct s_number	*col_b;
+	int				max_a;
+	int				min_a;
+	int				max_b;
+	int				min_b;
+	int				min;
+	int				max;
+	int				argc;
+	int				len_a;
+	int				len_b;
+}					t_col;
+
 void		ft_lstadd_back(t_num **alst, t_num *new);
 void		ft_free(t_num *alst);
-int			parsing(char **argv, t_num **col_a, t_num **col_b, int **lst_sort);
 void		swap_button(t_num **col_a, t_num **col_b, int button);
 void		push(t_num **col_a, t_num **col_b, int button);
 void		rotate(t_num **col_a, t_num **col_b, int button);
-int			ft_lstsize(t_num *lst);
 void		reverse_rot(t_num **col_a, t_num **col_b, int button);
+
+int			ft_lstsize(t_num *lst);
+int			parsing(char **argv, t_num **col_a, t_num **col_b, int **lst_sort);
+int			ft_atoi(const char *str);
+int			median(t_num **col_a, t_num **col_b, int **lst_sort, int nb);
+int			ft_error(t_num *col_a, t_num *col_b, int *lst_sort, int b);
+int			nb_min(t_num **col_a, int nb);
+int			nb_max(t_num **col_a, int nb);
+int			decreasing(t_num **col_b);
+int			ascending(t_num **col_a);
+
+t_col		*init_new_lst(t_num **col_a, t_num **col_b, int nb);
 
 #endif
