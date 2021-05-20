@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:07:09 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/19 16:09:56 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:05:57 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,17 @@ int	main (int argc, char **argv)
 		return (0);
 	if (parsing(argv, &col_a, &col_b, &lst_sort) == 1)
 		return (0);
+	if ((median(&col_a, &col_b, &lst_sort, (argc - 1))) < 0)
+		if ((ft_error(col_a, col_b, lst_sort, 3)) > 0)
+			return (0);
+	ft_free(col_a);
+	ft_free(col_b);
+	free(lst_sort);
+	//system("leaks push_swap");
+}
+
 	//ici ca sers a rien juste pour les tests
-	nb_tmp = col_a;
+	/*nb_tmp = col_a;
 	if (col_b)
 		nb_tmp_b = col_b;
 	while (nb_tmp)
@@ -48,16 +57,8 @@ int	main (int argc, char **argv)
 	{
 		printf("sorted == %d\n", lst_sort[tmp]);
 		tmp++;
-	}
+	}*/
 	//jusque ici et c'est 20 lignes.
-	if ((median(&col_a, &col_b, &lst_sort, (argc - 1))) < 0)
-		if ((ft_error(col_a, col_b, lst_sort, 3)) > 0)
-			return (0);
-	ft_free(col_a);
-	ft_free(col_b);
-	free(lst_sort);
-	//system("leaks push_swap");
-}
 
 //test pour voir si le swap fonctionne
 /*	swap_button(&col_a, &col_b, 1);

@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/12 17:51:34 by ybrutout          #+#    #+#              #
-#    Updated: 2021/05/19 12:14:06 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/05/20 11:29:31 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC = 	main.c \
 		ft_parsing.c \
 		operation.c \
 		algo.c \
+		toolbox_2.c \
 
 OBJ = $(SRC:.c=.o)
 

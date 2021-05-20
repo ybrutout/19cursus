@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:38:30 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/19 16:02:24 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:56:35 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,85 +24,164 @@ static void 	swap(t_num **column)
 	swap->next = tmp;
 }
 
-void	swap_button(t_num **col_a, t_num **col_b, int button)
+void	swap_button(t_col **index, int button)
 {
-	if (*col_a)
-		swap(col_a);
 	if (button == 1)
-		write(1, "sa\n", 3);
+	{
+		if ((*index)->col_a && (*index)->len_a > 1)
+			swap(&(*index)->col_a);
+		ft_write(1, index);
+	}
 	else if (button == 2)
-		write(1, "sb\n", 3);
+	{
+		if ((*index)->col_b && (*index)->len_b > 1)
+			swap(&(*index)->col_b);
+		ft_write(2, index);
+	}
 	else if (button == 3)
 	{
-		if (*col_b)
-			swap(col_b);
-		write(1, "ss\n", 3);
+		if ((*index)->col_a && (*index)->len_a > 1)
+			swap(&(*index)->col_a);
+		if ((*index)->col_b && (*index)->len_b > 1)
+			swap(&(*index)->col_b);
+		ft_write(3, index);
 	}
 }
 
-void	push(t_num **col_a, t_num **col_b, int button)
+void	push(t_col **index, int button)
 {
 	t_num	*tmp;
 
-	if (*col_a)
-	{
-		tmp = *col_a;
-		*col_a = (*col_a)->next;
-		tmp ->next = *col_b;
-		*col_b = tmp;
-	}
 	if (button == 1)
-		write(1, "pa\n", 3);
+	{
+		if ((*index)->col_a)
+		{
+			tmp = (*index)->col_a;
+			(*index)->col_a = (*index)->col_a->next;
+			tmp ->next = (*index)->col_b;
+			(*index)->col_b = tmp;
+		}
+		ft_write(5, index);
+	}
 	else if (button == 2)
-		write(1, "pb\n", 3);
+	{
+		if ((*index)->col_b)
+		{
+			tmp = (*index)->col_b;
+			(*index)->col_b = (*index)->col_b->next;
+			tmp ->next = (*index)->col_a;
+			(*index)->col_a = tmp;
+		}
+		ft_write(4, index);
+	}
 }
 
-void	rotate(t_num **col_a, t_num **col_b, int button)
+void	rotate(t_col **index, int button)
 {
 	t_num	*tmp;
 
-	if (*col_a && (*col_a)->next)
-	{
-		tmp = *col_a;
-		*col_a = (*col_a)->next;
-		tmp->next = NULL;
-		ft_lstadd_back(col_a, tmp);
-	}
 	if (button == 1)
-		write(1, "ra\n", 3);
+	{
+		if ((*index)->col_a && ((*index)->col_a->next))
+		{
+			tmp = (*index)->col_a;
+			(*index)->col_a = (*index)->col_a->next;
+			tmp->next = NULL;
+			ft_lstadd_back(&(*index)->col_a, tmp);
+		}
+		ft_write(6, index);
+	}
 	else if (button == 2)
-		write(1, "rb\n", 3);
+	{
+		if ((*index)->col_b && ((*index)->col_b->next))
+		{
+			tmp = (*index)->col_b;
+			(*index)->col_b = (*index)->col_b->next;
+			tmp->next = NULL;
+			ft_lstadd_back(&(*index)->col_b, tmp);
+		}
+		ft_write(7, index);
+	}
 	else if (button == 3)
 	{
-		rotate(col_b, col_a, 4);
-		write(1, "rr\n", 4);
+		if ((*index)->col_a && ((*index)->col_a->next))
+		{
+			tmp = (*index)->col_a;
+			(*index)->col_a = (*index)->col_a->next;
+			tmp->next = NULL;
+			ft_lstadd_back(&(*index)->col_a, tmp);
+		}
+		if ((*index)->col_b && ((*index)->col_b->next))
+		{
+			tmp = (*index)->col_b;
+			(*index)->col_b = (*index)->col_b->next;
+			tmp->next = NULL;
+			ft_lstadd_back(&(*index)->col_b, tmp);
+		}
+		ft_write(8, index);
 	}
 }
 
-void	reverse_rot(t_num **col_a, t_num **col_b, int button)
+void	reverse_rot(t_col **index, int button)
 {
 	t_num	*start;
 	t_num	*tmp;
 	int		len;
 
-	len = ft_lstsize(*col_a);
-	if (*col_a && (*col_a)->next)
-	{
-		start = *col_a;
-		while (len-- != 2)
-			start = start->next;
-		tmp = start->next;
-		start->next = NULL;
-		tmp->next = *col_a;
-		*col_a = tmp;
-	}
 	if (button == 1)
-		write(1, "rra\n", 4);
+	{
+		len = ft_lstsize((*index)->col_a);
+		if ((*index)->col_a && (*index)->col_a->next)
+		{
+			start = (*index)->col_a;
+			while (len-- != 2)
+				start = start->next;
+			tmp = start->next;
+			start->next = NULL;
+			tmp->next = (*index)->col_a;
+			(*index)->col_a = tmp;
+		}
+		ft_write(9, index);
+	}
 	else if (button == 2)
-		write(1, "rrb\n", 4);
+	{
+		len = ft_lstsize((*index)->col_b);
+		if ((*index)->col_b && (*index)->col_b->next)
+		{
+			start = (*index)->col_b;
+			while (len-- != 2)
+				start = start->next;
+			tmp = start->next;
+			start->next = NULL;
+			tmp->next = (*index)->col_b;
+			(*index)->col_b = tmp;
+		}
+		ft_write(10, index);
+	}
 	else if (button == 3)
 	{
-		reverse_rot(col_b, col_a, 4);
-		write(1, "rrr\n", 4);
+		len = ft_lstsize((*index)->col_a);
+		if ((*index)->col_a && (*index)->col_a->next)
+		{
+			start = (*index)->col_a;
+			while (len-- != 2)
+				start = start->next;
+			tmp = start->next;
+			start->next = NULL;
+			tmp->next = (*index)->col_a;
+			(*index)->col_a = tmp;
+		}
+		len = ft_lstsize((*index)->col_b);
+		if ((*index)->col_b && (*index)->col_b->next)
+		{
+			start = (*index)->col_b;
+			while (len-- != 2)
+				start = start->next;
+			tmp = start->next;
+			start->next = NULL;
+			tmp->next = (*index)->col_b;
+			(*index)->col_b = tmp;
+		}
+		ft_write(11, index);
 	}
 }

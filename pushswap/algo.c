@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:26:56 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/19 16:27:21 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:24:34 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,59 +63,95 @@ int	*nw_lst_order(t_num **col, int *lst_new, int len)
 			tmp_col = tmp_col->next;
 		}
 	}
-	ft_order(&tmp, len);
+	ft_order(&tmp, (len + 1));
 	free(lst_new);
 	return (tmp);
+}
+
+int	check(t_col **index)
+{
+	if (ascending(&(*index)->col_a) == 1)
+	{
+		if (decreasing(&(*index)->col_b) == 1)
+		{
+			if ((*index)->min_a > (*index)->max_b)
+			{
+				while((*index)->len_b > 0)
+					push(index, 2);
+				return (1);
+			}
+		}
+	}
+	return (0);
+}
+
+int	middlepoint(t_col **index, int **lst_sort)
+{
+	int		len;
+	int		median;
+
+	len = (*index)->len_a;
+	*lst_sort = nw_lst_order(&(*index)->col_a, *lst_sort, (*index)->len_a);
+	if (!*lst_sort)
+		return (0);
+	median = lst_sort[0][(len/2)];
+	while (len > 0)
+	{
+		if ((*index)->col_a->nb < median)
+			push(&(*index), 1);
+		else
+			rotate(&(*index), 1);
+		len--;
+		if (check(index) == 1)
+			return (2);
+	}
+	return (1);
 }
 
 int	median(t_num **col_a, t_num **col_b, int **lst_sort, int nb)
 {
 	t_col	*index;
-	int		median;
-	int		len;
-	t_num	*nb_tmp;
-	t_num	*nb_tmp_b;
-	int		i;
+	t_num	*nb_tmp; // pour les tests.
+	t_num	*nb_tmp_b;// pour les tests.
+	int		i;// pour les tests.
+	int		ret;
 
 	i = 0;
-	index = init_new_lst(col_a, col_b, nb);
+	index = int_new_index(col_a, col_b, nb);
 	if ((ascending(col_a)) == 1)
 	{
 		free(index);
 		return (1);
 	}
-	while (index->len_a > 2)
+	ft_write(12, &index);
+	while ((index->len_a) > 2)
 	{
-		index->len_a = ft_lstsize(*col_a);
-		len = index->len_a;
-		*lst_sort = nw_lst_order(col_a, *lst_sort, index->len_a);
-		median = lst_sort[0][(len/2)];
-		while ((*lst_sort)[i])
-			printf("lst == %d\n", (*lst_sort)[i++]);
-		printf("len == %d\n", len/2);
-		printf("median == %d\n", median);
-		while (len > 0)
+		ret = middlepoint(&index, lst_sort);
+		if (ret == 0)
+			return (-1);
+		else if (ret == 2)
 		{
-			if ((*col_a)->nb < median)
-				push(col_a, col_b, 2);
+			free(index);
+			return (1);
+		}
+	}
+	if (index->len_a == 2)
+	{
+		if (ascending(&index->col_a) == 0)
+		{
+			if (decreasing(&index->col_b) == 0)
+				swap_button(&index, 3);
 			else
-				rotate(col_a, col_b, 1);
-			len--;
+				swap_button(&index, 1);
+			ret = middlepoint(&index, lst_sort);
+			if (ret == 0)
+				return (-1);
+			else if (ret == 2)
+			{
+				free(index);
+				return (1);
+			}
 		}
-		nb_tmp = *col_a;
-		nb_tmp_b = *col_b;
-		while (nb_tmp)
-		{
-			printf("lst_a == %d\n", nb_tmp->nb);
-			nb_tmp = nb_tmp->next;
-		}
-		while (nb_tmp_b)
-		{
-			printf("lst_b == %d\n", nb_tmp_b->nb);
-			nb_tmp_b = nb_tmp_b->next;
-		}
-		printf("index->len_a == %d\n", index->len_a);
-		printf("median == %d\n", median);
 	}
 	free(index);
 	return (1);
