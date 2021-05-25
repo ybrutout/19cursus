@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:38:30 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/20 13:56:35 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/25 13:47:21 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	push(t_col **index, int button)
 			(*index)->col_b = (*index)->col_b->next;
 			tmp ->next = (*index)->col_a;
 			(*index)->col_a = tmp;
+			if ((*index)->col_a->nb > (*index)->col_a->next->nb)
+				swap_button(index, 1);
 		}
 		ft_write(4, index);
 	}

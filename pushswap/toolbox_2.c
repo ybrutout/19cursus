@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 11:11:46 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/20 16:25:39 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/25 15:35:47 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_write(int button, t_col **index)
 
 	if (!nb_comm)
 		nb_comm = 0;
-	system("clear");
+	//system("clear");
 	if (button > 0 && button < 12)
 	{
 		write(1, "\n\ncommand == ", 13);
@@ -69,7 +69,7 @@ void	ft_write(int button, t_col **index)
 	change_index(index);
 	//les tests commencent ici.
 	printf("nb commande : %d\n", nb_comm);
-	tmp = (*index)->col_a;
+/*	tmp = (*index)->col_a;
 	tmp_b = (*index)->col_b;
 	printf("		A		|		B		\n");
 	printf("--------------------------------|--------------------------------\n");
@@ -96,5 +96,5 @@ void	ft_write(int button, t_col **index)
 	}
 	printf("--------------------------------|--------------------------------\n");
 	// Et ils finissent ici !
-	system("sleep 0.3");
+	system("sleep 0.01");*/
 }

@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:07:09 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/20 16:05:57 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/25 14:30:09 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main (int argc, char **argv)
+int main (int argc, char **argv)
 {
 	t_num	*nb_tmp;// n'est utile que pour les tests.
 	t_num	*nb_tmp_b; // 'est utilisé que pour les tests.
@@ -37,6 +37,8 @@ int	main (int argc, char **argv)
 	free(lst_sort);
 	//system("leaks push_swap");
 }
+
+
 
 	//ici ca sers a rien juste pour les tests
 	/*nb_tmp = col_a;

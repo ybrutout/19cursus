@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:26:56 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/20 16:24:34 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/25 15:51:34 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,36 @@ int	check(t_col **index)
 				return (1);
 			}
 		}
+		return (2);
 	}
 	return (0);
+}
+
+int	len_position(t_col **index, int median, char a)
+{
+	t_num	*tmp;
+	int		len;
+
+	len = 0;
+	if (a == 'a')
+	{
+		tmp = (*index)->col_a;
+		while (tmp->nb > median)
+		{
+			tmp = tmp->next;
+			len++;
+		}
+	}
+	else if (a == 'b')
+	{
+		tmp = (*index)->col_a;
+		while (tmp->nb > median)
+		{
+			tmp = tmp->next;
+			len++;
+		}
+	}
+	return (len);
 }
 
 int	middlepoint(t_col **index, int **lst_sort)
@@ -97,15 +125,63 @@ int	middlepoint(t_col **index, int **lst_sort)
 	median = lst_sort[0][(len/2)];
 	while (len > 0)
 	{
-		if ((*index)->col_a->nb < median)
-			push(&(*index), 1);
+		if ((*index)->col_a && (*index)->col_a->nb < median)
+			push(index, 1);
 		else
-			rotate(&(*index), 1);
+		{
+			if ((*index)->col_b && (*index)->col_b->next && (*index)->col_b->nb < (*index)->col_b->next->nb)
+			{
+				rotate(index, 3);
+			}
+			else
+				rotate(index, 1);
+		}
 		len--;
 		if (check(index) == 1)
 			return (2);
 	}
 	return (1);
+}
+
+int position(t_col **index, int button)
+{
+	t_num	*tmp;
+	int		len;
+
+	len = 0;
+	if (button == 1)
+	{
+		tmp = (*index)->col_b;
+		while (tmp->nb != (*index)->max_b)
+		{
+			tmp = tmp->next;
+			len++;
+		}
+	}
+	else if (button == 2)
+	{
+		tmp = (*index)->col_a;
+		while (tmp->nb != (*index)->max_a)
+		{
+			tmp = tmp->next;
+			len++;
+		}
+	}
+	return (len);
+}
+
+int	checker(t_col **index)
+{
+	t_num	*tmp;
+
+	tmp = (*index)->col_a;
+	while (tmp)
+	{
+		if ( tmp->next && tmp->nb > tmp->next->nb)
+			return (tmp->nb);
+		tmp = tmp->next;
+	}
+	return (0);
 }
 
 int	median(t_num **col_a, t_num **col_b, int **lst_sort, int nb)
@@ -123,8 +199,7 @@ int	median(t_num **col_a, t_num **col_b, int **lst_sort, int nb)
 		free(index);
 		return (1);
 	}
-	ft_write(12, &index);
-	while ((index->len_a) > 2)
+	while ((index->len_a) > 2 )
 	{
 		ret = middlepoint(&index, lst_sort);
 		if (ret == 0)
@@ -143,15 +218,48 @@ int	median(t_num **col_a, t_num **col_b, int **lst_sort, int nb)
 				swap_button(&index, 3);
 			else
 				swap_button(&index, 1);
-			ret = middlepoint(&index, lst_sort);
-			if (ret == 0)
-				return (-1);
-			else if (ret == 2)
-			{
-				free(index);
-				return (1);
-			}
 		}
+	}
+	while (index->len_b != 0)
+	{
+		if (index->col_b->nb == index->max_b)
+			push(&index, 2);
+		else if (index->col_b->next->nb == index->max_b)
+			swap_button(&index, 2);
+		else if (index->col_b->nb == index->min_b)
+		{
+			push(&index, 2);
+			if (position(&index, 1) <= ((index->len_b) / 2))
+				rotate(&index, 3);
+			else
+				rotate(&index, 1);
+		}
+		else if (index->col_b->nb == nb_second_max(&(index->col_b), index->len_b, index->max_b))
+		{
+			push(&index, 2);
+		}
+		else if (position(&index, 1) <= ((index->len_b) / 2))
+			rotate(&index, 2);
+		else if (position(&index, 1) > ((index->len_b) / 2))
+			reverse_rot(&index, 2);
+	}
+	while (index->col_a->nb != index->min_a)
+		reverse_rot(&index, 1);
+	//checker
+	i = checker(&index);
+	if (i == 0)
+	{
+		write(1, "KO\n", 3);
+		printf("%d\n", i);
+	}
+	else
+		write(1, "OK\n", 3);
+	//fin checker
+	nb_tmp = index->col_a;
+	while (nb_tmp)
+	{
+		printf("%d\n", nb_tmp->nb);
+		nb_tmp = nb_tmp->next;
 	}
 	free(index);
 	return (1);
