@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:07:09 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/25 14:30:09 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/26 13:58:35 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ int main (int argc, char **argv)
 	t_num	*nb_tmp_b; // 'est utilisé que pour les tests.
 	t_num	*col_a;
 	t_num	*col_b;
-	int			tmp;// n'est utile que pour les tests.
-	int			*lst_sort;
+	int		tmp;// n'est utile que pour les tests.
+	int		*lst_sort;
+	t_col	*index;
 
 	if (argc < 3)
 		return (write(1, "hey, j'ai pas assez d'argument !\n", 33));
@@ -29,13 +30,15 @@ int main (int argc, char **argv)
 		return (0);
 	if (parsing(argv, &col_a, &col_b, &lst_sort) == 1)
 		return (0);
-	if ((median(&col_a, &col_b, &lst_sort, (argc - 1))) < 0)
+	index = int_new_index(&col_a, &col_b, (argc - 1));
+	if ((median(&index, &lst_sort, (argc - 1))) < 0)
 		if ((ft_error(col_a, col_b, lst_sort, 3)) > 0)
 			return (0);
 	ft_free(col_a);
 	ft_free(col_b);
+	free(index);
 	free(lst_sort);
-	//system("leaks push_swap");
+//	system("leaks push_swap");
 }
 
 

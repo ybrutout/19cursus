@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 10:06:56 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/25 13:36:53 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/26 13:32:57 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,20 @@ int		nb_second_max(t_num **col_a, int nb, int max)
 	return (tmp_max);
 }
 
+int	last_nb(t_num *col)
+{
+	t_num	*tmp;
+	int		ret;
+
+	tmp = col;
+	while (tmp)
+	{
+		ret = tmp->nb;
+		tmp = tmp->next;
+	}
+	return (ret);
+}
+
 t_col	*int_new_index(t_num **col_a, t_num **col_b, int nb)
 {
 	t_col *index;
@@ -99,6 +113,8 @@ t_col	*int_new_index(t_num **col_a, t_num **col_b, int nb)
 	index->argc = nb;
 	index->len_a = ft_lstsize(*col_a);
 	index->len_b = ft_lstsize(*col_b);
+	index->last_a = last_nb(*col_a);
+	index->last_b = last_nb(*col_b);
 	return(index);
 }
 
