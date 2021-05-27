@@ -1,33 +1,117 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   toolbox_2.c                                        :+:      :+:    :+:   */
+/*   toolbox.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/20 11:11:46 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/27 12:15:05 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/05/27 10:21:23 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/05/27 16:51:10 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+int	*nw_lst_order(t_num **col, int *lst_new, int len, int knob)
+{
+	int		*tmp;
+	t_num	*tmp_col;
+	int 	i;
+
+	tmp = malloc(sizeof(int) * len);
+	if (!tmp)
+		return (NULL);
+	i = 0;
+	if (*col)
+	{
+		tmp_col = *col;
+		while (tmp_col)
+		{
+			tmp[i++] = tmp_col->nb;
+			tmp_col = tmp_col->next;
+		}
+	}
+	ft_order(&tmp, (len + 1));
+	if (knob != 1)
+		free(lst_new);
+	return (tmp);
+}
+
+int	ft_order(int **lst_sort, int argc)
+{
+	int	i;
+	int	j;
+	int	*tmp;
+
+	i = 0;
+	while (lst_sort[0][i] && i < (argc - 1))
+	{
+		if (lst_sort[0][i] == lst_sort[0][i + 1] && (i + 1) < (argc - 1))
+		{
+			printf("a == %d\n b == %d\n", lst_sort[0][i], lst_sort[0][i + 1]);
+			return (0);
+		}
+		else if (lst_sort[0][i] > lst_sort[0][i + 1] && (i + 1) < (argc - 1))
+		{
+			j = lst_sort[0][i + 1];
+			lst_sort[0][i + 1] = lst_sort[0][i];
+			lst_sort[0][i] = j;
+			i = 0;
+		}
+		else
+			i++;
+	}
+	return (1);
+}
+
+t_col	*int_new_index(t_num **col_a, t_num **col_b, int nb)
+{
+	t_col *index;
+
+	index = malloc(sizeof(t_col));
+	if (!index)
+		return (NULL);
+	index->col_a = *col_a;
+	index->col_b = *col_b;
+	index->max = 0;
+	index->max_a = 0;
+	index->min = 0;
+	index->min_a = 0;
+	index->min_b = 0;
+	index->max_b = 0;
+	index->argc = nb;
+	index->len_a = 0;
+	index->len_b = 0;
+	index->last_a = 0;
+	index->last_b = 0;
+	return(index);
+}
+
 void	change_index(t_col **index)
 {
-	(*index)->len_a = ft_lstsize((*index)->col_a);
-	(*index)->len_b = ft_lstsize((*index)->col_b);
+	int	tmp;
+	tmp = ft_lstsize((*index)->col_a);
+	(*index)->len_a = tmp;
+	tmp = ft_lstsize((*index)->col_b);
+	(*index)->len_b = tmp;
 	if ((*index)->len_a > 0)
 	{
-		(*index)->max_a = nb_max(&(*index)->col_a, (*index)->len_a);
-		(*index)->min_a = nb_min(&(*index)->col_a, (*index)->len_a);
+		tmp = nb_max(&((*index)->col_a), (*index)->len_a);
+		(*index)->max_a = tmp;
+		tmp = nb_min(&((*index)->col_a), (*index)->len_a);
+		(*index)->min_a = tmp;
 	}
 	if ((*index)->len_b > 0)
 	{
-		(*index)->max_b = nb_max(&(*index)->col_b, (*index)->len_b);
-		(*index)->min_b = nb_min(&(*index)->col_b, (*index)->len_b);
+		tmp = nb_max(&((*index)->col_b), (*index)->len_b);
+		(*index)->max_b = tmp;
+		tmp = nb_min(&((*index)->col_b), (*index)->len_b);
+		(*index)->min_b = tmp;
 	}
-	(*index)->last_a = last_nb((*index)->col_a);
-	(*index)->last_b = last_nb((*index)->col_b);
+	tmp = last_nb((*index)->col_a);
+	(*index)->last_a = tmp;
+	tmp = last_nb((*index)->col_b);
+	(*index)->last_b = tmp;
 }
 
 void	ft_write(int button, t_col **index)
@@ -44,7 +128,7 @@ void	ft_write(int button, t_col **index)
 		nb_tests = 1;
 		nb_comm = 0;
 	}
-	//system("clear");
+	system("clear");
 	if (button > 0 && button < 12)
 	{
 		printf("n %d ", nb_tests++);
@@ -75,7 +159,7 @@ void	ft_write(int button, t_col **index)
 	}
 	change_index(index);
 	//les tests commencent ici.
-	/*printf("nb commande : %d\n", nb_comm);
+	printf("nb commande : %d\n", nb_comm);
 	tmp = (*index)->col_a;
 	tmp_b = (*index)->col_b;
 	printf("		A		|		B		\n");
@@ -104,5 +188,5 @@ void	ft_write(int button, t_col **index)
 	printf("--------------------------------|--------------------------------\n");
 	// Et ils finissent ici !
 	system("sleep 0.01");
-	//problème avec zero qu'il faut régler*/
+	//problème avec zero qu'il faut régler
 }
