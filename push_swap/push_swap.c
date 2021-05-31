@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:10:31 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/27 14:30:26 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/31 09:29:45 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,78 @@ int	main(int argc, char **argv)
 		return (0);
 	if (sorted(&index, &lst_sort) == 0)
 		return (0);
+	tester(&index);
 	free_lst(index->col_a);
 	free_lst(index->col_b);
 	free(lst_sort);
 	free(index);
-	system("leaks push_swap");
-	/*
-	if ((median(&index, &lst_sort, (argc - 1))) < 0)
-		if ((ft_error(col_a, col_b, lst_sort, 3)) > 0)
-			return (0);
-	ft_free(col_a);
-	ft_free(col_b);
-	free(index);
-	free(lst_sort);*/
+//	system("leaks push_swap");
+}
+
+int	checker(t_col **index)
+{
+	t_num	*tmp;
+	int		nb;
+
+	nb = (*index)->len_a;
+	tmp = (*index)->col_a;
+	while (nb != 0)
+	{
+		if ( tmp->next && tmp->nb > tmp->next->nb)
+			return (tmp->nb);
+		tmp = tmp->next;
+		nb--;
+	}
+	return (0);
+}
+
+void	tester(t_col **index)
+{
+	t_num	*nb_tmp; // pour les tests.
+	t_num	*nb_tmp_b;// pour les tests.
+	int		i;// pour les tests.
+		//checker
+	i = 0;//tests
+	i = checker(index);
+	if (i != 0)
+	{
+		write(1, "KO\n", 3);
+		printf("je suis le mauvais %d\n", i);
+	}
+	else
+		write(1, "OK\n", 3);
+	//fin checker
+	/*t_num	*tmp;//tests
+	t_num	*tmp_b;//tests
+	int		nb_a;//tests
+	int		nb_b;//tests
+
+	tmp_b = (*index)->col_b;
+	tmp = (*index)->col_a;
+	printf("		A		|		B		\n");
+	printf("--------------------------------|--------------------------------\n");
+	while (tmp || tmp_b)
+	{
+		nb_a = '\0';
+		nb_b = '\0';
+		if (tmp)
+		{
+			nb_a = tmp->nb;
+			tmp = tmp->next;
+		}
+		if (tmp_b)
+		{
+			nb_b = tmp_b->nb;
+			tmp_b = tmp_b->next;
+		}
+		if (nb_a != '\0' && nb_b != '\0')
+			printf("		%d		|		%d		\n", nb_a, nb_b);
+		else if (nb_a == '\0')
+			printf("		%c		|		%d		\n", ' ', nb_b);
+		else if (nb_b == '\0')
+			printf("		%d		|		%c		\n", nb_a, ' ');
+	}
+	printf("--------------------------------|--------------------------------\n");*/
 }
 
 /*nb_tmp = index->col_a;

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:21:23 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/27 16:51:10 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/31 11:54:37 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	*nw_lst_order(t_num **col, int *lst_new, int len, int knob)
 			tmp_col = tmp_col->next;
 		}
 	}
-	ft_order(&tmp, (len + 1));
+	tmp[len] = 0;
+	ft_order(&tmp, len);
 	if (knob != 1)
 		free(lst_new);
 	return (tmp);
@@ -44,14 +45,11 @@ int	ft_order(int **lst_sort, int argc)
 	int	*tmp;
 
 	i = 0;
-	while (lst_sort[0][i] && i < (argc - 1))
+	while (i < argc)
 	{
-		if (lst_sort[0][i] == lst_sort[0][i + 1] && (i + 1) < (argc - 1))
-		{
-			printf("a == %d\n b == %d\n", lst_sort[0][i], lst_sort[0][i + 1]);
+		if (lst_sort[0][i] == lst_sort[0][i + 1] && (i + 1) < argc)
 			return (0);
-		}
-		else if (lst_sort[0][i] > lst_sort[0][i + 1] && (i + 1) < (argc - 1))
+		else if (lst_sort[0][i] > lst_sort[0][i + 1] && (i + 1) < argc)
 		{
 			j = lst_sort[0][i + 1];
 			lst_sort[0][i + 1] = lst_sort[0][i];
@@ -131,8 +129,8 @@ void	ft_write(int button, t_col **index)
 	system("clear");
 	if (button > 0 && button < 12)
 	{
-		printf("n %d ", nb_tests++);
-		printf("command == ");
+		//printf("n %d ", nb_tests++);
+		//printf("command == ");
 		if (button == 1)
 			printf("sa\n");
 		else if (button == 2)

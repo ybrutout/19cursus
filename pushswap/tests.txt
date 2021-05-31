@@ -1,22 +1,43 @@
-n 199 command == pb
-n 200 command == ss
-n 201 command == pa
-n 202 command == pa
-n 203 command == rb
-n 204 command == pa
-n 205 command == pa
-n 206 command == rrb
-n 207 command == pa
-n 208 command == rb
-n 209 command == rb
-n 210 command == rb
-n 211 command == pa
-n 212 command == rb
-n 213 command == sa
-n 214 command == pa
-n 215 command == rrb
-n 216 command == pa
-n 217 command == rrb
-n 218 command == rrb
-n 219 command == rrb
-n 220 command == sa
+47		|		42
+		48		|		33
+		49		|		18
+		50		|		32
+		51		|		9
+		52		|		31
+		53		|		15
+		54		|		17
+		55		|		23
+		56		|		41
+		57		|		21
+		58		|		16
+		59		|		46
+		60		|		7
+		61		|		25
+		62		|		12
+		63		|		38
+		64		|		28
+		65		|		30
+		66		|		44
+		67		|		37
+		68		|		24
+		69		|		27
+		70		|		36
+		71		|		39
+		72		|		26
+		73		|		5
+		74		|		4
+		75		|		20
+		76		|		34
+		77		|		10
+		78		|		8
+		79		|		22
+		80		|		14
+		81		|		19
+		82		|		40
+		83		|		11
+		84		|		35
+		85		|		43
+		86		|		13
+		87		|		29
+		88		|		45
+		89		|		6

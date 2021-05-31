@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:11:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/27 14:10:26 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/31 09:22:45 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,8 @@ int		last_nb(t_num *col);
 
 //sorted
 int		sorted(t_col **index, int **lst_sort);
+
+//push_swap
+void	tester(t_col **index); // a enlever
 
 #endif
