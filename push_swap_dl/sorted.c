@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 12:44:43 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/31 14:31:42 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/31 16:27:47 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,16 @@ int	middlepoint(t_col **index, int **lst_sort)
 {
 	int		len;
 	int		median;
+	t_num	*nb_tmp;//t
+	t_num	*nb_tmp_b;//t
+	int		sign;//t
+	int		tmp;//t
+	int		tmp_b;//t
+	int		i;//t
+	static int	tests;//t
 
+	if (!tests)
+		tests = 0;
 	len = (*index)->len_a;
 	*lst_sort = nw_lst_order(&(*index)->col_a, *lst_sort, (*index)->len_a, 2);
 	if (!(*lst_sort))
@@ -35,6 +44,40 @@ int	middlepoint(t_col **index, int **lst_sort)
 		}
 		len--;
 	}
+	nb_tmp = (*index)->col_a;
+	nb_tmp_b = (*index)->col_b;
+	i = 1;
+	printf("		A		|		B		\n");
+	printf("--------------------------------|--------------------------------\n");
+	while ((*index)->argc > i)
+	{
+		if (nb_tmp)
+		{
+			i++;
+			tmp =	nb_tmp->nb;
+			nb_tmp = nb_tmp->next;
+		}
+		else
+			sign = 1;
+		if (nb_tmp_b)
+		{
+			i++;
+			tmp_b =	nb_tmp_b->nb;
+			nb_tmp_b = nb_tmp_b->next;
+		}
+		else
+			sign = 2;
+		if (sign == 1)
+			printf("		%c		|		%d		\n", ' ', tmp_b);
+		else if (sign == 2)
+			printf("		%d		|		%c		\n", tmp, ' ');
+		else
+			printf("		%d		|		%d		\n", tmp, tmp_b);
+	}
+	printf("--------------------------------|--------------------------------\n");
+	tests++;
+	if (tests > 2)
+		exit(EXIT_SUCCESS);
 	return (1);
 }
 
@@ -111,6 +154,12 @@ int	sorted(t_col **index, int **lst_sort)
 {
 	int	i;
 	int	tests;
+	t_num	*nb_tmp; //t
+	t_num	*nb_tmp_b; //t
+	int		tmp;//t
+	int		tmp_b;//t
+	int		sign;//t
+
 
 	tests = 0;
 	if (ascending(&(*index)->col_a) == 1)

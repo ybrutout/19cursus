@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:21:23 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/31 14:40:53 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/31 16:00:52 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,6 @@ void	ft_write(int button, t_col **index)
 {
 	static int	nb_comm;
 	static int	nb_tests; //tests
-	t_num 		*tmp; // tests
-	t_num 		*tmp_b;// tests
-	int			nb_a; // tests
-	int			nb_b;// tests
 
 	if (!nb_comm)
 	{
@@ -129,8 +125,8 @@ void	ft_write(int button, t_col **index)
 	//system("clear");
 	if (button > 0 && button < 12)
 	{
-		//printf("n %d ", nb_tests++);
-		//printf("command == ");
+	//	printf("n %d ", nb_tests++);
+	//	printf("command == ");
 		if (button == 1)
 			write(1, "sa\n", 3);
 		else if (button == 2)
@@ -157,33 +153,49 @@ void	ft_write(int button, t_col **index)
 	}
 	change_index(index);
 	//les tests commencent ici.
-	/*printf("nb commande : %d\n", nb_comm);
-	tmp = (*index)->col_a;
+/*	t_num	*tmp;//tests
+	t_num	*tmp_b;//tests
+	int		nb_a;//tests
+	int		nb_b;//tests
+	int		len;
+
 	tmp_b = (*index)->col_b;
+	tmp = (*index)->col_a;
+	len = (*index)->argc;
 	printf("		A		|		B		\n");
 	printf("--------------------------------|--------------------------------\n");
-	while (tmp || tmp_b)
+	while (len != 0)
 	{
 		nb_a = '\0';
 		nb_b = '\0';
 		if (tmp)
 		{
+			len --;
 			nb_a = tmp->nb;
 			tmp = tmp->next;
 		}
+		else
+			nb_a = ' ';
 		if (tmp_b)
 		{
+			len--;
 			nb_b = tmp_b->nb;
 			tmp_b = tmp_b->next;
 		}
-		if (nb_a != '\0' && nb_b != '\0')
-			printf("		%d		|		%d		\n", nb_a, nb_b);
-		else if (nb_a == '\0' && nb_b != 0)
-			printf("		%c		|		%d 		\n", ' ', nb_b);
-		else if (nb_b == '\0')
-			printf("		%d		|		%c		\n", nb_a, ' ');
+		else
+			nb_b = ' ';
+		if (nb_b == ' ')
+			printf("		%d		|		%c		\n", nb_a, nb_b);
+		else if (nb_a == ' ')
+			printf("		%c		|		%d		\n", nb_a, nb_b);
+		else
+		printf("		%d		|		%d		\n", nb_a, nb_b);
 	}
 	printf("--------------------------------|--------------------------------\n");
+	nb_tests++;
+	printf("nbtests == %d\n", nb_tests);
+	if (nb_tests > 100)
+		exit(EXIT_SUCCESS);
 	// Et ils finissent ici !
 	system("sleep 0.01");
 	//problème avec zero qu'il faut régler*/
