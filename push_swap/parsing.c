@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:17:20 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/27 14:15:07 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/31 13:18:43 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	parsing(char **argv, t_col **index, int **lst_sort)
 		ft_lstadd_back(&(*index)->col_a, lst_tmp);
 		lst_sort[0][i++ - 1] = tmp;
 	}
+	if (ft_order(lst_sort, (*index)->argc) == 0)
+		return (ft_error(*index, *lst_sort, 3));
 	change_index(index);
 	return (1);
 }

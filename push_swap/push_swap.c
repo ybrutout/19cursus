@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:10:31 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/31 09:29:45 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/31 14:25:15 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	checker(t_col **index)
 	t_num	*tmp;
 	int		nb;
 
-	nb = (*index)->len_a;
+	nb = (*index)->argc;
+	printf("nb == %d\n", nb);
 	tmp = (*index)->col_a;
 	while (nb != 0)
 	{
@@ -73,7 +74,7 @@ void	tester(t_col **index)
 	else
 		write(1, "OK\n", 3);
 	//fin checker
-	/*t_num	*tmp;//tests
+	t_num	*tmp;//tests
 	t_num	*tmp_b;//tests
 	int		nb_a;//tests
 	int		nb_b;//tests
@@ -103,7 +104,7 @@ void	tester(t_col **index)
 		else if (nb_b == '\0')
 			printf("		%d		|		%c		\n", nb_a, ' ');
 	}
-	printf("--------------------------------|--------------------------------\n");*/
+	printf("--------------------------------|--------------------------------\n");
 }
 
 /*nb_tmp = index->col_a;

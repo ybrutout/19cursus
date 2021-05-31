@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 12:44:43 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/31 11:48:56 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/31 14:31:42 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ int	middlepoint(t_col **index, int **lst_sort)
 				rotate(index, 1);
 		}
 		len--;
-		/*test++;
-		if (test == 10)
-			exit(EXIT_SUCCESS);*/
 	}
 	return (1);
 }
@@ -119,10 +116,11 @@ int	sorted(t_col **index, int **lst_sort)
 	if (ascending(&(*index)->col_a) == 1)
 		return (1);
 	while ((*index)->len_a > 2)
-		middlepoint(index, lst_sort);
+		if (middlepoint(index, lst_sort) == 0)
+			return(ft_error(*index, *lst_sort, 5));
 	if (ascending(&((*index)->col_a)) != 1)
 		rotate(index, 1);
-	while ((*index)->len_b != 0)
+	while ((*index)->len_b > 0)
 	{
 		i = position(index, (*index)->len_b, (((*index)->len_b) / 2), 2);
 		if ((*index)->col_b->nb == (*index)->max_b)

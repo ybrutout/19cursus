@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:20:14 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/27 14:22:48 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/31 14:32:52 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		ft_error(t_col *index, int *lst_sort, int b)
+int	ft_error(t_col *index, int *lst_sort, int b)
 {
 	write(1, "Error\n", 6);
 	if (b == 0)
@@ -22,20 +22,20 @@ int		ft_error(t_col *index, int *lst_sort, int b)
 	else if (b == 2)
 		write(1, "initiation of the sorted list\n", 30);
 	else if (b == 3)
+		write(1, "two arguments the same \n", 24);
+	else if (b == 4)
 		write(1, "parsing lst\n", 20);
+	else if (b == 5)
+		write(1, "middlepoint\n", 12);
 	if (b > 1)
 		free(index);
 	if (b > 2)
 		free(lst_sort);
-	if (b > 3)
-	{
-		free_lst(index->col_a);
-	}
 	if (b > 4)
-	{
+		free_lst(index->col_a);
+	if (b > 4)
 		if (index->col_b)
 			free_lst(index->col_b);
-	}
 	return (0);
 }
 

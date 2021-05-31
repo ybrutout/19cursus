@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:21:23 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/31 11:54:37 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/05/31 14:40:53 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,38 +126,38 @@ void	ft_write(int button, t_col **index)
 		nb_tests = 1;
 		nb_comm = 0;
 	}
-	system("clear");
+	//system("clear");
 	if (button > 0 && button < 12)
 	{
 		//printf("n %d ", nb_tests++);
 		//printf("command == ");
 		if (button == 1)
-			printf("sa\n");
+			write(1, "sa\n", 3);
 		else if (button == 2)
-			printf("sb\n");
+			write(1, "sb\n", 3);
 		else if (button == 3)
-			printf("ss\n");
+			write(1, "ss\n", 3);
 		else if (button == 4)
-			printf("pa\n");
+			write(1, "pa\n", 3);
 		else if (button == 5)
-			printf("pb\n");
+			write(1, "pb\n", 3);
 		else if (button == 6)
-			printf("ra\n");
+			write(1, "ra\n", 3);
 		else if (button == 7)
-			printf("rb\n");
+			write(1, "rb\n", 3);
 		else if (button == 8)
-			printf("rr\n");
+			write(1, "rr\n", 3);
 		else if (button == 9)
-			printf("rra\n");
+			write(1, "rra\n", 4);
 		else if (button == 10)
-			printf("rrb\n");
+			write(1, "rrb\n", 4);
 		else if (button == 11)
-			printf("rrr\n");
+			write(1, "rrr\n", 4);
 		nb_comm++;
 	}
 	change_index(index);
 	//les tests commencent ici.
-	printf("nb commande : %d\n", nb_comm);
+	/*printf("nb commande : %d\n", nb_comm);
 	tmp = (*index)->col_a;
 	tmp_b = (*index)->col_b;
 	printf("		A		|		B		\n");
@@ -186,5 +186,5 @@ void	ft_write(int button, t_col **index)
 	printf("--------------------------------|--------------------------------\n");
 	// Et ils finissent ici !
 	system("sleep 0.01");
-	//problème avec zero qu'il faut régler
+	//problème avec zero qu'il faut régler*/
 }
