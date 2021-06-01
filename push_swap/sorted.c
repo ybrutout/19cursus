@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 14:12:52 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/06/01 15:21:01 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/06/01 15:50:06 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,18 @@ int	middlepoint(t_col **index, int **lst_sort)
 {
 	int		len;
 	int		median;
-	static int		test;//test
 
 	len = (*index)->len_a;
 	*lst_sort = nw_lst_order(&(*index)->col_a, *lst_sort, len, 2);
 	if (!(*lst_sort))
 		return (0);
 	median = lst_sort[0][(len/2)];
-	if (!test)
-		test = 0;
 	while (len > 0)
 	{
 		if ((*index)->col_a && (*index)->col_a->nb < median)
 			push(index, 1);
+		else if ((*index)->last_a < median && (*index)->last_a < (*index)->col_a->nb && (*index)->last_a < (*index)->col_a->next->nb)
+			reverse_rot(index, 1);
 		else
 		{
 			if ((*index)->col_b && ((*index)->col_b->nb < (*index)->last_b))
@@ -38,9 +37,6 @@ int	middlepoint(t_col **index, int **lst_sort)
 		}
 		len--;
 	}
-	test++;
-	if (test == 10)
-		return(0);
 	return (1);
 }
 
