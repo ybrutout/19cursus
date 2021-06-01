@@ -6,33 +6,27 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:17:20 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/31 15:39:42 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/06/01 11:30:32 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	parsing(char **argv, t_col **index, int **lst_sort)
+int	parsing(char **argv, t_col **index)
 {
 	int			tmp;
 	int			i;
 	t_num		*lst_tmp;
 
 	i = 1;
-	*lst_sort = malloc(sizeof(int) * ((*index)->argc));
-	if (!lst_sort)
-		return(ft_error(*index, *lst_sort, 2));
 	while (argv[i])
 	{
 		tmp = ft_atoi(argv[i]);
 		lst_tmp = ft_lstnew(&tmp);
 		if (!lst_tmp)
-			return (ft_error(*index, *lst_sort, 3));
-		ft_lstadd_back(&(*index)->col_a, lst_tmp);
-		lst_sort[0][i++ - 1] = tmp;
+			return (ft_error(*index, NULL, 3));
+		(*index)->col_a = ft_lstadd_back((*index)->col_a, lst_tmp);
 	}
-	if (ft_order(lst_sort, (*index)->argc) == 0)
-		return (ft_error(*index, *lst_sort, 3));
 	change_index(index);
 	return (1);
 }

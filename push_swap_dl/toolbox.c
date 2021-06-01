@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:21:23 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/31 16:00:52 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/06/01 10:22:55 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,15 @@ int	ft_order(int **lst_sort, int argc)
 	return (1);
 }
 
-t_col	*int_new_index(t_num **col_a, t_num **col_b, int nb)
+t_col	*int_new_index(int nb)
 {
 	t_col *index;
 
 	index = malloc(sizeof(t_col));
 	if (!index)
 		return (NULL);
-	index->col_a = *col_a;
-	index->col_b = *col_b;
+	index->col_a = NULL;
+	index->col_b = NULL;
 	index->max = 0;
 	index->max_a = 0;
 	index->min = 0;
@@ -152,51 +152,59 @@ void	ft_write(int button, t_col **index)
 		nb_comm++;
 	}
 	change_index(index);
-	//les tests commencent ici.
-/*	t_num	*tmp;//tests
-	t_num	*tmp_b;//tests
-	int		nb_a;//tests
-	int		nb_b;//tests
-	int		len;
-
-	tmp_b = (*index)->col_b;
-	tmp = (*index)->col_a;
-	len = (*index)->argc;
-	printf("		A		|		B		\n");
-	printf("--------------------------------|--------------------------------\n");
-	while (len != 0)
-	{
-		nb_a = '\0';
-		nb_b = '\0';
-		if (tmp)
-		{
-			len --;
-			nb_a = tmp->nb;
-			tmp = tmp->next;
-		}
-		else
-			nb_a = ' ';
-		if (tmp_b)
-		{
-			len--;
-			nb_b = tmp_b->nb;
-			tmp_b = tmp_b->next;
-		}
-		else
-			nb_b = ' ';
-		if (nb_b == ' ')
-			printf("		%d		|		%c		\n", nb_a, nb_b);
-		else if (nb_a == ' ')
-			printf("		%c		|		%d		\n", nb_a, nb_b);
-		else
-		printf("		%d		|		%d		\n", nb_a, nb_b);
-	}
-	printf("--------------------------------|--------------------------------\n");
 	nb_tests++;
-	printf("nbtests == %d\n", nb_tests);
-	if (nb_tests > 100)
+	//printf("nb_tests == %d\n", nb_tests);
+	/*if (nb_tests == 300)
+	{
+		//les tests commencent ici.
+		t_num	*tmp;//tests
+		t_num	*tmp_b;//tests
+		int		nb_a;//tests
+		int		nb_b;//tests
+		int		len;
+		char	a;
+		char	b;
+
+		tmp_b = (*index)->col_b;
+		tmp = (*index)->col_a;
+		len = (*index)->argc;
+		printf("		A		|		B		\n");
+		printf("--------------------------------|--------------------------------\n");
+		while (len != 0)
+		{
+			//printf("tmp->nb == %d\n", tmp->nb);
+			if (tmp)
+			{
+				len --;
+				nb_a = tmp->nb;
+				tmp = tmp->next;
+			}
+			else
+				a = ' ';
+			if (tmp_b)
+			{
+				len--;
+				nb_b = tmp_b->nb;
+				tmp_b = tmp_b->next;
+			}
+			else
+				b = ' ';
+			if (b == ' ')
+				printf("		%d		|		%c		\n", nb_a, b);
+			else if (a == ' ')
+				printf("		%c		|		%d		\n", a, nb_b);
+			else
+			{
+				//printf("nb_a == %d, nb_b == %d \n", nb_a, nb_b);
+				printf("		%d		|		%d		\n", nb_a, nb_b);
+			}
+			a = 'd';
+			b = 'd';
+		}
+		printf("--------------------------------|--------------------------------\n");
 		exit(EXIT_SUCCESS);
-	// Et ils finissent ici !
-	system("sleep 0.01");
-	//problème avec zero qu'il faut régler*/
+		// Et ils finissent ici !
+		//system("sleep 0.01");
+		//problème avec zero qu'il faut régler
+	}*/
 }

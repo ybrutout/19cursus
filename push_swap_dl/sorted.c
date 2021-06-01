@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 12:44:43 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/31 16:27:47 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/06/01 11:27:46 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,40 +44,6 @@ int	middlepoint(t_col **index, int **lst_sort)
 		}
 		len--;
 	}
-	nb_tmp = (*index)->col_a;
-	nb_tmp_b = (*index)->col_b;
-	i = 1;
-	printf("		A		|		B		\n");
-	printf("--------------------------------|--------------------------------\n");
-	while ((*index)->argc > i)
-	{
-		if (nb_tmp)
-		{
-			i++;
-			tmp =	nb_tmp->nb;
-			nb_tmp = nb_tmp->next;
-		}
-		else
-			sign = 1;
-		if (nb_tmp_b)
-		{
-			i++;
-			tmp_b =	nb_tmp_b->nb;
-			nb_tmp_b = nb_tmp_b->next;
-		}
-		else
-			sign = 2;
-		if (sign == 1)
-			printf("		%c		|		%d		\n", ' ', tmp_b);
-		else if (sign == 2)
-			printf("		%d		|		%c		\n", tmp, ' ');
-		else
-			printf("		%d		|		%d		\n", tmp, tmp_b);
-	}
-	printf("--------------------------------|--------------------------------\n");
-	tests++;
-	if (tests > 2)
-		exit(EXIT_SUCCESS);
 	return (1);
 }
 
@@ -165,32 +131,31 @@ int	sorted(t_col **index, int **lst_sort)
 	if (ascending(&(*index)->col_a) == 1)
 		return (1);
 	while ((*index)->len_a > 2)
+	{
 		if (middlepoint(index, lst_sort) == 0)
 			return(ft_error(*index, *lst_sort, 5));
+	}
 	if (ascending(&((*index)->col_a)) != 1)
 		rotate(index, 1);
 	while ((*index)->len_b > 0)
 	{
 		i = position(index, (*index)->len_b, (((*index)->len_b) / 2), 2);
 		if ((*index)->col_b->nb == (*index)->max_b)
-			push(&(*index), 2);
+			push(index, 2);
 		else if ((*index)->col_b->nb == nb_second_max(&((*index)->col_b), (*index)->len_b, (*index)->max_b) && (*index)->max_b < (*index)->col_a->nb)
-			push(&(*index), 2);
+			push(index, 2);
 		else if ((*index)->col_b->nb == (*index)->min_b)
 		{
-			push(&(*index), 2);
+			push(index, 2);
 			if (position(index, (*index)->len_b, ((*index)->len_b)/2, 2) <= (((*index)->len_b) / 2) && (*index)->col_b->nb != (*index)->max_b)
-				rotate(&(*index), 3);
+				rotate(index, 3);
 			else
-				rotate(&(*index), 1);
+				rotate(index, 1);
 		}
 		else if (i < 0)
 			reverse_rot(index, 2);
 		else if (i >= 0)
 			rotate(index, 2);
-	/*	tests++;
-		if (tests == 256)
-			exit(EXIT_SUCCESS);*/
 	}
 	while ((*index)->last_a < (*index)->col_a->nb)
 		reverse_rot(index, 1);

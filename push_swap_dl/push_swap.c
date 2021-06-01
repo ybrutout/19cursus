@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:10:31 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/31 16:11:31 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/06/01 11:31:00 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int	main(int argc, char **argv)
 {
 	t_num	*nb_tmp;// n'est utile que pour les tests.
 	t_num	*nb_tmp_b; // 'est utilisé que pour les tests.
-	t_num	*col_a;
-	t_num	*col_b;
 	int		tmp;// n'est utile que pour les tests.
 	int		tmp_b; //tests
 	int		sign;//tests
@@ -26,10 +24,10 @@ int	main(int argc, char **argv)
 
 	if (argc < 3)
 		return (ft_error(index, lst_sort, 1));
-	index = int_new_index(&col_a, &col_b, (argc - 1));
+	index = int_new_index((argc - 1));
 	if (!index)
 		return(ft_error(index, lst_sort, 0));
-	if (parsing(argv, &index, &lst_sort) == 0)
+	if (parsing(argv, &index) == 0)
 		return (0);
 	if (sorted(&index, &lst_sort) == 0)
 		return (0);
@@ -38,7 +36,7 @@ int	main(int argc, char **argv)
 	free_lst(index->col_b);
 	free(lst_sort);
 	free(index);
-	//system("leaks push_swap");
+	system("leaks push_swap");
 }
 
 int	checker(t_col **index)
@@ -47,7 +45,7 @@ int	checker(t_col **index)
 	int		nb;
 
 	nb = (*index)->argc;
-	printf("nb == %d\n", nb);
+	//printf("nb == %d\n", nb);
 	tmp = (*index)->col_a;
 	while (nb != 0)
 	{
@@ -84,7 +82,7 @@ void	tester(t_col **index)
 	tmp_b = (*index)->col_b;
 	tmp = (*index)->col_a;
 	len = (*index)->argc;
-	printf("		A		|		B		\n");
+	/*printf("		A		|		B		\n");
 	printf("--------------------------------|--------------------------------\n");
 	while (len != 0)
 	{
@@ -113,7 +111,15 @@ void	tester(t_col **index)
 		else
 		printf("		%d		|		%d		\n", nb_a, nb_b);
 	}
-	printf("--------------------------------|--------------------------------\n");
+	printf("--------------------------------|--------------------------------\n");*/
+	int it = 0;
+	while (tmp)
+	{
+		printf("%d\n", tmp->nb);
+		tmp = tmp->next;
+		++it;
+	}
+	printf("%d\n", it);
 }
 
 /*nb_tmp = index->col_a;

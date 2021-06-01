@@ -6,22 +6,23 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:07:05 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/31 14:34:44 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/06/01 11:24:38 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void 	swap(t_num **column)
+t_num 	*swap(t_num *column)
 {
 	t_num	*tmp;
 	t_num	*swap;
 
-	tmp = *column;
-	swap = (*column)->next;
-	(*column)->next = (*column)->next->next;
-	*column = swap;
+	tmp = column;
+	swap = column->next;
+	column->next = column->next->next;
+	column = swap;
 	swap->next = tmp;
+	return (column);
 }
 
 void	swap_button(t_col **index, int button)
@@ -29,21 +30,21 @@ void	swap_button(t_col **index, int button)
 	if (button == 1)
 	{
 		if ((*index)->col_a && (*index)->len_a > 1)
-			swap(&(*index)->col_a);
+			(*index)->col_a = swap((*index)->col_a);
 		ft_write(1, index);
 	}
 	else if (button == 2)
 	{
 		if ((*index)->col_b && (*index)->len_b > 1)
-			swap(&(*index)->col_b);
+			(*index)->col_b = swap((*index)->col_b);
 		ft_write(2, index);
 	}
 	else if (button == 3)
 	{
 		if ((*index)->col_a && (*index)->len_a > 1)
-			swap(&(*index)->col_a);
+			(*index)->col_a = swap((*index)->col_a);
 		if ((*index)->col_b && (*index)->len_b > 1)
-			swap(&(*index)->col_b);
+			(*index)->col_b = swap((*index)->col_b);
 		ft_write(3, index);
 	}
 }
@@ -58,7 +59,7 @@ void	push(t_col **index, int button)
 		{
 			tmp = (*index)->col_a;
 			(*index)->col_a = (*index)->col_a->next;
-			tmp ->next = (*index)->col_b;
+			tmp->next = (*index)->col_b;
 			(*index)->col_b = tmp;
 		}
 		ft_write(5, index);
@@ -89,7 +90,7 @@ void	rotate(t_col **index, int button)
 			tmp = (*index)->col_a;
 			(*index)->col_a = (*index)->col_a->next;
 			tmp->next = NULL;
-			ft_lstadd_back(&(*index)->col_a, tmp);
+			(*index)->col_a = ft_lstadd_back((*index)->col_a, tmp);
 		}
 		ft_write(6, index);
 	}
@@ -100,7 +101,7 @@ void	rotate(t_col **index, int button)
 			tmp = (*index)->col_b;
 			(*index)->col_b = (*index)->col_b->next;
 			tmp->next = NULL;
-			ft_lstadd_back(&(*index)->col_b, tmp);
+			(*index)->col_b = ft_lstadd_back((*index)->col_b, tmp);
 		}
 		ft_write(7, index);
 	}
@@ -111,14 +112,14 @@ void	rotate(t_col **index, int button)
 			tmp = (*index)->col_a;
 			(*index)->col_a = (*index)->col_a->next;
 			tmp->next = NULL;
-			ft_lstadd_back(&(*index)->col_a, tmp);
+			(*index)->col_a = ft_lstadd_back((*index)->col_a, tmp);
 		}
 		if ((*index)->col_b && ((*index)->col_b->next))
 		{
 			tmp = (*index)->col_b;
 			(*index)->col_b = (*index)->col_b->next;
 			tmp->next = NULL;
-			ft_lstadd_back(&(*index)->col_b, tmp);
+			(*index)->col_b = ft_lstadd_back((*index)->col_b, tmp);
 		}
 		ft_write(8, index);
 	}

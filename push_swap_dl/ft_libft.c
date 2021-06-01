@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:16:24 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/05/27 10:16:44 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/06/01 11:24:00 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,20 @@ t_num	*ft_lstnew(int *content)
 	return (new);
 }
 
-void	ft_lstadd_back(t_num **alst, t_num *new)
+t_num	*ft_lstadd_back(t_num *alst, t_num *new)
 {
 	t_num	*nw;
 
-	if (!*alst)
+	if (!alst)
 	{
-		*alst = new;
-		return ;
+		alst = new;
+		return (alst);
 	}
-	nw = *alst;
+	nw = alst;
 	while (nw->next)
 		nw = nw->next;
 	nw->next = new;
+	return (alst);
 }
 
 int	ft_lstsize(t_num *lst)
