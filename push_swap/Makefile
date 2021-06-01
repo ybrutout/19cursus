@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 11:16:42 by ybrutout          #+#    #+#              #
-#    Updated: 2021/05/27 13:07:47 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/06/01 14:16:37 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,7 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror -c
 
-SRC =	error.c \
-		ft_libft.c \
+SRC =	ft_libft.c \
 		operation.c \
 		parsing.c \
 		push_swap.c \

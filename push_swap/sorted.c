@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/27 12:44:43 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/06/01 11:27:46 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/06/01 14:12:52 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/06/01 15:21:01 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,15 @@ int	middlepoint(t_col **index, int **lst_sort)
 {
 	int		len;
 	int		median;
-	t_num	*nb_tmp;//t
-	t_num	*nb_tmp_b;//t
-	int		sign;//t
-	int		tmp;//t
-	int		tmp_b;//t
-	int		i;//t
-	static int	tests;//t
+	static int		test;//test
 
-	if (!tests)
-		tests = 0;
 	len = (*index)->len_a;
-	*lst_sort = nw_lst_order(&(*index)->col_a, *lst_sort, (*index)->len_a, 2);
+	*lst_sort = nw_lst_order(&(*index)->col_a, *lst_sort, len, 2);
 	if (!(*lst_sort))
 		return (0);
 	median = lst_sort[0][(len/2)];
+	if (!test)
+		test = 0;
 	while (len > 0)
 	{
 		if ((*index)->col_a && (*index)->col_a->nb < median)
@@ -44,6 +38,9 @@ int	middlepoint(t_col **index, int **lst_sort)
 		}
 		len--;
 	}
+	test++;
+	if (test == 10)
+		return(0);
 	return (1);
 }
 
@@ -119,29 +116,21 @@ int	position(t_col **index, int len_col, int middle, int button)
 int	sorted(t_col **index, int **lst_sort)
 {
 	int	i;
-	int	tests;
-	t_num	*nb_tmp; //t
-	t_num	*nb_tmp_b; //t
-	int		tmp;//t
-	int		tmp_b;//t
-	int		sign;//t
 
-
-	tests = 0;
-	if (ascending(&(*index)->col_a) == 1)
-		return (1);
 	while ((*index)->len_a > 2)
-	{
 		if (middlepoint(index, lst_sort) == 0)
-			return(ft_error(*index, *lst_sort, 5));
-	}
-	if (ascending(&((*index)->col_a)) != 1)
+			return(0);
+	if (ascending((*index)->col_a, (*index)->len_a) != 1)
 		rotate(index, 1);
 	while ((*index)->len_b > 0)
 	{
 		i = position(index, (*index)->len_b, (((*index)->len_b) / 2), 2);
 		if ((*index)->col_b->nb == (*index)->max_b)
+		{
 			push(index, 2);
+			if ((*index)->col_a->next->nb < (*index)->col_a->nb)
+				swap_button(index, 1);
+		}
 		else if ((*index)->col_b->nb == nb_second_max(&((*index)->col_b), (*index)->len_b, (*index)->max_b) && (*index)->max_b < (*index)->col_a->nb)
 			push(index, 2);
 		else if ((*index)->col_b->nb == (*index)->min_b)
