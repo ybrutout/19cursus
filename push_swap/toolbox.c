@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 13:47:39 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/06/01 15:49:28 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/06/03 16:22:41 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	free_lst(t_num *alst)
 	free(tmp);
 }
 
-void	check(t_col	**index)
+void	check(t_col	**index, int comm)
 {
 	int len;
 	t_num	*col_a;
@@ -87,7 +87,7 @@ void	check(t_col	**index)
 	int		nb_a;
 	int		nb_b;
 	int		c;
-	system("clear");
+	//system("clear");
 
 	len = (*index)->argc;
 	col_a = (*index)->col_a;
@@ -121,7 +121,10 @@ void	check(t_col	**index)
 			printf("		%d		|		%c		\n", nb_a, ' ');
 		c = 0;
 	}
-	system("sleep 0.01");
+	/*if (comm > 201 && comm < 250)
+		system("sleep 2");
+	else*/
+	//	system("sleep 0.01");
 }
 
 void	ft_write(int button, t_col **index)
@@ -157,6 +160,11 @@ void	ft_write(int button, t_col **index)
 	}
 	nb_comm++;
 	change_index(index);
-	check(index);
-	printf("%d\n", nb_comm);
+	//check(index, nb_comm);
+	//if (nb_comm > 201 && nb_comm < 250)
+	//{
+	//	if (nb_comm == 215)
+	//		exit(EXIT_SUCCESS);
+	//	printf("%d\n", nb_comm);
+	//}
 }
