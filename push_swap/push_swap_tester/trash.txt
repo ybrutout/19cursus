@@ -872,7 +872,7 @@ Test n° 870: OK
 Test n° 871: OK
 Test n° 872: OK
 Test n° 873: OK
-Test n° 874: OK
+Test n° 874: KO
 Test n° 875: OK
 Test n° 876: OK
 Test n° 877: OK
@@ -888,7 +888,7 @@ Test n° 886: OK
 Test n° 887: OK
 Test n° 888: OK
 Test n° 889: OK
-Test n° 890: OK
+Test n° 890: KO
 Test n° 891: OK
 Test n° 892: OK
 Test n° 893: OK
@@ -941,7 +941,7 @@ Test n° 939: OK
 Test n° 940: OK
 Test n° 941: OK
 Test n° 942: OK
-Test n° 943: OK
+Test n° 943: KO
 Test n° 944: OK
 Test n° 945: OK
 Test n° 946: OK

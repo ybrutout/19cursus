@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 14:12:52 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/06/03 16:22:22 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/06/15 16:02:37 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,11 @@ int	middlepoint(t_col **index, int **lst_sort)
 	median = lst_sort[0][(len/2)];
 	while ((middlepoint_check((*index)->col_a, median, (*index)->len_a, 1)) == 0)
 	{
+		if (ascending((*index)->col_a, (*index)->len_a) == 1)
+		{
+			//write(1, "je suis la\n", 11);
+			return (1);
+		}
 		if ((*index)->col_a && (*index)->col_a->nb < median)
 			push(index, 1);
 		else if ((*index)->last_a < median && (*index)->last_a < (*index)->col_a->nb /*&& (*index)->last_a < (*index)->col_a->next->nb*/)
@@ -183,9 +188,11 @@ int	sorted(t_col **index, int **lst_sort)
 
 	if (middlepoint_first(index, lst_sort) == 0)
 		return (0);
-	while ((*index)->len_a > 2 || (ascending((*index)->col_a, (*index)->len_a) == 0))
+	while ((ascending((*index)->col_a, (*index)->len_a) == 0) && (*index)->len_a > 2)
+	{
 		if (middlepoint(index, lst_sort) == 0)
 			return(0);
+	}
 	if (ascending((*index)->col_a, (*index)->len_a) != 1)
 		rotate(index, 1);
 	while (decreasing((*index)->col_b, (*index)->len_b) == 0 || (*index)->len_b == 0)

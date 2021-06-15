@@ -6,19 +6,37 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:10:31 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/06/03 15:35:17 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/06/15 15:28:57 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+int	chek_sorted(t_col **index)
+{
+	t_num	*tmp;
+	int		tmp_nb;
+	if ((*index)->len_b != 0)
+		return (0);
+	tmp_nb = (*index)->col_a->nb;
+	tmp = (*index)->col_a;
+	while ((*index)->argc > 1)
+	{
+		tmp = tmp->next;
+		if (tmp_nb > tmp->nb)
+		{
+			printf("%d\n%d\n", tmp_nb, tmp->nb);
+			return(0);
+		}
+		else
+			tmp_nb = tmp->nb;
+		(*index)->argc = ((*index)->argc) - 1;
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
-	t_num	*nb_tmp;// n'est utile que pour les tests.
-	t_num	*nb_tmp_b; // 'est utilisé que pour les tests.
-	int		tmp;// n'est utile que pour les tests.
-	int		tmp_b; //tests
-	int		sign;//tests
 	int		*lst_sort;
 	t_col	*index;
 
@@ -31,9 +49,11 @@ int	main(int argc, char **argv)
 		return (0);
 	if (sorted(&index, &lst_sort) == 0)
 		return (0);
+	if (chek_sorted(&index) == 0)
+		return(write(1, "je suis pas dans l'ordre\n", 25));
 	free_lst(index->col_a);
 	free_lst(index->col_b);
 	free(lst_sort);
 	free(index);
-	//system("leaks push_swap");
+	system("leaks push_swap");
 }
