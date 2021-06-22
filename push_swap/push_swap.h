@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:11:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/06/01 14:21:41 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/06/22 15:49:07 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ int		parsing(char **argv, t_col **index);
 
 //sorted
 int		sorted(t_col **index, int **lst_sort);
+int		position_for(t_num *col, int nb);
+int		middlepoint_first(t_col **index, int **lst_sort);
+int		middlepoint(t_col **index, int **lst_sort);
 
 //toolbox
 
@@ -84,5 +87,13 @@ int		decreasing(t_num *col_b, int len);
 int		last_nb(t_num *col, int	len);
 int		*nw_lst_order(t_num **col, int *lst_new, int len, int knob);
 int		ft_order(int **lst_sort, int argc);
+
+//little_sort
+
+void 	sorted_3(t_col **index);
+void 	sorted_5(t_col **index, int **lst_sort);
+
+//big sorted
+int		sorted_five_hundred(t_col **index, int **lst_sort);
 
 #endif

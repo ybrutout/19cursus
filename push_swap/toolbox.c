@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 13:47:39 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/06/15 15:33:26 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/06/22 16:06:23 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,9 @@ void	check(t_col	**index, int comm)
 			printf("		%d		|		%c		\n", nb_a, ' ');
 		c = 0;
 	}
-	if ((*index)->len_a < 10)
+	/*if ((*index)->len_a < 10)
 		system("sleep 1");
-	else
+	else*/
 		system("sleep 0.01");
 }
 
@@ -165,6 +165,7 @@ void	ft_write(int button, t_col **index)
 	//{
 	//	if (nb_comm == 215)
 	//		exit(EXIT_SUCCESS);
-	//	printf("%d\n", nb_comm);
+	//if (nb_comm == 199)
+		printf("%d\n", nb_comm);
 	//}
 }
