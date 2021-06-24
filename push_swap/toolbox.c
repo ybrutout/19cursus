@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 13:47:39 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/06/22 16:06:23 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/06/23 16:21:37 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	check(t_col	**index, int comm)
 	int		nb_a;
 	int		nb_b;
 	int		c;
-	system("clear");
+	//system("clear");
 
 	len = (*index)->argc;
 	col_a = (*index)->col_a;
@@ -124,7 +124,7 @@ void	check(t_col	**index, int comm)
 	/*if ((*index)->len_a < 10)
 		system("sleep 1");
 	else*/
-		system("sleep 0.01");
+	//	system("sleep 0.001");
 }
 
 void	ft_write(int button, t_col **index)
