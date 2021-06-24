@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:11:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/06/22 15:49:07 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/06/24 15:45:26 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct		s_column
 	int				len_b;
 	int				last_a;
 	int				last_b;
+	int				stack;
 }					t_col;
 
 //operation
@@ -94,6 +95,6 @@ void 	sorted_3(t_col **index);
 void 	sorted_5(t_col **index, int **lst_sort);
 
 //big sorted
-int		sorted_five_hundred(t_col **index, int **lst_sort);
+int 	big_sorted(t_col **index, int **lst_sort);
 
 #endif

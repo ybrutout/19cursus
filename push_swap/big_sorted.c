@@ -5,108 +5,128 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/22 15:43:17 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/06/23 16:25:54 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/06/24 12:08:21 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/06/24 16:14:12 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	big_position(t_num *col, int *lst_sort, int half, int len)
+int *find_the_pivot(int **lst_sort, int len)
 {
-	int max;
-	int min;
-	int sc_max;
-	int sign = 0;
+	int	*tmp;
+	int pivot;
 
-	if ((max = position_for(col, lst_sort[half])) > (len / 2))
-	{
-		sign = 1;
-		max = len - max;
-	}
-	if ((min = position_for(col, lst_sort[0])) > (len / 2))
-	{
-		if (max > (len - min))
-		{
-			sign = 1;
-			max = len - min;
-		}
-	}
-	else if (max > min)
-	{
-		sign = 0;
-		max = min;
-	}
-	if ((sc_max= position_for(col, lst_sort[half - 1])) > (len / 2))
-	{
-		if (max > (len -sc_max))
-		{
-			sign = 1;
-			max = len - sc_max;
-		}
-	}
-	else if (max > sc_max)
-	{
-		sign = 0;
-		max = sc_max;
-	}
-	if (sign == 1)
-		max *= -1;
-	return(max);
+	tmp = malloc(sizeof(int) * 5);
+	if (!tmp)
+		return(0);
+	pivot = len / 5;
+	tmp[0] = lst_sort[0][pivot];
+	tmp[1] = lst_sort[0][pivot * 2];
+	tmp[2] = lst_sort[0][pivot * 3];
+	tmp[3] = lst_sort[0][pivot * 4];
+	tmp[4] = lst_sort[0][len - 1];
+	return (tmp);
 }
 
-int	sorted_five_hundred(t_col **index, int **lst_sort)
+void	stacka_sort(t_col **index, int **lst_sort, int *pivot, int len_pivot)
 {
-	int	half;
-	int	i = 0;
+	int	down;
+	int	i;
 
-	if (middlepoint_first(index, lst_sort) == 0)
-		return (0);
-	while ((ascending((*index)->col_a, (*index)->len_a) == 0) && (*index)->len_a > 2)
+	(*index)->stack += 2;
+	len_pivot /= 2;
+	while ((*index)->len_a != (*index)->stack)
 	{
-		half = ((*index)->len_a)/2;
-		if (middlepoint(index, lst_sort) == 0)
-			return(0);
-	}
-	if (ascending((*index)->col_a, (*index)->len_a) != 1)
-		rotate(index, 1);
-	if (half != (*index)->len_a)
-		half = (half * 2) - ((*index)->len_a);
-	while ((*index)->len_b > 0)
-	{
-		while (half != 0)
+		i = 0;
+		*lst_sort = nw_lst_order(&(*index)->col_a, *lst_sort, (*index)->len_a, 1);
+		down = lst_sort[0][((*index)->len_a - 1) - len_pivot];
+		while (i < (len_pivot))
 		{
-			*lst_sort = nw_lst_order(&(*index)->col_b, *lst_sort, (half - 1), 1);
-			if ((*index)->col_b->nb == (*index)->max_b)
+			if ((*index)->col_a->nb <= down)
 			{
-				push(index, 2);
-				if ((*index)->col_a->nb > (*index)->col_a->next->nb)
-					swap_button(index, 1);
+				i++;
+				push(index, 1);
 			}
-			else if ((*index)->col_b->nb == lst_sort[0][half - 2] && (*index)->min_a > (*index)->max_b)
-				push(index, 2);
-			else if ((*index)->col_b->nb == lst_sort[0][0] && (*index)->len_b > 2)
-			{
-				push(index, 2);
+			else
 				rotate(index, 1);
-			}
-			else if (big_position((*index)->col_b, *lst_sort, half, (*index)->len_b) >= 0)
-				rotate(index, 2);
-			else if (big_position((*index)->col_b, *lst_sort, half, (*index)->len_b) < 0)
-				reverse_rot(index, 2);
-			printf("je suis i == %d\n",lst_sort[0][half - 1]);
-			half--;
-			i++;
-			if (i == 3)
-				exit(EXIT_SUCCESS);
+			printf("len_pivot == %d\n", len_pivot);
+			printf("i == %d\n", i);
+			printf("down == %d\n", down);
 		}
-		while ((*index)->last_a < (*index)->col_a->nb)
-		{
-			reverse_rot(index, 1);
-		}
-		half = (*index)->len_a;
+		printf("je suis bloque la \n");
+		len_pivot /= 2;
+		printf("len_pivot == %d\n", len_pivot);
+		printf("i == %d\n", i);
 	}
 	exit(EXIT_SUCCESS);
-	//mettre condition si il est desordre croissqnt
+}
+
+void	stackb_sort(t_col **index, int **lst_sort, int *pivot, int len_pivot)
+{
+	int	i;
+	int down;
+
+	len_pivot = len_pivot / 2;
+	*lst_sort = nw_lst_order(&(*index)->col_b, *lst_sort, (*index)->len_b, 1);
+	down = lst_sort[0][((*index)->len_b - 1) - len_pivot];
+	i = 0;
+	while (i < len_pivot)
+	{
+		if ((*index)->col_b->nb > down)
+		{
+			i++;
+			push(index, 2);
+		}
+		else
+			rotate(index, 2);
+	}
+	while ((*index)->last_b > lst_sort[0][((*index)->len_b - 1) - (len_pivot * 2)])
+		reverse_rot(index, 2);
+	stacka_sort(index, lst_sort, pivot, len_pivot);
+	exit(EXIT_SUCCESS);
+}
+
+int big_sorted(t_col **index, int **lst_sort)
+{
+	int i = 0; //test
+	int *pivot;
+	int	j;
+	int	len_pivot;
+
+	while ((*index)->len_a != 0)
+	{
+		*lst_sort = nw_lst_order(&(*index)->col_a, *lst_sort, (*index)->argc, 1);
+		if (!*lst_sort)
+			return(0);
+		while (i < (*index)->argc)//test
+			printf("lst == %d\n", lst_sort[0][i++]); //test
+		pivot = find_the_pivot(lst_sort, (*index)->len_a);
+		if (!pivot)
+			return(0);
+		i = 0; //test
+		while (i < 5)//test
+			printf("pivot == %d\n", pivot[i++]);//test
+		j = 0;
+		len_pivot = ((*index)->len_a) / 5 ;
+		while (j < 5)
+		{
+			i = 0;
+			while ( len_pivot > i)
+			{
+				if ((*index)->col_a->nb <= pivot[j])
+				{
+					push(index, 1);
+					i++;
+				}
+				else
+						rotate(index, 1);
+			}
+			j++;
+		}
+	}
+	stackb_sort(index, lst_sort, pivot, len_pivot);
+	exit(EXIT_SUCCESS);
+	free(pivot);
 	return (1);
 }

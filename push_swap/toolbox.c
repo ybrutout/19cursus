@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 13:47:39 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/06/23 16:21:37 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/06/24 15:46:32 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_col	*int_new_index(int nb)
 	index->len_b = 0;
 	index->last_a = 0;
 	index->last_b = 0;
+	index->stack = 0;
 	return(index);
 }
 
@@ -124,7 +125,7 @@ void	check(t_col	**index, int comm)
 	/*if ((*index)->len_a < 10)
 		system("sleep 1");
 	else*/
-	//	system("sleep 0.001");
+	//	system("sleep 0.01");
 }
 
 void	ft_write(int button, t_col **index)
