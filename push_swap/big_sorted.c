@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 12:08:21 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/07 15:58:37 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/08 11:48:14 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,65 +82,177 @@ int		find_the_divide(int len)
 	return (i);
 }
 
-int		*find_the_fulcrum(t_col **index, int **lst_sort, int len, int knob)
+int		*find_the_fulcrum(t_col **index, int **lst_sort, int len)
 {
 	int i;
 	int	*fulcrum;
-	int j;
+	int	tmp_len;
 
 	i = find_the_divide(len);
 	fulcrum = malloc(sizeof(int) * (i * 2));
-	i = 0;
-	j = 0;
+	tmp_len = len;
 	while (len >= 2)
 	{
 		if (len % 2)
 		{
 			len = (len / 2);
-			fulcrum[i] = lst_sort[0][((*index)->len_b) - len - 1];
+			tmp_len -= len;
+			fulcrum[i++] = lst_sort[0][((*index)->len_a) - tmp_len - 1];
 			fulcrum[i++] = len;
-			i++;
 		}
 		else
 		{
 			len = len / 2;
-			fulcrum[i] = lst_sort[0][((*index)->len_b) - len - 1];
+			tmp_len -= len;
+			fulcrum[i++] = lst_sort[0][((*index)->len_a) - tmp_len - 1];
 			fulcrum[i++] = len;
-			i++;
+			printf("je suis len == %d\n", len);
 		}
 	}
-	while (j < 10)
+	return (fulcrum);
+}
+
+int		find_the_tmp_pivot(int **lst_sort, int tmp_len_pivot, int pivot)
+{
+	int	i;
+	int j;
+
+	i = 0;
+	while (lst_sort[0][i] != pivot && i < 20)
 	{
-		printf("fulcrum %d == %d\n", j, fulcrum[j]);
-		j++;
-		printf("fulcrum %d == %d\n", j, fulcrum[j]);
-		j++;
+		printf("lstsort[0][%d] == %d\n", i, lst_sort[0][i]);
+		i++;
+	}
+	j = lst_sort[0][i + tmp_len_pivot];
+	exit(EXIT_SUCCESS);
+	return(j);
+}
+
+void	sort(t_col **index, int pivot, int len_pivot, int stack)
+{
+	int i;
+	t_num *col;
+
+	i = 0;
+	while (i < len_pivot)
+	{
+		if (stack == 2)
+			col = (*index)->col_b;
+		else
+			col = (*index)->col_a;
+		if (col->nb >= pivot)
+		{
+			i++;
+			push(index, stack);
+		}
+		else
+			rotate(index, stack);
+	}
+}
+
+void	un_sort(t_col **index, int pivot, int len_pivot, int stack)
+{
+	int i;
+	t_num *col;
+
+	i = 0;
+	while (i < len_pivot)
+	{
+		if (stack == 2)
+			col = (*index)->col_b;
+		else
+			col = (*index)->col_a;
+		if (col->nb < pivot)
+		{
+			i++;
+			push(index, stack);
+		}
+		else
+			rotate(index, stack);
+	}
+}
+
+int		*change_fulcrum(int *fulcrum, int len, int pivot)
+{
+	int i;
+	int	*nw_fulcrum;
+
+	i = 0;
+	while (fulcrum[i] != pivot)
+		i++;
+	if (i == 0)
+	{
+		free(fulcrum);
+		return (NULL);
+	}
+	else
+	{
+		i = i - 1;
+		nw_fulcrum = malloc(sizeof(int) * i);
+		while (i >= 0)
+		{
+			nw_fulcrum[i] = fulcrum[i];
+			i--;
+		}
+		free(fulcrum);
+	}
+	i = -1;
+	while (++i < 5)
+	{
+		printf("nw_fulcrum[%d] == %d\n", i, nw_fulcrum[i]);
 	}
 	exit(EXIT_SUCCESS);
+	return (nw_fulcrum);
+}
+
+int		pong_sort(t_col **index, int *len, int *pivot)
+{
+	int *lst_sort;
+	static int *fulcrum;
+	int test;//test
+
+	lst_sort = nw_lst_order(&(*index)->col_a, lst_sort, (*index)->len_a, 1);
+	if (!lst_sort)
+		return (0);
+	if (!fulcrum)
+	{
+		fulcrum = find_the_fulcrum(index, &lst_sort, *len);
+		if (!fulcrum)
+			return (0);
+	}
+	(*index)->stack += 2;
+	while ((*index)->len_a > (*index)->stack)
+	{
+		*len = *len / 2;
+		*pivot = find_the_tmp_pivot(&lst_sort, *len, *pivot);
+		un_sort(index, *pivot, *len, 1);
+	}
+	printf("pivot == %d\nlen == %d\n", *pivot, *len);
+	*pivot = find_the_tmp_pivot(&fulcrum, -2, *pivot);
+	*len = find_the_tmp_pivot(&fulcrum, -1 , *pivot);
+	change_fulcrum(fulcrum, *len, *pivot);
+	free(lst_sort);
+	return(1);
 }
 
 int		ping_sort(t_col **index, int **lst_sort, int pivot, int len_pivot)
 {
-	int	i;
-	int	*fulcrum;
+	int	tmp_len_pivot;
+	int	tmp_pivot;
 
-	i = 0;
-	fulcrum = find_the_fulcrum(index, lst_sort, len_pivot, 0);
-	exit(EXIT_SUCCESS);
+	tmp_len_pivot = len_pivot / 2;
+	tmp_pivot = find_the_tmp_pivot(lst_sort, tmp_len_pivot, pivot);
 	while ((*index)->max_b >= pivot)
 	{
-		while (i < len_pivot)
-		{
-			if ((*index)->col_b->nb > pivot)
-			{
-				i++;
-				push(index, 1);
-			}
-			else
-				rotate(index, 2);
-		}
+		while ((*index)->max_b >= tmp_pivot)
+			sort(index, tmp_pivot, tmp_len_pivot, 2);
+		while ((*index)->last_b >= pivot)
+			reverse_rot(index, 2);
+		if (tmp_len_pivot > 1)
+			pong_sort(index, &tmp_len_pivot, &tmp_pivot);
+		else
+			(*index)->stack += 1;
 	}
-	free(fulcrum);
 	return (1);
 }
 
@@ -155,7 +267,7 @@ int		quick_sort(t_col **index, int **lst_sort)
 	if (!pivot)
 		return (0);
 	len_pivot = ((*index)->len_b) / 5;
-	i = 4;
+	i = 3;
 	while (i != 0 && (*index)->len_b != 0)
 	{
 		ret = ping_sort(index, lst_sort, pivot[i], len_pivot);
