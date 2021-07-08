@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 15:12:08 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/08 16:22:29 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/08 16:29:03 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,14 +115,25 @@ int		there_is_a_zero(t_num *col, int nb)
 	return (1);
 }
 
+int		this_is_a_zero(char *binary, int nb)
+{
+	if (binary[nb] == '0')
+		return (0);
+	return (1);
+}
+
 void	sorted_binary(t_col **index)
 {
-	int	i;
+	int		i;
 
-	i = (str_nbr((*index)->len_a));
+	i = (str_nbr((*index)->len_a) - 2);
 	while (ascending((*index)->col_a, (*index)->len_a) != 1 && (*index)->len_b != 0)
 	{
-		while (there_is_a_zero((*index)->col_a))
+		while (there_is_a_zero((*index)->col_a, i) != 1)
+		{
+			if (this_is_a_zero((*index)->col_a->binary, i) == 0)
+				push
+		}
 	}
 }
 
