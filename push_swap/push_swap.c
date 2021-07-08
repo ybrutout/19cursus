@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:10:31 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/06/24 12:16:16 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/08 15:29:49 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int	main(int argc, char **argv)
 		return (0);
 	if (ascending(index->col_a, index->len_a) == 1)
 		;
-	else if (index->argc <= 3)
+	/*else if (index->argc <= 3)
 		sorted_3(&index);
 	else if (index->argc <= 5)
-		sorted_5(&index, &lst_sort);
+		sorted_5(&index, &lst_sort);*/
 	/*else if (index->argc <= 200)
 	{
 		if (sorted(&index, &lst_sort) == 0)

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:11:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/06/24 15:45:26 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/08 15:13:23 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 typedef struct s_number
 {
 	int				nb;
+	int				indx;
+	char			*binary;
 	struct s_number	*next;
 }					t_num;
 
