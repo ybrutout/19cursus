@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 12:59:34 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/06/22 15:40:40 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/09 13:52:04 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void sorted_3(t_col **index)
+void	sorted_3(t_col **index)
 {
 	int	pos_min;
 	int	pos_max;
@@ -37,9 +37,23 @@ void sorted_3(t_col **index)
 		reverse_rot(index, 1);
 }
 
-void sorted_5(t_col **index, int **lst_sort)
+void	sorted_5_bis(t_col **index, int nxt_max, int middle)
 {
-	int nxt_max;
+	if ((*index)->col_a->nb != nxt_max && (*index)->col_a->nb != middle)
+		push(index, 1);
+	else
+	{
+		if ((*index)->col_a->next->nb == nxt_max || \
+		(*index)->col_a->next->nb == middle)
+			reverse_rot(index, 1);
+		else
+			rotate(index, 1);
+	}
+}
+
+void	sorted_5(t_col **index, int **lst_sort)
+{
+	int	nxt_max;
 	int	middle;
 	int	argc;
 
@@ -48,17 +62,7 @@ void sorted_5(t_col **index, int **lst_sort)
 	nxt_max = lst_sort[0][argc - 2];
 	middle = lst_sort[0][argc - 3];
 	while ((*index)->len_a != 3)
-	{
-		if ((*index)->col_a->nb != nxt_max && (*index)->col_a->nb != middle)
-			push(index, 1);
-		else
-		{
-			if ((*index)->col_a->next->nb == nxt_max || (*index)->col_a->next->nb == middle)
-				reverse_rot(index, 1);
-			else
-				rotate(index, 1);
-		}
-	}
+		sorted_5_bis(index, nxt_max, middle);
 	sorted_3(index);
 	while ((*index)->len_b != 0)
 	{

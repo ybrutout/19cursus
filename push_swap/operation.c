@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:07:05 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/06/01 13:44:29 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/09 14:20:52 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_num 	*swap(t_num *column)
+t_num	*swap(t_num *column)
 {
 	t_num	*tmp;
 	t_num	*swap;
@@ -79,110 +79,50 @@ void	push(t_col **index, int button)
 
 void	rotate(t_col **index, int button)
 {
-	t_num	*tmp;
-
 	if (button == 1)
 	{
 		if ((*index)->col_a && ((*index)->col_a->next))
-		{
-			tmp = (*index)->col_a;
-			(*index)->col_a = (*index)->col_a->next;
-			tmp->next = NULL;
-			(*index)->col_a = ft_lstadd_back((*index)->col_a, tmp);
-		}
+			rotate_bis(index, 1);
 		ft_write(6, index);
 	}
 	else if (button == 2)
 	{
 		if ((*index)->col_b && ((*index)->col_b->next))
-		{
-			tmp = (*index)->col_b;
-			(*index)->col_b = (*index)->col_b->next;
-			tmp->next = NULL;
-			(*index)->col_b = ft_lstadd_back((*index)->col_b, tmp);
-		}
+			rotate_bis(index, 2);
 		ft_write(7, index);
 	}
 	else if (button == 3)
 	{
 		if ((*index)->col_a && ((*index)->col_a->next))
-		{
-			tmp = (*index)->col_a;
-			(*index)->col_a = (*index)->col_a->next;
-			tmp->next = NULL;
-			(*index)->col_a = ft_lstadd_back((*index)->col_a, tmp);
-		}
+			rotate_bis(index, 1);
 		if ((*index)->col_b && ((*index)->col_b->next))
-		{
-			tmp = (*index)->col_b;
-			(*index)->col_b = (*index)->col_b->next;
-			tmp->next = NULL;
-			(*index)->col_b = ft_lstadd_back((*index)->col_b, tmp);
-		}
+			rotate_bis(index, 2);
 		ft_write(8, index);
 	}
 }
 
 void	reverse_rot(t_col **index, int button)
 {
-	t_num	*start;
-	t_num	*tmp;
 	int		len;
 
 	if (button == 1)
 	{
-		len = ft_lstsize((*index)->col_a);
 		if ((*index)->col_a && (*index)->col_a->next)
-		{
-			start = (*index)->col_a;
-			while (len-- != 2)
-				start = start->next;
-			tmp = start->next;
-			start->next = NULL;
-			tmp->next = (*index)->col_a;
-			(*index)->col_a = tmp;
-		}
+			reverse_rott_biss(index, len, 1);
 		ft_write(9, index);
 	}
 	else if (button == 2)
 	{
-		len = ft_lstsize((*index)->col_b);
 		if ((*index)->col_b && (*index)->col_b->next)
-		{
-			start = (*index)->col_b;
-			while (len-- != 2)
-				start = start->next;
-			tmp = start->next;
-			start->next = NULL;
-			tmp->next = (*index)->col_b;
-			(*index)->col_b = tmp;
-		}
+			reverse_rott_biss(index, len, 2);
 		ft_write(10, index);
 	}
 	else if (button == 3)
 	{
-		len = ft_lstsize((*index)->col_a);
 		if ((*index)->col_a && (*index)->col_a->next)
-		{
-			start = (*index)->col_a;
-			while (len-- != 2)
-				start = start->next;
-			tmp = start->next;
-			start->next = NULL;
-			tmp->next = (*index)->col_a;
-			(*index)->col_a = tmp;
-		}
-		len = ft_lstsize((*index)->col_b);
+			reverse_rott_biss(index, len, 1);
 		if ((*index)->col_b && (*index)->col_b->next)
-		{
-			start = (*index)->col_b;
-			while (len-- != 2)
-				start = start->next;
-			tmp = start->next;
-			start->next = NULL;
-			tmp->next = (*index)->col_b;
-			(*index)->col_b = tmp;
-		}
+			reverse_rott_biss(index, len, 2);
 		ft_write(11, index);
 	}
 }

@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 11:16:42 by ybrutout          #+#    #+#              #
-#    Updated: 2021/06/24 12:08:35 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/07/09 14:21:49 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,11 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror -c
 
 SRC =	big_sorted.c \
+		big_sorted_bis.c \
 		ft_libft.c \
 		little_sorted.c \
 		operation.c \
+		operation_biss.c \
 		parsing.c \
 		push_swap.c \
 		sorted.c \

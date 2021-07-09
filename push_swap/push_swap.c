@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:10:31 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/09 10:16:28 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/09 13:56:14 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,14 @@ int	main(int argc, char **argv)
 		sorted_3(&index);
 	else if (index->argc <= 5)
 		sorted_5(&index, &lst_sort);
-	/*else if (index->argc <= 200)
+	else if (index->argc <= 200)
 	{
 		if (sorted(&index, &lst_sort) == 0)
 			return (0);
-	}*/
+	}
 	else
 		if (big_sorted(&index, &lst_sort) == 0)
 			return (0);
-	if (chek_sorted(&index) == 0)
-		write(1, "je suis pas dans l'ordre\n", 25);
-	else
-		write(1, "je suis dans l'ordre\n", 21);
 	free_lst(index->col_a);
 	free_lst(index->col_b);
 	free(lst_sort);
