@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:11:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/08 15:13:23 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/09 12:49:32 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,10 @@ void 	sorted_5(t_col **index, int **lst_sort);
 
 //big sorted
 int 	big_sorted(t_col **index, int **lst_sort);
+
+//big_sorted_bis
+void	sorted_binary(t_col **index);
+int		there_is_a_zero(t_num *col, int nb, char c);
+int		this_is_a_zero(char *binary, int nb);
 
 #endif

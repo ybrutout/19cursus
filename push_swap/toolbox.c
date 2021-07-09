@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 13:47:39 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/09 10:19:09 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/09 12:33:54 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,18 @@ void	check(t_col	**index, int comm)
 	int		nb_a;
 	int		nb_b;
 	int		c;
+	t_num	*col;
+	int		test;
+	static int f;
+	t_num	*tmp;
 	//system("clear");
 
 	len = (*index)->argc;
 	col_a = (*index)->col_a;
 	col_b = (*index)->col_b;
 	c = 0;
+	if (!f)
+		f = 0;
 	printf("		A		|		B		\n");
 	printf("--------------------------------|--------------------------------\n");
 	while (len != 0)
@@ -122,6 +128,30 @@ void	check(t_col	**index, int comm)
 			printf("		%d		|		%c		\n", nb_a, ' ');
 		c = 0;
 	}
+	printf("--------------------------------|--------------------------------\n");
+	printf("\n");
+	col = (*index)->col_a;
+	test = 0;
+	while(test < (*index)->len_a)
+	{
+		tmp = col->next;
+		printf("%d	==	%d	=>	%d	=>	%s\n", test, col->nb, col->indx, col->binary);
+		col = tmp;
+		test++;
+	}
+	printf("------------------------------------------------------\n");
+	col = (*index)->col_b;
+	test = 0;
+	while(test < (*index)->len_b)
+	{
+		tmp = col->next;
+		printf("%d	==	%d	=>	%d	=>	%s\n", test, col->nb, col->indx, col->binary);
+		col = tmp;
+		test++;
+	}
+	f++;
+	//if (f == 30)
+	//	exit(EXIT_SUCCESS);
 	/*if ((*index)->len_a < 10)
 		system("sleep 1");
 	else*/
@@ -161,12 +191,12 @@ void	ft_write(int button, t_col **index)
 	}
 	nb_comm++;
 	change_index(index);
-	check(index, nb_comm);
+	//check(index, nb_comm);
 	//if (nb_comm > 201 && nb_comm < 250)
 	//{
 	//	if (nb_comm == 215)
 	//		exit(EXIT_SUCCESS);
 	//if (nb_comm == 199)
-		printf("%d\n", nb_comm);
+	//	printf("%d\n", nb_comm);
 	//}
 }
