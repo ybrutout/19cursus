@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 13:47:39 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/09 12:33:54 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/13 11:38:07 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_col	*int_new_index(int nb)
 
 	index = malloc(sizeof(t_col));
 	if (!index)
-		return (NULL);
+		return(error_malloc(0));
 	index->col_a = NULL;
 	index->col_b = NULL;
 	index->max = 0;
@@ -191,12 +191,12 @@ void	ft_write(int button, t_col **index)
 	}
 	nb_comm++;
 	change_index(index);
-	//check(index, nb_comm);
+	check(index, nb_comm);
 	//if (nb_comm > 201 && nb_comm < 250)
 	//{
 	//	if (nb_comm == 215)
 	//		exit(EXIT_SUCCESS);
 	//if (nb_comm == 199)
-	//	printf("%d\n", nb_comm);
+		printf("%d\n", nb_comm);
 	//}
 }

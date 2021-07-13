@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:11:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/09 14:21:30 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/13 12:06:23 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ typedef struct s_number
 	struct s_number	*next;
 }					t_num;
 
-t_num		*ft_lstnew(int *content);
-
 typedef struct		s_column
 {
 	struct s_number *col_a;
@@ -46,6 +44,9 @@ typedef struct		s_column
 	int				stack;
 }					t_col;
 
+//error
+void	*error_malloc(int nb);
+
 //operation
 
 void	swap_button(t_col **index, int button);
@@ -59,10 +60,6 @@ int		ft_atoi(const char *str);
 t_num	*ft_lstnew(int *content);
 t_num	*ft_lstadd_back(t_num *alst, t_num *new);
 int		ft_lstsize(t_num *lst);
-
-//parsing
-
-int		parsing(char **argv, t_col **index);
 
 //sorted
 int		sorted(t_col **index, int **lst_sort);
@@ -90,6 +87,7 @@ int		decreasing(t_num *col_b, int len);
 int		last_nb(t_num *col, int	len);
 int		*nw_lst_order(t_num **col, int *lst_new, int len, int knob);
 int		ft_order(int **lst_sort, int argc);
+int		parsing(char **argv, t_col **index);
 
 //little_sort
 
@@ -108,5 +106,18 @@ int		this_is_a_zero(char *binary, int nb);
 //operation_biss
 void	rotate_bis(t_col **index, int nb);
 void	reverse_rott_biss(t_col **index, int len, int nb);
+
+//position
+int	position_for(t_num *col, int nb);
+int	position_bis(t_col **index, int middle, t_num *tmp_col, int len);
+int	position(t_col **index, t_num *col, int len, int middle);
+
+//middlepoint
+int	mdpnt_check(t_num *col, int median, int len, int sign);
+int	mdpnt_first_bis(t_col **index, int median, int pivot);
+int	middlepoint_first(t_col **index, int **lst_sort);
+int	mdpnt_bis(t_col **index, int len, int median);
+int	middlepoint(t_col **index, int **lst_sort);
+
 
 #endif

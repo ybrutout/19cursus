@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:16:24 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/13 14:41:13 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/13 14:36:44 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int	ft_atoi(const char *str)
 	return (number * sign);
 }
 
-t_num	*ft_lstnew(int *content)
+t_col	*ft_lstnew(int *content)
 {
-	t_num	*new;
+	t_col	*new;
 
-	new = malloc(sizeof(t_num));
+	new = malloc(sizeof(t_col));
 	if (!new)
 		return (NULL);
 	new->nb = *content;
@@ -62,9 +62,9 @@ t_num	*ft_lstnew(int *content)
 	return (new);
 }
 
-t_num	*ft_lstadd_back(t_num *alst, t_num *new)
+t_col	*ft_lstadd_back(t_col *alst, t_col *new)
 {
-	t_num	*nw;
+	t_col	*nw;
 
 	if (!alst)
 	{
@@ -78,7 +78,7 @@ t_num	*ft_lstadd_back(t_num *alst, t_num *new)
 	return (alst);
 }
 
-int	ft_lstsize(t_num *lst)
+int	ft_lstsize(t_col *lst)
 {
 	int		i;
 

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 14:02:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/06/01 15:17:14 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/13 11:44:46 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,26 @@ int	*nw_lst_order(t_num **col, int *lst_new, int len, int knob)
 	return (tmp);
 }
 
+int	parsing(char **argv, t_col **index)
+{
+	int			tmp;
+	int			i;
+	t_num		*lst_tmp;
+
+	i = 1;
+	while (argv[i])
+	{
+		tmp = ft_atoi(argv[i]);
+		lst_tmp = ft_lstnew(&tmp);
+		if (!lst_tmp)
+			return (error_malloc(1));
+		(*index)->col_a = ft_lstadd_back((*index)->col_a, lst_tmp);
+		i++;
+	}
+	change_index(index);
+	return (1);
+}
+
 int	ft_order(int **lst_sort, int argc)
 {
 	int	i;
@@ -61,9 +81,9 @@ int	ft_order(int **lst_sort, int argc)
 	i = 0;
 	while (i < argc)
 	{
-		if (lst_sort[0][i] == lst_sort[0][i + 1] && (i + 1) < argc)
+		if ((i + 1) < argc && lst_sort[0][i] == lst_sort[0][i + 1])
 			return (0);
-		else if (lst_sort[0][i] > lst_sort[0][i + 1] && (i + 1) < argc)
+		else if ((i + 1) < argc && lst_sort[0][i] > lst_sort[0][i + 1])
 		{
 			j = lst_sort[0][i + 1];
 			lst_sort[0][i + 1] = lst_sort[0][i];

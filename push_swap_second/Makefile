@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    MAKEFILE                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/05/27 11:16:42 by ybrutout          #+#    #+#              #
-#    Updated: 2021/07/13 11:37:19 by ybrutout         ###   ########.fr        #
+#    Created: 2021/07/13 11:47:40 by ybrutout          #+#    #+#              #
+#    Updated: 2021/07/13 11:47:52 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,20 +16,7 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror -fsanitize=address -c
 
-SRC =	big_sorted.c \
-		big_sorted_bis.c \
-		error.c \
-		ft_libft.c \
-		little_sorted.c \
-		middlepoint.c \
-		operation.c \
-		operation_biss.c \
-		position.c \
-		push_swap.c \
-		sorted.c \
-		toolbox.c \
-		toolbox_2.c \
-		toolbox_3.c \
+SRC =	push_swap.c
 
 OBJ = $(SRC:.c=.o)
 
