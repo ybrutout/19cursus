@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:11:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/13 12:06:23 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/19 15:54:06 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ typedef struct s_number
 	struct s_number	*next;
 }					t_num;
 
-typedef struct		s_column
+typedef struct s_column
 {
-	struct s_number *col_a;
+	struct s_number	*col_a;
 	struct s_number	*col_b;
 	int				max_a;
 	int				min_a;
@@ -45,7 +45,7 @@ typedef struct		s_column
 }					t_col;
 
 //error
-void	*error_malloc(int nb);
+void	ft_error_message(t_col **index, int nb);
 
 //operation
 
@@ -56,10 +56,11 @@ void	reverse_rot(t_col **index, int button);
 
 //ft_libft
 
-int		ft_atoi(const char *str);
+int		ft_atoi(const char *str, t_col **index);
 t_num	*ft_lstnew(int *content);
 t_num	*ft_lstadd_back(t_num *alst, t_num *new);
 int		ft_lstsize(t_num *lst);
+void	ft_lstclear(t_num **lst);
 
 //sorted
 int		sorted(t_col **index, int **lst_sort);
@@ -71,7 +72,7 @@ int		middlepoint(t_col **index, int **lst_sort);
 
 void	change_index(t_col **index);
 void	ft_write(int button, t_col **index);
-t_col	*int_new_index(int nb);
+t_col	*int_new_index(int nb, char **argv, int **lst);
 void	free_lst(t_num *alst);
 
 //toolbox_2
@@ -91,11 +92,11 @@ int		parsing(char **argv, t_col **index);
 
 //little_sort
 
-void 	sorted_3(t_col **index);
-void 	sorted_5(t_col **index, int **lst_sort);
+void	sorted_3(t_col **index);
+void	sorted_5(t_col **index, int **lst_sort);
 
 //big sorted
-int 	big_sorted(t_col **index, int **lst_sort);
+int		big_sorted(t_col **index, int **lst_sort);
 int		str_nbr(int nb);
 
 //big_sorted_bis
@@ -108,16 +109,15 @@ void	rotate_bis(t_col **index, int nb);
 void	reverse_rott_biss(t_col **index, int len, int nb);
 
 //position
-int	position_for(t_num *col, int nb);
-int	position_bis(t_col **index, int middle, t_num *tmp_col, int len);
-int	position(t_col **index, t_num *col, int len, int middle);
+int		position_for(t_num *col, int nb);
+int		position_bis(t_col **index, int middle, t_num *tmp_col, int len);
+int		position(t_col **index, t_num *col, int len, int middle);
 
 //middlepoint
-int	mdpnt_check(t_num *col, int median, int len, int sign);
-int	mdpnt_first_bis(t_col **index, int median, int pivot);
-int	middlepoint_first(t_col **index, int **lst_sort);
-int	mdpnt_bis(t_col **index, int len, int median);
-int	middlepoint(t_col **index, int **lst_sort);
-
+int		mdpnt_check(t_num *col, int median, int len, int sign);
+int		mdpnt_first_bis(t_col **index, int median, int pivot);
+int		middlepoint_first(t_col **index, int **lst_sort);
+int		mdpnt_bis(t_col **index, int len, int median);
+int		middlepoint(t_col **index, int **lst_sort);
 
 #endif

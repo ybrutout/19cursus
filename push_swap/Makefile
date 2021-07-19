@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 11:16:42 by ybrutout          #+#    #+#              #
-#    Updated: 2021/07/13 11:37:19 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/07/19 09:06:50 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = push_swap
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -c
+FLAGS = -Wall -Wextra -Werror -c
 
 SRC =	big_sorted.c \
 		big_sorted_bis.c \
@@ -36,7 +36,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(SRC) -fsanitize=address -o $(NAME)
+	@$(CC) $(SRC) -o $(NAME)
 
 clean:
 	@rm -f $(OBJ)

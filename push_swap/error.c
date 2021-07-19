@@ -6,19 +6,28 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 11:29:46 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/13 11:45:21 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/19 15:59:21 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	*error_malloc(int nb)
+void	ft_error_message(t_col **index, int nb)
 {
 	write(1, "Error\n", 6);
-	write(1, "Malloc failed ", 13);
+	if (nb > 0)
+	{
+		if ((*index)->col_a)
+			ft_lstclear(&(*index)->col_a);
+		if ((*index)->col_b)
+			ft_lstclear(&(*index)->col_b);
+		free(index);
+	}
+	if (nb == -1)
+		write(1, "Malloc error\n", 13);
 	if (nb == 0)
-		write(1, "int_new_index\n", 14);
+			write(1, "False argument\n", 15);
 	if (nb == 1)
-		write(1, "lst_new\n", 8);
-	return (NULL);
+		write(1, "Malloc error\n", 13);
+	exit(EXIT_FAILURE);
 }

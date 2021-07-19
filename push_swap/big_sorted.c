@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 15:12:08 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/09 13:47:35 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/19 16:05:31 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,10 @@ void	init_binary(t_col **index, int **lst_sort)
 int	big_sorted(t_col **index, int **lst_sort)
 {
 	*lst_sort = nw_lst_order(&(*index)->col_a, *lst_sort, (*index)->len_a, 1);
+	if (!*lst_sort)
+		ft_error_message(index, 1);
 	init_indx(index, lst_sort);
 	init_binary(index, lst_sort);
 	sorted_binary(index);
-	exit(EXIT_SUCCESS);
 	return (1);
 }

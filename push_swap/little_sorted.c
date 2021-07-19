@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 12:59:34 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/09 13:52:04 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/19 15:58:23 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	sorted_5(t_col **index, int **lst_sort)
 	int	argc;
 
 	*lst_sort = nw_lst_order(&(*index)->col_a, *lst_sort, (*index)->len_a, 2);
+	if (!*lst_sort)
+		ft_error_message(index, 1);
 	argc = (*index)->argc;
 	nxt_max = lst_sort[0][argc - 2];
 	middle = lst_sort[0][argc - 3];

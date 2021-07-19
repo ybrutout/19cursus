@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 14:12:52 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/13 10:41:02 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/19 16:03:45 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ void	is_not_decreasing(t_col **index, int len_b)
 	else if ((*index)->col_b->nb == (*index)->min_b)
 	{
 		push(index, 2);
-		if (position(index, (*index)->col_b, len_b, ((len_b) / 2)) <= ((len_b) / 2) && (*index)->col_b->nb != (*index)->max_b)
-			rotate(index, 3);
-		else
-			rotate(index, 1);
+		rotate(index, 1);
 	}
 	else if (i < 0)
 		reverse_rot(index, 2);
@@ -56,12 +53,10 @@ void	sorted_bis(t_col **index)
 
 int	sorted(t_col **index, int **lst_sort)
 {
-	if (middlepoint_first(index, lst_sort) == 0)
-		return (0);
+	middlepoint_first(index, lst_sort);
 	while ((ascending((*index)->col_a, (*index)->len_a) == 0) \
 	&& (*index)->len_a > 2)
-		if (middlepoint(index, lst_sort) == 0)
-			return (0);
+		middlepoint(index, lst_sort);
 	if (ascending((*index)->col_a, (*index)->len_a) != 1)
 		rotate(index, 1);
 	while (decreasing((*index)->col_b, (*index)->len_b) == 0 \

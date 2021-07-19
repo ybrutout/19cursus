@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 14:02:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/13 11:44:46 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/19 15:21:54 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	*nw_lst_order(t_num **col, int *lst_new, int len, int knob)
 {
 	int		*tmp;
 	t_num	*tmp_col;
-	int 	i;
+	int		i;
 
 	tmp = malloc(sizeof(int) * len);
 	if (!tmp)
@@ -61,10 +61,14 @@ int	parsing(char **argv, t_col **index)
 	i = 1;
 	while (argv[i])
 	{
-		tmp = ft_atoi(argv[i]);
+		tmp = ft_atoi(argv[i], index);
 		lst_tmp = ft_lstnew(&tmp);
 		if (!lst_tmp)
-			return (error_malloc(1));
+		{
+			if (i > 1)
+				ft_lstclear(&(*index)->col_a);
+			return (write(1, "Error\nmalloc index init\n", 24));
+		}
 		(*index)->col_a = ft_lstadd_back((*index)->col_a, lst_tmp);
 		i++;
 	}
