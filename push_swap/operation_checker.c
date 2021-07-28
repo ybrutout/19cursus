@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operation.c                                        :+:      :+:    :+:   */
+/*   operation_checker.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/27 10:07:05 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/28 14:30:44 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/07/28 10:56:36 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/07/28 15:02:58 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_num	*swap(t_num *column)
+static t_num	*ch_swap(t_num *column)
 {
 	t_num	*tmp;
 	t_num	*swap;
@@ -25,31 +25,28 @@ t_num	*swap(t_num *column)
 	return (column);
 }
 
-void	swap_button(t_col **index, int button)
+void	ch_swap_button(t_col **index, int button)
 {
 	if (button == 1)
 	{
 		if ((*index)->col_a && (*index)->len_a > 1)
-			(*index)->col_a = swap((*index)->col_a);
-		ft_write(1, index);
+			(*index)->col_a = ch_swap((*index)->col_a);
 	}
 	else if (button == 2)
 	{
 		if ((*index)->col_b && (*index)->len_b > 1)
-			(*index)->col_b = swap((*index)->col_b);
-		ft_write(2, index);
+			(*index)->col_b = ch_swap((*index)->col_b);
 	}
 	else if (button == 3)
 	{
 		if ((*index)->col_a && (*index)->len_a > 1)
-			(*index)->col_a = swap((*index)->col_a);
+			(*index)->col_a = ch_swap((*index)->col_a);
 		if ((*index)->col_b && (*index)->len_b > 1)
-			(*index)->col_b = swap((*index)->col_b);
-		ft_write(3, index);
+			(*index)->col_b = ch_swap((*index)->col_b);
 	}
 }
 
-void	push(t_col **index, int button)
+void	ch_push(t_col **index, int button)
 {
 	t_num	*tmp;
 
@@ -62,7 +59,6 @@ void	push(t_col **index, int button)
 			tmp->next = (*index)->col_b;
 			(*index)->col_b = tmp;
 		}
-		ft_write(5, index);
 	}
 	else if (button == 2)
 	{
@@ -73,56 +69,49 @@ void	push(t_col **index, int button)
 			tmp ->next = (*index)->col_a;
 			(*index)->col_a = tmp;
 		}
-		ft_write(4, index);
 	}
 }
 
-void	rotate(t_col **index, int button)
+void	ch_rotate(t_col **index, int button)
 {
 	if (button == 1)
 	{
 		if ((*index)->col_a && ((*index)->col_a->next))
-			rotate_bis(index, 1);
-		ft_write(6, index);
+			ch_rotate_bis(index, 1);
 	}
 	else if (button == 2)
 	{
 		if ((*index)->col_b && ((*index)->col_b->next))
-			rotate_bis(index, 2);
-		ft_write(7, index);
+			ch_rotate_bis(index, 2);
 	}
 	else if (button == 3)
 	{
 		if ((*index)->col_a && ((*index)->col_a->next))
-			rotate_bis(index, 1);
+			ch_rotate_bis(index, 1);
 		if ((*index)->col_b && ((*index)->col_b->next))
-			rotate_bis(index, 2);
-		ft_write(8, index);
+			ch_rotate_bis(index, 2);
 	}
 }
 
-void	reverse_rot(t_col **index, int button)
+void	ch_reverse_rot(t_col **index, int button)
 {
 	int		len;
 
 	if (button == 1)
 	{
 		if ((*index)->col_a && (*index)->col_a->next)
-			reverse_rott_biss(index, len, 1);
-		ft_write(9, index);
+			ch_reverse_rott_biss(index, len, 1);
 	}
 	else if (button == 2)
 	{
 		if ((*index)->col_b && (*index)->col_b->next)
-			reverse_rott_biss(index, len, 2);
-		ft_write(10, index);
+			ch_reverse_rott_biss(index, len, 2);
 	}
 	else if (button == 3)
 	{
 		if ((*index)->col_a && (*index)->col_a->next)
-			reverse_rott_biss(index, len, 1);
+			ch_reverse_rott_biss(index, len, 1);
 		if ((*index)->col_b && (*index)->col_b->next)
-			reverse_rott_biss(index, len, 2);
-		ft_write(11, index);
+			ch_reverse_rott_biss(index, len, 2);
 	}
 }

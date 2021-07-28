@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 13:57:37 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/19 15:21:21 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/28 15:08:32 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,40 +44,6 @@ int	ascending(t_num *col_a, int len)
 		len--;
 	}
 	return (1);
-}
-
-int	nb_min(t_num **col_a, int len)
-{
-	t_num	*tmp;
-	int		min;
-
-	min = (*col_a)->nb;
-	tmp = *col_a;
-	while (len != 0)
-	{
-		if (min > tmp->nb)
-			min = tmp->nb;
-		tmp = tmp->next;
-		len--;
-	}
-	return (min);
-}
-
-int	nb_max(t_num **col_a, int len)
-{
-	t_num	*tmp;
-	int		max;
-
-	max = (*col_a)->nb;
-	tmp = *col_a;
-	while (len != 0)
-	{
-		if (max < tmp->nb)
-			max = tmp->nb;
-		tmp = tmp->next;
-		len--;
-	}
-	return (max);
 }
 
 int	nb_second_max(t_num **col, int len, int max)

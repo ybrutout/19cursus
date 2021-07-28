@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:11:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/19 15:54:06 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/28 16:31:02 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,12 @@ t_num	*ft_lstadd_back(t_num *alst, t_num *new);
 int		ft_lstsize(t_num *lst);
 void	ft_lstclear(t_num **lst);
 
+//ft_libft_second
+
+int		ft_strlen(char *str);
+int		ft_strcmp_check(char *s1, char *s2);
+char	*ft_strcat(char *str, char *buffer);
+
 //sorted
 int		sorted(t_col **index, int **lst_sort);
 int		position_for(t_num *col, int nb);
@@ -72,7 +78,7 @@ int		middlepoint(t_col **index, int **lst_sort);
 
 void	change_index(t_col **index);
 void	ft_write(int button, t_col **index);
-t_col	*int_new_index(int nb, char **argv, int **lst);
+t_col	*int_new_index(int nb, char **argv);
 void	free_lst(t_num *alst);
 
 //toolbox_2
@@ -119,5 +125,21 @@ int		mdpnt_first_bis(t_col **index, int median, int pivot);
 int		middlepoint_first(t_col **index, int **lst_sort);
 int		mdpnt_bis(t_col **index, int len, int median);
 int		middlepoint(t_col **index, int **lst_sort);
+
+//push_swap
+int		check_arg(int argc, char **argv);
+
+//operation_checker
+void	ch_swap_button(t_col **index, int button);
+void	ch_push(t_col **index, int button);
+void	ch_rotate(t_col **index, int button);
+void	ch_reverse_rot(t_col **index, int button);
+
+//operation_checker_biss
+void	ch_rotate_bis(t_col **index, int nb);
+void	ch_reverse_rott_biss(t_col **index, int len, int nb);
+
+//checker
+void	ft_operation(t_col **index, int nb);
 
 #endif

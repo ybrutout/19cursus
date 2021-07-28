@@ -6,26 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 14:02:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/19 15:21:54 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/28 15:08:54 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	last_nb(t_num *col, int	len)
-{
-	t_num	*tmp;
-	int		ret;
-
-	tmp = col;
-	while (len != 0)
-	{
-		ret = tmp->nb;
-		tmp = tmp->next;
-		len--;
-	}
-	return (ret);
-}
 
 int	*nw_lst_order(t_num **col, int *lst_new, int len, int knob)
 {
@@ -50,30 +35,6 @@ int	*nw_lst_order(t_num **col, int *lst_new, int len, int knob)
 	if (knob != 1)
 		free(lst_new);
 	return (tmp);
-}
-
-int	parsing(char **argv, t_col **index)
-{
-	int			tmp;
-	int			i;
-	t_num		*lst_tmp;
-
-	i = 1;
-	while (argv[i])
-	{
-		tmp = ft_atoi(argv[i], index);
-		lst_tmp = ft_lstnew(&tmp);
-		if (!lst_tmp)
-		{
-			if (i > 1)
-				ft_lstclear(&(*index)->col_a);
-			return (write(1, "Error\nmalloc index init\n", 24));
-		}
-		(*index)->col_a = ft_lstadd_back((*index)->col_a, lst_tmp);
-		i++;
-	}
-	change_index(index);
-	return (1);
 }
 
 int	ft_order(int **lst_sort, int argc)
