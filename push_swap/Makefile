@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 11:16:42 by ybrutout          #+#    #+#              #
-#    Updated: 2021/07/28 15:11:24 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/07/29 11:37:31 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,44 +16,46 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror -c
 
-SRC =	big_sorted.c \
-		big_sorted_bis.c \
-		both_utils.c \
-		error.c \
-		ft_libft.c \
-		little_sorted.c \
-		middlepoint.c \
-		operation.c \
-		operation_biss.c \
-		position.c \
-		push_swap.c \
-		sorted.c \
-		toolbox.c \
-		toolbox_2.c \
-		toolbox_3.c \
-		index.c \
+BOTH =	both/both_utils.c \
+		both/error.c \
+		both/ft_libft.c \
+		both/index.c \
+		both/toolbox.c \
 
-SRCBONUS =	both_utils.c \
-			checker.c \
-			error.c \
-			ft_libft.c \
-			ft_libft_second.c \
-			index.c \
-			operation_checker.c \
-			operation_checker_biss.c \
-			toolbox.c \
+CHECK =	checker/checker.c \
+		checker/ft_libft_second.c \
+		checker/operation_checker.c \
+		checker/operation_checker_biss.c \
+
+PS =	source/big_sorted.c \
+		source/big_sorted_bis.c \
+		source/little_sorted.c \
+		source/middlepoint.c \
+		source/operation_biss.c \
+		source/operation.c \
+		source/position.c \
+		source/push_swap.c \
+		source/sorted.c \
+		source/toolbox_second.c \
+		source/toolbox_third.c\
+
+SRC =	${BOTH} \
+		${PS} \
+
+SRCBONUS =	${BOTH} \
+		${CHECK} \
 
 OBJ = $(SRC:.c=.o)
 
 OBJBONUS = $(SRCBONUS:.c=.o)
 
-all: $(NAME)
+all: $(NAME) check
 
 $(NAME): $(OBJ)
 	@$(CC) $(SRC) -o $(NAME)
 
-checker: $(OBJBONUS)
-	@$(CC) $(SRCBONUS) -o checker
+check: $(OBJBONUS)
+	@$(CC) $(SRCBONUS) -o check
 
 clean:
 	@rm -f $(OBJ)
@@ -64,9 +66,11 @@ chclean:
 fclean: 	clean
 	@rm -f $(NAME)
 
-fchclean: chclean
-	@rm -f checker
+chfclean: chclean
+	@rm -f check
 
-re: fclean all
+afclean: chfclean fclean
+
+re: fclean chfclean all
 
 .PHONY:		all clean fclean re

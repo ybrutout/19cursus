@@ -6,11 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 10:56:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/28 15:02:58 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/29 10:57:25 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 static t_num	*ch_swap(t_num *column)
 {

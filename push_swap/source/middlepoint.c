@@ -6,11 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 10:27:51 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/19 16:03:03 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/29 10:57:25 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 int	mdpnt_check(t_num *col, int median, int len, int sign)
 {

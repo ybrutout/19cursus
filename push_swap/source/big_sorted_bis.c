@@ -6,11 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 12:47:54 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/09 12:49:10 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/29 10:57:25 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 void	sorted_binary(t_col **index)
 {

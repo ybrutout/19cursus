@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operation_biss.c                                   :+:      :+:    :+:   */
+/*   operation_checker_biss.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/09 14:20:19 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/09 14:21:00 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/07/28 14:02:42 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/07/29 10:57:25 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
-void	rotate_bis(t_col **index, int nb)
+void	ch_rotate_bis(t_col **index, int nb)
 {
 	t_num	*tmp;
 
@@ -32,7 +32,7 @@ void	rotate_bis(t_col **index, int nb)
 	}
 }
 
-void	reverse_rott_biss(t_col **index, int len, int nb)
+void	ch_reverse_rott_biss(t_col **index, int len, int nb)
 {
 	t_num	*start;
 	t_num	*tmp;
@@ -59,4 +59,31 @@ void	reverse_rott_biss(t_col **index, int len, int nb)
 		tmp->next = (*index)->col_b;
 		(*index)->col_b = tmp;
 	}
+}
+
+void	ft_operation(t_col **index, int nb)
+{
+	if (nb == 1)
+		ch_swap_button(index, 1);
+	else if (nb == 2)
+		ch_swap_button(index, 2);
+	else if (nb == 3)
+		ch_swap_button(index, 3);
+	else if(nb == 4)
+		ch_push(index, 2);
+	else if (nb == 5)
+		ch_push(index, 1);
+	else if (nb == 6)
+		ch_rotate(index, 1);
+	else if (nb == 7)
+		ch_rotate(index, 2);
+	else if (nb == 8)
+		ch_rotate(index, 3);
+	else if (nb == 9)
+		ch_reverse_rot(index, 1);
+	else if (nb == 10)
+		ch_reverse_rot(index, 2);
+	else if (nb == 11)
+		ch_reverse_rot(index, 3);
+	change_index(index);
 }

@@ -6,11 +6,11 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 11:29:46 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/19 15:59:21 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/29 10:57:25 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 void	ft_error_message(t_col **index, int nb)
 {

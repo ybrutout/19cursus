@@ -6,17 +6,18 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 14:12:52 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/19 16:03:45 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/29 12:40:26 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 void	is_not_decreasing(t_col **index, int len_b)
 {
 	int	i;
 
 	i = position(index, (*index)->col_b, len_b, ((len_b) / 2));
+	printf(" position == %d\n", i);
 	if ((*index)->col_b->nb == (*index)->max_b)
 	{
 		push(index, 2);
@@ -62,6 +63,7 @@ int	sorted(t_col **index, int **lst_sort)
 	while (decreasing((*index)->col_b, (*index)->len_b) == 0 \
 	|| (*index)->len_b == 0)
 		is_not_decreasing(index, (*index)->len_b);
+	exit(EXIT_SUCCESS);
 	if ((*index)->len_b > 0)
 		sorted_bis(index);
 	while ((*index)->last_a < (*index)->col_a->nb)
