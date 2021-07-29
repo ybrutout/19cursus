@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 15:05:13 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/29 10:57:25 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/29 14:53:23 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	check_arg(int argc, char **argv)
 		j = 0;
 		while (argv[i][j])
 		{
-			if (argv[i][j] == '-' && argv[i][j + 1] >= '0' && argv[i][j + 1] <= '9')
+			if (argv[i][j] == '-' && argv[i][j + 1] >= '0' \
+			&& argv[i][j + 1] <= '9')
 				j++;
 			if (!((argv[i][j] >= '0' && argv[i][j] <= '9')))
 				return (write(1, "Error\nFalse argument\n", 21));
@@ -58,5 +59,3 @@ int	parsing(char **argv, t_col **index)
 	change_index(index);
 	return (1);
 }
-
-

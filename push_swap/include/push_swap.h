@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:11:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/28 16:31:02 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/29 14:59:02 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	ft_lstclear(t_num **lst);
 int		ft_strlen(char *str);
 int		ft_strcmp_check(char *s1, char *s2);
 char	*ft_strcat(char *str, char *buffer);
+int		ft_compare(t_col **index, char *line);
 
 //sorted
 int		sorted(t_col **index, int **lst_sort);
@@ -116,7 +117,6 @@ void	reverse_rott_biss(t_col **index, int len, int nb);
 
 //position
 int		position_for(t_num *col, int nb);
-int		position_bis(t_col **index, int middle, t_num *tmp_col, int len);
 int		position(t_col **index, t_num *col, int len, int middle);
 
 //middlepoint

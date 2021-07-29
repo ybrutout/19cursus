@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 14:02:42 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/29 10:57:25 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/07/29 14:59:59 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_operation(t_col **index, int nb)
 		ch_swap_button(index, 2);
 	else if (nb == 3)
 		ch_swap_button(index, 3);
-	else if(nb == 4)
+	else if (nb == 4)
 		ch_push(index, 2);
 	else if (nb == 5)
 		ch_push(index, 1);
