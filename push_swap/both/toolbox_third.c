@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   toolbox_3.c                                        :+:      :+:    :+:   */
+/*   toolbox_third.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 14:02:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/29 10:57:25 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/02 08:56:16 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@ int	*nw_lst_order(t_num **col, int *lst_new, int len, int knob)
 			tmp_col = tmp_col->next;
 		}
 	}
-	ft_order(&tmp, len);
+	if (ft_order(&tmp, len) == 0)
+	{
+		free(tmp);
+		return (NULL);
+	}
 	if (knob != 1)
 		free(lst_new);
 	return (tmp);

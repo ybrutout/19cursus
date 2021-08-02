@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 10:27:51 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/29 10:57:25 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/02 11:09:19 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	middlepoint_first(t_col **index, int **lst_sort)
 	if (!(*lst_sort))
 		ft_error_message(index, 1);
 	median = lst_sort[0][(((*index)->len_a) / 2)];
-	pivot = lst_sort[0][(median / 2)];
+	pivot = lst_sort[0][((*index)->len_a / 2)];
 	while ((mdpnt_check((*index)->col_a, median, (*index)->len_a, 1)) == 0)
 		mdpnt_first_bis(index, median, pivot);
 	if ((*index)->col_b->nb < pivot)

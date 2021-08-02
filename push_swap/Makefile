@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 11:16:42 by ybrutout          #+#    #+#              #
-#    Updated: 2021/07/29 11:37:31 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/08/02 10:51:36 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,11 +21,12 @@ BOTH =	both/both_utils.c \
 		both/ft_libft.c \
 		both/index.c \
 		both/toolbox.c \
+		both/toolbox_third.c\
 
-CHECK =	checker/checker.c \
-		checker/ft_libft_second.c \
-		checker/operation_checker.c \
-		checker/operation_checker_biss.c \
+CHECK =	check/checker.c \
+		check/ft_libft_second.c \
+		check/operation_checker.c \
+		check/operation_checker_biss.c \
 
 PS =	source/big_sorted.c \
 		source/big_sorted_bis.c \
@@ -37,7 +38,6 @@ PS =	source/big_sorted.c \
 		source/push_swap.c \
 		source/sorted.c \
 		source/toolbox_second.c \
-		source/toolbox_third.c\
 
 SRC =	${BOTH} \
 		${PS} \
@@ -49,13 +49,13 @@ OBJ = $(SRC:.c=.o)
 
 OBJBONUS = $(SRCBONUS:.c=.o)
 
-all: $(NAME) check
+all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(CC) $(SRC) -o $(NAME)
 
-check: $(OBJBONUS)
-	@$(CC) $(SRCBONUS) -o check
+checker: $(OBJBONUS)
+	@$(CC) $(SRCBONUS) -o checker
 
 clean:
 	@rm -f $(OBJ)
@@ -67,7 +67,7 @@ fclean: 	clean
 	@rm -f $(NAME)
 
 chfclean: chclean
-	@rm -f check
+	@rm -f checker
 
 afclean: chfclean fclean
 
