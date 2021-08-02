@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 14:12:52 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/02 11:05:24 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/02 12:31:37 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,9 @@ void	sorted_bis(t_col **index)
 int	sorted(t_col **index, int **lst_sort)
 {
 	middlepoint_first(index, lst_sort);
-	while ((ascending((*index)->col_a, (*index)->len_a) == 0) \
-	&& (*index)->len_a > 2)
+	while ((ascending(index) == 0) && (*index)->len_a > 2)
 		middlepoint(index, lst_sort);
-	if (ascending((*index)->col_a, (*index)->len_a) != 1)
+	if (ascending(index) != 1)
 		rotate(index, 1);
 	while (decreasing((*index)->col_b, (*index)->len_b) == 0 \
 	|| (*index)->len_b == 0)

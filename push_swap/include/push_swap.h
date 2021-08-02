@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:11:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/29 14:59:02 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/02 12:52:12 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	free_lst(t_num *alst);
 int		nb_second_max(t_num **col, int len, int max);
 int		nb_max(t_num **col_a, int len);
 int		nb_min(t_num **col_a, int len);
-int		ascending(t_num *col_a, int len);
+int		ascending(t_col **index);
 int		decreasing(t_num *col_b, int len);
 
 //toolbox_3
@@ -110,6 +110,7 @@ int		str_nbr(int nb);
 void	sorted_binary(t_col **index);
 int		there_is_a_zero(t_num *col, int nb, char c);
 int		this_is_a_zero(char *binary, int nb);
+void 	free_binary(t_col **index);
 
 //operation_biss
 void	rotate_bis(t_col **index, int nb);

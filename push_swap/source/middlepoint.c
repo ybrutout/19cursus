@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 10:27:51 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/02 11:09:19 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/02 12:29:55 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	mdpnt_bis(t_col **index, int len, int median)
 	len = (*index)->len_a;
 	tmp = (*index)->col_a;
 	last_a = (*index)->last_a;
-	if (ascending(tmp, len) == 1 && (*index)->min_a > (*index)->max_b)
+	if (ascending(index) == 1 && (*index)->min_a > (*index)->max_b)
 		return (2);
 	if (tmp && tmp->nb < median)
 		push(index, 1);

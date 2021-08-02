@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 15:05:13 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/02 09:22:00 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/02 13:21:36 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_arg(int argc, char **argv)
 	int	j;
 
 	i = 1;
-	while (i < argc)
+	while (i <= argc)
 	{
 		j = 0;
 		while (argv[i][j])
@@ -54,12 +54,17 @@ int	parsing(char **argv, t_col **index)
 				ft_lstclear(&(*index)->col_a);
 			return (write(1, "Error\nmalloc index init\n", 24));
 		}
+		lst_tmp->binary = NULL;
 		(*index)->col_a = ft_lstadd_back((*index)->col_a, lst_tmp);
 		i++;
 	}
 	change_index(index);
 	nw_lst = nw_lst_order(&(*index)->col_a, nw_lst, (*index)->argc, 1);
 	if (!nw_lst)
+	{
+		free_lst((*index)->col_a);
 		return (0);
+	}
+	free(nw_lst);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:10:31 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/02 11:04:54 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/02 12:36:13 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,12 @@ int	main(int argc, char **argv)
 	index = int_new_index((argc - 1), argv);
 	if (!index)
 		return (write(1, "Error\n", 6));
-	if (ascending(index->col_a, index->len_a) == 1 || argc == 2)
+	if (ascending(&index) == 1 || argc == 2)
+	{
+		free_lst(index->col_a);
+		free(index);
 		return (1);
+	}
 	choose_sort(&index, &lst_sort, index->argc);
 	free_lst(index->col_a);
 	free_lst(index->col_b);

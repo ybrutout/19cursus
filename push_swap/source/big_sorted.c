@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 15:12:08 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/29 10:57:25 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/02 13:14:14 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*itoa_base_remix(int nb, int size)
 	return (c);
 }
 
-void	init_binary(t_col **index, int **lst_sort)
+int	init_binary(t_col **index, int **lst_sort)
 {
 	t_num	*tmp;
 	t_num	*col;
@@ -81,9 +81,17 @@ void	init_binary(t_col **index, int **lst_sort)
 	{
 		tmp = col->next;
 		col->binary = itoa_base_remix(col->indx, size);
+		if (!col->binary)
+		{
+			if (i > 0)
+				free_binary(index);
+			else
+				return (0);
+		}
 		col = tmp;
 		i++;
 	}
+	return (1);
 }
 
 int	big_sorted(t_col **index, int **lst_sort)
@@ -92,7 +100,12 @@ int	big_sorted(t_col **index, int **lst_sort)
 	if (!*lst_sort)
 		ft_error_message(index, 1);
 	init_indx(index, lst_sort);
-	init_binary(index, lst_sort);
+	if (!init_binary(index, lst_sort))
+	{
+		free(lst_sort);
+		ft_error_message(index, 1);
+	}
 	sorted_binary(index);
+	free_binary(index);
 	return (1);
 }

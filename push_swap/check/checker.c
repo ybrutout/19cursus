@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 10:36:02 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/02 09:22:42 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/02 13:33:20 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,11 @@ int	main(int argc, char **argv)
 	if (!index)
 		return (write(1, "Error\n", 6));
 	if (get_next_line_mix(&index) < 0)
+	{
+		free_lst(index->col_a);
+		free(index);
 		return (0);
+	}
 	last_check(&index);
 	ft_free_check(&index);
 	return (1);

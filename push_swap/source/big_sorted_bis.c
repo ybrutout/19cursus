@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 12:47:54 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/29 10:57:25 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/02 13:09:43 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,16 @@ int	this_is_a_zero(char *binary, int nb)
 	if (binary[nb] == '0')
 		return (0);
 	return (1);
+}
+
+void free_binary(t_col **index)
+{
+	t_num *tmp;
+
+	tmp = (*index)->col_a;
+	while (tmp && tmp->binary)
+	{
+		free(tmp->binary);
+		tmp = tmp->next;
+	}
 }

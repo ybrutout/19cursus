@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   toolbox_2.c                                        :+:      :+:    :+:   */
+/*   toolbox_second.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 13:57:37 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/07/29 10:57:25 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/02 12:28:31 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ int	decreasing(t_num *col_b, int len)
 	return (1);
 }
 
-int	ascending(t_num *col_a, int len)
+int	ascending(t_col **index)
 {
 	t_num	*tmp;
 	int		i;
+	int		len;
 
-	tmp = col_a;
+	tmp = (*index)->col_a;
+	len = (*index)->len_a;
 	while (len != 0)
 	{
 		i = tmp->nb;
