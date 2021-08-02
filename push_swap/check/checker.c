@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 10:36:02 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/02 13:33:20 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/02 13:42:09 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	main(int argc, char **argv)
 
 	if (argc == 1)
 		return (0);
-	if (check_arg((argc - 1), argv) != 1)
+	if (check_arg(argc, argv) != 1)
 		return (0);
 	index = int_new_index((argc - 1), argv);
 	if (!index)

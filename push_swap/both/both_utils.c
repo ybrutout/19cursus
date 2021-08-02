@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 15:05:13 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/02 13:21:36 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/02 13:42:18 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_arg(int argc, char **argv)
 	int	j;
 
 	i = 1;
-	while (i <= argc)
+	while (i < argc)
 	{
 		j = 0;
 		while (argv[i][j])
