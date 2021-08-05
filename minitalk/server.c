@@ -6,22 +6,64 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:23:48 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/04 17:07:05 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/05 16:20:14 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	user_one(int signum)
+int		ft_pow(int nb, int exposant)
 {
-	if (signum == 30)
-		printf("1");
+	int i;
+	int	value;
+
+	i = 0;
+	value = 1;
+	while(i < exposant)
+	{
+		value = value * nb;
+		i++;
+	}
+	return (value);
 }
 
-void	user_two(int signum)
+int		init_pid_client(int	nb)
 {
-	if (signum == 31)
-		printf("0");
+	static int	const_bit;
+	static int	pid;
+	static int	exposant;
+
+	if (!const_bit)
+	{
+		pid = 1;
+		const_bit = 31;
+		exposant = 0;
+	}
+	if (const_bit == -1)
+		return (0);
+	else
+	{
+		if (nb == 1)
+			pid = pid + ft_pow(2, exposant);
+		const_bit--;
+	}
+	return (pid);
+}
+
+void	received_binary(int signum)
+{
+	static int	pid_client;
+	static int	strlen;
+	static char	*str;
+	int			i;
+
+	if (signum == SIGUSR1)
+		i = 0;
+	else
+		i = 1;
+	if (init_pid_client(i) != -1)
+		pid_client = init_pid_client(i);
+	printf("pid == %d\n", pid_client);
 }
 
 int	main(void)
@@ -29,10 +71,10 @@ int	main(void)
 	pid_t	pid;
 
 	pid = getpid();
-	printf("PID == %d\n", pid);
-	signal(SIGUSR1, user_one);
-	signal(SIGUSR2, user_two);
+	printf("PID == %d\n", pid);//creer putnbr
+	signal(SIGUSR1, received_binary);
+	signal(SIGUSR2, received_binary);
 	while (1)
 		pause();
-	return (1);
+	return (0);
 }

@@ -1,6 +1,6 @@
-NAME = client
+NAME2 = client
 
-NAME2 = server
+NAME = server
 
 CC = gcc
 
@@ -11,21 +11,21 @@ CLIENT =	client.c \
 
 SERVER =	server.c \
 
-SRC = $(CLIENT)
+SRC2 = $(CLIENT)
 
-SRC2 = $(SERVER)
+SRC = $(SERVER)
 
-OBJ = $(SRCCLIENT:.c=.o)
+OBJ2 = $(SRCCLIENT:%.c=%.o)
 
-OBJ2 = $(SRCSERVER:.c=.o)
+OBJ = $(SRCSERVER:%.c=%.o)
 
-all: $(NAME) $(NAME2)
+all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(FLAGS) $(SRC) -o $(NAME)
+	@$(CC) $(SRC) -o $(NAME)
 
 $(NAME2): $(OBJ2)
-	@$(CC) $(FLAGS) $(SRC2) -o $(NAME2)
+	@$(CC) $(SRC2) -o $(NAME2)
 
 clean:
 	@rm -f $(OBJ)
