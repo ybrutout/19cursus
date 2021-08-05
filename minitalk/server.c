@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:23:48 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/05 16:20:14 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/05 16:22:20 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		init_pid_client(int	nb)
 		if (nb == 1)
 			pid = pid + ft_pow(2, exposant);
 		const_bit--;
+		exposant++;
 	}
 	return (pid);
 }
