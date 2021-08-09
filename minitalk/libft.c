@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:52:55 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/05 16:01:58 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/09 15:56:00 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	ft_atoi(char *str)
 		num = 10 * num + (*str - '0');
 		str++;
 	}
+	if (*str < '0' || *str > '9')
+		return (-1);
 	return ((int)(num * neg));
 }
 
@@ -51,22 +53,27 @@ unsigned int		ft_strlen(char *str)
 	return (i);
 }
 
-char	*itoa_base_remix(int nb, int size)//pas sure d'en avoir encore besoin
+void	ft_putchar(char c)
 {
-	char	*c;
+	write(1, &c, 1);
+}
 
-	c = malloc(sizeof(char) * size);
-	if (!c)
-		return (NULL);
-	c[--size] = '\0';
-	while (nb)
+void	ft_putnbr(int nb)
+{
+	long int i;
+
+	i = nb;
+	if (i >= 10)
 	{
-		c[--size] = nb % 2 + 48;
-		nb /= 2;
+		ft_putnbr(i / 10);
 	}
-	while (size > -1)
-	{
-		c[--size] = '0';
-	}
-	return (c);
+	ft_putchar(i % 10 + '0');
+}
+
+void	ft_putstr(char *str)
+{
+	int	i;
+
+	while(str[i])
+		ft_putchar(str[i++]);
 }

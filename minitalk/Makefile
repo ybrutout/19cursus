@@ -10,6 +10,7 @@ CLIENT =	client.c \
 			libft.c \
 
 SERVER =	server.c \
+			libft.c \
 
 SRC2 = $(CLIENT)
 
