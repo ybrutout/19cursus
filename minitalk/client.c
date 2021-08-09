@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:20:26 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/09 15:56:22 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/09 16:01:05 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,17 @@ int	init_client(char *str, int pid_server)
 	return(pid_client);
 }
 
-int	ft_error(char *str)
+int	ft_error(char *str, int argc)
 {
 	int	pid_server;
 
 	pid_server = ft_atoi(str);
-	if (pid_server < 0)
-	
+	if (pid_server < 0 || argc != 3)
+	{
+		write(1, "Error\nWrong argument\n", 21);
+		return (-1);
+	}
+	return (pid_server);
 }
 
 int	main(int argc, char **argv)
@@ -69,11 +73,8 @@ int	main(int argc, char **argv)
 	int pid_server;
 
 	pid_server = ft_atoi(argv[1]);
-	if (argc != 3 || pid_server < 0)
-	{
-		write(1, "Error\nWrong argument\n", 21);
+	if (pid_server < 0)
 		return (1);
-	}
 	init_client(argv[2], pid_server);
 	send_char(argv[2], pid_server);
 	return (0);
