@@ -6,11 +6,11 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:21:48 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/10 11:15:28 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/10 15:30:10 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../include/minitalk.h"
 
 int	ft_atoi(char *str)
 {

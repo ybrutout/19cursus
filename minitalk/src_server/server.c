@@ -6,11 +6,11 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:23:48 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/10 12:31:33 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/10 15:30:10 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../include/minitalk.h"
 
 int	init_client_server(int	nb, int	*stage, int len)
 {
@@ -47,7 +47,7 @@ char	*received_char(int strlen, int i, int *stage)
 	char		*tmp_str;
 	int			tmp_char;
 	int			tmp_stage;
-	int			nb;
+	static int	nb;
 
 	if (!str)
 		str = init_str(strlen, &nb);
@@ -56,11 +56,14 @@ char	*received_char(int strlen, int i, int *stage)
 		tmp_stage = *stage;
 		tmp_char = init_client_server(i, stage, 10);
 		if (*stage > tmp_stage)
+		{
 			str[nb++] = (char)tmp_char;
+		}
 		if (nb == strlen)
 		{
 			tmp_str = str;
 			str = NULL;
+			nb = 0;
 			return (tmp_str);
 		}
 	}
@@ -69,7 +72,6 @@ char	*received_char(int strlen, int i, int *stage)
 
 void	received_binary(int signum)
 {
-	static int	pid_client;
 	static int	strlen;
 	static int	stage;
 	int			i;
@@ -77,18 +79,23 @@ void	received_binary(int signum)
 	if (!strlen && !stage)
 	{
 		strlen = 0;
-		stage = 1;
+		stage = 2;
 	}
 	if (signum == SIGUSR1)
 		i = 0;
 	else
 		i = 1;
-	if (stage == 1)
-		pid_client = init_client_server(i, &stage, 34);
-	else if (stage == 2)
+	if (stage == 2)
 		strlen = init_client_server(i, &stage, 34);
 	else if (stage > 2)
-		stage_three(&pid_client, &strlen, &stage, i);
+	{
+		i = stage_three(&strlen, &stage, i);
+	}
+	if (i == 2)
+	{
+		strlen = 0;
+		stage = 0;
+	}
 }
 
 int	main(void)

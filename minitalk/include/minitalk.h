@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:36:48 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/10 12:31:48 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/10 17:08:08 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>
+# include <stdio.h>
+
+typedef struct s_general
+{
+	int				nb;
+	int				pid_server;
+	int				const_bit;
+	char			*str;
+}				t_gen;
 
 //libft
 int				ft_atoi(char *str);
@@ -27,8 +36,8 @@ void			ft_putstr(char *str);
 int				ft_error_message(int message);
 int				ft_pow(int nb, int exposant);
 int				init_client_server(int	nb, int	*stage, int len);
-void			send_binary(int nb, int pid_server, int len);
-void			stage_three(int *pid_client, int *strlen, int *stage, int i);
+void			send_binary(unsigned int nb, int pid_server, int len);
+int				stage_three(int *strlen, int *stage, int i);
 char			*received_char(int strlen, int i, int *stage);
 char			*init_str(int strlen, int *nb);
 

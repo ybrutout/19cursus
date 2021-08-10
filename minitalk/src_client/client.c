@@ -6,30 +6,25 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:20:26 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/10 11:15:47 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/10 15:30:10 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../include/minitalk.h"
 
 int	init_client(char *str, int pid_server)
 {
-	int				pid_client;
 	unsigned int	str_len;
 
-	pid_client = getpid();
-	send_binary(pid_client, pid_server, 31);
 	str_len = ft_strlen(str);
 	send_binary(str_len, pid_server, 31);
-	return (pid_client);
+	return (str_len);
 }
 
-void	send_binary(int nb, int pid_server, int len)
+void	send_binary(unsigned int nb, int pid_server, int len)
 {
-	int	i;
 	int	const_bit;
 
-	i = 7;
 	const_bit = len;
 	while (const_bit > -1)
 	{
@@ -67,7 +62,7 @@ int	main(int argc, char **argv)
 	init_client(argv[2], pid_server);
 	while (argv[2][i])
 	{
-		send_binary((int)argv[2][i], pid_server, 7);
+		send_binary((unsigned int)argv[2][i], pid_server, 7);
 		i++;
 	}
 	return (0);

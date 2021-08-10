@@ -6,11 +6,11 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:52:55 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/10 12:13:12 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/10 15:30:10 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../include/minitalk.h"
 
 int	const_value(int nb)
 {
