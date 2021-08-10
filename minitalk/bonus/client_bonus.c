@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:32:26 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/10 17:16:38 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/10 17:22:15 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	init_client(char *str, int pid_server)
 	send_binary(pid_client, pid_server, 31);
 	str_len = ft_strlen(str);
 	send_binary(str_len, pid_server, 31);
+	the_struct(pid_server, str);
 	return (str_len);
 }
 
