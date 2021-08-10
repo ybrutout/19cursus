@@ -6,15 +6,27 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:20:26 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/09 16:01:05 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/10 11:15:47 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
+int	init_client(char *str, int pid_server)
+{
+	int				pid_client;
+	unsigned int	str_len;
+
+	pid_client = getpid();
+	send_binary(pid_client, pid_server, 31);
+	str_len = ft_strlen(str);
+	send_binary(str_len, pid_server, 31);
+	return (pid_client);
+}
+
 void	send_binary(int nb, int pid_server, int len)
 {
-	int i;
+	int	i;
 	int	const_bit;
 
 	i = 7;
@@ -31,51 +43,32 @@ void	send_binary(int nb, int pid_server, int len)
 	}
 }
 
-void	send_char(char *str, int pid_server)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		send_binary((int)str[i], pid_server, 7);
-		i++;
-	}
-}
-
-int	init_client(char *str, int pid_server)
-{
-	int 			pid_client;
-	unsigned int	str_len;
-
-	pid_client = getpid();
-	send_binary(pid_client, pid_server, 31);
-	str_len = ft_strlen(str);
-	send_binary(str_len, pid_server, 31);
-	return(pid_client);
-}
-
 int	ft_error(char *str, int argc)
 {
 	int	pid_server;
 
 	pid_server = ft_atoi(str);
-	if (pid_server < 0 || argc != 3)
-	{
-		write(1, "Error\nWrong argument\n", 21);
-		return (-1);
-	}
+	if (pid_server < 0)
+		return (ft_error_message(PID_ERROR));
+	if (argc != 3)
+		return (ft_error_message(ARG_ERROR));
 	return (pid_server);
 }
 
 int	main(int argc, char **argv)
 {
-	int pid_server;
+	int	pid_server;
+	int	i;
 
-	pid_server = ft_atoi(argv[1]);
+	i = 0;
+	pid_server = ft_error(argv[1], argc);
 	if (pid_server < 0)
 		return (1);
 	init_client(argv[2], pid_server);
-	send_char(argv[2], pid_server);
+	while (argv[2][i])
+	{
+		send_binary((int)argv[2][i], pid_server, 7);
+		i++;
+	}
 	return (0);
 }

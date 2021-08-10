@@ -7,10 +7,12 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
 CLIENT =	client.c \
-			libft.c \
 
 SERVER =	server.c \
-			libft.c \
+			server_utils.c \
+
+BOTH =		utils.c \
+			second_utils.c \
 
 SRC2 = $(CLIENT)
 
@@ -23,18 +25,18 @@ OBJ = $(SRCSERVER:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(SRC) -o $(NAME)
+	$(CC) $(SRC) $(BOTH) -o $(NAME)
 
 $(NAME2): $(OBJ2)
-	@$(CC) $(SRC2) -o $(NAME2)
+	$(CC) $(SRC2) $(BOTH) -o $(NAME2)
 
 clean:
-	@rm -f $(OBJ)
-	@rm -f $(OBJ2)
+	rm -f $(OBJ)
+	rm -f $(OBJ2)
 
 fclean: 	clean
-	@rm -f $(NAME)
-	@rm -f $(NAME2)
+	rm -f $(NAME)
+	rm -f $(NAME2)
 
 re: fclean all
 
