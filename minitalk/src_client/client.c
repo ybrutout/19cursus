@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:20:26 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/10 15:30:10 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/11 16:23:04 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	send_binary(unsigned int nb, int pid_server, int len)
 		else
 			kill(pid_server, SIGUSR1);
 		nb = nb / 2;
-		usleep(100);
+		usleep(90);
 		const_bit--;
 	}
 }
@@ -43,7 +43,7 @@ int	ft_error(char *str, int argc)
 	int	pid_server;
 
 	pid_server = ft_atoi(str);
-	if (pid_server < 0)
+	if (pid_server <= 1)
 		return (ft_error_message(PID_ERROR));
 	if (argc != 3)
 		return (ft_error_message(ARG_ERROR));

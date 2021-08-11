@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:23:48 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/10 15:30:10 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/11 16:11:58 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ char	*received_char(int strlen, int i, int *stage)
 		tmp_stage = *stage;
 		tmp_char = init_client_server(i, stage, 10);
 		if (*stage > tmp_stage)
-		{
 			str[nb++] = (char)tmp_char;
-		}
 		if (nb == strlen)
 		{
 			tmp_str = str;

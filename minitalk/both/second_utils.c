@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:21:48 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/10 15:30:10 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/11 17:02:32 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	ft_atoi(char *str)
 		num = 10 * num + (str[i] - '0');
 		i++;
 	}
+	if ((num * neg) > INT_MAX)
+		return (-1);
 	return ((int)(num * neg));
 }
 
@@ -53,5 +55,7 @@ int	ft_error_message(int message)
 		write(1, "Error\nNot the right number of argument\n", 39);
 		return (-1);
 	}
+	if (message == END)
+		exit(EXIT_SUCCESS);
 	return (0);
 }
