@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:20:26 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/11 16:23:04 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/12 16:36:18 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	main(int argc, char **argv)
 	int	i;
 
 	i = 0;
+	if (argc != 3)
+		return (0);
 	pid_server = ft_error(argv[1], argc);
 	if (pid_server < 0)
 		return (1);

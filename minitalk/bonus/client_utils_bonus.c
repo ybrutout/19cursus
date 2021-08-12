@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client_utils_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 15:52:23 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/11 17:00:38 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/12 16:34:33 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static t_gen	*the_struct_b(t_gen *general)
 		else
 		{
 			free(general);
+			write(1, "I received the message \n", 24);
 			return (NULL);
 		}
 	}

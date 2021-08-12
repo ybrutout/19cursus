@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:32:59 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/11 16:14:42 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/12 16:35:13 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char	*received_char(int strlen, int i, int *stage)
 		if (nb == strlen)
 		{
 			tmp_str = str;
+			write(1, "I send the message\n", 19);
 			str = NULL;
 			nb = 0;
 			return (tmp_str);
