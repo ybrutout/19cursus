@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:32:26 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/16 10:21:05 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/16 10:23:18 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,6 @@ int	main(int argc, char **argv)
 {
 	int	pid_server;
 
-	if (argc != 3)
-		return (0);
 	pid_server = ft_error(argv[1], argc);
 	if (pid_server < 0)
 		return (1);
