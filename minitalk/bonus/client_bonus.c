@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:32:26 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/16 10:23:18 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/16 11:08:13 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,8 @@ void	send_str(int signum)
 			general = the_struct(0, 0, NULL, CHANGE);
 		}
 	}
-	else if (signum == SIGUSR2 && general->i == general->strlen)
-	{
-		free(general);
-		write(1, "Message received by server\n", 27);
-		exit(EXIT_SUCCESS);
-	}
 	else
-	{
-		free(general);
-		write(1, "Error signal\n", 13);
-		exit(EXIT_FAILURE);
-	}
+		end_or_error(general);
 }
 
 int	ft_error(char *str, int argc)

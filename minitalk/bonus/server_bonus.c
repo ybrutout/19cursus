@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:32:59 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/16 10:21:50 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/16 11:56:05 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ char	*received_char(int strlen, int i, int *stage)
 		if (nb == strlen)
 		{
 			tmp_str = str;
-			write(1, "I send the message\n", 19);
 			str = NULL;
 			nb = 0;
 			return (tmp_str);
@@ -90,7 +89,7 @@ void	received_binary(int signum)
 	else if (stage == 2)
 		strlen = init_client_server(i, &stage, 34);
 	else if (stage > 2)
-		i = stage_three_bonus(&strlen, &stage, i, pid_client);
+		i = stage_bonus(&strlen, &stage, i, pid_client);
 	if (i == 2)
 		stage = 0;
 }

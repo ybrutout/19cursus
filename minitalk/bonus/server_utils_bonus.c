@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:33:30 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/16 10:14:22 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/16 11:10:41 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*init_str(int strlen, int *nb)
 	return (str);
 }
 
-int	stage_three_bonus(int *strlen, int *stage, int i, int pid_client)
+int	stage_bonus(int *strlen, int *stage, int i, int pid_client)
 {
 	char	*str;
 

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 15:52:23 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/16 10:21:40 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/16 11:09:25 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,20 @@ t_gen	*the_struct(int pid_server, int strlen, char *arg, int button)
 	else if (button == CHANGE)
 		general = the_struct_b(general);
 	return (general);
+}
+
+void	end_or_error(t_gen *general)
+{
+	if (general->i == general->strlen)
+	{
+		free(general);
+		write(1, "Message received by server\n", 27);
+		exit(EXIT_SUCCESS);
+	}
+	else
+	{
+		free(general);
+		write(1, "Error signal\n", 13);
+		exit(EXIT_FAILURE);
+	}
 }

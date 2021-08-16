@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:21:48 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/16 10:24:23 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/16 11:44:10 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	ft_atoi(char *str)
 		num = 10 * num + (str[i] - '0');
 		i++;
 	}
+	if (str[i] && (str[i] < '0' || str[i] > '9'))
+		return (-1);
 	if ((num * neg) > INT_MAX)
 		return (-1);
 	return ((int)(num * neg));
