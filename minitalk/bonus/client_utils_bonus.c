@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 15:52:23 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/11 17:00:38 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/16 10:13:14 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ static t_gen	*the_struct_b(t_gen *general)
 		general->i += 1;
 		if (general->i < general->strlen)
 			general->nb = (general->str[general->i]);
-		else
-		{
-			free(general);
-			return (NULL);
-		}
 	}
 	return (general);
 }

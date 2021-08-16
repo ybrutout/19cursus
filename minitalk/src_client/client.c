@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:20:26 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/11 16:23:04 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/16 09:57:04 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ int	ft_error(char *str, int argc)
 {
 	int	pid_server;
 
+	if (argc != 3)
+		return (ft_error_message(ARG_ERROR));
 	pid_server = ft_atoi(str);
 	if (pid_server <= 1)
 		return (ft_error_message(PID_ERROR));
-	if (argc != 3)
-		return (ft_error_message(ARG_ERROR));
 	return (pid_server);
 }
 

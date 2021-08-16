@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:32:59 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/11 16:14:42 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/16 10:11:29 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,7 @@ void	received_binary(int signum)
 	else if (stage == 2)
 		strlen = init_client_server(i, &stage, 34);
 	else if (stage > 2)
-	{
-		i = stage_three(&strlen, &stage, i);
-		kill(pid_client, SIGUSR1);
-	}
+		i = stage_three_bonus(&strlen, &stage, i, pid_client);
 	if (i == 2)
 		stage = 0;
 }

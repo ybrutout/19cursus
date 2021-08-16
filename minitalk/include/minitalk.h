@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:36:48 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/11 17:00:16 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/16 10:11:51 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char			*init_str(int strlen, int *nb);
 
 //bonus
 t_gen			*the_struct(int pid_server, int strlen, char *arg, int button);
+int				stage_three_bonus(int *strlen, int *stage, int i, int pid_client);
 
 # define MALLOC_ERROR 1
 # define PID_ERROR 2

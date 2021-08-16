@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:33:30 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/11 15:31:22 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/16 10:14:22 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*init_str(int strlen, int *nb)
 	return (str);
 }
 
-int	stage_three(int *strlen, int *stage, int i)
+int	stage_three_bonus(int *strlen, int *stage, int i, int pid_client)
 {
 	char	*str;
 
@@ -48,7 +48,13 @@ int	stage_three(int *strlen, int *stage, int i)
 	{
 		ft_putstr(str);
 		free(str);
+		write(1, "Confirmation of reception sent to client\n", 41);
+		kill(pid_client, SIGUSR2);
 		return (2);
+	}
+	else
+	{
+		kill(pid_client, SIGUSR1);
 	}
 	return (0);
 }
