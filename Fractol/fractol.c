@@ -5,20 +5,69 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/16 15:03:15 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/16 15:45:52 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/08/18 09:42:19 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/08/18 16:55:23 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
+#include "include/mlx.h"
+#include "include/fractol.h"
 
-int		main(void)
+int	put_image(void)
 {
-	void	*mlx;
-	void	*new_window;
+	int	b;
+	int	a;
+	t_mlx		*mlx;
+	t_alg		*alg;
 
-	mlx = mlx_init();
-	new_window = mlx_new_window(mlx, 1920, 1080, "Coucou toi !");
+	mlx = change_mlx(1, 0, 0);
+	alg = change_mlx(2, 0, 0);
+	b = -1;
+	while (++b < SCREEN_H)
+	{
+		a = -1;
+		while (++a < SCREEN_W)
+		{
+			alg = change_mlx(3, a, b);
+			while (++alg->i < ITERATION)
+			{
+				alg->tmp = alg->z_r;
+				alg->z_r = (pow(alg->z_r, 2)) - (pow(alg->z_i, 2)) + alg->c_r;
+				alg->z_i = (2 * alg->z_i * alg->tmp) + alg->c_i;
+				if ((alg->z_i * alg->z_r) > 4)
+					break ;
+				alg->count++;
+			}
+			if (alg->count == ITERATION)
+			{
+				//printf("a == %d\nb == %d\ncount == %d\n", a, b, alg->count);
+				my_mlx_pixel_put(mlx->img, a, b, 0);
+			}
+			else
+			{
+				//printf("a == %d\nb == %d\ncount == %d\n", a, b, alg->count);
+				my_mlx_pixel_put(mlx->img, a, b, 1590000 * alg->count);
+			}
+		}
+	}
+	mlx_put_image_to_window(mlx->mlx, mlx->nwindow, mlx->img->img, 0, 0);
 	mlx_loop(mlx);
+	free(mlx->img);
+	free(mlx);
+	free(alg);
+	return (1);
+}
 
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->add + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
+int	main(void)
+{
+	put_image();
+	return (0);
 }
