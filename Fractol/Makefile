@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 15:34:10 by ybrutout          #+#    #+#              #
-#    Updated: 2021/08/18 13:39:12 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/08/19 11:38:41 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ FLAGS = -Wall -Wextra -Werror -c
 
 FLAGMLX = -lmlx -framework OpenGL -framework AppKit
 
-SRC =	fractol.c \
+SRC =	julia.c \
 		utils.c \
 
 

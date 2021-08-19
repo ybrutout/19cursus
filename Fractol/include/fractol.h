@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 10:56:14 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/19 11:11:17 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/19 12:02:21 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 
 # define SCREEN_W 1090
 # define SCREEN_H 1080
-# define ITERATION 50
+# define ITERATION 200
 # define ERROR_MALLOC 10
-# define END 20
+# define ARG_ERROR 20
+# define END 30
 
 typedef struct	s_image
 {
@@ -54,8 +55,10 @@ typedef struct	s_alg
 
 //utils
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
-void	*init_struct_mlx(int i);
-void	*change_mlx(int i, int a, int b);
+void	*init_struct(int i);
 int		ft_error(int message, int nb_free, t_mlx *mlx, t_alg *alg);
+
+//mandelbort_utils
+void	*change_mlx(int i, int a, int b);
 
 #endif
