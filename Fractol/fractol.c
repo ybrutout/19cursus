@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 09:42:19 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/18 16:55:23 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/19 11:14:58 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,14 @@ int	put_image(void)
 				alg->tmp = alg->z_r;
 				alg->z_r = (pow(alg->z_r, 2)) - (pow(alg->z_i, 2)) + alg->c_r;
 				alg->z_i = (2 * alg->z_i * alg->tmp) + alg->c_i;
-				if ((alg->z_i * alg->z_r) > 4)
+				if ((alg->z_i * alg->z_i + alg->z_r * alg->z_r) > 4)
 					break ;
 				alg->count++;
 			}
 			if (alg->count == ITERATION)
-			{
-				//printf("a == %d\nb == %d\ncount == %d\n", a, b, alg->count);
 				my_mlx_pixel_put(mlx->img, a, b, 0);
-			}
 			else
-			{
-				//printf("a == %d\nb == %d\ncount == %d\n", a, b, alg->count);
-				my_mlx_pixel_put(mlx->img, a, b, 1590000 * alg->count);
-			}
+				my_mlx_pixel_put(mlx->img, a, b, 98798798 + 1000 * alg->count);
 		}
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->nwindow, mlx->img->img, 0, 0);

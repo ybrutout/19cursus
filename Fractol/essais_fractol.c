@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 15:03:15 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/18 15:25:53 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/19 11:11:17 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		main(void)
 	void	*new_window;
 	int		max_applied;
 	int		a, b, i;//tests
-	double	new_a, new_b;//test
+	long double	new_a, new_b;//test
 	int		count;//test
 
 	mlx = mlx_init();
@@ -45,8 +45,8 @@ int		main(void)
 		{
 			i = -1;
 			count = 0;
-			new_a = (double)a / SCREEN_W * 2.0 - 2;
-			new_b = (double)b / SCREEN_H * 2.0 - 2;
+			new_a = (long double)a / SCREEN_W * 2.0 - 2;
+			new_b = (long double)b / SCREEN_H * 2.0 - 2;
 			while (++i < max_applied)
 			{
 				new_a = pow(new_a, 2);
