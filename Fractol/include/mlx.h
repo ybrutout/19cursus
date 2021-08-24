@@ -1,9 +1,9 @@
 /*
-** mlx.h for MinilibX in 
-** 
+** mlx.h for MinilibX in
+**
 ** Made by Charlie Root
 ** Login   <ol@staff.42.fr>
-** 
+**
 ** Started on  Mon Jul 31 16:37:50 2000 Charlie Root
 ** Last update Tue Oct 01 16:23:28 2014 Olivier Crouzet
 */
@@ -79,7 +79,7 @@ void	*mlx_new_image(void *mlx_ptr,int width,int height);
 /*
 **  return void *0 if failed
 */
-char	*mlx_get_data_addr(void *img_ptr, int *bits_per_pixel,
+char	*mlx_get_data_addr(void *img_ptr, int *bpp,
 			   int *size_line, int *endian);
 /*
 **  endian : 0 = sever X is little endian, 1 = big endian

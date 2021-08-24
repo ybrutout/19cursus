@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 10:56:14 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/19 12:02:21 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/24 16:43:22 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,46 +19,69 @@
 # include <stdlib.h>
 # include <math.h>
 
-# define SCREEN_W 1090
-# define SCREEN_H 1080
+// MACCRO
+
+# define SCRN_W 1190
+# define SCRN_H 1080
 # define ITERATION 200
+
 # define ERROR_MALLOC 10
 # define ARG_ERROR 20
-# define END 30
+# define ERROR_ARG_LESS 30
+# define END 100
+
+//STRUCTURE
 
 typedef struct	s_image
 {
 	void	*img;
 	char	*add;
-	int		bits_per_pixel;
-	int		line_length;
+	int		bpp;
+	int		line_l;
 	int		endian;
 }				t_img;
 
-typedef struct	s_mlx
+typedef struct	s_fractal
 {
 	void	*mlx;
 	void	*nwindow;
 	t_img	*img;
-}				t_mlx;
+}				t_fract;
 
 typedef struct	s_alg
 {
-	long double		c_r;
-	long double		c_i;
-	long double		z_r;
-	long double		z_i;
-	long double		tmp;
-	int				i;
-	int				count;
+	long double	min_re;
+	long double	max_re;
+	long double	min_im;
+	long double	max_im;
+	long double	facteur_re;
+	long double	facteur_im;
+	long double	c_re;
+	long double	c_im;
+	long double	z_re;
+	long double	z_im;
+	long double z_tmp;
+	int			iteration;
+	int			x;
+	int			y;
 }				t_alg;
 
-//utils
+//FRACTOL
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
-void	*init_struct(int i);
-int		ft_error(int message, int nb_free, t_mlx *mlx, t_alg *alg);
 
-//mandelbort_utils
-void	*change_mlx(int i, int a, int b);
+//LIBFT
+int		ft_strncmp(const char *s1, const char *s2, unsigned int n);
+int		ft_strlen(const char *s);
 
+//ERROR
+void	print_settings(void);
+void	ft_error(int message);
+
+//UTILS
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+
+//MANDELBROT
+t_alg	*init_struct_man(t_fract *fract);
+void	init_fract(t_fract *fract);
+int		mandelbrot(void);
 #endif

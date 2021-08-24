@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 11:22:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/19 11:23:21 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/24 14:27:52 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	*change_mlx(int i, int a, int b)
 		alg->tmp = 0;
 		alg->count = 0;
 		alg->i = -1;
-		alg->c_r = (long double)a / SCREEN_W * 4 - 2.0;
-		alg->c_i = (long double)b / SCREEN_H * 4 - 2.0;
+		alg->c_r = (long double)a / SCRN_W * 4 - 2.0;
+		alg->c_i = (long double)b / SCRN_H * 4 - 2.0;
 		return (alg);
 	}
 	return (NULL);

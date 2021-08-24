@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/19 11:32:51 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/19 12:11:09 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/08/18 09:42:19 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/08/24 14:27:52 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/fractol.h"
 #include "include/mlx.h"
-
+#include "include/fractol.h"
 
 void	*change_mlx(int i, int a, int b)
 {
@@ -29,19 +28,19 @@ void	*change_mlx(int i, int a, int b)
 		return (alg);
 	if (i == 3)
 	{
-		alg->z_i = (long double)b / SCREEN_H * 4 - 2.0;
-		alg->z_r = (long double)a / SCREEN_W * 4 - 2.0;
+		alg->z_i = 0;
+		alg->z_r = 0;
 		alg->tmp = 0;
 		alg->count = 0;
 		alg->i = -1;
-		alg->c_r = 0.285;
-		alg->c_i = -0.013;
+		alg->c_r = (long double)a / SCRN_W * 4 - 2.0;
+		alg->c_i = (long double)b / SCRN_H * 4 - 2.0;
 		return (alg);
 	}
 	return (NULL);
 }
 
-int	main(void)
+int	mandelbort(void)
 {
 	int	b;
 	int	a;
@@ -51,10 +50,10 @@ int	main(void)
 	mlx = change_mlx(1, 0, 0);
 	alg = change_mlx(2, 0, 0);
 	b = -1;
-	while (++b < SCREEN_H)
+	while (++b < SCRN_H)
 	{
 		a = -1;
-		while (++a < SCREEN_W)
+		while (++a < SCRN_W)
 		{
 			alg = change_mlx(3, a, b);
 			while (++alg->i < ITERATION)
@@ -62,14 +61,14 @@ int	main(void)
 				alg->tmp = alg->z_r;
 				alg->z_r = (pow(alg->z_r, 2)) - (pow(alg->z_i, 2)) + alg->c_r;
 				alg->z_i = (2 * alg->z_i * alg->tmp) + alg->c_i;
-				if (((pow(alg->z_i, 2)) + (pow(alg->z_r, 2))) > 4)
+				if ((alg->z_i * alg->z_i + alg->z_r * alg->z_r) > 4)
 					break ;
 				alg->count++;
 			}
 			if (alg->count == ITERATION)
 				my_mlx_pixel_put(mlx->img, a, b, 0);
 			else
-				my_mlx_pixel_put(mlx->img, a, b, 14942208 + (955 * alg->count));
+				my_mlx_pixel_put(mlx->img, a, b, 14942208 + (10500 * alg->count));
 		}
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->nwindow, mlx->img->img, 0, 0);
@@ -78,4 +77,17 @@ int	main(void)
 	free(mlx);
 	free(alg);
 	return (1);
+}
+
+int	argc_error(int argc, char *argv)
+{
+	if (argc == 1)
+		ft_error(ARG_ERROR, 0, NULL, NULL);
+}
+
+int	main(int argc, char *argv)
+{
+
+	mandelbort();
+	return (0);
 }

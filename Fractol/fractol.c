@@ -5,61 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/18 09:42:19 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/19 11:32:45 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/08/24 10:23:36 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/08/24 16:21:34 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/mlx.h"
 #include "include/fractol.h"
 
-int	mandelbort(void)
+int	check_arg(int argc, char **argv)
 {
-	int	b;
-	int	a;
-	t_mlx		*mlx;
-	t_alg		*alg;
+	int			i;
+	const char	*fractals_list[2] = {"Julia", "Mandelbrot"};
 
-	mlx = change_mlx(1, 0, 0);
-	alg = change_mlx(2, 0, 0);
-	b = -1;
-	while (++b < SCREEN_H)
+	i = 1;
+	if (argc < 2)
+		ft_error(ERROR_ARG_LESS);
+	while (i <= 2)
 	{
-		a = -1;
-		while (++a < SCREEN_W)
-		{
-			alg = change_mlx(3, a, b);
-			while (++alg->i < ITERATION)
-			{
-				alg->tmp = alg->z_r;
-				alg->z_r = (pow(alg->z_r, 2)) - (pow(alg->z_i, 2)) + alg->c_r;
-				alg->z_i = (2 * alg->z_i * alg->tmp) + alg->c_i;
-				if ((alg->z_i * alg->z_i + alg->z_r * alg->z_r) > 4)
-					break ;
-				alg->count++;
-			}
-			if (alg->count == ITERATION)
-				my_mlx_pixel_put(mlx->img, a, b, 0);
-			else
-				my_mlx_pixel_put(mlx->img, a, b, 14942208 + (10500 * alg->count));
-		}
+		if (ft_strncmp(argv[1], fractals_list[i - 1], ft_strlen(fractals_list[i - 1])) == 0)
+			return (i);
+		i++;
 	}
-	mlx_put_image_to_window(mlx->mlx, mlx->nwindow, mlx->img->img, 0, 0);
-	mlx_loop(mlx);
-	free(mlx->img);
-	free(mlx);
-	free(alg);
-	return (1);
+	ft_error(ARG_ERROR);
+	return (-1);
 }
 
-int	argc_error(int argc, char *argv)
+int		main(int argc, char **argv)
 {
-	if (argc == 1)
-		ft_error(ARG_ERROR, 0, NULL, NULL);
-}
+	int 	set;
 
-int	main(int argc, char *argv)
-{
-	mandelbort();
-	return (0);
+	set = check_arg(argc, argv);
+	if (set == 2)
+		mandelbrot();
 }
