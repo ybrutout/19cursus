@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 09:34:19 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/26 10:02:35 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/26 14:15:06 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ t_alg	*init_struct_jul(t_fract *fract)
 		free(fract);
 		ft_error(ERROR_MALLOC);
 	}
-	calc->min_re = -2.0;
-	calc->max_re = 2.0;
+	calc->min_re = -1.0;
+	calc->max_re = 1.0;
 	calc->min_im = -2.0;
 	calc->max_im = calc->min_im + \
 	(calc->max_re - calc->min_re) * SCRN_H / SCRN_W;
-	calc->c_re = 0.285;
-	calc->c_im = -0.01;
+	calc->c_re = -0.8;
+	calc->c_im = -0.156;
 	calc->z_re = 0;
 	calc->z_im = 0;
 	calc->z_tmp = 0;
@@ -61,8 +61,16 @@ void	julia_bis(t_alg **calc, t_fract **fract)
 			my_mlx_pixel_put((*fract)->img, (*calc)->x, (*calc)->y, 0);
 		else
 			my_mlx_pixel_put((*fract)->img, (*calc)->x, (*calc)->y, \
-			200 + (3000 * (*calc)->iteration));
+			0xE8C0DF + (300000 * ((*calc)->iteration) / ITERATION));
 	}
+}
+
+int	essais(int keycode, t_alg *val)
+{
+	printf("keycode == %d\n", keycode);
+	if (keycode == 600)
+		printf("val == %Lf\n", val->x);
+	return (1);
 }
 
 int	julia(void)
@@ -81,6 +89,7 @@ int	julia(void)
 		julia_bis(&calc, &fract);
 	}
 	mlx_put_image_to_window(fract->mlx, fract->nwindow, fract->img->img, 0, 0);
+	mlx_mouse_hook(fract->nwindow, essais, calc);
 	mlx_loop(fract->mlx);
 	free(calc);
 	free(fract->img);

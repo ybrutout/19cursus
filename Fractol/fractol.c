@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 10:23:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/26 09:50:19 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/26 16:09:37 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,19 @@ int	check_arg(int argc, char **argv)
 int		main(int argc, char **argv)
 {
 	int 	set;
+	t_fract	*fract;
 
 	set = check_arg(argc, argv);
+	fract = malloc(sizeof(t_fract));
+	if (!fract)
+		ft_error(ERROR_MALLOC);
+	init_fract(fract);
 	if (set == 2)
-		mandelbrot();
-	if (set == 1)
-		julia();
+		mandelbrot(1, fract);
+	/*if (set == 1)
+		julia();*/
+	mlx_key_hook(fract->nwindow, mandelbrot, fract);
+	mlx_loop(fract->mlx);
+	free(fract->img);
+	free(fract);
 }

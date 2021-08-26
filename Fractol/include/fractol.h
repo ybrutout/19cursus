@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 10:56:14 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/26 09:53:10 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/26 16:36:53 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 
 // MACCRO
 
-# define SCRN_W 1190
+# define SCRN_W 1090
 # define SCRN_H 1080
-# define ITERATION 250
+# define ITERATION 50
 
 # define ERROR_MALLOC 10
 # define ARG_ERROR 20
@@ -63,8 +63,10 @@ typedef struct	s_alg
 	long double	z_im;
 	long double z_tmp;
 	int			iteration;
-	int			x;
-	int			y;
+	long double x;
+	long double y;
+	long double y_tmp;
+	long double	x_tmp;
 }				t_alg;
 
 //FRACTOL
@@ -85,8 +87,7 @@ void		init_fract(t_fract *fract);
 
 //MANDELBROT
 t_alg		*init_struct_man(t_fract *fract);
-void		init_fract(t_fract *fract);
-int			mandelbrot(void);
+int			mandelbrot(int keycode, t_fract *fract);
 
 //JULIA
 int			julia(void);
