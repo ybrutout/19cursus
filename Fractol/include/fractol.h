@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 10:56:14 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/26 09:32:11 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/26 09:53:10 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 # define SCRN_W 1190
 # define SCRN_H 1080
-# define ITERATION 200
+# define ITERATION 250
 
 # define ERROR_MALLOC 10
 # define ARG_ERROR 20
@@ -80,10 +80,14 @@ void		ft_error(int message);
 
 //UTILS
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
-long double	ft_pow(long double nb, int exposant);
+//long double	ft_pow(long double nb, int exposant);
+void		init_fract(t_fract *fract);
 
 //MANDELBROT
 t_alg		*init_struct_man(t_fract *fract);
 void		init_fract(t_fract *fract);
 int			mandelbrot(void);
+
+//JULIA
+int			julia(void);
 #endif

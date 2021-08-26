@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/24 14:55:15 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/26 09:51:17 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/08/26 09:34:19 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/08/26 10:02:35 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/fractol.h"
 
-t_alg	*init_struct_man(t_fract *fract)
+t_alg	*init_struct_jul(t_fract *fract)
 {
 	t_alg	*calc;
 
@@ -28,10 +28,8 @@ t_alg	*init_struct_man(t_fract *fract)
 	calc->min_im = -2.0;
 	calc->max_im = calc->min_im + \
 	(calc->max_re - calc->min_re) * SCRN_H / SCRN_W;
-	calc->facteur_re = (calc->max_re - calc->min_re) / (SCRN_W - 1);
-	calc->facteur_im = (calc->max_im - calc->min_im) / (SCRN_H - 1);
-	calc->c_re = 0;
-	calc->c_im = 0;
+	calc->c_re = 0.285;
+	calc->c_im = -0.01;
 	calc->z_re = 0;
 	calc->z_im = 0;
 	calc->z_tmp = 0;
@@ -41,13 +39,12 @@ t_alg	*init_struct_man(t_fract *fract)
 	return (calc);
 }
 
-void	mandelbrot_bis(t_alg **calc, t_fract **fract)
+void	julia_bis(t_alg **calc, t_fract **fract)
 {
 	while (++(*calc)->x < SCRN_W - 1)
 	{
-		(*calc)->c_re = (*calc)->min_re + ((*calc)->x * (*calc)->facteur_re);
-		(*calc)->z_re = (*calc)->c_re;
-		(*calc)->z_im = (*calc)->c_im;
+		(*calc)->z_re = (long double)(*calc)->x / SCRN_W * 4 - 2.0;
+		(*calc)->z_im = (long double)(*calc)->y / SCRN_H * 4 - 2.0;
 		(*calc)->iteration = 0;
 		while ((*calc)->iteration < ITERATION)
 		{
@@ -64,11 +61,11 @@ void	mandelbrot_bis(t_alg **calc, t_fract **fract)
 			my_mlx_pixel_put((*fract)->img, (*calc)->x, (*calc)->y, 0);
 		else
 			my_mlx_pixel_put((*fract)->img, (*calc)->x, (*calc)->y, \
-			(*calc)->iteration);
+			200 + (3000 * (*calc)->iteration));
 	}
 }
 
-int	mandelbrot(void)
+int	julia(void)
 {
 	t_alg	*calc;
 	t_fract	*fract;
@@ -77,12 +74,11 @@ int	mandelbrot(void)
 	if (!fract)
 		ft_error(ERROR_MALLOC);
 	init_fract(fract);
-	calc = init_struct_man(fract);
+	calc = init_struct_jul(fract);
 	while (++calc->y < SCRN_H - 1)
 	{
 		calc->x = -1;
-		calc->c_im = calc->max_im - (calc->y * calc->facteur_im);
-		mandelbrot_bis(&calc, &fract);
+		julia_bis(&calc, &fract);
 	}
 	mlx_put_image_to_window(fract->mlx, fract->nwindow, fract->img->img, 0, 0);
 	mlx_loop(fract->mlx);

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 10:23:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/26 09:32:26 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/26 09:50:19 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,6 @@ int		main(int argc, char **argv)
 	set = check_arg(argc, argv);
 	if (set == 2)
 		mandelbrot();
+	if (set == 1)
+		julia();
 }

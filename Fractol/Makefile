@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 15:34:10 by ybrutout          #+#    #+#              #
-#    Updated: 2021/08/24 16:30:47 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/08/26 09:50:35 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ FLAGMLX = -lmlx -framework OpenGL -framework AppKit
 
 SRC =	error.c \
 		fractol.c \
+		julia.c \
 		libft.c \
 		mandelbrot.c \
 		utils.c \
