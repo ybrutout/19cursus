@@ -6,11 +6,10 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 10:23:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/24 16:21:34 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/26 09:32:26 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/mlx.h"
 #include "include/fractol.h"
 
 int	check_arg(int argc, char **argv)

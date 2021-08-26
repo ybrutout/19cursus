@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 10:56:14 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/24 16:43:22 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/26 09:32:11 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <limits.h>
 # include <stdlib.h>
 # include <math.h>
+# include "mlx.h"
 
 // MACCRO
 
@@ -67,21 +68,22 @@ typedef struct	s_alg
 }				t_alg;
 
 //FRACTOL
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 //LIBFT
-int		ft_strncmp(const char *s1, const char *s2, unsigned int n);
-int		ft_strlen(const char *s);
+int			ft_strncmp(const char *s1, const char *s2, unsigned int n);
+int			ft_strlen(const char *s);
 
 //ERROR
-void	print_settings(void);
-void	ft_error(int message);
+void		print_settings(void);
+void		ft_error(int message);
 
 //UTILS
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
+long double	ft_pow(long double nb, int exposant);
 
 //MANDELBROT
-t_alg	*init_struct_man(t_fract *fract);
-void	init_fract(t_fract *fract);
-int		mandelbrot(void);
+t_alg		*init_struct_man(t_fract *fract);
+void		init_fract(t_fract *fract);
+int			mandelbrot(void);
 #endif

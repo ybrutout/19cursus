@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:45:56 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/24 13:46:23 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/26 08:49:04 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,10 @@ void	ft_error(int message)
 		print_settings();
 		exit(EXIT_SUCCESS);
 	}
+	else if (message == ERROR_MALLOC)
+	{
+		printf("Error : Error with a malloc\n");
+		exit(EXIT_FAILURE);
+	}
+
 }
