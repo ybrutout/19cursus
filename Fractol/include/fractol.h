@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 10:56:14 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/26 16:36:53 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/31 12:18:43 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct	s_alg
 	long double y;
 	long double y_tmp;
 	long double	x_tmp;
+	long double	essais;//je sais pas ce que ca va donner
 }				t_alg;
 
 //FRACTOL
@@ -88,6 +89,7 @@ void		init_fract(t_fract *fract);
 //MANDELBROT
 t_alg		*init_struct_man(t_fract *fract);
 int			mandelbrot(int keycode, t_fract *fract);
+int mouse_handler(int keycode, int x, int y, void *params);
 
 //JULIA
 int			julia(void);

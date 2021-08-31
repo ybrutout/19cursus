@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 15:34:10 by ybrutout          #+#    #+#              #
-#    Updated: 2021/08/26 09:50:35 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/08/31 10:55:45 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -c
 
-FLAGMLX = -lmlx -framework OpenGL -framework AppKit
+FLAGMLX = -fsanitize=address -g -lmlx -framework OpenGL -framework AppKit
 
 SRC =	error.c \
 		fractol.c \

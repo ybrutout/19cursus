@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 10:23:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/26 16:09:37 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/31 11:00:12 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int		main(int argc, char **argv)
 	/*if (set == 1)
 		julia();*/
 	mlx_key_hook(fract->nwindow, mandelbrot, fract);
+	mlx_mouse_hook(fract->nwindow, mouse_handler, fract);
 	mlx_loop(fract->mlx);
 	free(fract->img);
 	free(fract);
