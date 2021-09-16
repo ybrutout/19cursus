@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 14:55:15 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/31 15:46:57 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/16 11:46:08 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,13 @@ int mouse_handler(int keycode, int x, int y, void *params)
 int	mandelbrot(int keycode, t_fract *fract)
 {
 	static t_alg	*calc;
-	int				i;//test
+	long double		i;//test
+	long double		j;//test
 
 	if (!calc)
 		calc = init_struct_man(fract);
-	i = 0;
+	i = (((calc->min_re - calc->max_re) / SCRN_W) / 2);
+	j = (((calc->min_im - calc->max_im) / SCRN_H) / 2);
 	if (keycode == 125)
 	{
 		calc->min_im = calc->min_im - ((calc->max_im - calc->min_im) / 8);
@@ -143,7 +145,7 @@ int	mandelbrot(int keycode, t_fract *fract)
 		calc->facteur_im = (calc->max_im - calc->min_im) / (SCRN_H - 1);
 		calc->y = -1;
 		calc->x = -1;
-		calc->zoom = calc->zoom / 0.01;
+		calc->zoom = calc->zoom / 0.05;
 	}
 	if (keycode == 4 || keycode == 46)
 	{
@@ -164,7 +166,7 @@ int	mandelbrot(int keycode, t_fract *fract)
 		calc->facteur_im = (calc->max_im - calc->min_im) / (SCRN_H - 1);
 		calc->y = -1;
 		calc->x = -1;
-		calc->zoom = calc->zoom * 0.01;
+		calc->zoom = calc->zoom * 0.05;
 	}
 	while (++calc->y < SCRN_H - 1)
 	{
