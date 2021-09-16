@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 10:56:14 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/31 12:18:43 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:20:58 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 // MACCRO
 
-# define SCRN_W 1090
-# define SCRN_H 1080
+# define SCRN_W 512
+# define SCRN_H 360
 # define ITERATION 50
 
 # define ERROR_MALLOC 10
@@ -67,7 +67,7 @@ typedef struct	s_alg
 	long double y;
 	long double y_tmp;
 	long double	x_tmp;
-	long double	essais;//je sais pas ce que ca va donner
+	long double	zoom;//je sais pas ce que ca va donner
 }				t_alg;
 
 //FRACTOL

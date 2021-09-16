@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 14:55:15 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/31 14:14:55 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:46:57 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_alg	*init_struct_man(t_fract *fract)
 		ft_error(ERROR_MALLOC);
 	}
 	calc->min_re = -2.5;
-	calc->max_re = 1.3;
+	calc->max_re = 1.4;
 	calc->min_im = -1.8;
 	calc->max_im = calc->min_im + \
 	(calc->max_re - calc->min_re) * SCRN_H / SCRN_W;
@@ -38,6 +38,7 @@ t_alg	*init_struct_man(t_fract *fract)
 	calc->iteration = 0;
 	calc->x = 0;
 	calc->y = -1;
+	calc->zoom = 1;
 	return (calc);
 }
 
@@ -75,7 +76,6 @@ int mouse_handler(int keycode, int x, int y, void *params)
 	t_fract	*fract;
 
 	fract = (t_fract *)params;
-	printf("%p\n", fract->nwindow);
 	mandelbrot(keycode, fract);
 	return (0);
 }
@@ -88,29 +88,19 @@ int	mandelbrot(int keycode, t_fract *fract)
 	if (!calc)
 		calc = init_struct_man(fract);
 	i = 0;
-	if (keycode == 126)
-	{
-		calc->min_im = calc->min_im - (calc->min_re * 0.05);
-		calc->max_im = calc->min_im + (calc->max_re - calc->min_re) * SCRN_H / SCRN_W;
-		calc->facteur_re = (calc->max_re - calc->min_re) / (SCRN_W - 1);
-		calc->facteur_im = (calc->max_im - calc->min_im) / (SCRN_H - 1);
-		calc->y = -1;
-		calc->x = -1;
-	}
 	if (keycode == 125)
 	{
-		calc->min_im = calc->min_im + (calc->min_re * 0.05);
+		calc->min_im = calc->min_im - ((calc->max_im - calc->min_im) / 8);
 		calc->max_im = calc->min_im + (calc->max_re - calc->min_re) * SCRN_H / SCRN_W;
 		calc->facteur_re = (calc->max_re - calc->min_re) / (SCRN_W - 1);
 		calc->facteur_im = (calc->max_im - calc->min_im) / (SCRN_H - 1);
 		calc->y = -1;
 		calc->x = -1;
 	}
-	if (keycode == 124)
+	if (keycode == 126)
 	{
-		calc->min_re = calc->min_re - (calc->min_im * 0.05);
-		printf("long double max == %Lf\n", calc->min_re - (calc->max_im - calc->min_im) * SCRN_H / SCRN_W);
-		calc->max_re = calc->min_re - (calc->max_im - calc->min_im) * SCRN_H / SCRN_W;
+		calc->min_im = calc->min_im + ((calc->max_im - calc->min_im) / 8);
+		calc->max_im = calc->min_im + (calc->max_re - calc->min_re) * SCRN_H / SCRN_W;
 		calc->facteur_re = (calc->max_re - calc->min_re) / (SCRN_W - 1);
 		calc->facteur_im = (calc->max_im - calc->min_im) / (SCRN_H - 1);
 		calc->y = -1;
@@ -118,8 +108,17 @@ int	mandelbrot(int keycode, t_fract *fract)
 	}
 	if (keycode == 123)
 	{
-		calc->min_re = calc->min_re + (calc->min_im * 0.05);
-		calc->max_re = calc->min_re + (calc->max_im - calc->min_im) * SCRN_H / SCRN_W;
+		calc->min_re = calc->min_re - ((calc->max_re - calc->min_re) / 8);
+		calc->max_re = calc->max_re - ((calc->max_re - calc->min_re) / 8);
+		calc->facteur_re = (calc->max_re - calc->min_re) / (SCRN_W - 1);
+		calc->facteur_im = (calc->max_im - calc->min_im) / (SCRN_H - 1);
+		calc->y = -1;
+		calc->x = -1;
+	}
+	if (keycode == 124)
+	{
+		calc->min_re = calc->min_re + ((calc->max_re - calc->min_re) / 8);
+		calc->max_re = calc->max_re + ((calc->max_re - calc->min_re) / 8);
 		calc->facteur_re = (calc->max_re - calc->min_re) / (SCRN_W - 1);
 		calc->facteur_im = (calc->max_im - calc->min_im) / (SCRN_H - 1);
 		calc->y = -1;
@@ -127,31 +126,45 @@ int	mandelbrot(int keycode, t_fract *fract)
 	}
 	if (keycode == 5 || keycode == 45)
 	{
-		calc->min_re = calc->min_re * 0.95;
+		if (calc->min_re > 0)
+			calc->min_re = calc->min_re * 1.05;
+		else
+			calc->min_re = calc->min_re * 0.95;
 		if (calc->max_re < 0)
 			calc->max_re = calc->max_re * 1.05;
 		else
 			calc->max_re = calc->max_re * 0.95;
-		calc->min_im = calc->min_im * 0.95;
+		if (calc->min_im > 0)
+			calc->min_im = calc->min_im * 1.05;
+		else
+			calc->min_im = calc->min_im * 0.95;
 		calc->max_im = calc->min_im + (calc->max_re - calc->min_re) * SCRN_H / SCRN_W;
 		calc->facteur_re = (calc->max_re - calc->min_re) / (SCRN_W - 1);
 		calc->facteur_im = (calc->max_im - calc->min_im) / (SCRN_H - 1);
 		calc->y = -1;
 		calc->x = -1;
+		calc->zoom = calc->zoom / 0.01;
 	}
 	if (keycode == 4 || keycode == 46)
 	{
-		calc->min_re = calc->min_re * 1.05;
+		if (calc->min_re > 0)
+			calc->min_re = calc->min_re * 0.95;
+		else
+			calc->min_re = calc->min_re * 1.05;
 		if (calc->max_re < 0)
 			calc->max_re = calc->max_re * 0.95;
 		else
 			calc->max_re = calc->max_re * 1.05;
-		calc->min_im = calc->min_im * 1.05;
+		if (calc->min_im > 0)
+			calc->min_im = calc->min_im * 0.95;
+		else
+			calc->min_im = calc->min_im * 1.05;
 		calc->max_im = calc->min_im + (calc->max_re - calc->min_re) * SCRN_H / SCRN_W;
 		calc->facteur_re = (calc->max_re - calc->min_re) / (SCRN_W - 1);
 		calc->facteur_im = (calc->max_im - calc->min_im) / (SCRN_H - 1);
 		calc->y = -1;
 		calc->x = -1;
+		calc->zoom = calc->zoom * 0.01;
 	}
 	while (++calc->y < SCRN_H - 1)
 	{
