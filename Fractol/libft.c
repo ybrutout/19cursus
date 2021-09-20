@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:14:33 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/20 14:28:10 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/20 15:52:52 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,61 @@ int	ft_strncmp(const char *s1, const char *s2, unsigned int n)
 	}
 }
 
-int	*arg_julia(char **argv, int argc)
+int	is_digit_or_comma(char *str)
 {
-	int	*arg_j;
+	int	i;
+	int comma;
 
-	
-	if (argc > 1)
+	i = 0;
+	comma = 1;
+	while (str[i])
 	{
-		if (argc > 2)
+		if ((str[i] >= '0' && str[i] <= '9') || str[i] == '.' || str[i] == '-')
 		{
-
+			if (str[i] == '.' && comma == 1)
+				comma = -1;
+			else if (str[i] == '.' && comma == -1)
+				return (0);
+			i++;
 		}
+		else
+			return (0);
 	}
+	return (i * comma);
+}
+
+long double	ft_atoi(char *str)
+{
+	long double	unit;
+	long double dec;
+	int			neg;
+	int			comma;
+	int			i;
+
+	neg = 1;
+	unit = 0;
+	dec = 0;
+	comma = 0;
+	i = is_digit_or_comma(str);
+	if (i == 0)
+		return (0);
+	else if (i < 0)
+	{
+		i = (i * -1) - 1;
+		comma = 1;
+	}
+	while ((str[i] >= '0' && str[i] <= '9' && i >= 0) || str[i] == '.')
+	{
+
+		if (str[i] == '.')
+			comma = 0;
+		else if (comma == 1)
+			dec = (dec + (str[i] - '0')) / 10;
+		else
+			unit = 10 * unit + (str[i] - '0');
+		i--;
+	}
+	if (str[i] == '-')
+		neg *= -1;
+	return ((long double) ((unit + dec) * neg));
 }

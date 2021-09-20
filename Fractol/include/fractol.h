@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 10:56:14 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/20 14:33:57 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/20 15:12:24 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct	s_alg
 //LIBFT
 int			ft_strncmp(const char *s1, const char *s2, unsigned int n);
 int			ft_strlen(const char *s);
+long double	ft_atoi(char *str);
 
 //ERROR
 void		free_clean(t_alg *calc, t_fract *fract, int message, int nb);
@@ -96,7 +97,7 @@ void		ft_error(int message);
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void		init_fract(t_fract *fract);
 void		init_struct_man(t_alg *calc);
-void		init_struct_julia(t_alg *calc);
+void		init_struct_julia(t_alg *calc, long double c_re, long double c_im);
 t_alg		*find_the_calc(t_fract *fract, int set, int argc, char **argv);
 
 //MANDELBROT

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 10:12:34 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/20 13:41:58 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/20 15:20:21 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	frame(t_fract *fract)
 {
 	t_alg	*calc;
 
-	calc = find_the_calc(fract, 0);
+	calc = find_the_calc(fract, 0, 0, NULL);
 	if (calc->id == 2)
 		mandelbrot(fract, calc);
 	else if (calc->id == 1)
@@ -28,7 +28,7 @@ int	move_key(int keycode, t_fract *fract)
 {
 	t_alg *calc;
 
-	calc = find_the_calc(fract, 0);
+	calc = find_the_calc(fract, 0, 0, NULL);
 	if (keycode == 125 || keycode == 126)
 	{
 		if (keycode == 126)
@@ -59,7 +59,7 @@ int mouse_handler(int keycode, int x, int y, t_fract *fract)
 
 	(void)x;
 	(void)y;
-	calc = find_the_calc(fract, 0);
+	calc = find_the_calc(fract, 0, 0, NULL);
 	if (keycode == 5)
 	{
 		calc->min_re = calc->min_re + (ZOOM * calc->facteur_re);
