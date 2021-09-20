@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:45:56 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/26 08:49:04 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/20 10:46:28 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,21 @@ void	print_settings(void)
 	printf("the name of the desired fractal.\n");
 	printf("The valid parameters are : \n");
 	printf("\t- Julia\n\t- Mandelbrot\n");
+}
+
+void	free_clean(t_alg *calc, t_fract *fract, int message, int nb)
+{
+	if (nb > 0)
+	{
+		if (nb > 1)
+		{
+			if (nb > 2)
+				free(calc);
+			free(fract->img);
+		}
+		free(fract);
+	}
+	ft_error(message);
 }
 
 void	ft_error(int message)

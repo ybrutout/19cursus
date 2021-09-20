@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 10:23:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/31 11:00:12 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/20 12:56:48 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,11 @@ int		main(int argc, char **argv)
 	if (!fract)
 		ft_error(ERROR_MALLOC);
 	init_fract(fract);
-	if (set == 2)
-		mandelbrot(1, fract);
-	/*if (set == 1)
-		julia();*/
-	mlx_key_hook(fract->nwindow, mandelbrot, fract);
+	find_the_calc(fract, set);
+	mlx_key_hook(fract->nwindow, move_key, fract);
 	mlx_mouse_hook(fract->nwindow, mouse_handler, fract);
+	mlx_loop_hook(fract->mlx, frame, fract);
 	mlx_loop(fract->mlx);
-	free(fract->img);
-	free(fract);
+	free(fract->img); // a changer quand on gerera la fermeture
+	free(fract);// pareil que en haut
 }
