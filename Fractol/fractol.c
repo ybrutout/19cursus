@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 10:23:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/20 13:09:02 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/20 14:32:21 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int			main(int argc, char **argv)
 	if (!fract)
 		ft_error(ERROR_MALLOC);
 	init_fract(fract);
-	find_the_calc(fract, set);
+	find_the_calc(fract, set, argc, argv);
 	mlx_key_hook(fract->nwindow, move_key, fract);
 	mlx_mouse_hook(fract->nwindow, mouse_handler, fract);
 	mlx_loop_hook(fract->mlx, frame, fract);

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:14:33 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/08/24 13:40:48 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/20 14:28:10 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,19 @@ int	ft_strncmp(const char *s1, const char *s2, unsigned int n)
 		}
 		else
 			return (-1);
+	}
+}
+
+int	*arg_julia(char **argv, int argc)
+{
+	int	*arg_j;
+
+	
+	if (argc > 1)
+	{
+		if (argc > 2)
+		{
+
+		}
 	}
 }

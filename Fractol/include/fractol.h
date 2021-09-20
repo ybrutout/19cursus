@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 10:56:14 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/20 13:45:15 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/20 14:33:57 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@
 # define END 100
 # define ZOOM 20
 # define MOVE 10
-
-
 
 /****************/
 /*	STRUCTURE	*/
@@ -72,9 +70,11 @@ typedef struct	s_alg
 	long double	z_im;
 	long double z_tmp;
 	int			iteration;
-	int x;
-	int y;
+	int			x;
+	int			y;
 	int			id;
+	long double	arg_cre;
+	long double	arg_cim;
 }				t_alg;
 
 
@@ -97,7 +97,7 @@ void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void		init_fract(t_fract *fract);
 void		init_struct_man(t_alg *calc);
 void		init_struct_julia(t_alg *calc);
-t_alg		*find_the_calc(t_fract *fract, int set);
+t_alg		*find_the_calc(t_fract *fract, int set, int argc, char **argv);
 
 //MANDELBROT
 int			mandelbrot(t_fract *fract, t_alg *calc);
