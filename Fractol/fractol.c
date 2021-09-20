@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 10:23:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/20 12:56:48 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/20 13:09:02 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/fractol.h"
 
-int	check_arg(int argc, char **argv)
+static int	check_arg(int argc, char **argv)
 {
 	int			i;
 	const char	*fractals_list[2] = {"Julia", "Mandelbrot"};
@@ -30,7 +30,7 @@ int	check_arg(int argc, char **argv)
 	return (-1);
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	int 	set;
 	t_fract	*fract;

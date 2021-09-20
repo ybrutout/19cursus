@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 10:56:14 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/20 12:57:22 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/20 13:45:15 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,6 @@ typedef struct	s_alg
 /*	FONCTION	*/
 /****************/
 
-//FRACTOL
-void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
-
 //LIBFT
 int			ft_strncmp(const char *s1, const char *s2, unsigned int n);
 int			ft_strlen(const char *s);
@@ -97,7 +94,6 @@ void		ft_error(int message);
 
 //UTILS
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
-//long double	ft_pow(long double nb, int exposant);
 void		init_fract(t_fract *fract);
 void		init_struct_man(t_alg *calc);
 void		init_struct_julia(t_alg *calc);
@@ -112,7 +108,6 @@ int			julia(t_fract *fract, t_alg *calc);
 //MOVE
 int			move_key(int keycode, t_fract *fract);
 int 		mouse_handler(int keycode, int x, int y, t_fract *fract);
-
-//FRAME
 int			frame(t_fract *fract);
+
 #endif

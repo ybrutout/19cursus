@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:47:33 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/20 12:49:51 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/20 13:40:35 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,10 @@ void	init_struct_man(t_alg *calc)
 
 void	init_struct_julia(t_alg *calc)
 {
-	calc->min_re = -1.0;
-	calc->max_re = 1.0;
-	calc->min_im = -2.0;
-	calc->max_im = calc->min_im + \
-	(calc->max_re - calc->min_re) * SCRN_H / SCRN_W;
+	calc->min_re = -2.0;
+	calc->max_re = 2.0;
+	calc->min_im = -1.5;
+	calc->max_im = calc->min_im + (calc->max_re - calc->min_re) * SCRN_H / SCRN_W;
 	calc->c_re = -0.8;
 	calc->c_im = -0.156;
 	calc->z_re = 0;
@@ -64,6 +63,8 @@ void	init_struct_julia(t_alg *calc)
 	calc->z_tmp = 0;
 	calc->iteration = 0;
 	calc->id = 1;
+	calc->facteur_re = (calc->max_re - calc->min_re) / (SCRN_W - 1);
+	calc->facteur_im = (calc->max_im - calc->min_im) / (SCRN_H - 1);
 }
 
 t_alg	*find_the_calc(t_fract *fract, int set)
@@ -82,18 +83,3 @@ t_alg	*find_the_calc(t_fract *fract, int set)
 	}
 	return (calc);
 }
-
-/*long double	ft_pow(long double nb, int exposant)
-{
-	int	i;
-	long double	value;
-
-	i = 0;
-	value = 1;
-	while (i < exposant)
-	{
-		value = value * nb;
-		i++;
-	}
-	return (value);
-}*/// pas besoin pour le moment a voir

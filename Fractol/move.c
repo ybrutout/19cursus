@@ -6,11 +6,23 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 10:12:34 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/20 12:54:22 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/20 13:41:58 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/fractol.h"
+
+int	frame(t_fract *fract)
+{
+	t_alg	*calc;
+
+	calc = find_the_calc(fract, 0);
+	if (calc->id == 2)
+		mandelbrot(fract, calc);
+	else if (calc->id == 1)
+		julia(fract, calc);
+	return (1);
+}
 
 int	move_key(int keycode, t_fract *fract)
 {

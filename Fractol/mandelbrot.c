@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 14:55:15 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/20 11:39:52 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/20 13:42:23 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/fractol.h"
 
-void	mandelbrot_bis(t_alg **calc, t_fract **fract)
+static void	mandelbrot_bis(t_alg **calc, t_fract **fract)
 {
 	while (++(*calc)->x < SCRN_W - 1)
 	{
@@ -47,8 +47,6 @@ int	mandelbrot(t_fract *fract, t_alg *calc)
 		calc->c_im = calc->max_im - (calc->y * calc->facteur_im);
 		mandelbrot_bis(&calc, &fract);
 	}
-	printf("max->re == %Lf\nmin->re == %Lf\nmax->im == %Lf\nmin->im == %Lf\n", calc->max_re, calc->min_re, calc->max_im, calc->min_im);//test
-	printf("facteur_re == %Lf\nfacteur_im == %Lf\n", calc->facteur_re, calc->facteur_im);//test
 	mlx_put_image_to_window(fract->mlx, fract->nwindow, fract->img->img, 0, 0);
 	return (1);
 }
