@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 10:23:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/22 08:57:38 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/22 11:42:39 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ int	main(int argc, char **argv)
 	mlx_key_hook(fract->nwindow, move_key, fract);
 	mlx_mouse_hook(fract->nwindow, mouse_handler, fract);
 	mlx_loop_hook(fract->mlx, frame, fract);
+	mlx_hook(fract->nwindow, 17, 1L << 17, close_x, fract);
 	mlx_loop(fract->mlx);
+	return (0);
 }
