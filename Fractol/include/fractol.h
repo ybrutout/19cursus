@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 10:56:14 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/22 11:12:41 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/22 12:59:27 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 /*	MACRO	*/
 /************/
 
-# define SCRN_W 512
-# define SCRN_H 360
+# define SCRN_W 1190
+# define SCRN_H 1080
 # define ITERATION 250
 
 # define ERROR_MALLOC 10

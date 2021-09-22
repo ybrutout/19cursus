@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 15:34:10 by ybrutout          #+#    #+#              #
-#    Updated: 2021/09/22 11:48:52 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/09/22 11:56:18 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,5 +42,8 @@ fclean: 	clean
 	@rm -f $(NAME)
 
 re: fclean all
+
+bonus:
+	@echo "I did'nt do any bonus :)"
 
 .PHONY:		all clean fclean re
