@@ -6,16 +6,16 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:14:33 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/20 15:52:52 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/22 09:24:51 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/fractol.h"
+#include "../include/fractol.h"
 
-int		ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
 	char	*s1;
-	int	i;
+	int		i;
 
 	s1 = (char *)s;
 	i = 0;
@@ -46,7 +46,7 @@ int	ft_strncmp(const char *s1, const char *s2, unsigned int n)
 int	is_digit_or_comma(char *str)
 {
 	int	i;
-	int comma;
+	int	comma;
 
 	i = 0;
 	comma = 1;
@@ -66,29 +66,17 @@ int	is_digit_or_comma(char *str)
 	return (i * comma);
 }
 
-long double	ft_atoi(char *str)
+static long double	ft_atoi_bis(char *str, int i, int comma)
 {
 	long double	unit;
-	long double dec;
+	long double	dec;
 	int			neg;
-	int			comma;
-	int			i;
 
-	neg = 1;
 	unit = 0;
 	dec = 0;
-	comma = 0;
-	i = is_digit_or_comma(str);
-	if (i == 0)
-		return (0);
-	else if (i < 0)
-	{
-		i = (i * -1) - 1;
-		comma = 1;
-	}
+	neg = 1;
 	while ((str[i] >= '0' && str[i] <= '9' && i >= 0) || str[i] == '.')
 	{
-
 		if (str[i] == '.')
 			comma = 0;
 		else if (comma == 1)
@@ -99,5 +87,25 @@ long double	ft_atoi(char *str)
 	}
 	if (str[i] == '-')
 		neg *= -1;
-	return ((long double) ((unit + dec) * neg));
+	return ((unit + dec) * neg);
+}
+
+long double	ft_atoi(char *str)
+{
+	int			comma;
+	int			i;
+	long double	nb;
+
+	comma = 0;
+	nb = 0;
+	i = is_digit_or_comma(str);
+	if (i == 0)
+		return (0);
+	else if (i < 0)
+	{
+		i = (i * -1) - 1;
+		comma = 1;
+	}
+	nb = ft_atoi_bis(str, i, comma);
+	return (nb);
 }

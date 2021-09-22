@@ -6,11 +6,11 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:45:56 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/20 10:46:28 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/22 09:24:42 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/fractol.h"
+#include "../include/fractol.h"
 
 void	print_settings(void)
 {
@@ -41,18 +41,18 @@ void	ft_error(int message)
 	{
 		printf("Error : No argument detected\n");
 		print_settings();
-		exit(EXIT_SUCCESS);
 	}
 	else if (message == ARG_ERROR)
 	{
 		printf("Error : Wrong argument\n");
 		print_settings();
-		exit(EXIT_SUCCESS);
 	}
 	else if (message == ERROR_MALLOC)
 	{
 		printf("Error : Error with a malloc\n");
 		exit(EXIT_FAILURE);
 	}
-
+	else if (message == END)
+		printf("Goodbye !\n");
+	exit(EXIT_SUCCESS);
 }

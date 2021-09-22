@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 10:23:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/20 14:32:21 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/22 08:57:38 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static int	check_arg(int argc, char **argv)
 		ft_error(ERROR_ARG_LESS);
 	while (i <= 2)
 	{
-		if (ft_strncmp(argv[1], fractals_list[i - 1], ft_strlen(fractals_list[i - 1])) == 0)
+		if (ft_strncmp(argv[1], fractals_list[i - 1], \
+		 ft_strlen(fractals_list[i - 1])) == 0)
 			return (i);
 		i++;
 	}
@@ -30,9 +31,9 @@ static int	check_arg(int argc, char **argv)
 	return (-1);
 }
 
-int			main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	int 	set;
+	int		set;
 	t_fract	*fract;
 
 	set = check_arg(argc, argv);
@@ -45,6 +46,4 @@ int			main(int argc, char **argv)
 	mlx_mouse_hook(fract->nwindow, mouse_handler, fract);
 	mlx_loop_hook(fract->mlx, frame, fract);
 	mlx_loop(fract->mlx);
-	free(fract->img); // a changer quand on gerera la fermeture
-	free(fract);// pareil que en haut
 }

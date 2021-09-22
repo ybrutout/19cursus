@@ -6,11 +6,11 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 09:34:19 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/20 14:00:28 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/22 09:24:33 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/fractol.h"
+#include "../../include/fractol.h"
 
 static void	julia_bis(t_alg **calc, t_fract **fract)
 {
@@ -22,16 +22,20 @@ static void	julia_bis(t_alg **calc, t_fract **fract)
 		while ((*calc)->iteration < ITERATION)
 		{
 			(*calc)->z_tmp = (*calc)->z_re;
-			(*calc)->z_re = ((*calc)->z_re * (*calc)->z_re) - ((*calc)->z_im * (*calc)->z_im) + (*calc)->c_re;
-			(*calc)->z_im = 2 * (*calc)->z_tmp * (*calc)->z_im + (*calc)->c_im;
-			if (((*calc)->z_re * (*calc)->z_re) + ((*calc)->z_im * (*calc)->z_im) > 4)
+			(*calc)->z_re = ((*calc)->z_re * (*calc)->z_re) - \
+			((*calc)->z_im * (*calc)->z_im) + (*calc)->c_re;
+			(*calc)->z_im = 2 * (*calc)->z_tmp * \
+			(*calc)->z_im + (*calc)->c_im;
+			if (((*calc)->z_re * (*calc)->z_re) + \
+			((*calc)->z_im * (*calc)->z_im) > 4)
 				break ;
 			(*calc)->iteration++;
 		}
 		if ((*calc)->iteration == ITERATION)
 			my_mlx_pixel_put((*fract)->img, (*calc)->x, (*calc)->y, 0);
 		else
-			my_mlx_pixel_put((*fract)->img, (*calc)->x, (*calc)->y, ( 145628 * ((*calc)->iteration) / ITERATION));
+			my_mlx_pixel_put((*fract)->img, (*calc)->x, (*calc)->y, \
+			0xE8C0DF + (-601403 * ((*calc)->iteration) / ITERATION));
 	}
 }
 

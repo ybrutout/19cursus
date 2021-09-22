@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:47:33 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/20 15:53:05 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/22 09:24:46 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/fractol.h"
+#include "../include/fractol.h"
 
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
 
 	dst = data->add + (y * data->line_l + x * (data->bpp / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
 void	init_fract(t_fract *fract)
@@ -55,7 +55,8 @@ void	init_struct_julia(t_alg *calc, long double c_re, long double c_im)
 	calc->min_re = -2.0;
 	calc->max_re = 2.0;
 	calc->min_im = -1.5;
-	calc->max_im = calc->min_im + (calc->max_re - calc->min_re) * SCRN_H / SCRN_W;
+	calc->max_im = calc->min_im + \
+	(calc->max_re - calc->min_re) * SCRN_H / SCRN_W;
 	if (c_re != 0)
 		calc->c_re = c_re;
 	else

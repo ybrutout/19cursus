@@ -6,11 +6,11 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 14:55:15 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/20 13:42:23 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/22 09:24:38 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/fractol.h"
+#include "../../include/fractol.h"
 
 static void	mandelbrot_bis(t_alg **calc, t_fract **fract)
 {
@@ -34,7 +34,8 @@ static void	mandelbrot_bis(t_alg **calc, t_fract **fract)
 		if ((*calc)->iteration == ITERATION)
 			my_mlx_pixel_put((*fract)->img, (*calc)->x, (*calc)->y, 0);
 		else
-			my_mlx_pixel_put((*fract)->img, (*calc)->x, (*calc)->y,  0xE8C0DF + (-300 * (*calc)->iteration));
+			my_mlx_pixel_put((*fract)->img, (*calc)->x, (*calc)->y, \
+			0xE8C0DF + (-300 * (*calc)->iteration));
 	}
 }
 

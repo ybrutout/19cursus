@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/16 15:34:10 by ybrutout          #+#    #+#              #
-#    Updated: 2021/09/20 15:23:02 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/09/22 09:25:19 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,15 +18,13 @@ CFLAGS = -Wall -Wextra -Werror -c
 
 FLAGMLX = -fsanitize=address -g -lmlx -framework OpenGL -framework AppKit
 
-SRC =	error.c \
+SRC =	src/error.c \
 		fractol.c \
-		julia.c \
-		libft.c \
-		mandelbrot.c \
-		move.c \
-		utils.c \
-
-
+		src/init.c \
+		src/fractal/julia.c \
+		src/libft.c \
+		src/fractal/mandelbrot.c \
+		src/move.c \
 
 SRCLIB = libmlx.a
 

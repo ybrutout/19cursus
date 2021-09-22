@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 10:56:14 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/20 15:12:24 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/22 08:36:30 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 # define SCRN_W 512
 # define SCRN_H 360
-# define ITERATION 250
+# define ITERATION 300
 
 # define ERROR_MALLOC 10
 # define ARG_ERROR 20
