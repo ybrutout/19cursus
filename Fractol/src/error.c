@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:45:56 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/22 13:40:02 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/23 08:56:40 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ void	ft_error(int message)
 	}
 	else if (message == END)
 		printf("Goodbye !\n");
-	exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS)
 }
