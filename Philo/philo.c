@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 11:20:48 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/28 15:59:59 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/28 16:07:59 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*routine()
 		write(1, "coucou je suis la !\n", 20);
 		i++;
 	}
-	
+	pthread_mutex_unlock(&mutex);
 	return (0);
 }
 
