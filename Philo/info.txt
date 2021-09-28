@@ -57,3 +57,35 @@ Si aucun attribut n'est assigné, la valeur par défault sera utilisé.
 
 Si la fonction est une réussite, l'id du mutex sera assigné dans *mutex et la fonction retournera un 0.
 Dans le cas inverse, un autre numéro sera renvoyé en fonction de l'erreur.
+
+-------------------------------------------------------------------------------------------------------------------
+
+int	pthread_mutex_destroy (pthread_mutex_t *mutex);
+
+La fonction free la variable mutex.
+
+Si la fonction réussi, elle retourne 0. Dans le cas contraire elle retourne un autre chiffre qui indique quel
+est l'erreur.
+
+-------------------------------------------------------------------------------------------------------------------
+
+int	pthread_mutex_lock (pthread_mutex_t *mutex);
+
+La fonction vérouille mutex. Si le mutex est déjà vérouillé, le thread appellé sera en veille jusqu'à ce que le
+soit déverouillé.
+
+Si la fonction a bien verouillé le mutex, elle retournera 0. Dans le cas contraire elle retournera un autre
+chiffre qui indiquera quel est l'erreur.
+
+-------------------------------------------------------------------------------------------------------------------
+
+int	pthread_mutex_unlock (pthread_mutex_t *mutex);
+
+La fonction déverouille le mutex si il est vérouillé.
+
+Appellé la fonction sur un mutex que le thread ne détient pas, entrainera un comportement indéfinis.
+
+Si la fonction a bien déverouillé le mutex, elle retournera 0. Dans le cas contraire elle retournera un autre
+chiffre qui indiquera quel est l'erreur.
+
+-------------------------------------------------------------------------------------------------------------------
