@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 12:52:33 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/29 16:03:06 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/29 16:11:44 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ int	main(int argc, char **argv)
 	arg = init_arg();
 	if (check_arg(argc, argv, arg) != 1)
 		clean_free(arg, 1, ER_ARG);
+	
 	return (0);
 }

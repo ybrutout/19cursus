@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 12:52:33 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/29 14:24:21 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/09/29 16:11:35 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int	check_arg(int argc, char **argv, t_arg *arg)
 	int	i;
 
 	i = 1;
-	if (argc > 1)
+	if (argc > 1 && argc < 7)
 	{
-		while (i < 6)
+		while (i < 6 && i < argc)
 		{
 			if (ft_is_digit(argv[i]) == 1)
 			{
