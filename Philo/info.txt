@@ -11,6 +11,13 @@ les autres threads du même processeur.
 Si deux threads essayent d'accéder à la même variable de leur mémoire partagée en même temps cela créera des
 comportements indéfinis.
 
+
+Astuces :
+
+- 	Les threads sont enfaite des structures ce qui permet de les mettres dans des tableaux de structures.
+- 	Pour créer les threads et les joindre au programme, il faut faire cela dans deux loop différentes aussi
+	non on enlève tout le principe du thread.
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -27,6 +34,21 @@ cette fonction permet de sécurisé au mieux les comportement indéfinis / indé
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 PROTYPE :
+
+void *memset(void *b, int c, size_t len);
+
+La fonction rempli "len" octet de au pointeur "b" du caractère "c".
+
+il retourne le première argument.
+
+-------------------------------------------------------------------------------------------------------------------
+
+int	usleep(useconds_t microseconds);
+
+La fonction suspend l'exécution du thread appelé pendant "microseconds" microsecondes ou jusqu'à ce qu'un signal
+soit envoyé à ce thread.
+
+La fonction renvoie 0 si elle a réussi aussi non elle renvoi -1.
 
 -------------------------------------------------------------------------------------------------------------------
 
@@ -45,6 +67,14 @@ int	pthread_join (pthread_t thread, void **value_ptr);
 
 c'est une fonction qui lorsqu'elle est appelée suspends l'exécution du thread qui l'a appelée tant que le thread
 ciblé, thread, n'a pas fini.
+
+Elle sert aussi a faire le lien entre la valeur de sortie du thread et le main. l'argument value_ptr est en faite
+un pointeur sur la valeur de retour du thread. Par conte il faut que la mémoire de la valeur soit alloué vu
+qu'elle passe d'une fonction à l'autre. De plus le thread retourne un pointeur or value_ptr est un pointeur sur
+pointeur donc il faut aussi faire attention a cela dans la mise en execution pour récupérer la valeur.
+
+ATTENTION : si la mémoire est alloué pour passer d'une fonction à l'autre, il fait faire hyper attention à la
+libérer avant la fin du programme.
 
 c'est une fonction qui renverra un 0 si tout c'est déroulé correctement.
 
@@ -89,3 +119,15 @@ Si la fonction a bien déverouillé le mutex, elle retournera 0. Dans le cas con
 chiffre qui indiquera quel est l'erreur.
 
 -------------------------------------------------------------------------------------------------------------------
+
+int	gettimeofday(struct timeval *restirct tp, void *restirct tzp);
+
+Cette fonction sert à lire ou à retrouver l'heure et/ou le fuseau horaire.
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Doc utile :
+-	https://www.youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2 (playlist sur youtube sur comment
+	utiliser les threads en C).
+
