@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 13:50:06 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/05 13:06:56 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/05 16:25:17 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,18 @@ void	ft_message(int message)
 	}
 }
 
-void	clean_free(t_arg *arg, t_philo **lst, int nb, int message)
+void	clean_free(t_arg *arg, t_lst_philo *first, int nb, int message)
 {
-	if (nb > 0)
+	t_philo	phil_clean;
+
+	if (nb >= 1)
 	{
-		if (nb > 1)
+		if (nb >= 2)
 		{
-			while (nb > 2)
+			while (nb >= 3)
 			{
-				free(lst[nb]);
-				nb--;
+				
 			}
-			free(lst);
 		}
 		free(arg);
 	}

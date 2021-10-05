@@ -6,11 +6,25 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 13:06:51 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/29 14:08:33 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/05 16:38:52 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void		ft_lst_add_back(t_lst_philo *first, t_lst_philo *new)
+{
+	t_lst_philo *tmp;
+
+	if (!first)
+		first = new;
+	tmp = first;
+	while (tmp->next)
+	{
+		tmp = tmp->next;
+	}
+	tmp->next = new;
+}
 
 int			ft_is_digit(char *str)
 {
