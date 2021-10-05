@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 11:19:04 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/29 14:04:00 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/05 11:57:04 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,15 @@ typedef struct	s_arg
 	long	tm_sleep;
 	int		nb_eat;
 }				t_arg;
+
+typedef struct s_philo
+{
+	pthread_mutex_t	*f_l;
+	int				id;
+	t_philo			*nxt;
+	t_philo			*bef;
+}				t_philo;
+
 
 
 //LIBFT
