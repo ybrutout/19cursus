@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 11:19:04 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/05 11:57:04 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/05 12:55:26 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ long int	ft_atoi(char *str);
 
 t_arg		*init_arg(void);
 int			check_arg(int argc, char **argv, t_arg *arg);
+t_philo		**init_lst_philo(t_arg *arg);
 
 //ERROR
 
-void		clean_free(t_arg *arg, int nb, int message);
+void		clean_free(t_arg *arg, t_philo **lst, int nb, int message);
 
 #endif

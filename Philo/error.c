@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 13:50:06 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/29 16:11:25 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/05 13:06:56 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,25 @@ void	ft_message(int message)
 	}
 	else if (message == ER_ARG)
 	{
-		write(1, "Error : Wrong Argument\n", 23);
+		write(1, "Error : Wrong argument or not enough argument\n", 45);
 		ft_write_the_good_option();
 		exit(EXIT_SUCCESS);
 	}
 }
 
-void	clean_free(t_arg *arg, int nb, int message)
+void	clean_free(t_arg *arg, t_philo **lst, int nb, int message)
 {
 	if (nb > 0)
 	{
+		if (nb > 1)
+		{
+			while (nb > 2)
+			{
+				free(lst[nb]);
+				nb--;
+			}
+			free(lst);
+		}
 		free(arg);
 	}
 	ft_message(message);

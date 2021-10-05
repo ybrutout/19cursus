@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 12:52:33 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/09/29 16:11:35 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/05 12:58:11 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,33 @@ t_arg	*init_arg(void)
 
 	arg = malloc(sizeof(t_arg));
 	if (!arg)
-		clean_free(NULL, 0, ER_MALLOC);
+		clean_free(NULL, NULL, 0, ER_MALLOC);
 	arg->nb_philo = 0;
 	arg->tm_die = 0;
 	arg->tm_eat = 0;
 	arg->tm_sleep = 0;
 	arg->nb_eat = 0;
 	return (arg);
+}
+
+t_philo	**init_lst_philo(t_arg *arg)
+{
+	t_philo	**lst;
+	int		i;
+
+	i = 0;
+	lst = malloc(sizeof(t_philo) * (arg->nb_philo - 1));
+	if (!lst)
+		clean_free(arg, NULL, 1, ER_MALLOC);
+	while (i < arg->nb_philo)
+	{
+		lst[i] = malloc(sizeof(t_philo));
+		if (!lst[i])
+			clean_free(arg, lst, i + 2, ER_MALLOC);
+		lst[i]->id = i + 1;
+		
+	}
+	return (lst);
 }
 
 int	check_arg(int argc, char **argv, t_arg *arg)
