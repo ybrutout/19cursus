@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 13:50:06 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/06 09:52:05 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2021/10/06 12:00:01 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,34 @@ void	ft_message(int message)
 
 void	clean_free(t_arg *arg, t_lst_philo *first, t_philo *philo, int nb, int message)
 {
-	t_lst_philo	*tmp;
+	t_philo		*tmp;
+	t_lst_philo	*tmp_lst;
 
 	if (nb >= 1)
 	{
-		if (nb >= 4)
+		while (nb >= 2)
 		{
-			while (nb > 1)
+			if (first)
+				tmp = first->philo;
+			else
+				tmp = philo;
+			if (nb >= 3)
 			{
-				
+				if (nb >= 4)
+				{
+					tmp_lst = first->next;
+					free(first);
+					first = tmp_lst;
+					nb--;
+				}
+				pthread_mutex_destroy(tmp->fork_right);
+				nb--;
 			}
-		}
-		else if (nb == 2 || nb == 3)
-		{
-			if (nb >= 2)
-			{
-				if (nb == 3)
-					pthread_mutex_destroy(philo->fork_right);
-				free(philo);
-			}
+			free(tmp);
+			nb--;
 		}
 		free(arg);
+		nb--;
 	}
 	ft_message(message);
 }
