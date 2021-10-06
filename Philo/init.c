@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 12:52:33 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/05 16:41:41 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/06 09:30:16 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 t_arg	*init_arg(void)
 {
-	t_arg	*arg;
+	static t_arg	*arg;
 
-	arg = malloc(sizeof(t_arg));
 	if (!arg)
-		clean_free(NULL, NULL, 0, ER_MALLOC);
-	arg->nb_philo = 0;
-	arg->tm_die = 0;
-	arg->tm_eat = 0;
-	arg->tm_sleep = 0;
-	arg->nb_eat = 0;
+	{
+		arg = malloc(sizeof(t_arg));
+		if (!arg)
+			clean_free(NULL, NULL, 0, ER_MALLOC);
+		arg->nb_philo = 0;
+		arg->tm_die = 0;
+		arg->tm_eat = 0;
+		arg->tm_sleep = 0;
+		arg->nb_eat = 0;
+	}
 	return (arg);
 }
 
@@ -87,22 +90,27 @@ t_lst_philo	*init_lst_philo(t_arg *arg)
 	t_lst_philo	*last;
 	t_philo		*philo;
 	int			i;
+	int			mal;
 
 	first = NULL;
 	i = 0;
+	mal = 1;
 	while (i < arg->nb_philo)
 	{
 		philo = malloc(sizeof(t_philo));
 		if (!philo)
-			clean_free(arg, first, (i * 2) + 1, ER_MALLOC);
+			clean_free(arg, first, mal, ER_MALLOC);
+		mal++;
 		philo->id = i + 1;
 		philo->tm_die = arg->tm_die;
 		philo->lst_eat = 0;
 		if (init_fork(philo, first, arg, i) == 0)
-			clean_free(arg, first, (i * 2)+ 2, ER_MALLOC);
+			clean_free(arg, first, mal, ER_MALLOC);
+		mal++;
 		last = new_lst_philo(philo);
 		if (!last)
-			clean_free(arg, first, 8, ER_MALLOC);// a revoir
+			clean_free(arg, first, mal, ER_MALLOC);// a revoir
+		mal++;
 		ft_lst_add_back(first, last);
 	}
 	return (first);
@@ -113,7 +121,7 @@ int	check_arg(int argc, char **argv, t_arg *arg)
 	int	i;
 
 	i = 1;
-	if (argc > 1 && argc < 7)
+	if (argc > 4 && argc < 7)
 	{
 		while (i < 6 && i < argc)
 		{

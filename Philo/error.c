@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 13:50:06 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/05 16:25:17 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/06 09:52:05 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,26 @@ void	ft_message(int message)
 	}
 }
 
-void	clean_free(t_arg *arg, t_lst_philo *first, int nb, int message)
+void	clean_free(t_arg *arg, t_lst_philo *first, t_philo *philo, int nb, int message)
 {
-	t_philo	phil_clean;
+	t_lst_philo	*tmp;
 
 	if (nb >= 1)
 	{
-		if (nb >= 2)
+		if (nb >= 4)
 		{
-			while (nb >= 3)
+			while (nb > 1)
 			{
 				
+			}
+		}
+		else if (nb == 2 || nb == 3)
+		{
+			if (nb >= 2)
+			{
+				if (nb == 3)
+					pthread_mutex_destroy(philo->fork_right);
+				free(philo);
 			}
 		}
 		free(arg);
