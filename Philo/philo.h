@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 11:19:04 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/06 15:13:48 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/06 17:06:11 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define ER_MALLOC 10
 # define ER_ARG 11
 # define ER_GTOD 12
+# define ER_PTH_C 13
+# define ER_PTH_J 14
 
 typedef struct s_arg
 {
@@ -37,7 +39,7 @@ typedef struct s_philo
 {
 	pthread_mutex_t	*fork_right;
 	pthread_mutex_t	*fork_left;
-	pthread_t		*phil_id;
+	pthread_t		phil_id;
 	int				tm_die;
 	int				lst_eat;
 	int				id;

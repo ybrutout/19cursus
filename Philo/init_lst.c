@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:42:08 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/06 15:15:38 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/06 16:06:07 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static t_philo	*init_b(t_lst_philo *first, int mal, int i, t_arg *arg)
 		clean_free(first, NULL, mal, ER_MALLOC);
 	mal++;
 	philo->lst_eat = 0;
-	philo->id = i + 1;
+	philo->id = i;
 	philo->tm_die = arg->tm_die;
 	return (philo);
 }

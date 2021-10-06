@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 13:50:06 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/06 15:11:23 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/06 15:53:07 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ static void	ft_write_the_good_option(void)
 static void	ft_message(int message)
 {
 	if (message == ER_MALLOC)
-	{
 		write(1, "Error : Malloc\n", 15);
-		exit(EXIT_FAILURE);
-	}
 	else if (message == ER_ARG)
 	{
 		write(1, "Error : Wrong argument or not enough argument\n", 45);
@@ -33,10 +30,12 @@ static void	ft_message(int message)
 		exit(EXIT_SUCCESS);
 	}
 	else if (message == ER_GTOD)
-	{
 		write(1, "Error : Get time of the day return -1\n", 38);
-		exit(EXIT_FAILURE);
-	}
+	else if (message == ER_PTH_C)
+		write(1, "Error : A thread has not been created properly\n", 47);
+	else if (message == ER_PTH_J)
+		write(1, "Error : A thread has not been join properly\n", 44);
+	exit(EXIT_FAILURE);
 }
 
 static int	clean_free_b(t_lst_philo *first, t_philo *philo, int nb)
