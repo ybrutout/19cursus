@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 11:19:04 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/06 14:26:34 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/06 15:13:48 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 # define ER_MALLOC 10
 # define ER_ARG 11
+# define ER_GTOD 12
 
 typedef struct s_arg
 {
@@ -29,6 +30,7 @@ typedef struct s_arg
 	long	tm_eat;
 	long	tm_sleep;
 	int		nb_eat;
+	int		nb_malloc;
 }				t_arg;
 
 typedef struct s_philo
@@ -64,5 +66,9 @@ t_lst_philo	*init_lst_philo(t_arg *arg);
 //ERROR
 
 void		clean_free(t_lst_philo *lst, t_philo *philo, int nb, int message);
+
+//GET THE TIME
+
+long int	actual_time(t_philo *philo, t_lst_philo *lst, t_arg *arg);
 
 #endif

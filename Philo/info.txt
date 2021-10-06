@@ -134,7 +134,13 @@ La première étape a été de bien comprendre les threads et les mutexs. C'est 
 pu trouver. (Vous trouverez la doc utile tout en bas).
 
 2ème étape:
-Mise en place de la gestion d'erreur des arguments. 
+Mise en place de la gestion d'erreur des arguments.
+
+3ème étape:
+Mise en place des structures utiles.
+
+4ème étape:
+Gestion du temps.
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////

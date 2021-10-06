@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 13:50:06 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/06 13:48:25 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/06 15:11:23 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ static void	ft_message(int message)
 		write(1, "Error : Wrong argument or not enough argument\n", 45);
 		ft_write_the_good_option();
 		exit(EXIT_SUCCESS);
+	}
+	else if (message == ER_GTOD)
+	{
+		write(1, "Error : Get time of the day return -1\n", 38);
+		exit(EXIT_FAILURE);
 	}
 }
 

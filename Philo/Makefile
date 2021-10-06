@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 11:21:59 by ybrutout          #+#    #+#              #
-#    Updated: 2021/10/06 13:45:42 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/10/06 15:12:58 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,11 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 SRC =	arg.c \
-		philo.c \
 		error.c \
-		init.c \
+		get_the_time.c \
+		init_lst.c \
 		libft.c \
+		philo.c \
 
 OBJ = $(SRC:.c=.o)
 
