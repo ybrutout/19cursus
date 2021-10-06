@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 11:21:59 by ybrutout          #+#    #+#              #
-#    Updated: 2021/09/29 14:02:58 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/10/06 13:45:42 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC =	philo.c \
+SRC =	arg.c \
+		philo.c \
 		error.c \
 		init.c \
 		libft.c \

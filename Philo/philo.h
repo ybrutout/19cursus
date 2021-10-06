@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 11:19:04 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/05 16:41:12 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/06 14:26:34 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define ER_MALLOC 10
 # define ER_ARG 11
 
-typedef struct	s_arg
+typedef struct s_arg
 {
 	int		nb_philo;
 	long	tm_die;
@@ -47,23 +47,22 @@ typedef struct s_lst_philo
 	struct s_lst_philo	*next;
 }				t_lst_philo;
 
+//ARG
 
-
+t_arg		*init_arg(int argc, char **argv);
 
 //LIBFT
 
 int			ft_is_digit(char *str);
 long int	ft_atoi(char *str);
-void		ft_lst_add_back(t_lst_philo *first, t_lst_philo *new);
+t_lst_philo	*ft_lst_add_back(t_lst_philo *first, t_lst_philo *new);
 
 //INIT
 
-t_arg		*init_arg(void);
-int			check_arg(int argc, char **argv, t_arg *arg);
 t_lst_philo	*init_lst_philo(t_arg *arg);
 
 //ERROR
 
-void		clean_free(t_arg *arg, t_lst_philo *lst, int nb, int message);
+void		clean_free(t_lst_philo *lst, t_philo *philo, int nb, int message);
 
 #endif

@@ -6,18 +6,20 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 13:50:06 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/06 13:07:06 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/06 13:48:25 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/*void	ft_write_the_good_option(void)
-{
-	;
-}*/
+/*je dois refaire les instructions !*/
 
-void	ft_message(int message)
+static void	ft_write_the_good_option(void)
+{
+	printf("il faut que je note les indications !!!!\n");
+}
+
+static void	ft_message(int message)
 {
 	if (message == ER_MALLOC)
 	{
@@ -32,34 +34,41 @@ void	ft_message(int message)
 	}
 }
 
-void	clean_free(t_arg *arg, t_lst_philo *first, t_philo *philo, int nb, int message)
+static int	clean_free_b(t_lst_philo *first, t_philo *philo, int nb)
 {
 	t_philo		*tmp;
 	t_lst_philo	*tmp_lst;
 
+	if (first)
+		tmp = first->philo;
+	else
+		tmp = philo;
+	if (nb >= 3)
+	{
+		if (nb >= 4)
+		{
+			tmp_lst = first->next;
+			free(first);
+			first = tmp_lst;
+			nb--;
+		}
+		pthread_mutex_destroy(tmp->fork_right);
+		nb--;
+	}
+	free(tmp);
+	nb--;
+	return (nb);
+}
+
+void	clean_free(t_lst_philo *first, t_philo *philo, int nb, int message)
+{
+	t_arg		*arg;
+
+	arg = init_arg(0, NULL);
 	if (nb >= 1)
 	{
 		while (nb >= 2)
-		{
-			if (first)
-				tmp = first->philo;
-			else
-				tmp = philo;
-			if (nb >= 3)
-			{
-				if (nb >= 4)
-				{
-					tmp_lst = first->next;
-					free(first);
-					first = tmp_lst;
-					nb--;
-				}
-				pthread_mutex_destroy(tmp->fork_right);
-				nb--;
-			}
-			free(tmp);
-			nb--;
-		}
+			nb = clean_free_b(first, philo, nb);
 		free(arg);
 	}
 	ft_message(message);
