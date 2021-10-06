@@ -6,16 +6,16 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 13:50:06 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/06 12:00:01 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/06 13:07:06 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_write_the_good_option(void)
+/*void	ft_write_the_good_option(void)
 {
 	;
-}
+}*/
 
 void	ft_message(int message)
 {
@@ -61,7 +61,6 @@ void	clean_free(t_arg *arg, t_lst_philo *first, t_philo *philo, int nb, int mess
 			nb--;
 		}
 		free(arg);
-		nb--;
 	}
 	ft_message(message);
 }
