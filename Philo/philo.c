@@ -6,22 +6,34 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 12:52:33 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/06 17:08:14 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/06 17:28:01 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void	ft_eat(t_philo *philo)
+{
+	
+}
+
 void	*routine(void *lst)
 {
 	t_arg		*arg;
-	//t_lst_philo	*lst_philo;
+	t_lst_philo	*lst_philo;
 	t_philo		*philo;
+	int			i;//test
 
 	arg = init_arg(0, NULL);
-	//lst_philo = (t_lst_philo*)lst;
-	philo = (t_philo *)lst;
-	printf("id == %d\n", philo->id);
+	lst_philo = (t_lst_philo*)lst;
+	philo = lst_philo->philo;
+	printf("id == %d\n", philo->id);//test
+	i = 0;
+	while (i < 5)
+	{
+		if (philo->id % 2)
+
+	}
 	return (0);
 }
 
@@ -30,7 +42,6 @@ int	main(int argc, char **argv)
 	t_arg		*arg;
 	t_lst_philo	*lst_phil;
 	t_lst_philo	*tmp_lst;
-	t_philo *tmp;
 	long int	now;//test
 	int			i;
 
@@ -45,8 +56,7 @@ int	main(int argc, char **argv)
 	tmp_lst = lst_phil;
 	while (i < arg->nb_philo)
 	{
-		tmp = tmp_lst->philo;
-		if (pthread_create(&tmp->phil_id, NULL, routine, tmp_lst->philo) != 0)
+		if (pthread_create(&tmp_lst->philo->phil_id, NULL, routine, tmp_lst) != 0)
 			clean_free(lst_phil, lst_phil->philo, arg->nb_malloc, ER_PTH_C);
 		tmp_lst = tmp_lst->next;
 		i++;
@@ -55,8 +65,7 @@ int	main(int argc, char **argv)
 	tmp_lst = lst_phil;
 	while (i < arg->nb_philo)
 	{
-		tmp = tmp_lst->philo;
-		if (pthread_join(tmp->phil_id, NULL) != 0)
+		if (pthread_join(tmp_lst->philo->phil_id, NULL) != 0)
 			clean_free(lst_phil, lst_phil->philo, arg->nb_malloc, ER_PTH_J);
 		tmp_lst = tmp_lst->next;
 		i++;
