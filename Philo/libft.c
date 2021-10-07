@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 13:06:51 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/06 14:25:42 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/07 15:17:42 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,25 @@ t_lst_philo	*ft_lst_add_back(t_lst_philo *first, t_lst_philo *new)
 		tmp->next = new;
 	}
 	return (first);
+}
+static void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void	ft_putnbr(int nb)
+{
+	long int i;
+
+	i = nb;
+	if (i < 0)
+	{
+		ft_putchar('-');
+		i *= -1;
+	}
+	if (i >= 10)
+		ft_putnbr(i / 10);
+	ft_putchar(i % 10 + '0');
 }
 
 int	ft_is_digit(char *str)

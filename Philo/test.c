@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 11:20:48 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/07 12:07:21 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/07 16:00:09 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ void	*routine()
 
 	pthread_mutex_lock(&mutex);
 	i = 0;
-	while (i < 10000)
+	while (i < 2)
 	{
 		write(1, "coucou je suis la !\n", 20);
+		sleep(1);
 		i++;
 		j++;
 	}
@@ -40,7 +41,7 @@ int	main(void)
 
 	pthread_mutex_init(&mutex, NULL);
 	gettimeofday(&current_time, NULL);
-	printf("seconds : %ld\nmicro seconds : %d", current_time.tv_sec, current_time.tv_usec);
+	printf("seconds : %ld\nmicro seconds : %d\n", current_time.tv_sec, current_time.tv_usec);
 	i = -1;
 	while (++i < 2)
 	{
@@ -59,7 +60,6 @@ int	main(void)
 			return (2);
 		}
 	}
-
 	if (pthread_mutex_destroy(&mutex) != 0)
 	{
 		write(1, "Error with the destroy of mutex\n", 32);

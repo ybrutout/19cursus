@@ -6,28 +6,15 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 12:52:33 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/07 12:07:42 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/07 16:14:43 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_write(int nb)
+int	ft_write(int nb, t_philo *philo)
 {
-	static pthread_mutex_t	died;
-	static int				nb_died;
-
-
-	pthread_mutex_lock(&died);
-	if (!nb_died)
-		nb_died = 0;
-	if (nb == -1)
-		nb_died = 1;
-	if (nb_died == 1)
-		exit(EXIT_SUCESS);
-	pthr
-
-
+	return (1);
 }
 
 void	*routine(void *lst)
@@ -36,18 +23,20 @@ void	*routine(void *lst)
 	t_lst_philo	*lst_philo;
 	t_philo		*philo;
 	int			i;//test
+	int			j; //test
 
 	arg = init_arg(0, NULL);
 	lst_philo = (t_lst_philo*)lst;
 	philo = lst_philo->philo;
-	printf("id == %d\n", philo->id);//test
-	i = 0;
-	while (i < 5)
-	{
-		if (philo->id % 2)
-			;
-		i++;
-	}
+	//printf("id == %d\n", philo->id);//test
+	i = 1;
+	j = 0;
+	/*while (i)
+	{*/
+		if (ft_write(j++, philo) == 0)
+			return (0);
+		/*i++;
+	}*/
 	return (0);
 }
 
@@ -70,6 +59,7 @@ int	main(int argc, char **argv)
 	tmp_lst = lst_phil;
 	while (i < arg->nb_philo)
 	{
+		tmp_lst->philo->start_tm = actual_time;
 		if (pthread_create(&tmp_lst->philo->phil_id, NULL, routine, tmp_lst) != 0)
 			clean_free(lst_phil, lst_phil->philo, arg->nb_malloc, ER_PTH_C);
 		tmp_lst = tmp_lst->next;

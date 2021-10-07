@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 11:19:04 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/06 17:06:11 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/07 16:11:14 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_philo
 	pthread_t		phil_id;
 	int				tm_die;
 	int				lst_eat;
+	long int		start_tm;
 	int				id;
 }				t_philo;
 
@@ -60,6 +61,7 @@ t_arg		*init_arg(int argc, char **argv);
 int			ft_is_digit(char *str);
 long int	ft_atoi(char *str);
 t_lst_philo	*ft_lst_add_back(t_lst_philo *first, t_lst_philo *new);
+void		ft_putnbr(int nb);
 
 //INIT
 
