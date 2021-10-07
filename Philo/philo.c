@@ -6,15 +6,28 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 12:52:33 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/06 17:28:01 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/07 12:07:42 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_eat(t_philo *philo)
+void	ft_write(int nb)
 {
-	
+	static pthread_mutex_t	died;
+	static int				nb_died;
+
+
+	pthread_mutex_lock(&died);
+	if (!nb_died)
+		nb_died = 0;
+	if (nb == -1)
+		nb_died = 1;
+	if (nb_died == 1)
+		exit(EXIT_SUCESS);
+	pthr
+
+
 }
 
 void	*routine(void *lst)
@@ -32,7 +45,8 @@ void	*routine(void *lst)
 	while (i < 5)
 	{
 		if (philo->id % 2)
-
+			;
+		i++;
 	}
 	return (0);
 }
