@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 11:19:04 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/07 16:11:14 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/13 16:08:37 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,22 @@
 # define ER_GTOD 12
 # define ER_PTH_C 13
 # define ER_PTH_J 14
+# define FORK 21
+# define SLEEP 22
+# define EAT 23
+# define DEAD 24
+# define THINK 25
 
 typedef struct s_arg
 {
-	int		nb_philo;
-	long	tm_die;
-	long	tm_eat;
-	long	tm_sleep;
-	int		nb_eat;
-	int		nb_malloc;
+	int				nb_philo;
+	long			tm_die;
+	long			tm_eat;
+	long			tm_sleep;
+	int				nb_eat;
+	int				nb_malloc;
+	int				dead;
+	pthread_mutex_t	*write_mut;
 }				t_arg;
 
 typedef struct s_philo
@@ -40,8 +47,7 @@ typedef struct s_philo
 	pthread_mutex_t	*fork_right;
 	pthread_mutex_t	*fork_left;
 	pthread_t		phil_id;
-	int				tm_die;
-	int				lst_eat;
+	long int		lst_eat;
 	long int		start_tm;
 	int				id;
 }				t_philo;
@@ -73,6 +79,15 @@ void		clean_free(t_lst_philo *lst, t_philo *philo, int nb, int message);
 
 //GET THE TIME
 
-long int	actual_time(t_philo *philo, t_lst_philo *lst, t_arg *arg);
+long int	ft_actual_time(t_philo *philo, t_lst_philo *lst, t_arg *arg);
+int			ft_sleep(long int ms, t_lst_philo *lst);
+
+//ROUTINE
+
+void		*routine(void *lst);
+
+//PHILO
+
+int			ft_write(int nb, t_philo *philo, t_lst_philo *lst, t_arg *arg);
 
 #endif

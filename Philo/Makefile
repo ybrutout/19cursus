@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 11:21:59 by ybrutout          #+#    #+#              #
-#    Updated: 2021/10/06 16:12:36 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/10/13 12:59:16 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror ##-fsanitize=address
 
 SRC =	arg.c \
 		error.c \
@@ -22,6 +22,7 @@ SRC =	arg.c \
 		init_lst.c \
 		libft.c \
 		philo.c \
+		routine.c \
 
 OBJ = $(SRC:.c=.o)
 

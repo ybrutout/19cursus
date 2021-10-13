@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 12:52:33 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/06 15:04:51 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/13 11:50:46 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ t_arg	*init_arg(int argc, char **argv)
 			clean_free(NULL, NULL, 0, ER_MALLOC);
 		check_arg(argc, argv, arg);
 		arg->nb_malloc = 1;
+		arg->dead = 0;
+		arg->write_mut = malloc(sizeof(pthread_mutex_t)); //gérer le nouveau malloc
+		//protection de malloc
+		if (pthread_mutex_init(arg->write_mut, NULL) != 0)
+			clean_free(NULL, NULL, 0, ER_MALLOC);// a refaire
 	}
 	return (arg);
 }
