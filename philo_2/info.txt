@@ -1,0 +1,158 @@
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+THREAD :
+
+Il existe toujours un minimum de thread par processus. Mais il est aussi possible d'en créer.
+Chaque thread a en lui ses éléments dont lui seul à l'accès, mais aussi ses éléments qui sont partagés avec
+les autres threads du même processeur.
+
+Si deux threads essayent d'accéder à la même variable de leur mémoire partagée en même temps cela créera des
+comportements indéfinis.
+
+
+Astuces :
+
+- 	Les threads sont enfaite des structures ce qui permet de les mettres dans des tableaux de structures.
+- 	Pour créer les threads et les joindre au programme, il faut faire cela dans deux loop différentes aussi
+	non on enlève tout le principe du thread.
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+MUTEX :
+
+Le mutex peut être comparé à une serurre qui s'ouvre et qui se ferme pour bloqué un bout de code et contrer
+la possibilité que deux threads utilisent la même variable au même moment. Plus concrétement, si un thread(th2)
+veut avoir accès a une variable déjà utilisé par un autre thread(th1), le mutex fera ensorte que th2 attende que
+th1 ait finie avec la variable avant de lui donner accès.
+
+cette fonction permet de sécurisé au mieux les comportement indéfinis / indésirable.
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+PROTYPE :
+
+void *memset(void *b, int c, size_t len);
+
+La fonction rempli "len" octet de au pointeur "b" du caractère "c".
+
+il retourne le première argument.
+
+-------------------------------------------------------------------------------------------------------------------
+
+int	usleep(useconds_t microseconds);
+
+La fonction suspend l'exécution du thread appelé pendant "microseconds" microsecondes ou jusqu'à ce qu'un signal
+soit envoyé à ce thread.
+
+La fonction renvoie 0 si elle a réussi aussi non elle renvoi -1.
+
+-------------------------------------------------------------------------------------------------------------------
+
+int	pthread_create (pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg);
+
+C'est une fonction qui crée un thread.
+Si le thread est correctement créer, son id sera stocké dans thread. La fonction retournera un 0 sauf
+en cas d'erreur.
+
+Le thread est créé pour exécuter la fonction start routine. qui est un void pointeur qui prend en paramètre
+un void pointeur aussi. Cet argument qui lui est envoyé n'est autre que arg.
+
+-------------------------------------------------------------------------------------------------------------------
+
+int	pthread_join (pthread_t thread, void **value_ptr);
+
+c'est une fonction qui lorsqu'elle est appelée suspends l'exécution du thread qui l'a appelée tant que le thread
+ciblé, thread, n'a pas fini.
+
+Elle sert aussi a faire le lien entre la valeur de sortie du thread et le main. l'argument value_ptr est en faite
+un pointeur sur la valeur de retour du thread. Par conte il faut que la mémoire de la valeur soit alloué vu
+qu'elle passe d'une fonction à l'autre. De plus le thread retourne un pointeur or value_ptr est un pointeur sur
+pointeur donc il faut aussi faire attention a cela dans la mise en execution pour récupérer la valeur.
+
+ATTENTION : si la mémoire est alloué pour passer d'une fonction à l'autre, il fait faire hyper attention à la
+libérer avant la fin du programme.
+
+c'est une fonction qui renverra un 0 si tout c'est déroulé correctement.
+
+-------------------------------------------------------------------------------------------------------------------
+
+int	pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *attr);
+
+C'est une fonction qui crée un mutex. Celui ci peut avoir un attribu mais cela reste optionnel.
+Si aucun attribut n'est assigné, la valeur par défault sera utilisé.
+
+Si la fonction est une réussite, l'id du mutex sera assigné dans *mutex et la fonction retournera un 0.
+Dans le cas inverse, un autre numéro sera renvoyé en fonction de l'erreur.
+
+-------------------------------------------------------------------------------------------------------------------
+
+int	pthread_mutex_destroy (pthread_mutex_t *mutex);
+
+La fonction free la variable mutex.
+
+Si la fonction réussi, elle retourne 0. Dans le cas contraire elle retourne un autre chiffre qui indique quel
+est l'erreur.
+
+-------------------------------------------------------------------------------------------------------------------
+
+int	pthread_mutex_lock (pthread_mutex_t *mutex);
+
+La fonction vérouille mutex. Si le mutex est déjà vérouillé, le thread appellé sera en veille jusqu'à ce que le
+soit déverouillé.
+
+Si la fonction a bien verouillé le mutex, elle retournera 0. Dans le cas contraire elle retournera un autre
+chiffre qui indiquera quel est l'erreur.
+
+-------------------------------------------------------------------------------------------------------------------
+
+int	pthread_mutex_unlock (pthread_mutex_t *mutex);
+
+La fonction déverouille le mutex si il est vérouillé.
+
+Appellé la fonction sur un mutex que le thread ne détient pas, entrainera un comportement indéfinis.
+
+Si la fonction a bien déverouillé le mutex, elle retournera 0. Dans le cas contraire elle retournera un autre
+chiffre qui indiquera quel est l'erreur.
+
+-------------------------------------------------------------------------------------------------------------------
+
+int	gettimeofday(struct timeval *restirct tp, void *restirct tzp);
+
+Cette fonction sert à lire ou à retrouver l'heure et/ou le fuseau horaire.
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+MISE EN PLACE DE LA SOLUTION :
+
+1ère étape:
+La première étape a été de bien comprendre les threads et les mutexs. C'est pourquoi j'ai lu toute la doc que j'ai
+pu trouver. (Vous trouverez la doc utile tout en bas).
+
+2ème étape:
+Mise en place des structures utiles.
+	-	Check des arguments.
+	-	Mise en place de la gestion d'erreurs.
+	-	Initialisation des différentes structures et/ou liste utile.
+	-	Mise en place de la création des threads et de leur renvoie vers la fonction routine.
+
+3ème étape:
+Création de la routine. Quelques problèmes aux quels je me suis confrontés avec la solution que j'ai mis en
+place :
+
+	-	Les philosophes impairs (ceux qui partent en premier chez moi) ne partent pas en même temps.
+			==> Le problème c'est que la création des threads ca prend du temps. C'est pourquoi j'ai créé une
+			variable commune à tous les thread qui est initialisés à 0. Aucun philo ne commence sa routine avant
+			que cette variable ne soit pas devenu 1. Cette variable est changé dans mon main à la fin de la
+			création des threads. 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Doc utile :
+-	https://www.youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2 (playlist sur youtube sur comment
+	utiliser les threads en C).
+

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:42:08 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/13 14:11:44 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/14 10:07:48 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static t_lst_philo	*new_lst_philo(t_philo *philo)
 	return (new);
 }
 
-static t_philo	*init_b(t_lst_philo *first, int mal, int i)
+static t_philo	*init_b(t_lst_philo *first, int mal, int i, int *beguin)
 {
 	t_philo	*philo;
 
@@ -56,10 +56,11 @@ static t_philo	*init_b(t_lst_philo *first, int mal, int i)
 	mal++;
 	philo->lst_eat = 0;
 	philo->id = i;
+	philo->extra = beguin;
 	return (philo);
 }
 
-t_lst_philo	*init_lst_philo(t_arg *arg)
+t_lst_philo	*init_lst_philo(t_arg *arg, int *beguin)
 {
 	t_lst_philo	*first;
 	t_lst_philo	*last;
@@ -72,13 +73,13 @@ t_lst_philo	*init_lst_philo(t_arg *arg)
 	mal = 1;
 	while (i <= arg->nb_philo)
 	{
-		philo = init_b(first, mal, i);
+		philo = init_b(first, mal, i, beguin);
 		if (init_fork(philo, &first, arg, i) == 0)
-			clean_free(first, philo, mal, ER_MALLOC);
+			clean_free(first, philo, mal, ER_MALLOC);//gestion des erreurs à changé
 		mal++;
 		last = new_lst_philo(philo);
 		if (!last)
-			clean_free(first, philo, mal, ER_MALLOC);
+			clean_free(first, philo, mal, ER_MALLOC);//gestion des erreurs à changé
 		mal++;
 		if (i == arg->nb_philo)
 			last->next = first;

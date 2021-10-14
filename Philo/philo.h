@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 11:19:04 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/13 16:08:37 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/14 10:02:04 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_philo
 	long int		lst_eat;
 	long int		start_tm;
 	int				id;
+	int				*extra;
 }				t_philo;
 
 typedef struct s_lst_philo
@@ -71,7 +72,7 @@ void		ft_putnbr(int nb);
 
 //INIT
 
-t_lst_philo	*init_lst_philo(t_arg *arg);
+t_lst_philo	*init_lst_philo(t_arg *arg, int *beguin);
 
 //ERROR
 

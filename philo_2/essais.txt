@@ -1,0 +1,31 @@
+Ce programme fonctionne avec 4 arguments obligatoires et un arguments optionnel :
+
+	1.Le nombre de philosophe	:
+		Cela équivaudra aussi au nombre de fourchette.
+	2.Le temps pour mourrir		:
+		Cela équivaudra au temps maximum qu'il peut y avoir entre deux repas.
+	3.Le temps pour manger		:
+		Cela équivaudra au temps qu'il faut à chaque philosophe pour manger.
+	4.Le temps pour dormir		:
+		Cela équivaudra au temps qu'il faut à chaque philosophe pour dormir.
+	5.Le nombre de repas		:
+		Cela équivaudra au nombre de repas que chaque philosophe devra avoir mangé avant l'arrêt du programme.
+
+remarques : Aucun argument obligatoire ne peut être négatif ou nul.
+
+This program works with 4 mandatory arguments and one optional argument:
+
+	1.the number of philosophers:
+		This will also be equivalent to the number of forks.
+	2.time to die :
+		This will be equivalent to the maximum time it can take between two meals.
+	3.time to eat:
+		This will be equal to the time it takes each philosopher to eat.
+	4) Time to sleep:
+		This will be equivalent to the time it takes each philosopher to sleep.
+	5) The number of meals:
+		This will be equivalent to the number of meals each philosopher must have eaten before the programme stops.
+
+Notes: No mandatory argument can be negative or null.
+
+Translated with www.DeepL.com/Translator (free version)

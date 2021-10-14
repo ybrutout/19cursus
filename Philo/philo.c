@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 12:52:33 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/14 09:41:25 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/14 10:45:12 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,32 @@ int	main(int argc, char **argv)
 	t_arg		*arg;
 	t_lst_philo	*lst_phil;
 	t_lst_philo	*tmp_lst;
+	int			*beguin;
 	int			i;
 
 	arg = init_arg(argc, argv);
 	printf("nb_philo == %d\ntm_die == %ld\n", arg->nb_philo, arg->tm_die); //test
 	printf("tm_eat == %ld\n", arg->tm_eat); //test
 	printf("tm_sleep == %ld\nnb_eat == %d\n", arg->tm_sleep, arg->nb_eat); //test
-	lst_phil = init_lst_philo(arg);
-	i = 0;
+	beguin = malloc(sizeof(int));//proteger beguin
+	*beguin = 1;
+	lst_phil = init_lst_philo(arg, beguin);
 	tmp_lst = lst_phil;
+	i = 0;
 	while (i < arg->nb_philo)
 	{
 		if (pthread_create(&tmp_lst->philo->phil_id, NULL, routine, tmp_lst) != 0)
+		{
+			write(1, "hey\n", 4);//a enlever
+			exit(EXIT_FAILURE);//a enlever
 			clean_free(lst_phil, lst_phil->philo, arg->nb_malloc, ER_PTH_C);
+		}
 		tmp_lst = tmp_lst->next;
 		i++;
 	}
-	i = 0;
+	*beguin = 0;
 	tmp_lst = lst_phil;
+	i = 0;
 	while (i < arg->nb_philo)
 	{
 		if (pthread_join(tmp_lst->philo->phil_id, NULL) != 0)
