@@ -134,14 +134,21 @@ La première étape a été de bien comprendre les threads et les mutexs. C'est 
 pu trouver. (Vous trouverez la doc utile tout en bas).
 
 2ème étape:
-Mise en place de la gestion d'erreur des arguments.
+Mise en place des structures utiles.
+	-	Check des arguments.
+	-	Mise en place de la gestion d'erreurs.
+	-	Initialisation des différentes structures et/ou liste utile.
+	-	Mise en place de la création des threads et de leur renvoie vers la fonction routine.
 
 3ème étape:
-Mise en place des structures utiles.
+Création de la routine. Quelques problèmes aux quels je me suis confrontés avec la solution que j'ai mis en
+place :
 
-4ème étape:
-Gestion du temps.
-
+	-	Les philosophes impairs (ceux qui partent en premier chez moi) ne partent pas en même temps.
+			==> Le problème c'est que la création des threads ca prend du temps. C'est pourquoi j'ai créé une
+			variable commune à tous les thread qui est initialisés à 0. Aucun philo ne commence sa routine avant
+			que cette variable ne soit pas devenu 1. Cette variable est changé dans mon main à la fin de la
+			création des threads. 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

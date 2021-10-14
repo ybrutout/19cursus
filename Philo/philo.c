@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 12:52:33 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/13 16:19:49 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/14 09:41:25 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	main(int argc, char **argv)
 	tmp_lst = lst_phil;
 	while (i < arg->nb_philo)
 	{
-		(tmp_lst)->philo->start_tm = ft_actual_time(tmp_lst->philo, lst_phil, arg);
 		if (pthread_create(&tmp_lst->philo->phil_id, NULL, routine, tmp_lst) != 0)
 			clean_free(lst_phil, lst_phil->philo, arg->nb_malloc, ER_PTH_C);
 		tmp_lst = tmp_lst->next;
