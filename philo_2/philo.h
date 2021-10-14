@@ -49,18 +49,26 @@ typedef struct s_philo
 	int				id;
 } t_philo;
 
+typedef struct s_lst
+{
+	t_philo			*philo;
+	struct s_lst	*next;
+}	t_lst;
+
  //ARGUMENT
  t_arg		*init_arg(t_arg *arg, char **argv);
+ t_lst		*init_lst(t_arg *arg);
 
  //PHILOSOPHERS
 
  //ERROR
  void		ft_error(int message);
- void		free_clean(t_arg *arg, t_philo *philo, int nb, int message);
+ void		free_clean(t_arg *arg, t_philo *philo, t_lst *lst, int nb, int message);
 
- //LIBFT
+ //LIBFT (COMPLET)
  long int	ft_atoi(char *str);
  int		ft_is_digit(char *str);
  void		ft_putnbr(int nb);
+ t_lst		*ft_lst_add_back(t_lst *first, t_lst *new);
 
 #endif

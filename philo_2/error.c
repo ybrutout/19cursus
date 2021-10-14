@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 11:37:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/14 13:32:06 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/14 15:58:41 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,54 @@ void	ft_error(int message)
 	}
 }
 
-void	free_clean(t_arg *arg, t_philo *philo, int nb, int message)
+int	free_clean_lst(t_philo *philo, t_lst *lst, int nb)
+{
+	t_lst	*tmp_lst;
+
+	if (nb >= 8)
+	{
+		tmp_lst = lst;
+		if (nb > 9)
+		{
+			if (nb > 10)
+			{
+				if (nb > 11)
+				{
+					pthread_mutex_destroy(lst->philo->fork_right);
+					nb--;
+				}
+				free(lst->philo->fork_right);
+				nb--;
+			}
+			free(lst->philo);
+			nb--;
+		}
+		lst = tmp_lst->next;
+		free(tmp_lst);
+		nb--;
+	}
+	else
+	{
+		if (nb > 4)
+		{
+			if (nb > 5)
+			{
+				if (nb > 6)
+				{
+					pthread_mutex_destroy(lst->philo->fork_right);
+					nb--;
+				}
+				free(philo->fork_right);
+				nb--;
+			}
+			free(philo);
+			nb--;
+		}
+	}
+	return (nb);
+}
+
+void	free_clean(t_arg *arg, t_philo *philo, t_lst *lst, int nb, int message)
 {
 	if (nb > 0)
 	{
@@ -63,13 +110,26 @@ void	free_clean(t_arg *arg, t_philo *philo, int nb, int message)
 			{
 				if (nb > 3)
 				{
+					while (nb > 4)
+					{
+						nb = free_clean_lst(philo, lst, nb);
+					}
 					pthread_mutex_destroy(arg->extra);
+					nb--;
 				}
 				free(arg->extra);
+				nb--;
 			}
 			free(arg->wait);
+			nb--;
 		}
 		free(arg);
+		nb--;
+	}
+	if (nb != 0)
+	{
+		write(1, "probleme pour clean !\n", 22);
+		exit(EXIT_FAILURE);
 	}
 	ft_error(message);
 }
