@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 11:37:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/14 12:04:04 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:05:06 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	printf_settings(void)
+static void	printf_settings(void)
 {
 	write(1, "This program works with 4 mandatory arguments", 45);
 	write(1, " and one optional argument:\n\n", 29);

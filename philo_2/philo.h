@@ -49,5 +49,7 @@ typedef struct s_philo
 
  //PHILOSOPHERS
 
+ //ERROR
+ void	ft_error(int message);
 
 #endif
