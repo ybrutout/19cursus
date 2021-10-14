@@ -24,6 +24,8 @@
 # define THINK 53
 # define DEAD 54
 # define BAD_ARG 10
+# define ER_MAL 11
+# define ER_MUTEX 12
 
 typedef struct s_arg
 {
@@ -47,9 +49,18 @@ typedef struct s_philo
 	int				id;
 } t_philo;
 
+ //ARGUMENT
+ t_arg		*init_arg(t_arg *arg, char **argv);
+
  //PHILOSOPHERS
 
  //ERROR
- void	ft_error(int message);
+ void		ft_error(int message);
+ void		free_clean(t_arg *arg, t_philo *philo, int nb, int message);
+
+ //LIBFT
+ long int	ft_atoi(char *str);
+ int		ft_is_digit(char *str);
+ void		ft_putnbr(int nb);
 
 #endif
