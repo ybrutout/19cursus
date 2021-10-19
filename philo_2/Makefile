@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/14 11:16:58 by ybrutout          #+#    #+#              #
-#    Updated: 2021/10/19 14:36:33 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/10/19 15:30:29 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC =	argument.c \
 		libft.c \
 		philo.c \
 		philo_list.c \
+		routine.c \
 
 OBJ = $(SRC:.c=.o)
 

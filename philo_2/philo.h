@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:03:16 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/19 14:38:57 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/19 15:47:48 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <stdlib.h>
+# include <sys/time.h>
 
 # define EAT 50
 # define FORK 51
@@ -26,6 +27,9 @@
 # define ER_ARG 10
 # define ER_MAL 11
 # define ER_MUTEX 12
+# define ER_THR 13
+
+# define TEST 100
 
 typedef struct s_arg
 {
@@ -43,7 +47,7 @@ typedef struct s_philo
 {
 	pthread_mutex_t	*fork_left;
 	pthread_mutex_t	*fork_right;
-	pthread_t		*philo_add;
+	pthread_t		philo_add;
 	t_arg			*arg;
 	long			last_eat;
 	int				id;
@@ -64,6 +68,7 @@ void		free_clean(t_philo *philo, t_lst *lst, int nb, int message);
 
 //GET_THE_TIME
 long		get_current(void);
+void		ft_sleep(long ms, t_arg *arg);
 
 //LIBFT (COMPLET)
 long		ft_atoi(char *str);
@@ -73,5 +78,8 @@ t_lst		*ft_lst_add_back(t_lst *first, t_lst *new);
 
 //PHILO_LST
 t_lst		*init_lst(t_arg *arg);
+
+//ROUTINE
+void		*routine(void *lst);
 
 #endif

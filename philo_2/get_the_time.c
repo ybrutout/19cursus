@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:36:08 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/19 14:37:33 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/19 15:05:07 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,14 @@ long	get_current(void)
 
 	gettimeofday(&current_time, NULL);
 	return (current_time.tv_sec * 1000000 + current_time.tv_usec);
+}
+
+void	ft_sleep(long ms, t_arg *arg)
+{
+	const long	time_start = get_current();
+
+	if (ms <= 0)
+		return ;
+	while (get_current() - time_start < ms * 1000 && !arg->died)
+		usleep(80);
 }
