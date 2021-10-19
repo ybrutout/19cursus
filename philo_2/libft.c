@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 12:59:51 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/19 11:50:51 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/19 14:38:32 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	ft_putchar(char c)
 
 void	ft_putnbr(int nb)
 {
-	long int i;
+	long int	i;
 
 	i = nb;
 	if (i < 0)
@@ -65,10 +65,10 @@ t_lst	*ft_lst_add_back(t_lst *first, t_lst *new)
 	return (first);
 }
 
-long int	ft_atoi(char *str)
+long	ft_atoi(char *str)
 {
 	int			i;
-	long int	nb;
+	long		nb;
 
 	i = 0;
 	nb = 0;

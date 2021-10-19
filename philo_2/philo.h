@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                      :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/14 11:16:13 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/14 11:30:13 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/10/19 14:03:16 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/10/19 14:38:57 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@
 typedef struct s_arg
 {
 	int				nb_phil;
-	long int		tm_die;
-	long int		tm_eat;
-	long int		tm_sleep;
+	long			tm_die;
+	long			tm_eat;
+	long			tm_sleep;
+	long			start;
 	int				nb_meal;
 	int				died;
 	pthread_mutex_t	*sec_died;
-} t_arg;
+}	t_arg;
 
 typedef struct s_philo
 {
@@ -44,10 +45,9 @@ typedef struct s_philo
 	pthread_mutex_t	*fork_right;
 	pthread_t		*philo_add;
 	t_arg			*arg;
-	long int		last_eat;
-	long int		start;
+	long			last_eat;
 	int				id;
-} t_philo;
+}	t_philo;
 
 typedef struct s_lst
 {
@@ -55,19 +55,23 @@ typedef struct s_lst
 	struct s_lst	*next;
 }	t_lst;
 
- //ARGUMENT
- t_arg		*init_arg(char **argv);
+//ARGUMENT
+t_arg		*init_arg(char **argv);
 
- //PHILOSOPHERS
+//ERROR
+void		ft_error(int message);
+void		free_clean(t_philo *philo, t_lst *lst, int nb, int message);
 
- //ERROR
- void		ft_error(int message);
- void		free_clean(t_philo *philo, t_lst *lst, int nb, int message);
+//GET_THE_TIME
+long		get_current(void);
 
- //LIBFT (COMPLET)
- long int	ft_atoi(char *str);
- int		ft_is_digit(char *str);
- void		ft_putnbr(int nb);
- t_lst		*ft_lst_add_back(t_lst *first, t_lst *new);
+//LIBFT (COMPLET)
+long		ft_atoi(char *str);
+int			ft_is_digit(char *str);
+void		ft_putnbr(int nb);
+t_lst		*ft_lst_add_back(t_lst *first, t_lst *new);
+
+//PHILO_LST
+t_lst		*init_lst(t_arg *arg);
 
 #endif

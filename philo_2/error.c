@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 11:37:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/19 13:45:56 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/19 14:01:42 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,47 @@ void	ft_error(int message)
 	}
 }
 
-int		free_lst
+static int	free_lst(t_philo *tmp, int nb)
+{
+	if (nb > 4)
+	{
+		if (nb > 5)
+		{
+			if (nb > 6)
+			{
+				if (nb > 7)
+				{
+					pthread_mutex_destroy(tmp->fork_right);
+					nb--;
+				}
+				free(tmp->fork_right);
+				nb--;
+			}
+			pthread_mutex_destroy(tmp->fork_left);
+			nb--;
+		}
+		free(tmp->fork_left);
+		nb--;
+	}
+	free(tmp);
+	nb--;
+	return (nb);
+}
+
+static t_philo	*tmp_is(t_philo *philo, t_lst *lst)
+{
+	t_philo	*tmp;
+
+	if (lst)
+	{
+		tmp = lst->philo;
+		free(lst);
+		lst = lst->next;
+	}
+	else
+		tmp = philo;
+	return (tmp);
+}
 
 void	free_clean(t_philo *philo, t_lst *lst, int nb, int message)
 {
@@ -68,36 +108,8 @@ void	free_clean(t_philo *philo, t_lst *lst, int nb, int message)
 			{
 				while (nb > 3)
 				{
-					if (lst)
-					{
-						tmp = lst->philo;
-						free(lst);
-						lst = lst->next;
-					}
-					else
-						tmp = philo;
-					if (nb > 4)
-					{
-						if (nb > 5)
-						{
-							if (nb > 6)
-							{
-								if (nb > 7)
-								{
-									pthread_mutex_destroy(tmp->fork_right);
-									nb--;
-								}
-								free(tmp->fork_right);
-								nb--;
-							}
-							pthread_mutex_destroy(tmp->fork_left);
-							nb--;
-						}
-						free(tmp->fork_left);
-						nb--;
-					}
-					free(tmp);
-					nb--;
+					tmp = tmp_is(philo, lst);
+					nb = free_lst(tmp, nb);
 				}
 				pthread_mutex_destroy(arg->sec_died);
 			}

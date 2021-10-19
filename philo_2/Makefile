@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/14 11:16:58 by ybrutout          #+#    #+#              #
-#    Updated: 2021/10/19 12:15:20 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/10/19 14:36:33 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,10 @@ CFLAGS = ##-Wall -Wextra -Werror ##-fsanitize=address
 
 SRC =	argument.c \
 		error.c \
+		get_the_time.c \
 		libft.c \
 		philo.c \
+		philo_list.c \
 
 OBJ = $(SRC:.c=.o)
 

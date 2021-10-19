@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 13:14:32 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/19 12:13:38 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/19 14:35:42 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int		check_arg(char **argv)
+int	check_arg(char **argv)
 {
 	int		i;
 
@@ -28,7 +28,7 @@ int		check_arg(char **argv)
 
 static void	argument(t_arg *arg, char **argv)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	arg->nb_phil = ft_atoi(argv[i++]);
@@ -45,6 +45,7 @@ static void	argument(t_arg *arg, char **argv)
 		free_clean(NULL, NULL, 1, ER_MAL);
 	if (pthread_mutex_init(arg->sec_died, NULL))
 		free_clean(NULL, NULL, 2, ER_MUTEX);
+	arg->start = 0;
 }
 
 t_arg	*init_arg(char **argv)
