@@ -23,7 +23,7 @@
 # define SLEEP 52
 # define THINK 53
 # define DEAD 54
-# define BAD_ARG 10
+# define ER_ARG 10
 # define ER_MAL 11
 # define ER_MUTEX 12
 
@@ -34,9 +34,8 @@ typedef struct s_arg
 	long int		tm_eat;
 	long int		tm_sleep;
 	int				nb_meal;
-	int				*wait;
 	int				died;
-	pthread_mutex_t *extra;
+	pthread_mutex_t	*sec_died;
 } t_arg;
 
 typedef struct s_philo
@@ -44,6 +43,7 @@ typedef struct s_philo
 	pthread_mutex_t	*fork_left;
 	pthread_mutex_t	*fork_right;
 	pthread_t		*philo_add;
+	t_arg			*arg;
 	long int		last_eat;
 	long int		start;
 	int				id;
@@ -56,14 +56,13 @@ typedef struct s_lst
 }	t_lst;
 
  //ARGUMENT
- t_arg		*init_arg(t_arg *arg, char **argv);
- t_lst		*init_lst(t_arg *arg);
+ t_arg		*init_arg(char **argv);
 
  //PHILOSOPHERS
 
  //ERROR
  void		ft_error(int message);
- void		free_clean(t_arg *arg, t_philo *philo, t_lst *lst, int nb, int message);
+ void		free_clean(t_philo *philo, t_lst *lst, int nb, int message);
 
  //LIBFT (COMPLET)
  long int	ft_atoi(char *str);

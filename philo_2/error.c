@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 11:37:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/14 15:58:41 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/19 13:45:56 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,101 +35,75 @@ static void	printf_settings(void)
 
 void	ft_error(int message)
 {
-	if (message == BAD_ARG)
+	if (message == ER_ARG)
 	{
-		write(1, "Error : ARG\n\n", 13);
 		printf_settings();
-		exit(EXIT_SUCCESS);
-	}
-	if (message == ER_MAL)
-	{
-		write(1, "Error : BAD MALLOC\n", 19);
 		exit(EXIT_FAILURE);
 	}
-	if (message == ER_MUTEX)
+	else if (message == ER_MAL)
 	{
-		write(1, "Error : MUTEX\n", 14);
+		write(1, "Malloc Error\n", 13);
+		exit(EXIT_FAILURE);
+	}
+	else if (message == ER_MUTEX)
+	{
+		write(1, "Mutex Error\n", 12);
 		exit(EXIT_FAILURE);
 	}
 }
 
-int	free_clean_lst(t_philo *philo, t_lst *lst, int nb)
-{
-	t_lst	*tmp_lst;
+int		free_lst
 
-	if (nb >= 8)
-	{
-		tmp_lst = lst;
-		if (nb > 9)
-		{
-			if (nb > 10)
-			{
-				if (nb > 11)
-				{
-					pthread_mutex_destroy(lst->philo->fork_right);
-					nb--;
-				}
-				free(lst->philo->fork_right);
-				nb--;
-			}
-			free(lst->philo);
-			nb--;
-		}
-		lst = tmp_lst->next;
-		free(tmp_lst);
-		nb--;
-	}
-	else
-	{
-		if (nb > 4)
-		{
-			if (nb > 5)
-			{
-				if (nb > 6)
-				{
-					pthread_mutex_destroy(lst->philo->fork_right);
-					nb--;
-				}
-				free(philo->fork_right);
-				nb--;
-			}
-			free(philo);
-			nb--;
-		}
-	}
-	return (nb);
-}
-
-void	free_clean(t_arg *arg, t_philo *philo, t_lst *lst, int nb, int message)
+void	free_clean(t_philo *philo, t_lst *lst, int nb, int message)
 {
+	t_arg	*arg;
+	t_philo	*tmp;
+
+	arg = init_arg(NULL);
 	if (nb > 0)
 	{
 		if (nb > 1)
 		{
 			if (nb > 2)
 			{
-				if (nb > 3)
+				while (nb > 3)
 				{
-					while (nb > 4)
+					if (lst)
 					{
-						nb = free_clean_lst(philo, lst, nb);
+						tmp = lst->philo;
+						free(lst);
+						lst = lst->next;
 					}
-					pthread_mutex_destroy(arg->extra);
+					else
+						tmp = philo;
+					if (nb > 4)
+					{
+						if (nb > 5)
+						{
+							if (nb > 6)
+							{
+								if (nb > 7)
+								{
+									pthread_mutex_destroy(tmp->fork_right);
+									nb--;
+								}
+								free(tmp->fork_right);
+								nb--;
+							}
+							pthread_mutex_destroy(tmp->fork_left);
+							nb--;
+						}
+						free(tmp->fork_left);
+						nb--;
+					}
+					free(tmp);
 					nb--;
 				}
-				free(arg->extra);
-				nb--;
+				pthread_mutex_destroy(arg->sec_died);
 			}
-			free(arg->wait);
-			nb--;
+			free(arg->sec_died);
 		}
 		free(arg);
-		nb--;
-	}
-	if (nb != 0)
-	{
-		write(1, "probleme pour clean !\n", 22);
-		exit(EXIT_FAILURE);
 	}
 	ft_error(message);
 }
