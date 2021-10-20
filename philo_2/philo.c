@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 11:15:51 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/19 15:43:57 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/20 11:31:20 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ int	main(int argc, char **argv)
 	{
 		tmp->philo->last_eat = arg->start;
 		if (pthread_create(&tmp->philo->philo_add, NULL, routine, (void *)tmp))
-			free_clean(tmp->philo, lst, ((arg->nb_phil * 6) + 3), ER_THR);
+			free_clean(tmp->philo, lst, ((arg->nb_phil * 4) + 3), ER_THR);
 		tmp = tmp->next;
 	}
 	tmp = lst;
 	while (tmp)
 	{
 		if (pthread_join(tmp->philo->philo_add, NULL) != 0)
-			free_clean(lst->philo, lst, ((arg->nb_phil * 6) + 3), ER_THR);
+			free_clean(lst->philo, lst, ((arg->nb_phil * 4) + 3), ER_THR);
 		tmp = tmp->next;
 	}
 	return (0);

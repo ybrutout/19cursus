@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 11:37:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/19 15:15:43 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/20 11:32:07 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,29 +46,19 @@ void	ft_error(int message)
 	exit(EXIT_FAILURE);
 }
 
-static int	free_lst(t_philo *tmp, int nb)
+static int	free_lst(t_philo *philo, int nb)
 {
 	if (nb > 4)
 	{
 		if (nb > 5)
 		{
-			if (nb > 6)
-			{
-				if (nb > 7)
-				{
-					pthread_mutex_destroy(tmp->fork_right);
-					nb--;
-				}
-				free(tmp->fork_right);
-				nb--;
-			}
-			pthread_mutex_destroy(tmp->fork_left);
+			pthread_mutex_destroy(philo->fork_right);
 			nb--;
 		}
-		free(tmp->fork_left);
+		free(philo->fork_right);
 		nb--;
 	}
-	free(tmp);
+	free(philo);
 	nb--;
 	return (nb);
 }

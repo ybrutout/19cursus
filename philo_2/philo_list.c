@@ -6,31 +6,50 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:16:21 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/19 14:34:52 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/20 11:28:50 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	init_philo(t_philo *philo, t_lst *lst, int i, int mall)
+static int	init_fork(t_philo *philo, t_lst **first, t_arg	*arg, int i)
 {
-	t_arg	*arg;
+	static pthread_mutex_t	*last;
 
-	arg = init_arg(NULL);
-	philo->fork_left = malloc(sizeof(pthread_mutex_t));
-	if (!philo->fork_left)
-		free_clean(philo, lst, mall, ER_MAL);
-	mall++;
-	if (pthread_mutex_init(philo->fork_left, NULL))
-		free_clean(philo, lst, mall, ER_MUTEX);
-	mall++;
 	philo->fork_right = malloc(sizeof(pthread_mutex_t));
 	if (!philo->fork_right)
-		free_clean(philo, lst, mall, ER_MAL);
-	mall++;
-	if (pthread_mutex_init(philo->fork_right, NULL))
-		free_clean(philo, lst, mall, ER_MUTEX);
-	mall++;
+		return (0);
+	if (pthread_mutex_init(philo->fork_right, NULL) != 0)
+		return (1);
+	if (i == 0)
+		philo->fork_left = philo->fork_right;
+	else if (i == arg->nb_phil)
+	{
+		philo->fork_left = last;
+		(*first)->philo->fork_left = philo->fork_right;
+	}
+	else
+		philo->fork_left = last;
+	last = philo->fork_right;
+	return (2);
+}
+
+static void	init_philo(t_philo *philo, t_lst *lst, int i, int mall)
+{
+	t_arg					*arg;
+	static pthread_mutex_t	*last;
+	int						ret;
+
+	arg = init_arg(NULL);
+	ret = init_fork(philo, &lst, arg, i);
+	if (ret < 2)
+	{
+		if (ret == 0)
+			free_clean(philo, lst, mall, ER_MAL);
+		else
+			free_clean(philo, lst, mall + 1, ER_MUTEX);
+	}
+	mall = mall + 2;
 	philo->arg = arg;
 	philo->last_eat = 0;
 	philo->id = i;
