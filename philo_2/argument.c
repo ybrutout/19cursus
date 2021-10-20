@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 13:14:32 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/19 14:35:42 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/20 13:18:51 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	argument(t_arg *arg, char **argv)
 	arg->tm_die = ft_atoi(argv[i++]);
 	arg->tm_eat = ft_atoi(argv[i++]);
 	arg->tm_sleep = ft_atoi(argv[i++]);
+	arg->end_meal = 0;
 	if (argv[i])
 		arg->nb_meal = ft_atoi(argv[i]);
 	else

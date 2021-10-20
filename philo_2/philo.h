@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:03:16 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/19 15:47:48 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/20 13:34:09 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define SLEEP 52
 # define THINK 53
 # define DEAD 54
+# define END 55
 # define ER_ARG 10
 # define ER_MAL 11
 # define ER_MUTEX 12
@@ -39,6 +40,7 @@ typedef struct s_arg
 	long			tm_sleep;
 	long			start;
 	int				nb_meal;
+	int				end_meal;
 	int				died;
 	pthread_mutex_t	*sec_died;
 }	t_arg;
@@ -51,6 +53,7 @@ typedef struct s_philo
 	t_arg			*arg;
 	long			last_eat;
 	int				id;
+	int				meal;
 }	t_philo;
 
 typedef struct s_lst
@@ -81,5 +84,6 @@ t_lst		*init_lst(t_arg *arg);
 
 //ROUTINE
 void		*routine(void *lst);
+void		ft_write(int message, t_philo *philo);
 
 #endif

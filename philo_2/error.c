@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 11:37:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/20 11:32:07 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/20 15:26:21 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	ft_error(int message)
 		write(1, "Mutex Error\n", 12);
 	else if (message == ER_THR)
 		write(1, "Thread Error\n", 13);
+	else if (message == END)
+		exit(EXIT_SUCCESS);
 	exit(EXIT_FAILURE);
 }
 
@@ -63,18 +65,22 @@ static int	free_lst(t_philo *philo, int nb)
 	return (nb);
 }
 
-static t_philo	*tmp_is(t_philo *philo, t_lst *lst)
+static t_philo	*tmp_is(t_philo *philo, t_lst **lst, int message)
 {
 	t_philo	*tmp;
+	t_lst	*tmp_lst;
 
-	if (lst)
+	if (*lst)
 	{
-		tmp = lst->philo;
-		free(lst);
-		lst = lst->next;
+		tmp = (*lst)->philo;
+		tmp_lst = (*lst)->next;
+		free(*lst);
+		*lst = tmp_lst;
 	}
-	else
+	else if (message != END)
 		tmp = philo;
+	else
+		return (NULL);
 	return (tmp);
 }
 
@@ -92,7 +98,9 @@ void	free_clean(t_philo *philo, t_lst *lst, int nb, int message)
 			{
 				while (nb > 3)
 				{
-					tmp = tmp_is(philo, lst);
+					tmp = tmp_is(philo, &lst, message);
+					if (!tmp)
+						break;
 					nb = free_lst(tmp, nb);
 				}
 				pthread_mutex_destroy(arg->sec_died);

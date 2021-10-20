@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:16:21 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/20 11:28:50 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/20 14:31:30 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ static int	init_fork(t_philo *philo, t_lst **first, t_arg	*arg, int i)
 {
 	static pthread_mutex_t	*last;
 
+	if (!last)
+		last = NULL;
 	philo->fork_right = malloc(sizeof(pthread_mutex_t));
 	if (!philo->fork_right)
 		return (0);
 	if (pthread_mutex_init(philo->fork_right, NULL) != 0)
 		return (1);
-	if (i == 0)
+	if (i == 1)
 		philo->fork_left = philo->fork_right;
 	else if (i == arg->nb_phil)
 	{
@@ -37,7 +39,6 @@ static int	init_fork(t_philo *philo, t_lst **first, t_arg	*arg, int i)
 static void	init_philo(t_philo *philo, t_lst *lst, int i, int mall)
 {
 	t_arg					*arg;
-	static pthread_mutex_t	*last;
 	int						ret;
 
 	arg = init_arg(NULL);
@@ -53,6 +54,7 @@ static void	init_philo(t_philo *philo, t_lst *lst, int i, int mall)
 	philo->arg = arg;
 	philo->last_eat = 0;
 	philo->id = i;
+	philo->meal = 0;
 }
 
 static t_lst	*new_tmp_lst(t_philo *philo, t_lst *first, int mall)
