@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:16:21 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/20 14:31:30 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/20 16:40:59 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ static void	init_philo(t_philo *philo, t_lst *lst, int i, int mall)
 		else
 			free_clean(philo, lst, mall + 1, ER_MUTEX);
 	}
-	mall = mall + 2;
 	philo->arg = arg;
-	philo->last_eat = 0;
+	philo->last_eat = get_current();
 	philo->id = i;
 	philo->meal = 0;
 }

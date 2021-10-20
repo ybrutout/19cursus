@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:03:16 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/20 13:34:09 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/20 16:27:25 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void		free_clean(t_philo *philo, t_lst *lst, int nb, int message);
 //GET_THE_TIME
 long		get_current(void);
 void		ft_sleep(long ms, t_arg *arg);
+void		*routine_time(void *lst);
 
 //LIBFT (COMPLET)
 long		ft_atoi(char *str);

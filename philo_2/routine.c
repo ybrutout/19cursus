@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:21:09 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/20 14:35:26 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/20 16:57:11 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	*routine(void *tmp)
 
 	lst = tmp;
 	philo = lst->philo;
-	if (philo->id % 2 && philo->arg->nb_phil % 2)
+	if (philo->id % 2 && philo->arg->nb_phil % 2 && philo->arg->nb_phil != 1)
 		ft_sleep(philo->arg->tm_eat / 2, philo->arg);
 	while (philo->arg->died != 1)
 	{

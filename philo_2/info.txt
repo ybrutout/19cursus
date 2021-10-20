@@ -62,6 +62,10 @@ un void pointeur aussi. Cet argument qui lui est envoyé n'est autre que arg.
 
 -------------------------------------------------------------------------------------------------------------------
 
+int pthread_detach(pthread_t th);
+
+C'est une fonction détache le thread th 
+
 int	pthread_join (pthread_t thread, void **value_ptr);
 
 c'est une fonction qui lorsqu'elle est appelée suspends l'exécution du thread qui l'a appelée tant que le thread
