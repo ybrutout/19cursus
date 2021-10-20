@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 11:37:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/20 15:26:21 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/20 15:51:19 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	printf_settings(void)
 {
-	write(1, "This program works with 4 mandatory arguments", 45);
+	write(1, "\nThis program works with 4 mandatory arguments", 46);
 	write(1, " and one optional argument:\n\n", 29);
 	write(1, "\t1.the number of philosophers:\n", 31);
 	write(1, "\t\tThis will also be equivalent to the number of forks.\n", 55);
@@ -27,10 +27,10 @@ static void	printf_settings(void)
 	write(1, "\t4.Time to sleep:\n", 18);
 	write(1, "\t\tThis will be equivalent to the time it takes each ", 52);
 	write(1, "philosopher to sleep.\n", 22);
-	write(1, "\t5.The number of meals:\n", 24);
+	write(1, "\t5.The number of meals: (optional)\n", 35);
 	write(1, "\t\tThis will be equivalent to the number of meals each", 53);
 	write(1, " philosopher must have eaten before the programme stops.\n\n", 58);
-	write(1, "Notes: No mandatory argument can be negative or null.\n", 54);
+	write(1, "Notes: No mandatory argument can be negative or null.\n\n", 55);
 }
 
 void	ft_error(int message)

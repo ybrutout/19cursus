@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 12:59:51 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/19 14:38:32 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/20 15:47:29 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,7 @@ long	ft_atoi(char *str)
 		nb = nb * 10 + ((long int)str[i] - '0');
 		i++;
 	}
+	if (nb <= 0)
+		return (-1);
 	return (nb);
 }
