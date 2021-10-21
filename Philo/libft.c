@@ -5,30 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/29 13:06:51 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/13 10:32:52 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/10/14 12:59:51 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/10/20 15:47:29 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_lst_philo	*ft_lst_add_back(t_lst_philo *first, t_lst_philo *new)
-{
-	t_lst_philo	*tmp;
-
-	if (!first)
-		first = new;
-	else
-	{
-		tmp = first;
-		while (tmp->next)
-		{
-			tmp = tmp->next;
-		}
-		tmp->next = new;
-	}
-	return (first);
-}
 static void	ft_putchar(char c)
 {
 	write(1, &c, 1);
@@ -36,7 +19,7 @@ static void	ft_putchar(char c)
 
 void	ft_putnbr(int nb)
 {
-	long int i;
+	long int	i;
 
 	i = nb;
 	if (i < 0)
@@ -64,10 +47,28 @@ int	ft_is_digit(char *str)
 	return (1);
 }
 
-long int	ft_atoi(char *str)
+t_lst	*ft_lst_add_back(t_lst *first, t_lst *new)
+{
+	t_lst	*tmp;
+
+	if (!first)
+		first = new;
+	else
+	{
+		tmp = first;
+		while (tmp->next)
+		{
+			tmp = tmp->next;
+		}
+		tmp->next = new;
+	}
+	return (first);
+}
+
+long	ft_atoi(char *str)
 {
 	int			i;
-	long int	nb;
+	long		nb;
 
 	i = 0;
 	nb = 0;
@@ -76,5 +77,7 @@ long int	ft_atoi(char *str)
 		nb = nb * 10 + ((long int)str[i] - '0');
 		i++;
 	}
+	if (nb <= 0)
+		return (-1);
 	return (nb);
 }

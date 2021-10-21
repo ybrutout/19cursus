@@ -5,86 +5,95 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 12:57:19 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/14 11:09:46 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/10/19 15:21:09 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/10/21 11:53:58 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	it_s_my_fork(t_philo *philo, t_lst_philo *lst, t_arg *arg)
+static int	maybe_is_finish(int message, t_philo *philo)
+{
+	if (philo->arg->died == 1)
+		return (1);
+	else if (philo->arg->end_meal == philo->arg->nb_phil)
+		return (1);
+	else
+		ft_write(message, philo);
+	return (0);
+}
+
+static int	fork(pthread_mutex_t *first, pthread_mutex_t *second, t_philo *philo)
+{
+	pthread_mutex_lock(first);
+	if (maybe_is_finish(FORK, philo))
+	{
+		pthread_mutex_unlock(first);
+		return (1);
+	}
+	pthread_mutex_lock(second);
+	if (maybe_is_finish(FORK, philo))
+	{
+		pthread_mutex_unlock(first);
+		pthread_mutex_unlock(second);
+		return (1);
+	}
+}
+
+static int	ft_hungry(t_philo *philo)
 {
 	if (philo->id % 2)
 	{
-		if (pthread_mutex_lock(philo->fork_right) != 0)
+		if (fork(philo->fork_left, philo->fork_right, philo))
+			return (1);
+		if (maybe_is_finish(EAT, philo))
 		{
-			write(1, "j'ai un probleme de fourchette droite\n", 38);//a enlever
-			exit(EXIT_FAILURE);//a enlever
-			return (0);
+			pthread_mutex_unlock(philo->fork_left);
+			pthread_mutex_unlock(philo->fork_right);
+			return (1);
 		}
-		ft_write(FORK, philo, lst, arg);
-		pthread_mutex_lock(philo->fork_left);
-		ft_write(FORK, philo, lst, arg);
+		ft_sleep(philo->arg->tm_eat, philo->arg);
+		pthread_mutex_unlock(philo->fork_left);
+		pthread_mutex_unlock(philo->fork_right);
 	}
 	else
 	{
-		if (pthread_mutex_lock(philo->fork_left) != 0)
-		{
-			write(1, "j'ai un probleme de fourchette gauche\n", 38);//a enlever
-			exit(EXIT_FAILURE);//a enlever
-			return (0);
-		}
-		ft_write(FORK, philo, lst, arg);
-		pthread_mutex_lock(philo->fork_right);
-		ft_write(FORK, philo, lst, arg);
+		if (fork(philo->fork_right, philo->fork_left, philo))
+			return (1);
+		if (maybe_is_finish(EAT, philo))
+			return (1);
+		ft_sleep(philo->arg->tm_eat, philo->arg);
+		pthread_mutex_unlock(philo->fork_right);
+		pthread_mutex_unlock(philo->fork_left);
 	}
-	return (1);
+	return (0);
 }
 
-int	ft_hungry(t_lst_philo *lst, t_philo *philo, t_arg *arg)
+static int	ft_tired(t_philo *philo)
 {
-	if (it_s_my_fork(philo, lst, arg) == 0)
-		return (0);
-	ft_write(EAT, philo, lst, arg);
-	ft_sleep(arg->tm_eat, lst);
-	pthread_mutex_unlock(philo->fork_left);
-	pthread_mutex_unlock(philo->fork_right);
-	return (1);
+	if (maybe_is_finish(SLEEP, philo))
+		return (1);
+	ft_sleep(philo->arg->tm_sleep, philo->arg);
+	if (maybe_is_finish(THINK, philo))
+		return (1);
+	return (0);
 }
 
-int	ft_other(t_lst_philo *lst, t_philo *philo, t_arg *arg)
+void	*routine(void *tmp)
 {
-	if (ft_write(SLEEP, philo, lst, arg) == 0)
-		return (0);
-	ft_sleep(arg->tm_sleep, lst);
-	if (ft_write(THINK, philo, lst, arg) == 0)
-		return (0);
-	return (1);
-}
+	t_philo	*philo;
+	t_lst	*lst;
 
-void	*routine(void *lst)
-{
-	t_arg		*arg;
-	t_lst_philo	*lst_philo;
-	t_philo		*philo;
-
-	arg = init_arg(0, NULL);
-	lst_philo = (t_lst_philo*)lst;
-	philo = lst_philo->philo;
-	while (*philo->extra == 1)
-		usleep(80);
-	philo->start_tm = ft_actual_time(philo, lst, arg);
-	philo->lst_eat = ft_actual_time(philo, lst, arg) - philo->start_tm;
-	if (philo->id % 2 && arg->nb_philo % 2)
-		ft_sleep(800, lst);
-	if (!(philo->id % 2) && !(arg->nb_philo % 2))
-		ft_sleep(arg->tm_eat * 2, lst);
-	while (arg->dead != 1)
+	lst = tmp;
+	philo = lst->philo;
+	if (philo->id % 2 && philo->arg->nb_phil % 2 && philo->arg->nb_phil != 1)
+		ft_sleep(philo->arg->tm_eat / 2, philo->arg);
+	while (philo->arg->died != 1)
 	{
-		if (ft_hungry(lst, philo, arg) == 0)
-			break ;
-		if (ft_other(lst, philo, arg) == 0)
-			break;
+		if (ft_hungry(philo))
+			return (NULL);
+		if (ft_tired(philo))
+			return (NULL);
 	}
 	return (NULL);
 }

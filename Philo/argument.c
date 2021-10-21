@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 13:14:32 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/20 15:49:14 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/21 11:51:43 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	check_arg(char **argv)
+static int	check_arg(char **argv)
 {
 	int		i;
 
@@ -26,17 +26,15 @@ int	check_arg(char **argv)
 	return (0);
 }
 
-static void	argument(t_arg *arg, char **argv)
+static void	argument_bis(t_arg *arg, char **argv, int i)
 {
-	int	i;
-
-	i = 1;
 	arg->nb_phil = ft_atoi(argv[i++]);
 	arg->tm_die = ft_atoi(argv[i++]);
 	arg->tm_eat = ft_atoi(argv[i++]);
 	arg->tm_sleep = ft_atoi(argv[i++]);
 	arg->end_meal = 0;
-	if (arg->nb_phil == -1 || arg->tm_die == -1 || arg->tm_eat == -1 || arg->tm_sleep == -1)
+	if (arg->nb_phil == -1 || arg->tm_die == -1 || \
+	arg->tm_eat == -1 || arg->tm_sleep == -1)
 		free_clean(NULL, NULL, 1, ER_ARG);
 	if (argv[i])
 	{
@@ -46,6 +44,14 @@ static void	argument(t_arg *arg, char **argv)
 	}
 	else
 		arg->nb_meal = -1;
+}
+
+static void	argument(t_arg *arg, char **argv)
+{
+	int	i;
+
+	i = 1;
+	argument_bis(arg, argv, i);
 	arg->died = 0;
 	arg->sec_died = malloc(sizeof(pthread_mutex_t));
 	if (!arg->sec_died)

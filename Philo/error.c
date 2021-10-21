@@ -5,75 +5,109 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/29 13:50:06 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/06 15:53:07 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/10/14 11:37:10 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/10/21 11:36:17 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/*je dois refaire les instructions !*/
-
-static void	ft_write_the_good_option(void)
+static void	printf_settings(void)
 {
-	printf("il faut que je note les indications !!!!\n");
+	write(1, "\nThis program works with 4 mandatory arguments", 46);
+	write(1, " and one optional argument:\n\n", 29);
+	write(1, "\t1.the number of philosophers:\n", 31);
+	write(1, "\t\tThis will also be equivalent to the number of forks.\n", 55);
+	write(1, "\t2.time to die :\n", 17);
+	write(1, "\t\tThis will be equivalent to the maximum", 40);
+	write(1, " time it can take between two meals.\n", 37);
+	write(1, "\t3.time to eat:\n", 16);
+	write(1, "\t\tThis will be equal to the time it takes", 41);
+	write(1, " each philosopher to eat.\n", 26);
+	write(1, "\t4.Time to sleep:\n", 18);
+	write(1, "\t\tThis will be equivalent to the time it takes each ", 52);
+	write(1, "philosopher to sleep.\n", 22);
+	write(1, "\t5.The number of meals: (optional)\n", 35);
+	write(1, "\t\tThis will be equivalent to the number of meals each", 53);
+	write(1, " philosopher must have eaten before the programme stops.\n\n", 58);
+	write(1, "Notes: No mandatory argument can be negative or null.\n\n", 55);
 }
 
-static void	ft_message(int message)
+void	ft_error(int message)
 {
-	if (message == ER_MALLOC)
-		write(1, "Error : Malloc\n", 15);
-	else if (message == ER_ARG)
-	{
-		write(1, "Error : Wrong argument or not enough argument\n", 45);
-		ft_write_the_good_option();
+	if (message == ER_ARG)
+		printf_settings();
+	else if (message == ER_MAL)
+		write(1, "Malloc Error\n", 13);
+	else if (message == ER_MUTEX)
+		write(1, "Mutex Error\n", 12);
+	else if (message == ER_THR)
+		write(1, "Thread Error\n", 13);
+	else if (message == END)
 		exit(EXIT_SUCCESS);
-	}
-	else if (message == ER_GTOD)
-		write(1, "Error : Get time of the day return -1\n", 38);
-	else if (message == ER_PTH_C)
-		write(1, "Error : A thread has not been created properly\n", 47);
-	else if (message == ER_PTH_J)
-		write(1, "Error : A thread has not been join properly\n", 44);
 	exit(EXIT_FAILURE);
 }
 
-static int	clean_free_b(t_lst_philo *first, t_philo *philo, int nb)
+static int	free_lst(t_philo *philo, int nb)
 {
-	t_philo		*tmp;
-	t_lst_philo	*tmp_lst;
-
-	if (first)
-		tmp = first->philo;
-	else
-		tmp = philo;
-	if (nb >= 3)
+	if (nb > 4)
 	{
-		if (nb >= 4)
+		if (nb > 5)
 		{
-			tmp_lst = first->next;
-			free(first);
-			first = tmp_lst;
+			pthread_mutex_destroy(philo->fork_right);
 			nb--;
 		}
-		pthread_mutex_destroy(tmp->fork_right);
+		free(philo->fork_right);
 		nb--;
 	}
-	free(tmp);
+	free(philo);
 	nb--;
 	return (nb);
 }
 
-void	clean_free(t_lst_philo *first, t_philo *philo, int nb, int message)
+static t_philo	*tmp_is(t_philo *philo, t_lst **lst, int message)
 {
-	t_arg		*arg;
+	t_philo	*tmp;
+	t_lst	*tmp_lst;
 
-	arg = init_arg(0, NULL);
-	if (nb >= 1)
+	if (*lst)
 	{
-		while (nb >= 2)
-			nb = clean_free_b(first, philo, nb);
+		tmp = (*lst)->philo;
+		tmp_lst = (*lst)->next;
+		free(*lst);
+		*lst = tmp_lst;
+	}
+	else if (message != END)
+		tmp = philo;
+	else
+		return (NULL);
+	return (tmp);
+}
+
+void	free_clean(t_philo *philo, t_lst *lst, int nb, int message)
+{
+	t_arg	*arg;
+	t_philo	*tmp;
+
+	arg = init_arg(NULL);
+	if (nb > 0)
+	{
+		if (nb > 1)
+		{
+			if (nb > 2)
+			{
+				while (nb > 3)
+				{
+					tmp = tmp_is(philo, &lst, message);
+					if (!tmp)
+						break ;
+					nb = free_lst(tmp, nb);
+				}
+				pthread_mutex_destroy(arg->sec_died);
+			}
+			free(arg->sec_died);
+		}
 		free(arg);
 	}
-	ft_message(message);
+	ft_error(message);
 }

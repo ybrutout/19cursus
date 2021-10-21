@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/09/28 11:21:59 by ybrutout          #+#    #+#              #
-#    Updated: 2021/10/13 12:59:16 by ybrutout         ###   ########.fr        #
+#    Created: 2021/10/21 11:50:57 by ybrutout          #+#    #+#              #
+#    Updated: 2021/10/21 11:50:59 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,22 +14,22 @@ NAME = philo
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror ##-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
-SRC =	arg.c \
+SRC =	argument.c \
 		error.c \
-		get_the_time.c \
-		init_lst.c \
 		libft.c \
 		philo.c \
+		philo_list.c \
 		routine.c \
+		utils.c \
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME):$(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@$(CC) $(OBJ) -o $(NAME)
 
 clean:
 	@rm -f $(OBJ)

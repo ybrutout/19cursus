@@ -5,90 +5,86 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/28 11:19:04 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/20 13:17:52 by ybrutout         ###   ########.fr       */
+/*   Created: 2021/10/19 14:03:16 by ybrutout          #+#    #+#             */
+/*   Updated: 2021/10/21 11:52:54 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <stdio.h>
 # include <unistd.h>
-# include <stdlib.h>
+# include <stdio.h>
 # include <pthread.h>
+# include <stdlib.h>
 # include <sys/time.h>
 
-# define ER_MALLOC 10
-# define ER_ARG 11
-# define ER_GTOD 12
-# define ER_PTH_C 13
-# define ER_PTH_J 14
-# define FORK 21
-# define SLEEP 22
-# define EAT 23
-# define DEAD 24
-# define THINK 25
+# define EAT 50
+# define FORK 51
+# define SLEEP 52
+# define THINK 53
+# define DEAD 54
+# define END 55
+# define ER_ARG 10
+# define ER_MAL 11
+# define ER_MUTEX 12
+# define ER_THR 13
+
+# define TEST 100
 
 typedef struct s_arg
 {
-	int				nb_philo;
+	int				nb_phil;
 	long			tm_die;
 	long			tm_eat;
 	long			tm_sleep;
-	int				nb_eat;
-	int				nb_malloc;
-	int				dead;
-	pthread_mutex_t	*write_mut;
-}				t_arg;
+	long			start;
+	int				nb_meal;
+	int				end_meal;
+	int				died;
+	pthread_mutex_t	*sec_died;
+}	t_arg;
 
 typedef struct s_philo
 {
-	pthread_mutex_t	*fork_right;
 	pthread_mutex_t	*fork_left;
-	pthread_t		phil_id;
-	long int		lst_eat;
-	long int		start_tm;
+	pthread_mutex_t	*fork_right;
+	pthread_t		philo_add;
+	t_arg			*arg;
+	long			last_eat;
 	int				id;
-	int				*extra;
-}				t_philo;
+	int				meal;
+}	t_philo;
 
-typedef struct s_lst_philo
+typedef struct s_lst
 {
-	t_philo				*philo;
-	struct s_lst_philo	*next;
-}				t_lst_philo;
+	t_philo			*philo;
+	struct s_lst	*next;
+}	t_lst;
 
-//ARG
-
-t_arg		*init_arg(int argc, char **argv);
-
-//LIBFT
-
-int			ft_is_digit(char *str);
-long int	ft_atoi(char *str);
-t_lst_philo	*ft_lst_add_back(t_lst_philo *first, t_lst_philo *new);
-void		ft_putnbr(int nb);
-
-//INIT
-
-t_lst_philo	*init_lst_philo(t_arg *arg, int *beguin);
+//ARGUMENT
+t_arg		*init_arg(char **argv);
 
 //ERROR
+void		ft_error(int message);
+void		free_clean(t_philo *philo, t_lst *lst, int nb, int message);
 
-void		clean_free(t_lst_philo *lst, t_philo *philo, int nb, int message);
+//LIBFT
+long		ft_atoi(char *str);
+int			ft_is_digit(char *str);
+void		ft_putnbr(int nb);
+t_lst		*ft_lst_add_back(t_lst *first, t_lst *new);
 
-//GET THE TIME
-
-long int	ft_actual_time(t_philo *philo, t_lst_philo *lst, t_arg *arg);
-int			ft_sleep(long int ms, t_lst_philo *lst);
+//PHILO_LST
+t_lst		*init_lst(t_arg *arg);
 
 //ROUTINE
-
 void		*routine(void *lst);
 
-//PHILO
-
-int			ft_write(int nb, t_philo *philo, t_lst_philo *lst, t_arg *arg);
+//UTILS
+long		get_current(void);
+void		ft_sleep(long ms, t_arg *arg);
+void		*routine_time(void *lst);
+void		ft_write(int message, t_philo *philo);
 
 #endif
