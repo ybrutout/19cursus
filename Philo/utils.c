@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:36:08 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/21 11:44:19 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/21 14:58:03 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_write(int message, t_philo *philo)
 {
-	pthread_mutex_lock(philo->arg->sec_died);
 	ft_putnbr((get_current() - philo->arg->start) / 1000);
 	write(1, " ", 1);
 	ft_putnbr(philo->id);
@@ -34,9 +33,6 @@ void	ft_write(int message, t_philo *philo)
 		write(1, " is thinking\n", 13);
 	if (message == DEAD)
 		write(1, " died\n", 6);
-	if (message == TEST)
-		write(1, " ici\n", 5);
-	pthread_mutex_unlock(philo->arg->sec_died);
 }
 
 void	*routine_time(void *tmp)
@@ -62,7 +58,7 @@ void	*routine_time(void *tmp)
 			else
 				lst = lst->next;
 		}
-		if (arg->died == 1 || arg->end_meal == arg->nb_phil)
+		if (arg->died == 1 || arg->end_meal == arg->phill)
 			break ;
 	}
 	return (NULL);

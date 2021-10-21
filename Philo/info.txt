@@ -64,7 +64,7 @@ un void pointeur aussi. Cet argument qui lui est envoyé n'est autre que arg.
 
 int pthread_detach(pthread_t th);
 
-je sais pas encore trop ce que fais cette fonction. 
+je sais pas encore trop ce que fais cette fonction.
 
 -------------------------------------------------------------------------------------------------------------------
 
@@ -161,3 +161,8 @@ Doc utile :
 -	https://www.youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2 (playlist sur youtube sur comment
 	utiliser les threads en C).
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	printf("nb phil == %d\ntm_die == %zu\ntm_eat == %zu\ntm_sleep == %zu\n", arg->phill, arg->tm_die, arg->tm_eat, arg->tm_sleep);
+	printf("start == %zu\nnb_meal == %d\nend_meal == %d\ndied == %d\nsec_died == %p\n", arg->start, arg->nb_meal, arg->end_meal, arg->died, arg->sec_died);

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 11:37:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/21 12:34:51 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/21 14:49:07 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	printf_settings(void)
 	write(1, "Notes: No mandatory argument can be negative or null.\n\n", 55);
 }
 
-void	ft_error(int message)
+int	ft_error(int message)
 {
 	if (message == ER_ARG)
 		printf_settings();
@@ -41,14 +41,11 @@ void	ft_error(int message)
 		write(1, "Malloc Error\n", 13);
 	else if (message == ER_MUTEX)
 		write(1, "Mutex Error\n", 12);
-	else if (message == ER_THR)
+	else if (message == THR)
 		write(1, "Thread Error\n", 13);
 	else if (message == END)
-	{
-		write(1, "hey\n", 4);
-		exit(EXIT_SUCCESS);
-	}
-	exit(EXIT_FAILURE);
+		return (0);
+	return (1);
 }
 
 static int	free_lst(t_philo *philo, int nb)
@@ -87,12 +84,12 @@ static t_philo	*tmp_is(t_philo *philo, t_lst **lst, int message)
 	return (tmp);
 }
 
-void	free_clean(t_philo *philo, t_lst *lst, int nb, int message)
+int	free_clean(t_philo *philo, t_lst *lst, int nb, int message)
 {
 	t_arg	*arg;
 	t_philo	*tmp;
 
-	arg = init_arg(NULL);
+	init_arg(NULL, &arg);
 	if (nb > 0)
 	{
 		if (nb > 1)
@@ -112,5 +109,5 @@ void	free_clean(t_philo *philo, t_lst *lst, int nb, int message)
 		}
 		free(arg);
 	}
-	ft_error(message);
+	return (ft_error(message));
 }

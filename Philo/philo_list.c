@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:16:21 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/20 16:40:59 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/21 14:22:35 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	init_fork(t_philo *philo, t_lst **first, t_arg	*arg, int i)
 		return (1);
 	if (i == 1)
 		philo->fork_left = philo->fork_right;
-	else if (i == arg->nb_phil)
+	else if (i == arg->phill)
 	{
 		philo->fork_left = last;
 		(*first)->philo->fork_left = philo->fork_right;
@@ -36,39 +36,49 @@ static int	init_fork(t_philo *philo, t_lst **first, t_arg	*arg, int i)
 	return (2);
 }
 
-static void	init_philo(t_philo *philo, t_lst *lst, int i, int mall)
+static int	init_philo(t_philo *philo, t_lst *lst, int i, int mall)
 {
 	t_arg					*arg;
 	int						ret;
 
-	arg = init_arg(NULL);
+	init_arg(NULL, &arg);
 	ret = init_fork(philo, &lst, arg, i);
 	if (ret < 2)
 	{
 		if (ret == 0)
-			free_clean(philo, lst, mall, ER_MAL);
+			return (free_clean(philo, lst, mall, ER_MAL));
 		else
-			free_clean(philo, lst, mall + 1, ER_MUTEX);
+			return (free_clean(philo, lst, mall + 1, ER_MUTEX));
 	}
 	philo->arg = arg;
 	philo->last_eat = get_current();
 	philo->id = i;
 	philo->meal = 0;
+	return (0);
 }
 
-static t_lst	*new_tmp_lst(t_philo *philo, t_lst *first, int mall)
+static int	new_tmp_lst(t_philo *philo, t_lst *first, int mall, t_lst **lst)
 {
 	t_lst	*tmp;
 
 	tmp = malloc(sizeof(t_lst));
 	if (!tmp)
-		free_clean(philo, first, mall, ER_MAL);
+		return (free_clean(philo, first, mall, ER_MAL));
 	tmp->philo = philo;
 	tmp->next = 0;
-	return (tmp);
+	*lst = tmp;
+	return (0);
 }
 
-t_lst	*init_lst(t_arg *arg)
+static int	mall_phil(t_philo **philo, t_lst *first, int mall)
+{
+	*philo = malloc(sizeof(t_philo));
+	if (!*philo)
+		return (free_clean(*philo, first, mall, ER_MAL));
+	return (0);
+}
+
+int	init_lst(t_arg *arg, t_lst **lst)
 {
 	t_lst	*first;
 	t_philo	*philo;
@@ -79,17 +89,20 @@ t_lst	*init_lst(t_arg *arg)
 	first = NULL;
 	i = 0;
 	mall = 3;
-	while (++i <= arg->nb_phil)
+	tmp = NULL;
+	while (++i <= arg->phill)
 	{
-		philo = malloc(sizeof(t_philo));
-		if (!philo)
-			free_clean(philo, first, mall, ER_MAL);
+		if (mall_phil(&philo, first, mall))
+			return (1);
 		mall++;
-		init_philo(philo, first, i, mall);
+		if (init_philo(philo, first, i, mall))
+			return (1);
 		mall = mall + 4;
-		tmp = new_tmp_lst(philo, first, mall);
+		if (new_tmp_lst(philo, first, mall, &tmp))
+			return (1);
 		mall++;
 		first = ft_lst_add_back(first, tmp);
 	}
-	return (first);
+	*lst = first;
+	return (0);
 }

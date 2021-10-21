@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:03:16 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/21 11:52:54 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/21 14:16:31 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@
 # define ER_ARG 10
 # define ER_MAL 11
 # define ER_MUTEX 12
-# define ER_THR 13
+# define THR 13
 
 # define TEST 100
 
 typedef struct s_arg
 {
-	int				nb_phil;
+	int				phill;
 	long			tm_die;
 	long			tm_eat;
 	long			tm_sleep;
@@ -63,11 +63,11 @@ typedef struct s_lst
 }	t_lst;
 
 //ARGUMENT
-t_arg		*init_arg(char **argv);
+int			init_arg(char **argv, t_arg **fst);
 
 //ERROR
-void		ft_error(int message);
-void		free_clean(t_philo *philo, t_lst *lst, int nb, int message);
+int			ft_error(int message);
+int			free_clean(t_philo *philo, t_lst *lst, int nb, int message);
 
 //LIBFT
 long		ft_atoi(char *str);
@@ -76,7 +76,7 @@ void		ft_putnbr(int nb);
 t_lst		*ft_lst_add_back(t_lst *first, t_lst *new);
 
 //PHILO_LST
-t_lst		*init_lst(t_arg *arg);
+int			init_lst(t_arg *arg, t_lst **lst);
 
 //ROUTINE
 void		*routine(void *lst);

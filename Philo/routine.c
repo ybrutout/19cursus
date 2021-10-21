@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:21:09 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/21 12:17:23 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/21 15:02:40 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 static int	maybe_is_finish(int message, t_philo *philo)
 {
+	pthread_mutex_lock(philo->arg->sec_died);
 	if (philo->arg->died == 1)
 		return (1);
-	else if (philo->arg->end_meal == philo->arg->nb_phil)
+	else if (philo->arg->end_meal == philo->arg->phill)
 		return (1);
 	else
 		ft_write(message, philo);
+	pthread_mutex_unlock(philo->arg->sec_died);
 	return (0);
 }
 
@@ -87,7 +89,7 @@ void	*routine(void *tmp)
 
 	lst = tmp;
 	philo = lst->philo;
-	if (philo->id % 2 && philo->arg->nb_phil != 1)
+	if (philo->id % 2 && philo->arg->phill != 1)
 		ft_sleep(philo->arg->tm_eat / 2, philo->arg);
 	while (philo->arg->died != 1)
 	{

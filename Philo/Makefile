@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 11:50:57 by ybrutout          #+#    #+#              #
-#    Updated: 2021/10/21 12:01:24 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/10/21 14:46:58 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+##CFLAGS = -Wall -Wextra -Werror
 
 SRC =	argument.c \
 		error.c \
@@ -29,7 +29,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME):$(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@$(CC) $(OBJ) -o $(NAME)
 
 clean:
 	@rm -f $(OBJ)
