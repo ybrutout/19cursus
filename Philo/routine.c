@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:21:09 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/21 11:53:58 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/21 12:17:23 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,29 @@ static int	maybe_is_finish(int message, t_philo *philo)
 	return (0);
 }
 
-static int	fork(pthread_mutex_t *first, pthread_mutex_t *second, t_philo *philo)
+static int	ft_fork(pthread_mutex_t *fst, pthread_mutex_t *sec, t_philo *philo)
 {
-	pthread_mutex_lock(first);
+	pthread_mutex_lock(fst);
 	if (maybe_is_finish(FORK, philo))
 	{
-		pthread_mutex_unlock(first);
+		pthread_mutex_unlock(fst);
 		return (1);
 	}
-	pthread_mutex_lock(second);
+	pthread_mutex_lock(sec);
 	if (maybe_is_finish(FORK, philo))
 	{
-		pthread_mutex_unlock(first);
-		pthread_mutex_unlock(second);
+		pthread_mutex_unlock(fst);
+		pthread_mutex_unlock(sec);
 		return (1);
 	}
+	return (0);
 }
 
 static int	ft_hungry(t_philo *philo)
 {
 	if (philo->id % 2)
 	{
-		if (fork(philo->fork_left, philo->fork_right, philo))
+		if (ft_fork(philo->fork_left, philo->fork_right, philo))
 			return (1);
 		if (maybe_is_finish(EAT, philo))
 		{
@@ -58,7 +59,7 @@ static int	ft_hungry(t_philo *philo)
 	}
 	else
 	{
-		if (fork(philo->fork_right, philo->fork_left, philo))
+		if (ft_fork(philo->fork_right, philo->fork_left, philo))
 			return (1);
 		if (maybe_is_finish(EAT, philo))
 			return (1);
@@ -86,7 +87,7 @@ void	*routine(void *tmp)
 
 	lst = tmp;
 	philo = lst->philo;
-	if (philo->id % 2 && philo->arg->nb_phil % 2 && philo->arg->nb_phil != 1)
+	if (philo->id % 2 && philo->arg->nb_phil != 1)
 		ft_sleep(philo->arg->tm_eat / 2, philo->arg);
 	while (philo->arg->died != 1)
 	{

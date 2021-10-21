@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 11:37:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/21 11:36:17 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/21 12:34:51 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ void	ft_error(int message)
 	else if (message == ER_THR)
 		write(1, "Thread Error\n", 13);
 	else if (message == END)
+	{
+		write(1, "hey\n", 4);
 		exit(EXIT_SUCCESS);
+	}
 	exit(EXIT_FAILURE);
 }
 
