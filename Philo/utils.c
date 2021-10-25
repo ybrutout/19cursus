@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:36:08 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/21 14:58:03 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/25 15:09:28 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_write(int message, t_philo *philo)
 		write(1, " died\n", 6);
 }
 
-void	*routine_time(void *tmp)
+/*void	*routine_time(void *tmp)
 {
 	t_lst	*lst;
 	t_arg	*arg;
@@ -62,7 +62,7 @@ void	*routine_time(void *tmp)
 			break ;
 	}
 	return (NULL);
-}
+}*/
 
 long	get_current(void)
 {

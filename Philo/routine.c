@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:21:09 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/21 15:02:40 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/25 15:23:03 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,15 @@ static int	maybe_is_finish(int message, t_philo *philo)
 {
 	pthread_mutex_lock(philo->arg->sec_died);
 	if (philo->arg->died == 1)
+	{
+		pthread_mutex_unlock(philo->arg->sec_died);
 		return (1);
+	}
 	else if (philo->arg->end_meal == philo->arg->phill)
+	{
+		pthread_mutex_unlock(philo->arg->sec_died);
 		return (1);
+	}
 	else
 		ft_write(message, philo);
 	pthread_mutex_unlock(philo->arg->sec_died);
