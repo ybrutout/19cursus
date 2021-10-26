@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:36:08 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/21 14:58:03 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/21 16:01:39 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	*routine_time(void *tmp)
 		if (arg->died == 1 || arg->end_meal == arg->phill)
 			break ;
 	}
+	ft_sleep(2000, arg);
 	return (NULL);
 }
 
