@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 11:15:51 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/26 13:07:08 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/26 14:16:34 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	check_the_died(t_lst *lst, t_arg *arg)
+static void	check_the_died(t_lst *lst, t_arg *arg)
 {
 	t_lst	*tmp;
 
@@ -21,8 +21,8 @@ void	check_the_died(t_lst *lst, t_arg *arg)
 		tmp = lst;
 		while (tmp)
 		{
-			if (((get_current() - tmp->philo->last_eat) / 1000) \
-			>= tmp->philo->arg->tm_die)
+			if (((get_current() - tmp->philo->last_eat)) \
+			>= tmp->philo->arg->tm_die * 1000)
 			{
 				arg->died = 1;
 				ft_write(DEAD, tmp->philo);
@@ -41,7 +41,7 @@ void	check_the_died(t_lst *lst, t_arg *arg)
 	}
 }
 
-int	send_the_thread(t_lst *lst, t_arg *arg)
+static int	send_the_thread(t_lst *lst, t_arg *arg)
 {
 	t_lst		*tmp;
 
