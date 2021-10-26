@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:36:08 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/21 16:01:39 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/26 10:46:06 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_write(int message, t_philo *philo)
 		write(1, " died\n", 6);
 }
 
-void	*routine_time(void *tmp)
+/*void	*routine_time(void *tmp)
 {
 	t_lst	*lst;
 	t_arg	*arg;
@@ -63,7 +63,7 @@ void	*routine_time(void *tmp)
 	}
 	ft_sleep(2000, arg);
 	return (NULL);
-}
+}*/
 
 long	get_current(void)
 {

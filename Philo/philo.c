@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 11:15:51 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/21 15:58:15 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/26 10:46:43 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	send_the_thread(t_lst *lst, t_arg *arg)
 {
 	t_lst		*tmp;
-	pthread_t	time;
+	//pthread_t	time;
 
 	tmp = lst;
 	while (tmp)
@@ -25,17 +25,31 @@ int	send_the_thread(t_lst *lst, t_arg *arg)
 			return (free_clean(tmp->philo, lst, ((arg->phill * 4) + 3), THR));
 		tmp = tmp->next;
 	}
-	if (pthread_create(&time, NULL, routine_time, (void *)lst))
-		return (free_clean(tmp->philo, lst, ((arg->phill * 4) + 3), THR));
+	while (1)
+	{
+		tmp = lst;
+		while (tmp)
+		{
+			if (((get_current() - lst->philo->last_eat) / 1000) \
+			> tmp->philo->arg->tm_die)
+			{
+				tmp->philo->arg->died = 1;
+				ft_write(DEAD, tmp->philo);
+				break ;
+			}
+			else
+				tmp = tmp->next;
+		}
+		if (arg->died == 1 || arg->end_meal == arg->phill)
+			break ;
+	}
 	tmp = lst;
 	while (tmp)
 	{
-		if (pthread_detach(tmp->philo->philo_add))
+		if (pthread_join(tmp->philo->philo_add, NULL))
 			return (free_clean(lst->philo, lst, ((arg->phill * 4) + 3), THR));
 		tmp = tmp->next;
 	}
-	if (pthread_join(time, NULL))
-		return (free_clean(lst->philo, lst, ((arg->phill * 4) + 3), THR));
 	return (0);
 }
 
