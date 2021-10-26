@@ -6,30 +6,22 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 11:15:51 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/26 11:14:54 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/26 13:07:08 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	send_the_thread(t_lst *lst, t_arg *arg)
+void	check_the_died(t_lst *lst, t_arg *arg)
 {
-	t_lst		*tmp;
+	t_lst	*tmp;
 
-	tmp = lst;
-	while (tmp)
-	{
-		tmp->philo->last_eat = arg->start;
-		if (pthread_create(&tmp->philo->philo_add, NULL, routine, (void *)tmp))
-			return (free_clean(tmp->philo, lst, ((arg->phill * 4) + 3), THR));
-		tmp = tmp->next;
-	}
 	while (1)
 	{
 		tmp = lst;
 		while (tmp)
 		{
-			if (((get_current() - lst->philo->last_eat) / 1000) \
+			if (((get_current() - tmp->philo->last_eat) / 1000) \
 			>= tmp->philo->arg->tm_die)
 			{
 				arg->died = 1;
@@ -39,7 +31,7 @@ int	send_the_thread(t_lst *lst, t_arg *arg)
 			else if (arg->nb_meal != -1 && arg->end_meal == arg->phill)
 			{
 				arg->died = 1;
-				break;
+				break ;
 			}
 			else
 				tmp = tmp->next;
@@ -47,6 +39,21 @@ int	send_the_thread(t_lst *lst, t_arg *arg)
 		if (arg->died == 1 || arg->end_meal == arg->phill)
 			break ;
 	}
+}
+
+int	send_the_thread(t_lst *lst, t_arg *arg)
+{
+	t_lst		*tmp;
+
+	tmp = lst;
+	while (tmp)
+	{
+		tmp->philo->last_eat = get_current();
+		if (pthread_create(&tmp->philo->philo_add, NULL, routine, (void *)tmp))
+			return (free_clean(tmp->philo, lst, ((arg->phill * 4) + 3), THR));
+		tmp = tmp->next;
+	}
+	check_the_died(lst, arg);
 	tmp = lst;
 	while (tmp)
 	{

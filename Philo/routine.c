@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:21:09 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/26 10:46:13 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/26 13:12:36 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,22 @@
 
 static int	maybe_is_finish(int message, t_philo *philo)
 {
-	pthread_mutex_lock(philo->arg->sec_died);
 	if (philo->arg->died == 1)
-	{
-		pthread_mutex_unlock(philo->arg->sec_died);
 		return (1);
-	}
 	else if (philo->arg->end_meal == philo->arg->phill)
-	{
-		pthread_mutex_unlock(philo->arg->sec_died);
 		return (1);
-	}
 	else
 		ft_write(message, philo);
-	pthread_mutex_unlock(philo->arg->sec_died);
 	return (0);
 }
 
 static int	ft_fork(pthread_mutex_t *fst, pthread_mutex_t *sec, t_philo *philo)
 {
 	pthread_mutex_lock(fst);
-	if (maybe_is_finish(FORK, philo))
+	if (maybe_is_finish(FORK, philo) || philo->arg->phill == 1)
 	{
+		if (philo->arg->phill == 1)
+			ft_sleep(philo->arg->died, philo->arg);
 		pthread_mutex_unlock(fst);
 		return (1);
 	}
@@ -51,19 +45,12 @@ static int	ft_fork(pthread_mutex_t *fst, pthread_mutex_t *sec, t_philo *philo)
 
 static int	ft_hungry(t_philo *philo)
 {
-	if (philo->id % 2)
+	if (philo->id % 2 || philo->arg->phill % 2)
 	{
 		if (ft_fork(philo->fork_left, philo->fork_right, philo))
 			return (1);
 		if (maybe_is_finish(EAT, philo))
-		{
-			pthread_mutex_unlock(philo->fork_left);
-			pthread_mutex_unlock(philo->fork_right);
 			return (1);
-		}
-		ft_sleep(philo->arg->tm_eat, philo->arg);
-		pthread_mutex_unlock(philo->fork_left);
-		pthread_mutex_unlock(philo->fork_right);
 	}
 	else
 	{
@@ -71,10 +58,14 @@ static int	ft_hungry(t_philo *philo)
 			return (1);
 		if (maybe_is_finish(EAT, philo))
 			return (1);
-		ft_sleep(philo->arg->tm_eat, philo->arg);
-		pthread_mutex_unlock(philo->fork_right);
-		pthread_mutex_unlock(philo->fork_left);
 	}
+	philo->meal++;
+	philo->last_eat = get_current();
+	if (philo->meal == philo->arg->nb_meal)
+		philo->arg->end_meal++;
+	ft_sleep(philo->arg->tm_eat, philo->arg);
+	pthread_mutex_unlock(philo->fork_left);
+	pthread_mutex_unlock(philo->fork_right);
 	return (0);
 }
 
