@@ -1,0 +1,73 @@
+MINISHELL
+
+Fonction externes autorisées :
+
+	-	readline,									-	fstat,
+	-	rl_clear_history,							-	unlink,
+	-	rl_on_new_line,								-	execve,
+	-	rl_replace_line,							-	dup,
+	-	rl_redisplay,								-	dup2,
+	-	add_history,								-	pipe,
+	-	printf,										-	opendir,
+	-	malloc,										-	readdir,
+	-	free,										-	closedir,
+	-	write,										-	strerror,
+	-	open,										-	perror,
+	-	read,										-	isatty,
+	-	close,										-	ttyname,
+	-	fork,										-	ttyslot,
+	-	wait,										-	iotcl,
+	-	waitpid,									-	getenv,
+	-	wait3,										-	tcsetattr,
+	-	wait4,										-	tcgetattr,
+	-	signal,										-	tgetent,
+	-	kill,										-	tgetflag,
+	-	exit,										-	tgetnum,
+	-	getcwd,										-	tgetstr,
+	-	chdir,										-	tgoto,
+	-	stat,										-	tputs
+	-	lstat,
+
+Le shell doit être capable de :
+
+	-	ne pas interpréter les guillements ou de ne pas spécifié les charactères tel que "\" ou ";".
+	-	ne pas utiliser plus d'une variable globale, il faut réfléchir à son utilisation et être prêt
+		à défendre et expliquer ce choix.
+	-	montrer qu'il est en attente pour une nouvelle commande.
+	-	d'avoir un historique fonctionnel.
+	-	rechercher et lancer le bon exécutable (basé sur le PATH variable ou en utilisant un path
+		relatif ou absolu).
+	-	de gérer les implémentations suivantes :
+			-	echo avec les options -n.
+			-	cd avec seulement un path relatif ou absolu.
+			-	pwd avec aucune autre option.
+			-	export avec aucune autre option.
+			-	unset avec aucune autre option.
+			-	env avec aucune option ni aucun arguments.
+			-	exit avec aucune autre option.
+	-	' empêche toute interprétation d'une séquence de charactère.
+	-	" empêche toute interprétation d'une séquence de charactère sauf pour $.
+	-	rediriger :
+			-	< redirige l'input.
+			-	> redirige l'output.
+			-	"<<" lit l'input de la source actuelle jusqu'à ce qu'une ligne contenant le délimiteur
+				soit vue. Il n'y a pas besoin de mettre a jour l'historique.
+			-	">>" redirige l'output vers le mode annexe.
+	-	Pipe |. L'output de chaque commande dans le pipeline est connecté via un pipe à l'input de la
+		prochaine commande.
+	-	de gérer les variables d'environnement ($ suivis par des charactères) doit étendre ses valeurs.
+	-	de gérer $? en l'étendant sur le status exit du plus récent exécutable au premier plan d'un pipeline.
+	-	de gérer ctrl-C ctrl-D ctrl-\ qio diovent fonctionner comme dans bash.
+	-	gestion des interactive aussi:
+		-	ctrl-C imprime une nouvelle commande dans une nouvelle ligne.
+		-	ctrl-D sort du shell.
+		-	strl-\ne fais rien.
+
+RM:
+	-	Readline peut créer certain leak, il n'est pas nécessaire de less gérer.
+	-	Cependant aucune ligne de notre code ne doit produire des leaks.
+	-	On doit se limiter aux descriptions du sujets.
+	-	Rien qui n'est pas demandé n'est requis.
+	-	Pour chaque point, si il existe un doute, il faut se référencer à bash.
+
+
