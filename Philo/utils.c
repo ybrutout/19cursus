@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:36:08 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/26 10:46:06 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/26 11:00:12 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,36 +34,6 @@ void	ft_write(int message, t_philo *philo)
 	if (message == DEAD)
 		write(1, " died\n", 6);
 }
-
-/*void	*routine_time(void *tmp)
-{
-	t_lst	*lst;
-	t_arg	*arg;
-
-	lst = (t_lst *)tmp;
-	arg = lst->philo->arg;
-	ft_sleep(lst->philo->arg->tm_die / 2, lst->philo->arg);
-	while (1)
-	{
-		lst = (t_lst *)tmp;
-		while (lst)
-		{
-			if (((get_current() - lst->philo->last_eat) / 1000) \
-			> lst->philo->arg->tm_die)
-			{
-				lst->philo->arg->died = 1;
-				ft_write(DEAD, lst->philo);
-				break ;
-			}
-			else
-				lst = lst->next;
-		}
-		if (arg->died == 1 || arg->end_meal == arg->phill)
-			break ;
-	}
-	ft_sleep(2000, arg);
-	return (NULL);
-}*/
 
 long	get_current(void)
 {

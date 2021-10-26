@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 11:15:51 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/26 10:46:43 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/26 11:14:54 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	send_the_thread(t_lst *lst, t_arg *arg)
 {
 	t_lst		*tmp;
-	//pthread_t	time;
 
 	tmp = lst;
 	while (tmp)
@@ -31,11 +30,16 @@ int	send_the_thread(t_lst *lst, t_arg *arg)
 		while (tmp)
 		{
 			if (((get_current() - lst->philo->last_eat) / 1000) \
-			> tmp->philo->arg->tm_die)
+			>= tmp->philo->arg->tm_die)
 			{
-				tmp->philo->arg->died = 1;
+				arg->died = 1;
 				ft_write(DEAD, tmp->philo);
 				break ;
+			}
+			else if (arg->nb_meal != -1 && arg->end_meal == arg->phill)
+			{
+				arg->died = 1;
+				break;
 			}
 			else
 				tmp = tmp->next;
