@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/27 13:42:59 by ybrutout          #+#    #+#              #
-#    Updated: 2021/10/27 13:49:23 by ybrutout         ###   ########.fr        #
+#    Updated: 2021/10/27 17:13:34 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,14 @@ RPATH = /Users/$(USER)/.brew/opt/readline/
 
 RL_FLAGS    =   -L/usr/include  -lreadline
 
-SRC = essais.c\
+SRC =	essais.c\
+		libft.c \
+		error.c \
 
 OBJ = ${SRC:c=o}
 
 %.o: %.c
-	@${CC} ${CFLAGS} ${RFLAGS} -c $< -o $@
+	@${CC} ${CFLAGS} -c $< -o $@
 
 all : ${NAME}
 

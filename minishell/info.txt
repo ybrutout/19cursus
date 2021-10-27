@@ -188,3 +188,7 @@ pid_t	fork(void);
 
 Fork crée un nouveau process par duplication du process qui l'appelle. Ce nouveau process is référencé comme un
 process enfant. Le proccess appellant est référencé comme le process parent.
+
+Le process enfant et le process parent tourne sur des espaces de mémoire différent. Au moment de fork() les deux
+espaces de mémoire on le même contenue.
+

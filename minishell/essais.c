@@ -6,37 +6,41 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:05:20 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/27 14:25:46 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/27 17:12:57 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <sys/wait.h>
-#include <sys/errno.h>
-#include <signal.h>
-#include <dirent.h>
+#include "minishell.h"
 
-int main(void)
+char	**cpy_env(char **env)
 {
-	char	*line;
+	int		size_env;
+	int		size_str;
 	int		i;
+	char	**env_cpy;
+	char	*str_cpy;
 
-	while (1)
+	size_env = tab_str_len(env);
+	i = -1;
+	env_cpy = malloc(sizeof(char * ) * (size_env + 1));
+	if (!env_cpy)
+		return (ERROR);
+	env_cpy[size_env] = NULL;
+	while (++i < size_env)
 	{
-		line = readline(">");
-		if (line)
-			printf("%s\n", line);
-		if (line && *line)
-		{
-   			i = add_history (line);
-			printf("%d\n", i);
-		}
-		free(line);
+		size_str = ft_str_len(env[i]);
+		str_cpy = malloc(sizeof(char) * (size_str + 1));
+		if (!str_cpy)
+			
+
 	}
+	return (env_cpy);
+}
+
+int main(int argc, char **argv, char **env)
+{
+	char 	**env;
+
+
 	return (0);
 }
