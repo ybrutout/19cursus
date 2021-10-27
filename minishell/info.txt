@@ -1,5 +1,10 @@
 MINISHELL
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+SUJETS EXPLICATIONS
+
 Fonction externes autorisées :
 
 	-	readline,									-	fstat,
@@ -70,4 +75,116 @@ RM:
 	-	Rien qui n'est pas demandé n'est requis.
 	-	Pour chaque point, si il existe un doute, il faut se référencer à bash.
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+PROTOTYPE :
+
+Readline librairie :
+
+La librairie readline demande une compilation différente. Voici les commandes à introduire dans le Makefile.
+
+RPATH = /Users/$(USER)/.brew/opt/readline/
+
+RL_FLAGS    =   -L/usr/include  -lreadline
+
+${NAME}: ${OBJ}
+	@${CC} ${CFLAGS} ${RL_FLAGS} -o ${NAME} ${OBJ}
+
+---------------------------------------------------------------------------------------------------------------------
+
+Les variables régulièrement utilisé dans readline:
+
+	-	char *rl_line_buffer
+
+---------------------------------------------------------------------------------------------------------------------
+
+#include <readline/readline.h>
+
+char	*readline(const char *prompt);
+
+La fonction Readline imprime un prompt qui s'appelle prompt. Ensuite il lit et retourne une ligne de texte venant
+de l'utilisateur. Si la valeur vrompt est NULL ou est une string vide, aucun prompt ne sera affiché.
+La ligne retourné par readline a alloué sa mémoire avec malloc. La focntion qui a appelé readline devra donc gérer
+la libération de la mémoire lorsqu'elle aura fini avec.
+
+la ligne retournée ne contiendra pas le "\n" ou autre. Elle ne contiendra que les charactères imprimables.
+
+exemple :
+
+int main(void)
+{
+	char	*line;
+
+	while (1)
+	{
+		line = readline(">");
+		if (line)
+			printf("%s\n", line);
+		free(line);
+	}
+	return (0);
+}
+
+---------------------------------------------------------------------------------------------------------------------
+
+#include <readline/readline.h>
+
+void	rl_clear_history(void)
+
+Readline_clear_history efface la liste de l'historique en supprimant toutes les entrées de la même manière que
+clear_history de la librairie History. Elle diffère tout de même car elle libère les données privées que Readline
+enregistre dans l'historique. (grâce à add_history)
+
+---------------------------------------------------------------------------------------------------------------------
+
+#include <readline/readline.h>
+
+int	rl_on_new_line(void);
+
+La fonction change le rl_line buffer.
+
+---------------------------------------------------------------------------------------------------------------------
+
+#include <readline/readline.h>
+
+void rl_replace_line (const char *text, int clear undo);
+
+Remplace le contenu de rl_line_buffer par du texte. Le point et la marque sont préservés, si possible. Si clear
+undo est non nul, la liste d'annulation associée à la ligne courante est effacée.
+
+---------------------------------------------------------------------------------------------------------------------
+
+#include <readline/readline.h>
+
+void	rl_redisplay(void);
+
+Redisplay change le contenue de rl_line_buffer par du texte. Le point et la marque sont retenus si possible.
+
+---------------------------------------------------------------------------------------------------------------------
+
+int	add_history(char *line);
+
+La fonction ajoute line à l'historique. La fonction retourne 0 si line a bien été ajouté à l'historique aussi non
+elle retourne 1.
+
+---------------------------------------------------------------------------------------------------------------------
+
+#include <fcntl.h>
+
+int	open(const char *pathname, int flags, mode_t mode);
+
+La fonction système open appelle le fichier spécifié par pathname. Si ce fichier spécifié n'existe pas et que O_CREAT
+est spécifié en flags, le fichier sera créé par open().
+
+la valeur de retour de open est le fd qui est un chiffre non négatif integer
+// a continuer
+
+---------------------------------------------------------------------------------------------------------------------
+
+#include <unistd.h>
+
+pid_t	fork(void);
+
+Fork crée un nouveau process par duplication du process qui l'appelle. Ce nouveau process is référencé comme un
+process enfant. Le proccess appellant est référencé comme le process parent.
