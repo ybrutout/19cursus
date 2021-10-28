@@ -6,11 +6,24 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 17:13:26 by ybrutout          #+#    #+#             */
-/*   Updated: 2021/10/27 17:28:42 by ybrutout         ###   ########.fr       */
+/*   Updated: 2021/10/28 15:22:53 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
+
 void	free_env(char ** env, int nb)
 {
-	;
+	if (nb > 0)
+	{
+		if (nb > 1)
+		{
+			while (nb > 1)
+			{
+				free(env[nb - 2]);
+				nb--;
+			}
+		}
+		free(env);
+	}
 }
