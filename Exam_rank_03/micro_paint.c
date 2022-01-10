@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 10:41:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/01/10 17:02:43 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/01/10 17:09:38 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,13 @@ char	**paint_background(t_area *area)
 	return(background);
 }
 
-void	draw_the_rec
+void	draw_the_rec(float x, float y, char **background, t_sharpe *sharpe)
+{
+ //il faut que je puisse comparer chaque pixel int en les convertissant en float pour pouvoir y appliquer la formule qui se
+ //retrouve dans le suvject
+}
 
-t_sharpe	*init_sharpe(FILE *file, t_area *area, char **background)
+t_sharpe	*init_sharpe(FILE *file, char **background)
 {
 	t_sharpe	*sharpe;
 
@@ -97,9 +101,9 @@ t_sharpe	*init_sharpe(FILE *file, t_area *area, char **background)
 		return (NULL);
 	while (fscanf(file, "%c %f %f %f %f %c\n", &(sharpe->c), &(sharpe->x), &(sharpe->y), &(sharpe->width), &(sharpe->height), &(sharpe->chr)) == 6)
 	{
-		if (sharpe->width > 0.0000000 && sharpe->height > 0.000000 && (sharpe->c == 'r' || sharpe->c == 'R'))
+		if (sharpe->width > 0.0000000 && sharpe->height > 0.000000 && (sharpe->c == 'r' || sharpe->c == 'R'))// trouver une autre facon de cheque il faute que ca break ou que ca passe lorsque les donnnees ne sont pas bonnes.
 			return (sharpe);
-		draw_the_rec
+		//draw_the_rec
 	}
 	return (NULL);
 }
@@ -125,7 +129,7 @@ int	main(int argc, char **argv)
 	background = paint_background(area);
 	if (!background)
 		return(ft_error(2));
-	sharpe = init_sharpe(file);
+	sharpe = init_sharpe(file, background);
 	if (!sharpe)
 		return(ft_error(1));
 	printf("%d, %d, %c\n", area->width, area->height, area->bgr);
