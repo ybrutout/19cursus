@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 10:41:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/01/10 17:09:38 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/01/11 11:27:17 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,37 +74,63 @@ char	**paint_background(t_area *area)
 		}
 		background[i][j] = '\0';
 	}
-//	background[i] = NULL;
-	printf("area->height == %d\narea->wight == %d\n", area->height, area->width);
-	i = 0;
-	j = 0;
-	while (i < area->height)
-	{
-		printf("%s\n", background[i]);
-		i++;
-	}
+	background[i] = NULL;
 	return(background);
 }
 
-void	draw_the_rec(float x, float y, char **background, t_sharpe *sharpe)
+int		check_point(float x, float y, t_sharpe *sharpe)
 {
- //il faut que je puisse comparer chaque pixel int en les convertissant en float pour pouvoir y appliquer la formule qui se
- //retrouve dans le suvject
+	if (x < sharpe->x || y < sharpe->y || x > (sharpe->x + sharpe->width) || y > (sharpe->y + sharpe->height))
+		return (0);
+	else if (x == sharpe->x || y == sharpe->y || x == (sharpe->x + sharpe->width) || y == (sharpe->y + sharpe->height))
+		return (1);
+	return (2);
+}
+
+t_sharpe	*draw_the_rec(char **background, t_sharpe *sharpe)
+{
+	int		i;
+	int		j;
+	int 	point;
+
+	i = -1;
+	while (background[++i])
+	{
+		j = -1;
+		while (background[i][++j])
+		{
+			point = check_point((float)j, (float)i, sharpe);
+			if (point == 1)
+				background[i][j] = sharpe->chr;
+			else if (point == 2)
+				background[i][j] = 'z';
+		}
+	}
+	return (sharpe);
 }
 
 t_sharpe	*init_sharpe(FILE *file, char **background)
 {
 	t_sharpe	*sharpe;
+	int			i;
 
 	sharpe = malloc(sizeof(t_sharpe));
 	if (!sharpe)
 		return (NULL);
 	while (fscanf(file, "%c %f %f %f %f %c\n", &(sharpe->c), &(sharpe->x), &(sharpe->y), &(sharpe->width), &(sharpe->height), &(sharpe->chr)) == 6)
 	{
-		if (sharpe->width > 0.0000000 && sharpe->height > 0.000000 && (sharpe->c == 'r' || sharpe->c == 'R'))// trouver une autre facon de cheque il faute que ca break ou que ca passe lorsque les donnnees ne sont pas bonnes.
-			return (sharpe);
-		//draw_the_rec
+		if (sharpe->width < 0.00000000 || sharpe->height < 0.00000000 || (sharpe->c != 'r' && sharpe->c != 'R'))
+			return (NULL);
+		else
+			draw_the_rec(background, sharpe);
 	}
+	//essais
+	i = -1;
+	while (background[++i])
+	{
+		printf("%s\n", background[i]);
+	}
+	//fin
 	return (NULL);
 }
 
@@ -132,8 +158,6 @@ int	main(int argc, char **argv)
 	sharpe = init_sharpe(file, background);
 	if (!sharpe)
 		return(ft_error(1));
-	printf("%d, %d, %c\n", area->width, area->height, area->bgr);
-	printf("%c, %f, %f, %f, %f, %c\n", sharpe->c, sharpe->x, sharpe->y, sharpe->width, sharpe->height, sharpe->chr);
 	fclose(file);
 	return (0);
 }
