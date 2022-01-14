@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 15:25:13 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/01/13 12:16:22 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/01/14 13:56:49 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,29 @@
 int		main(void)
 {
 	std::string	buff;
-	PhoneBook	directory;
-	std::cout <<"coucou" << std::endl;
+	PhoneBook	repertory;
 	Contact		*contact;
 
-	while (std::cin >> buff)
+	while (1)
 	{
+		std::cout<<"Please enter the commands 'ADD', 'SEARCH' or 'EXIT': "<<std::endl;
+		std::cin >> buff;
 		if (buff.compare("ADD") == 0)
 		{
-			std::cout << "ADD" << std::endl;
-			contact = directory.get_repertory();
-			//if (contact.getnbcontact < 8)
-			//	contact[contact.getnbcontact] = contact.new();
+			if (repertory.get_nbcontact() > 7)
+				std::cout <<"Oops... There are already 8 contacts. Impossible to add more."<<std::endl;
+			else
+			{
+				contact = repertory.get_repertory();
+				contact->add_contact();
+			}
 		}
 		else if (buff.compare("SEARCH") == 0)
 		{
-			std::cout <<"SEARCH" <<std::endl;
-
+			repertory.show_contact();
 		}
 		else if (buff.compare("EXIT") == 0)
-		{
-			std::cout << "je quitte" << std::endl;
-			return(0);
-		}
+			break;
 	}
 	return (0);
 }

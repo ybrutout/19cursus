@@ -1,0 +1,194 @@
+MINISHELL
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+SUJETS EXPLICATIONS
+
+Fonction externes autorisées :
+
+	-	readline,									-	fstat,
+	-	rl_clear_history,							-	unlink,
+	-	rl_on_new_line,								-	execve,
+	-	rl_replace_line,							-	dup,
+	-	rl_redisplay,								-	dup2,
+	-	add_history,								-	pipe,
+	-	printf,										-	opendir,
+	-	malloc,										-	readdir,
+	-	free,										-	closedir,
+	-	write,										-	strerror,
+	-	open,										-	perror,
+	-	read,										-	isatty,
+	-	close,										-	ttyname,
+	-	fork,										-	ttyslot,
+	-	wait,										-	iotcl,
+	-	waitpid,									-	getenv,
+	-	wait3,										-	tcsetattr,
+	-	wait4,										-	tcgetattr,
+	-	signal,										-	tgetent,
+	-	kill,										-	tgetflag,
+	-	exit,										-	tgetnum,
+	-	getcwd,										-	tgetstr,
+	-	chdir,										-	tgoto,
+	-	stat,										-	tputs
+	-	lstat,
+
+Le shell doit être capable de :
+
+	-	ne pas interpréter les guillements ou de ne pas spécifié les charactères tel que "\" ou ";".
+	-	ne pas utiliser plus d'une variable globale, il faut réfléchir à son utilisation et être prêt
+		à défendre et expliquer ce choix.
+	-	montrer qu'il est en attente pour une nouvelle commande.
+	-	d'avoir un historique fonctionnel.
+	-	rechercher et lancer le bon exécutable (basé sur le PATH variable ou en utilisant un path
+		relatif ou absolu).
+	-	de gérer les implémentations suivantes :
+			-	echo avec les options -n.
+			-	cd avec seulement un path relatif ou absolu.
+			-	pwd avec aucune autre option.
+			-	export avec aucune autre option.
+			-	unset avec aucune autre option.
+			-	env avec aucune option ni aucun arguments.
+			-	exit avec aucune autre option.
+	-	' empêche toute interprétation d'une séquence de charactère.
+	-	" empêche toute interprétation d'une séquence de charactère sauf pour $.
+	-	rediriger :
+			-	< redirige l'input.
+			-	> redirige l'output.
+			-	"<<" lit l'input de la source actuelle jusqu'à ce qu'une ligne contenant le délimiteur
+				soit vue. Il n'y a pas besoin de mettre a jour l'historique.
+			-	">>" redirige l'output vers le mode annexe.
+	-	Pipe |. L'output de chaque commande dans le pipeline est connecté via un pipe à l'input de la
+		prochaine commande.
+	-	de gérer les variables d'environnement ($ suivis par des charactères) doit étendre ses valeurs.
+	-	de gérer $? en l'étendant sur le status exit du plus récent exécutable au premier plan d'un pipeline.
+	-	de gérer ctrl-C ctrl-D ctrl-\ qio diovent fonctionner comme dans bash.
+	-	gestion des interactive aussi:
+		-	ctrl-C imprime une nouvelle commande dans une nouvelle ligne.
+		-	ctrl-D sort du shell.
+		-	strl-\ne fais rien.
+
+RM:
+	-	Readline peut créer certain leak, il n'est pas nécessaire de less gérer.
+	-	Cependant aucune ligne de notre code ne doit produire des leaks.
+	-	On doit se limiter aux descriptions du sujets.
+	-	Rien qui n'est pas demandé n'est requis.
+	-	Pour chaque point, si il existe un doute, il faut se référencer à bash.
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+PROTOTYPE :
+
+Readline librairie :
+
+La librairie readline demande une compilation différente. Voici les commandes à introduire dans le Makefile.
+
+RPATH = /Users/$(USER)/.brew/opt/readline/
+
+RL_FLAGS    =   -L/usr/include  -lreadline
+
+${NAME}: ${OBJ}
+	@${CC} ${CFLAGS} ${RL_FLAGS} -o ${NAME} ${OBJ}
+
+---------------------------------------------------------------------------------------------------------------------
+
+Les variables régulièrement utilisé dans readline:
+
+	-	char *rl_line_buffer
+
+---------------------------------------------------------------------------------------------------------------------
+
+#include <readline/readline.h>
+
+char	*readline(const char *prompt);
+
+La fonction Readline imprime un prompt qui s'appelle prompt. Ensuite il lit et retourne une ligne de texte venant
+de l'utilisateur. Si la valeur vrompt est NULL ou est une string vide, aucun prompt ne sera affiché.
+La ligne retourné par readline a alloué sa mémoire avec malloc. La focntion qui a appelé readline devra donc gérer
+la libération de la mémoire lorsqu'elle aura fini avec.
+
+la ligne retournée ne contiendra pas le "\n" ou autre. Elle ne contiendra que les charactères imprimables.
+
+exemple :
+
+int main(void)
+{
+	char	*line;
+
+	while (1)
+	{
+		line = readline(">");
+		if (line)
+			printf("%s\n", line);
+		free(line);
+	}
+	return (0);
+}
+
+---------------------------------------------------------------------------------------------------------------------
+
+#include <readline/readline.h>
+
+void	rl_clear_history(void)
+
+Readline_clear_history efface la liste de l'historique en supprimant toutes les entrées de la même manière que
+clear_history de la librairie History. Elle diffère tout de même car elle libère les données privées que Readline
+enregistre dans l'historique. (grâce à add_history)
+
+---------------------------------------------------------------------------------------------------------------------
+
+#include <readline/readline.h>
+
+int	rl_on_new_line(void);
+
+La fonction change le rl_line buffer.
+
+---------------------------------------------------------------------------------------------------------------------
+
+#include <readline/readline.h>
+
+void rl_replace_line (const char *text, int clear undo);
+
+Remplace le contenu de rl_line_buffer par du texte. Le point et la marque sont préservés, si possible. Si clear
+undo est non nul, la liste d'annulation associée à la ligne courante est effacée.
+
+---------------------------------------------------------------------------------------------------------------------
+
+#include <readline/readline.h>
+
+void	rl_redisplay(void);
+
+Redisplay change le contenue de rl_line_buffer par du texte. Le point et la marque sont retenus si possible.
+
+---------------------------------------------------------------------------------------------------------------------
+
+int	add_history(char *line);
+
+La fonction ajoute line à l'historique. La fonction retourne 0 si line a bien été ajouté à l'historique aussi non
+elle retourne 1.
+
+---------------------------------------------------------------------------------------------------------------------
+
+#include <fcntl.h>
+
+int	open(const char *pathname, int flags, mode_t mode);
+
+La fonction système open appelle le fichier spécifié par pathname. Si ce fichier spécifié n'existe pas et que O_CREAT
+est spécifié en flags, le fichier sera créé par open().
+
+la valeur de retour de open est le fd qui est un chiffre non négatif integer
+// a continuer
+
+---------------------------------------------------------------------------------------------------------------------
+
+#include <unistd.h>
+
+pid_t	fork(void);
+
+Fork crée un nouveau process par duplication du process qui l'appelle. Ce nouveau process is référencé comme un
+process enfant. Le proccess appellant est référencé comme le process parent.
+
+Le process enfant et le process parent tourne sur des espaces de mémoire différent. Au moment de fork() les deux
+espaces de mémoire on le même contenue.
+
