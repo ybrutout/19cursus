@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:00:04 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/01/24 12:20:32 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/01/24 13:15:37 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ class Zombie{
 	public:
 		Zombie(void);
 		~Zombie(void);
-		void	setname(std::string name);
+		void		setname(std::string name);
+		void		announced(void);
 
 	private:
-		void		announced(void);
 		std::string	name;
 };
 
