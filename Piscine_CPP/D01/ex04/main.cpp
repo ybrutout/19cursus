@@ -6,13 +6,13 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:01:26 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/01/26 11:26:26 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/01/26 12:19:53 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <fstream>
-# include <string>
+#include <string>
 
 int		main(int argc, char **argv)
 {
@@ -37,15 +37,14 @@ int		main(int argc, char **argv)
 	ifs.seekg(0,ifs.beg);
 	char * buff = new char[lenght];
 	ifs.read(buff, lenght);
+	ifs.close();
 	std::string buffer = buff;
-	for(size_t i = buffer.find(s1); i != std::string::npos; i = buffer.find(s1))
+	for(size_t i = buffer.find(s1); i != std::string::npos; i = buffer.find(s1, i + 1))
 	{
 		buffer.erase(i, s1.length());
 		buffer.insert(i, s2);
 	}
-	buffer.begin();
 	out << buffer;
 	out.close();
-	ifs.close();
 	return (0);
 }
