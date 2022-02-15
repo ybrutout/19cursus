@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 14:21:41 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/02/15 09:20:09 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/02/15 15:47:55 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,14 @@ void	Karen::complain(std::string level){
 	{
 		case 0:
 			this->debug();
-			this->info();
-			this->warning();
-			this->error();
-			break;
 		case 1:
 			this->info();
-			this->warning();
-			this->error();
-			break;
 		case 2:
 			this->warning();
-			this->error();
-			break;
 		case 3:
 			this->error();
 			break;
-		case 4:
-			std::cout<<"[ Probably complaining about insignificant problems ]"<<std::endl;
-			break;
 		default:
-			break;
+			std::cout<<"[ Probably complaining about insignificant problems ]"<<std::endl;
 	}
 }
