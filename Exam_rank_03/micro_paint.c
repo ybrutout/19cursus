@@ -5,161 +5,116 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 10:41:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/01/11 11:27:17 by ybrutout         ###   ########.fr       */
+/*   Created: 2022/02/10 13:35:11 by ybrutout          #+#    #+#             */
+/*   Updated: 2022/02/10 16:06:04 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "micro_paint.h"
+# include "micro_paint.h"
 
-int	ft_error(int nb)
+int	ft_strlen(char *str)
 {
-	if (nb == 0)
-		printf("Error: Argument\n");
-	else if (nb == 1)
-		printf("Error: Operation file corrupted\n");
+	int	i;
+
+	i = 0;
+	if (!str)
+		return(i);
+	while (str[i])
+		i++;
+	return (i);
+}
+
+int	fail_return(char *str)
+{
+	write(1, str, ft_strlen(str));
 	return (1);
 }
 
-t_area	*init_area(FILE *file)
+int	the_zone(FILE *file, t_zone *zone)
 {
-	t_area	*area;
-	int		ret;
-
-	area = malloc(sizeof(t_area));
-	if (!area)
-		return (NULL);
-	if ((ret = fscanf(file, "%d %d %c\n", &(area->width), &(area->height), &(area->bgr))) != 3)
-	{
-		write(1, "je suis la\n", 11);
-		return (NULL);
-	}
-	if (area->width < 1 || area->width > 300 || area->height < 1 || area->height > 300)
-	{
-		free(area);
-		return(NULL);
-	}
-	if (ret < 0)
-	{
-		free(area);
-		return (NULL);
-	}
-	return (area);
-}
-
-char	**paint_background(t_area *area)
-{
-	char	**background;
-	int		i;
-	int		j;
-
-	i = -1;
-	background = malloc(sizeof(char*) * ((area->height) + 1));
-	if (!background)
-		return(NULL);
-	while (++i < area->height)
-	{
-
-		background[i] = malloc(sizeof(char) * (area->width) + 1);
-		if(!background[i])
-		{
-			//free_cl
-			return(NULL);
-		}
-		j = 0;
-		while (j < area->width)
-		{
-			background[i][j] = area->bgr;
-			j++;
-		}
-		background[i][j] = '\0';
-	}
-	background[i] = NULL;
-	return(background);
-}
-
-int		check_point(float x, float y, t_sharpe *sharpe)
-{
-	if (x < sharpe->x || y < sharpe->y || x > (sharpe->x + sharpe->width) || y > (sharpe->y + sharpe->height))
+	int	i;
+	int	j;
+	if ((fscanf(file, "%d %d %c\n", &zone->width, &zone->height, &zone->c)) != 3)
 		return (0);
-	else if (x == sharpe->x || y == sharpe->y || x == (sharpe->x + sharpe->width) || y == (sharpe->y + sharpe->height))
-		return (1);
-	return (2);
+	if (zone->width < 1 || zone->width > 300 || zone->height < 1 || zone->height > 300)
+		return(0);
+	zone->draw = malloc(sizeof (char *) * (zone->height + 1));
+	if (!(zone->draw))
+		return (0);
+	zone->draw[zone->height] = NULL;
+	i = -1;
+	while (++i < zone->height)
+	{
+
+		zone->draw[i] = malloc(sizeof(char) * (zone->width + 1));
+		if (!(zone->draw[i]))
+			return(0);
+		zone->draw[i][zone->width] = '\0';
+		j = -1;
+		while (++j < zone->width)
+			zone->draw[i][j] = zone->c;
+	}
+
+	i = 0;
+	printf("width == %d\nheight == %d\nc == %c\n", zone->width, zone->height, zone->c);
+	while (zone->draw[i])
+	{
+		printf("%s\n", zone->draw[i]);
+		i++;
+	}
+	return(1);
 }
 
-t_sharpe	*draw_the_rec(char **background, t_sharpe *sharpe)
+int	get_the_rect(FILE *file, t_zone *zone)
 {
-	int		i;
-	int		j;
-	int 	point;
+	t_rect *rect;
+	int	i;
+	int	j;
 
-	i = -1;
-	while (background[++i])
+	while ((fscanf(file, "%c %f %f %f %f %c", &rect->type, &rect->x, &rect->y, &rect->width, &rect->height, &rect->c)) == 6)
 	{
-		j = -1;
-		while (background[i][++j])
+		if (rect->type != 'r' && rect->type != 'R')
+			return(0);
+		if (if rect->width < 1 || rect->height < 1)
+			return(0);
+		i = 0;
+		while (zone->draw[i])
 		{
-			point = check_point((float)j, (float)i, sharpe);
-			if (point == 1)
-				background[i][j] = sharpe->chr;
-			else if (point == 2)
-				background[i][j] = 'z';
+			j = 0
+			while (zone->draw[i][j])
+			{
+				if (rect->type == 'r')
+					if ((j >= rect->x || j <= (rect-> x + rect->width)) && (i == rect->y || i == (rect->height) ))
+						zone->draw[i][j] = rect->charactere;
+				else if (rect->type == 'R')
+					if ((j >= rect->x || j <= (rect-> x + rect->width)) && (i == rect->y || i == (rect->height) ))
+				else
+				 return(0);
+				j++;
+			}
+			i++;
 		}
 	}
-	return (sharpe);
-}
-
-t_sharpe	*init_sharpe(FILE *file, char **background)
-{
-	t_sharpe	*sharpe;
-	int			i;
-
-	sharpe = malloc(sizeof(t_sharpe));
-	if (!sharpe)
-		return (NULL);
-	while (fscanf(file, "%c %f %f %f %f %c\n", &(sharpe->c), &(sharpe->x), &(sharpe->y), &(sharpe->width), &(sharpe->height), &(sharpe->chr)) == 6)
-	{
-		if (sharpe->width < 0.00000000 || sharpe->height < 0.00000000 || (sharpe->c != 'r' && sharpe->c != 'R'))
-			return (NULL);
-		else
-			draw_the_rec(background, sharpe);
-	}
-	//essais
-	i = -1;
-	while (background[++i])
-	{
-		printf("%s\n", background[i]);
-	}
-	//fin
-	return (NULL);
 }
 
 int	main(int argc, char **argv)
 {
-	FILE 		*file;
-	t_area		*area;
-	t_sharpe	*sharpe;
-	int			mal;
-	char		**background;
-	//int			i;
+	FILE 	*file;
+	t_zone	zone;
 
 	if (argc != 2)
-		return (ft_error(0));
-	file = fopen(argv[1], "r");
-	if (!file)
-		return (ft_error(1));
-	area = init_area(file);
-	if (!area)
-		return (ft_error(1));
-	mal = 1;
-	background = paint_background(area);
-	if (!background)
-		return(ft_error(2));
-	sharpe = init_sharpe(file, background);
-	if (!sharpe)
-		return(ft_error(1));
-	fclose(file);
+		return (fail_return("Error: argument\n"));
+	if (!(file = fopen(argv[1], "r")))
+		return (fail_return("Error: Operation file corrupted"));
+	if (!(the_zone(file, &zone)))
+	{
+		fclose(file);
+		return(0);
+	}
+	if (!(get_the_rect(file, &zone)))
+	{
+		fclose(file);
+		return(0);
+	}
 	return (0);
 }
-
-//	printf("area.wight == %d\narea.height == %d\narea.bgr == %c", area->width, area->height, area->bgr);

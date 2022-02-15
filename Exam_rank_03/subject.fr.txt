@@ -26,7 +26,8 @@ Les lignes doivent etre lu dans l'ordre et par consequent les operations doivent
 Il doit y avoir au moins un espace entre chaque variable d'une ligne
 
 WIDTH HEIGHT BACKGROUND_CHAR
-Cette ligne sera toujours la premiere ligne du fichier et elle definie la zone dites "de dessin". Votre programme ne devrait rien afficher en dehors de cette "zone de dessin". Cette ligne ne sera presente qu une fois.
+Cette ligne sera toujours la premiere ligne du fichier et elle definie la zone dites "de dessin". Votre programme ne devrait rien afficher en dehors de cette "zone de dessin".
+Cette ligne ne sera presente qu une fois.
 - WIDTH: doit etre un int tel que 0 < WIDTH <= 300, C est le nombre de caractères horizontaux utilisés pour la zone de dessin
 - HEIGHT: doit etre un int tel que 0 < HEIGHT <= 300, C est le nombre de caractères verticaux utilisés pour la zone de dessin
 - BACKGROUND_CHAR: Par defaut toutes la "zone de dessin" est rempli avec BACKGROUND_CHAR
@@ -54,7 +55,8 @@ Pour faciliter les calculs nous n'utiliserons que le coin en haut à gauche d'un
 Si le coin en haut a gauche d'un pixel est à une distance superieure ou egale à 1 de la bordure d un rectangle celui ci ne fait pas parti d'un rectangle vide
 Si le coin en haut a gauche d'un pixel est à une distance inferieur à 1 de la bordure d'un rectangle, il fait alors parti d'un rectangle vide
 
-Vous devriez regarder l'image fournie tout en lisant les prochaines lignes. Cette image represente le terminal. Nous avons fait une "zone de dessin" avec un WIDTH à 5 et une HEIGHT à 3
+Vous devriez regarder l'image fournie tout en lisant les prochaines lignes. Cette image represente le terminal. Nous avons fait une "zone de dessin" avec un
+WIDTH à 5 et une HEIGHT à 3
 Nous avons écrit une lettre différente par caractère dans la "zone de dessin" afin de faciliter les explications.
 - Si vous voulez effectuer l'operation: r 2.5 1.5 1 1 X (le rectangle vert)
 -- Cela fera que le caractère 'D' dans l'image sera remplacés par 'X'
