@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 15:17:56 by ybrutout          #+#    #+#              #
-#    Updated: 2022/01/13 12:17:53 by ybrutout         ###   ########.fr        #
+#    Updated: 2022/02/16 14:35:04 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,26 @@ CC = clang++
 
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC =	main.cpp \
-		PhoneBook.cpp \
-		Contact.cpp \
+SRC =	sources/PhoneBook.cpp \
+		sources/Contact.cpp \
 
-all:
-	$(CC) $(CPPFLAGS) $(SRC) -o $(NAME)
+OBJS		=	$(SRCS:%.cpp=%.o)
+
+all: $(NAME)
+
+$(NAME):
+			@$(CC) $(CPPFLAGS) main.cpp $(SRC) -o $(NAME)
+			@echo "The executable \033[38;2;39;154;186m$(NAME)\033[0m is ready"
+
+.cpp.o:
+			@$(CC) $(CPPFLAGS) -c $< -o $(<:.cpp=.o)
+
 clean:
-	@rm -f phone_book
+			@rm -rf $(OBJS)
+
+fclean:		clean
+			@rm -rf $(NAME)
+
+re:			fclean all
+
+.PHONY:		fclean, all, re

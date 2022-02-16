@@ -6,11 +6,11 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:17:22 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/02/16 13:47:38 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/02/16 14:35:20 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Contact.hpp"
+#include "../includes/Contact.hpp"
 
 Contact::Contact(void)
 {}

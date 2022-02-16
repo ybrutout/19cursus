@@ -10,19 +10,19 @@
 #include <vector>
 #include <algorithm>
 #include <functional>
-#include "Account.hpp"
+#include "include/Account.hpp"
 
 
 int		main( void ) {
 
 	typedef std::vector<Account::t>							  accounts_t; //création d'un TYPE : Vector de type Account::T qui s'appelle accounts_t
 	typedef std::vector<int>								  ints_t;//Vector de type int quin s'appelle ints_t
-	typedef std::pair<accounts_t::iterator, ints_t::iterator> acc_int_t;//	declaration d'un objet pair qui lie un iterateur de 
+	typedef std::pair<accounts_t::iterator, ints_t::iterator> acc_int_t;//	declaration d'un objet pair qui lie un iterateur de
 																		//	du vecteur accounts_s a un iterateur de ints_t
 
 	int	const				amounts[]	= { 42, 54, 957, 432, 1234, 0, 754, 16576 };//Creation d'un tableau statique de 8 valeur
 	size_t const			amounts_size( sizeof(amounts) / sizeof(int) );//variable type size_t qui équivaut a la taille du tableau amount diviser par la taille d'un int
-	accounts_t				accounts( amounts, amounts + amounts_size );// pas comprendre 
+	accounts_t				accounts( amounts, amounts + amounts_size );// pas comprendre
 	accounts_t::iterator	acc_begin	= accounts.begin();
 	accounts_t::iterator	acc_end		= accounts.end();
 
@@ -34,7 +34,7 @@ int		main( void ) {
 
 	int	const			w[]			= { 321, 34, 657, 4, 76, 275, 657, 7654 };
 	size_t const		w_size( sizeof(w) / sizeof(int) );
-	ints_t				withdrawals( w, w + w_size );//pas comprendre 
+	ints_t				withdrawals( w, w + w_size );//pas comprendre
 	ints_t::iterator	wit_begin	= withdrawals.begin();
 	ints_t::iterator	wit_end		= withdrawals.end();
 
