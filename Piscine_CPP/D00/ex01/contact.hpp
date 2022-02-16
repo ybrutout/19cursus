@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 16:00:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/01/14 13:11:07 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2022/02/16 13:37:01 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class	Contact{
 		Contact(void);
 		~ Contact(void);
 
-		void	add_contact(void);
+		int	add_contact(void);
 
 		std::string	get_first_name(void)const;
 		std::string	getlast_name(void);

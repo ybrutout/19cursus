@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 11:58:07 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/01/14 17:16:52 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2022/02/16 13:55:10 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		PhoneBook::strtoint(const char *str)
 	return (ret);
 }
 
-void	PhoneBook::show_contact(void)
+int	PhoneBook::show_contact(void)
 {
 	Contact		contact;
 	std::string	buff;
@@ -72,7 +72,7 @@ void	PhoneBook::show_contact(void)
 	if (this->_nbcontact == 0)
 	{
 		std::cout<<"No contact"<<std::endl;
-		return ;
+		return (1);
 	}
 	std::cout<<"     index|first name| last name|  nickname"<<std::endl;
 	for(int i = 0; i < this->get_nbcontact(); i++)
@@ -96,11 +96,16 @@ void	PhoneBook::show_contact(void)
 	while (1)
 	{
 		std::cout<<"Enter the id of the desired contact : ";
-		std::cin>>buff;
+		std::getline(std::cin, buff);
+		if (std::cin.eof())
+		{
+			std::cout<<std::endl;
+			return (0);
+		}
 		index = this->strtoint(buff.c_str());
 		if (index < 0 || index > (this->_nbcontact - 1))
 			std::cout<<"Oops... The id "<<buff<<" doesn't exist."<<std::endl;
-		else 
+		else
 		{
 			contact = this->_repertory[index];
 			std::cout<<"First Name : "<<contact.get_first_name()<<std::endl;
@@ -111,5 +116,6 @@ void	PhoneBook::show_contact(void)
 			break;
 		}
 	}
+	return (1);
 }
 

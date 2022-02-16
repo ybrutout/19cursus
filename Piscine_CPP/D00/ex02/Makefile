@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+         #
+#    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 13:58:34 by yannahbruto       #+#    #+#              #
-#    Updated: 2022/01/17 14:03:21 by yannahbruto      ###   ########.fr        #
+#    Updated: 2022/02/16 10:48:22 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,4 +22,4 @@ SRC =	Account.cpp \
 all:
 	$(CC) $(CPPFLAGS) $(SRC) -o $(NAME)
 clean:
-	@rm -f phone_book
+	@rm -f $(NAME)

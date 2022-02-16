@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 15:25:13 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/01/14 13:56:49 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2022/02/16 13:53:50 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,28 @@ int		main(void)
 	while (1)
 	{
 		std::cout<<"Please enter the commands 'ADD', 'SEARCH' or 'EXIT': "<<std::endl;
-		std::cin >> buff;
-		if (buff.compare("ADD") == 0)
+		std::getline(std::cin, buff);
+		if (std::cin.eof())
+			break;
+		else if (buff == "ADD")
 		{
 			if (repertory.get_nbcontact() > 7)
 				std::cout <<"Oops... There are already 8 contacts. Impossible to add more."<<std::endl;
 			else
 			{
 				contact = repertory.get_repertory();
-				contact->add_contact();
+				if (!(contact->add_contact()))
+					break;
 			}
 		}
-		else if (buff.compare("SEARCH") == 0)
+		else if (buff == "SEARCH")
 		{
-			repertory.show_contact();
+			if (!repertory.show_contact())
+				break;
 		}
-		else if (buff.compare("EXIT") == 0)
+		else if (buff == "EXIT")
 			break;
 	}
+	std::cout<<"The programm closes"<<std::endl;
 	return (0);
 }
