@@ -6,20 +6,19 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 11:51:34 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/02/23 12:34:07 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/02/23 13:49:40 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Fixed.hpp"
+#include "../include/Fixed.hpp"
 
-Fixed::Fixed(void) : _RawBits(0), _comma(8){
+Fixed::Fixed(void) : _RawBits(0){
 	std::cout << "Default constructor called" << std::endl;
 	return ;
 }
 
 Fixed::Fixed(Fixed const & fixed) : _RawBits(fixed.getRawBits()){
 	std::cout << "Copy constructor called" << std::endl;
-	_comma = 8;
 	return ;
 }
 

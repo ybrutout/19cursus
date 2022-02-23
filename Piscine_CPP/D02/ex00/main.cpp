@@ -6,11 +6,11 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 11:43:45 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/02/23 12:38:34 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/02/23 13:23:39 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Fixed.hpp"
+#include "./include/Fixed.hpp"
 
 //main présent dans le sujet
 /*int main( void )
