@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Student.hpp                                        :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/16 16:00:16 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/02/21 15:35:44 by ybrutout         ###   ########.fr       */
+/*   Created: 2022/02/23 11:41:20 by ybrutout          #+#    #+#             */
+/*   Updated: 2022/02/23 12:21:48 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//Sample.cpp
-
-#ifndef STUDENT_HPP
-# define STUDENT_HPP
+#ifndef FIXED_HPP
+# define FIXED_HPP
 
 # include <iostream>
 
-class Integer{
+class Fixed{
 	public:
 
-		Integer(int const n);
-		~Integer(void);
+		Fixed(void);
+		Fixed(Fixed const & fixed);
+		~Fixed(void);
 
-		int        getvalue(void)const;
+		Fixed	&	operator=(Fixed const & fixed);
 
-		Integer  & operator=(Integer const & rhs);
-		Integer    operator+(Integer const & rhs) const;
+		int getRawBits(void)const;
+		void setRawBits(int const raw);
 
 	private:
 
-		int _n;
-
+		int		_RawBits;
+		int		_comma;
 };
-
-std::ostream & operator<<(::std::ostream & o, Integer const & rhs);
 
 #endif
