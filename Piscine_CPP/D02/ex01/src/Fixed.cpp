@@ -6,22 +6,21 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 11:51:34 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/02 11:04:21 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/03/02 13:46:20 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Fixed.hpp"
 
 Fixed::Fixed(int const rb){
-	std::cout << "Integer constructor called" << std::endl;
+	std::cout << "Int constructor called" << std::endl;
 	this->_RawBits = rb << this->_comma;
 	return ;
 }
 
 Fixed::Fixed(float fl){
-	float i = 8.0000;
 	std::cout << "Float constructor called" << std::endl;
-	this->_RawBits = (int)roundf(fl << i)
+	this->_RawBits = (int)roundf(fl * (1 << this->_comma));
 	return ;
 }
 
@@ -30,8 +29,9 @@ Fixed::Fixed(void) : _RawBits(0){
 	return ;
 }
 
-Fixed::Fixed(Fixed const & fixed) : _RawBits(fixed.getRawBits()){
+Fixed::Fixed(Fixed const & fixed){
 	std::cout << "Copy constructor called" << std::endl;
+	this->_RawBits = fixed.getRawBits();
 	return ;
 }
 
@@ -40,40 +40,39 @@ Fixed::~Fixed(void){
 	return ;
 }
 
-// Fixed	&	Fixed::operator=(Fixed const & fixed){
-// 	std::cout << "Copy assignment called" << std::endl;
+Fixed	&	Fixed::operator=(Fixed const & fixed){
+	std::cout << "Copy assignment operator called" << std::endl;
 
-// 	if (this != &fixed)
-// 		this->_RawBits = fixed.getRawBits();
+	if (this != &fixed)
+		this->_RawBits = fixed.getRawBits();
 
-// 	return (*this);
-// }
+	return (*this);
+}
 
 int 	Fixed::getRawBits( void )const{
-	std::cout << "getRawBits member function called" << std::endl;
 	return (this->_RawBits);
 }
 
-// void	Fixed::setRawBits( int const raw){
-// 	std::cout << "setRawBits member function called with " << raw << std::endl;
+int		Fixed::getComma(void)const{
+	return (this->_comma);
+}
 
-// 	this->_RawBits = raw;
-// 	return ;
-// }
+int		Fixed::toInt(void)const{
+	int i;
 
-// int		Fixed::getComma(void)const{
-// 	return (this->_comma);
-// }
+	i = (this->_RawBits >> this->_comma);
 
-// int		FIXED::toInt(void)const{
-// 	int i;
+	return (i);
+}
 
-// 	i = (this->getRawBits >> this->getComma);
+float		Fixed::toFloat(void)const{
+	float	i;
 
-// 	return (i);
-// }
+	i = (float)this->_RawBits / (1 << this->_comma);
+	return (i);
+}
 
-// std::ostream & operator<<(std::ostream & o, Integer const & rhs){
-// 	o << rhs.getRawBits();
-// 	return o;
-// }
+ std::ostream & operator<<(std::ostream & o, Fixed const & rhs){
+ 	o << rhs.toFloat();
+ 	return o;
+}
