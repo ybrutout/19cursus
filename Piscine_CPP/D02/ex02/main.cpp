@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 13:18:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/02 17:44:50 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/03/03 11:33:04 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,39 @@ int main( void ) {
 	//test for static min no const
 	std::cout << std::endl << "static min no const" << std::endl;
 	std::cout << "b == " << b << " and c == " << c << std::endl;
-	
+	std::cout <<"min non const est : " << Fixed::min(b, c) << std::endl;
+
+	//test for static min no const
+	std::cout << std::endl << "static max no const" << std::endl;
+	std::cout << "b == " << b << " and c == " << c << std::endl;
+	std::cout <<"max non const est : " << Fixed::max(b, c) << std::endl;
+
+	//test for static min const
+	Fixed const e(42.4219f);
+	Fixed const f(c);
+	std::cout << std::endl << "static min const" << std::endl;
+	std::cout << "e == " << e << " and f == " << f << std::endl;
+	std::cout <<"min non const est : " << Fixed::min(e, f) << std::endl;
+
+	//test for static max const
+	std::cout << std::endl << "static max const" << std::endl;
+	std::cout << "e == " << e << " and f == " << f << std::endl;
+	std::cout <<"max non const est : " << Fixed::max(e, f) << std::endl;
 
 	return 0;
 }
+
+/*main du sujet*/
+
+// int main( void ) {
+// 	Fixed a;
+// 	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+// 	std::cout << a << std::endl;
+// 	std::cout << ++a << std::endl;
+// 	std::cout << a << std::endl;
+// 	std::cout << a++ << std::endl;
+// 	std::cout << a << std::endl;
+// 	std::cout << b << std::endl;
+// 	std::cout << Fixed::max( a, b ) << std::endl;
+// 	return 0;
+// }

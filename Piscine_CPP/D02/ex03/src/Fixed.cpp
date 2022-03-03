@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 11:51:34 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/03 10:40:55 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/03/03 13:08:52 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ void	Fixed::setRawbits(int const rb){
 	this->_RawBits = rb;
 }
 
-int 	Fixed::getRawBits( void )const{
+int		Fixed::getRawBits( void )const{
 	return (this->_RawBits);
 }
 

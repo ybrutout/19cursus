@@ -6,13 +6,13 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 13:13:41 by ybrutout          #+#    #+#              #
-#    Updated: 2022/02/23 13:24:02 by ybrutout         ###   ########.fr        #
+#    Updated: 2022/03/03 10:26:07 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = NumberFixed
 
-CC = clang++
+CXX = c++
 
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
@@ -24,11 +24,11 @@ OBJS		=	$(SRCS:%.cpp=%.o)
 all: $(NAME)
 
 $(NAME):
-			@$(CC) $(CPPFLAGS) $(SRC) -o $(NAME)
+			@$(CXX) $(CPPFLAGS) $(SRC) -o $(NAME)
 			@echo "The executable \033[38;2;39;154;186m$(NAME)\033[0m is ready"
 
 .cpp.o:
-			@$(CC) $(CPPFLAGS) -c $< -o $(<:.cpp=.o)
+			@$(CXX) $(CPPFLAGS) -c $< -o $(<:.cpp=.o)
 
 clean:
 			@rm -rf $(OBJS)
