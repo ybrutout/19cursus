@@ -6,31 +6,41 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 14:17:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/03 14:45:24 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/03/22 13:52:41 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Point.hpp"
 
-static float sign(Point const & p1, Point const & p2, Point const & p3)
+float	area(Point const a, Point const b, Point const c)
 {
-	return (p1.get_x() - p3.get_x()) * (p2.get_y() - p3.get_y()) - (p2.get_x() - p3.get_x()) * (p1.get_y() - p3.get_y());
+	float	area;
+	Fixed	tmp;
+
+	tmp = ((a.get_x() * (b.get_y() - c.get_y())) + (b.get_x() * (c.get_y() - a.get_y())) + (c.get_x() * (a.get_y() - b.get_y()))) / 2;
+
+	area = tmp.toFloat();
+
+	return (area);
 }
 
-bool bsp(Point const & p1, Point const & p2, Point const & p3, Point const & point)
+bool bsp(Point const p1, Point const p2, Point const p3, Point const point)
 {
-	float d1, d2, d3;
-    bool has_neg, has_pos;
-
-    d1 = sign(point, p1, p2);
-    d2 = sign(point, p2, p3);
-    d3 = sign(point, p3, p1);
-	has_neg = (d1 <= 0) || (d2 <= 0) || (d3 <= 0);
-	printf("has_neg == %B", has_neg);
-    has_pos = (d1 >= 0) || (d2 >= 0) || (d3 >= 0);
-	printf("has_pos == %B", has_pos);
-
-	printf("last == %B", !(has_neg && has_pos));
-
-    return !(has_neg && has_pos);
+	float	abc = area(p1, p2, p3);
+	float 	abx = area(p1, p2, point);
+	float	bcx = area(p2, p3, point);
+	float	cax = area(p3, p1, point);
+	std::cout << "abc == " << abc << std::endl;
+	std::cout << "abx == " << abx << std::endl;
+	std::cout << "bcx == " << bcx << std::endl;
+	std::cout << "cax == " << cax << std::endl;
+	if (abc != (abx + bcx + cax))
+	{
+		std::cout << "1: " << abc << " , " << (abx + bcx + cax) << std::endl;
+		return (false);
+	}
+	else if (abx == 0 || bcx == 0 || cax == 0)
+		return (false);
+	std::cout << "2: " << abc << " , " << (abx + bcx + cax) << std::endl;
+	return (true);
 }
