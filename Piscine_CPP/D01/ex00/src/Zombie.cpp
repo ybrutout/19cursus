@@ -5,15 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/24 11:59:51 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/01/24 12:06:58 by ybrutout         ###   ########.fr       */
+/*   Created: 2022/01/24 10:17:23 by ybrutout          #+#    #+#             */
+/*   Updated: 2022/03/22 10:21:19 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "../include/Zombie.hpp"
 
-Zombie::Zombie(void){
-	std::cout<<"A zombie is born"<<std::endl;
+Zombie::Zombie(std::string name){
+	this->name = name;
+	std::cout << name;
+	this->announced();
 }
 
 Zombie::~Zombie(void){
@@ -21,9 +23,5 @@ Zombie::~Zombie(void){
 }
 
 void	Zombie::announced(void){
-	std::cout<<this->name<<"  BraiiiiiiinnnzzzZ..."<<std::endl;
-}
-
-void	Zombie::setname(std::string name){
-	this->name = name;
+	std::cout << "  BraiiiiiiinnnzzzZ..." << std::endl;
 }

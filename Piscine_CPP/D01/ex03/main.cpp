@@ -6,12 +6,12 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 15:11:21 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/01/24 15:47:54 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/03/22 10:50:38 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include "include/HumanA.hpp"
+#include "include/HumanB.hpp"
 
 int main()
 {

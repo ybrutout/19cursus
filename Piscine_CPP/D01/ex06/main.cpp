@@ -6,11 +6,11 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 08:47:45 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/02/15 09:13:27 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/03/22 11:59:35 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Karen.hpp"
+#include "include/Karen.hpp"
 
 int main(int argc, char **argv)
 {

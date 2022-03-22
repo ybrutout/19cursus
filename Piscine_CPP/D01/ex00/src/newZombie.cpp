@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   randomChump.cpp                                    :+:      :+:    :+:   */
+/*   newZombie.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/24 10:58:43 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/01/24 11:25:39 by ybrutout         ###   ########.fr       */
+/*   Created: 2022/01/24 10:32:49 by ybrutout          #+#    #+#             */
+/*   Updated: 2022/03/22 10:21:28 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "../include/Zombie.hpp"
 
-void randomChump( std::string name ){
-	Zombie	random = Zombie(name);
+Zombie*	newZombie( std::string name ){
+	Zombie*		nw = new Zombie(name);
+	return (nw);
 }

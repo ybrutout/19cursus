@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   newZombie.cpp                                      :+:      :+:    :+:   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/24 10:32:49 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/01/24 10:58:27 by ybrutout         ###   ########.fr       */
+/*   Created: 2022/01/24 11:59:51 by ybrutout          #+#    #+#             */
+/*   Updated: 2022/03/22 10:39:14 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "../include/Zombie.hpp"
 
-Zombie*	newZombie( std::string name ){
-	Zombie*		nw = new Zombie(name);
-	return (nw);
+Zombie::Zombie(void){
+	std::cout<<"A zombie is born"<<std::endl;
+}
+
+Zombie::~Zombie(void){
+	std::cout<<this->name<<" died"<<std::endl;
+}
+
+void	Zombie::announced(void){
+	std::cout<<this->name<<"  BraiiiiiiinnnzzzZ..."<<std::endl;
+}
+
+void	Zombie::setname(std::string name){
+	this->name = name;
 }

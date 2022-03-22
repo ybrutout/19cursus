@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 11:59:24 by ybrutout          #+#    #+#              #
-#    Updated: 2022/03/03 10:26:07 by ybrutout         ###   ########.fr        #
+#    Updated: 2022/03/22 10:47:20 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,26 @@ CXX = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRC =	main.cpp \
-		ZombieHorde.cpp\
-		Zombie.cpp\
+		src/ZombieHorde.cpp\
+		src/Zombie.cpp\
 
-all:
-	$(CXX) $(CPPFLAGS) $(SRC) -o $(NAME)
+OBJS		=	$(SRC:%.cpp=%.o)
+
+all: $(NAME)
+
+$(NAME):
+			@$(CXX) $(CPPFLAGS) $(SRC) -o $(NAME)
+			@echo "The executable \033[38;2;39;154;186m$(NAME)\033[0m is ready"
+
+.cpp.o:
+			@$(CXX) $(CPPFLAGS) -c $< -o $(<:.cpp=.o)
+
 clean:
-	@rm -f $(NAME)
+			@rm -rf $(OBJS)
+
+fclean:		clean
+			@rm -rf $(NAME)
+
+re:			fclean all
+
+.PHONY:		fclean, all, re

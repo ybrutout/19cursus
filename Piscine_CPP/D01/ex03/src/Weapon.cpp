@@ -6,11 +6,11 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:29:55 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/01/26 08:32:37 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/03/22 10:51:25 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
+#include "../include/Weapon.hpp"
 
 Weapon::Weapon(std::string type_weapon){
 	std::cout<<"A weapon was created"<<std::endl;

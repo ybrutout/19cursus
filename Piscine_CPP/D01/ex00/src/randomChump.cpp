@@ -1,30 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ZombieHorde.cpp                                    :+:      :+:    :+:   */
+/*   randomChump.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/24 11:59:07 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/01/24 13:15:08 by ybrutout         ###   ########.fr       */
+/*   Created: 2022/01/24 10:58:43 by ybrutout          #+#    #+#             */
+/*   Updated: 2022/03/22 10:21:23 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "../include/Zombie.hpp"
 
-Zombie* zombieHorde( int N, std::string name ){
-	if (N <= 0)
-	{
-		std::cout<<"zombies don't exist! "<<std::endl;
-		return (NULL);
-	}
-	Zombie*	nw = new Zombie[N];
-	for (int i = 0; i < N; i++)
-	{
-		nw[i].setname(name);
-		nw[i].announced();
-		if (i == 0)
-			std::cout<<"address to first zombie ==	"<<&nw[0]<<std::endl;
-	}
-	return (nw);
+void randomChump( std::string name ){
+	Zombie	random = Zombie(name);
 }

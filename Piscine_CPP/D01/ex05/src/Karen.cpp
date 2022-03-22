@@ -5,17 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/26 14:21:41 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/02/15 15:47:55 by ybrutout         ###   ########.fr       */
+/*   Created: 2022/01/26 12:33:32 by ybrutout          #+#    #+#             */
+/*   Updated: 2022/03/22 11:55:52 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Karen.hpp"
+#include "../include/Karen.hpp"
 
 Karen::Karen(void){
+	std::cout<<"O No ! A karen has just entered your restaurant."<<std::endl;
 }
 
 Karen::~Karen(void){
+	std::cout<<"O Yes! Karen leaves the restaurant !"<<std::endl;
 }
 
 void	Karen::debug(void){
@@ -35,28 +37,20 @@ void	Karen::error(void){
 }
 
 void	Karen::complain(std::string level){
-	int	i;
+	void	(Karen::*fct[4])(void)= {&Karen::debug, &Karen::info, &Karen::warning, &Karen::error};
 	std::string	lvl[4] = {"debug", "info", "warning", "error"};
-
-	i = 0;
-	while (i < 4)
+	for (int i = 0; i < 4; i++)
 	{
 		if (lvl[i] == level)
-			break;
-		i++;
+		{
+			(this->*(fct[i]))();
+			return ;
+		}
 	}
-	switch (i)
-	{
-		case 0:
-			this->debug();
-		case 1:
-			this->info();
-		case 2:
-			this->warning();
-		case 3:
-			this->error();
-			break;
-		default:
-			std::cout<<"[ Probably complaining about insignificant problems ]"<<std::endl;
-	}
+	std::cout<<"Karen doesn't understand what she has to do."<<std::endl;
+	std::cout<<"Karen needs an argument to get you started:"<<std::endl;
+	std::cout<<"	- debug"<<std::endl;
+	std::cout<<"	- info"<<std::endl;
+	std::cout<<"	- warnig"<<std::endl;
+	std::cout<<"	- error"<<std::endl;
 }

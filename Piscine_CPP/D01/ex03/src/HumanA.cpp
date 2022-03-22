@@ -6,11 +6,11 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:53:22 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/01/24 16:10:42 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/03/22 10:51:11 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
+#include "../include/HumanA.hpp"
 
 HumanA::HumanA(std::string name, Weapon & weapon) : gunREF(weapon)
 {

@@ -6,11 +6,11 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 15:32:39 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/01/24 16:08:13 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/03/22 10:51:01 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanB.hpp"
+#include "../include/HumanB.hpp"
 
 HumanB::HumanB(std::string name){
 	std::cout<<"A human is bord"<<std::endl;

@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   ZombieHorde.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/24 12:00:04 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/01/24 13:15:37 by ybrutout         ###   ########.fr       */
+/*   Created: 2022/01/24 11:59:07 by ybrutout          #+#    #+#             */
+/*   Updated: 2022/03/22 10:27:01 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#include "../include/Zombie.hpp"
 
-# include <iostream>
-# include <string>
-
-class Zombie{
-	public:
-		Zombie(void);
-		~Zombie(void);
-		void		setname(std::string name);
-		void		announced(void);
-
-	private:
-		std::string	name;
-};
-
-Zombie* zombieHorde( int N, std::string name );
-
-#endif
+Zombie* zombieHorde( int N, std::string name ){
+	if (N <= 0)
+	{
+		std::cout<<"zombies don't exist! "<<std::endl;
+		return (NULL);
+	}
+	Zombie*	nw = new Zombie[N];
+	for (int i = 0; i < N; i++)
+	{
+		nw[i].setname(name);
+		nw[i].announced();
+		if (i == 0)
+			std::cout<<"address to first zombie ==	"<<&nw[0]<<std::endl;
+	}
+	return (nw);
+}
