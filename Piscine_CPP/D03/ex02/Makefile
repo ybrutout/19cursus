@@ -6,11 +6,11 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 11:18:50 by ybrutout          #+#    #+#              #
-#    Updated: 2022/03/23 16:25:08 by ybrutout         ###   ########.fr        #
+#    Updated: 2022/03/23 16:26:57 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		= ScavTrap
+NAME 		= FragTrap
 
 CXX 		= c++
 
@@ -19,6 +19,7 @@ CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
 SRC 		=	main.cpp \
 				src/ClapTrap.cpp \
 				src/ScavTrap.cpp \
+				src/GragTrap.cpp \
 
 OBJS		=	$(SRC:%.cpp=%.o)
 
