@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 14:17:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/22 13:52:41 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/03/22 14:28:50 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,16 @@ bool bsp(Point const p1, Point const p2, Point const p3, Point const point)
 	float 	abx = area(p1, p2, point);
 	float	bcx = area(p2, p3, point);
 	float	cax = area(p3, p1, point);
-	std::cout << "abc == " << abc << std::endl;
-	std::cout << "abx == " << abx << std::endl;
-	std::cout << "bcx == " << bcx << std::endl;
-	std::cout << "cax == " << cax << std::endl;
+
 	if (abc != (abx + bcx + cax))
 	{
-		std::cout << "1: " << abc << " , " << (abx + bcx + cax) << std::endl;
+		//std::cout << "if I'm here, I'm out" << std::endl;
 		return (false);
 	}
 	else if (abx == 0 || bcx == 0 || cax == 0)
+	{
+		//std::cout << "if I'm here, I'm on" << std::endl;
 		return (false);
-	std::cout << "2: " << abc << " , " << (abx + bcx + cax) << std::endl;
+	}
 	return (true);
 }

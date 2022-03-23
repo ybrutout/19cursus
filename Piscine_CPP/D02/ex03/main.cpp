@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 13:18:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/22 13:55:40 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/03/22 14:29:34 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		main(void){
 
 	Point	in_triangle(5,5.26f);
 	Point	out_triangle(1, 1);
-	Point	on_triangle(3.5f, 6);
+	Point	on_triangle(3.5f, 3);
 
 	std::cout << "in_triangle class (" << in_triangle.get_x() << "," << in_triangle.get_y() << ")" << std::endl;
 	std::cout << "out_triangle class (" << out_triangle.get_x() << "," << out_triangle.get_y() << ")" << std::endl;
