@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 13:51:29 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/23 16:09:33 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:42:57 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,12 @@
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
 	std::cout << "ScavTrap " << this->name;
-	std::cout << " constructor by default called." << std::endl;
+	std::cout << " is born." << std::endl;
+}
+
+ScavTrap::ScavTrap() : ClapTrap()
+{
+	std::cout << "The ScavTrap is born, by default constructor." << std::endl;
 }
 
 ScavTrap::~ScavTrap(void)

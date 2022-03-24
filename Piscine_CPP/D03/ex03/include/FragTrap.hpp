@@ -6,7 +6,7 @@
 /*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 16:26:03 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/24 15:44:46 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2022/03/24 16:33:04 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "ClapTrap.hpp"
 
-class FragTrap : public ClapTrap
+class FragTrap : virtual public ClapTrap
 {
 	public:
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 13:51:35 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/23 16:09:04 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:41:18 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ class ScavTrap : public ClapTrap
 {
 	public:
 
+		ScavTrap();
 		ScavTrap(std::string name);
 		ScavTrap(ScavTrap const & scav);
 		~ScavTrap(void);

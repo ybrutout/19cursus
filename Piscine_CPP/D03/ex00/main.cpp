@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:21:56 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/23 13:42:22 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:40:34 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main(void)
 	ClapTrap	Simone("Simone");
 	ClapTrap	Nicole("Nicole");
 	ClapTrap	third(Simone);
+	ClapTrap	Alexie;
 
 	std::cout<<std::endl;
 	third = Nicole;
