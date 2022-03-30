@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 13:13:41 by ybrutout          #+#    #+#              #
-#    Updated: 2022/03/30 08:58:08 by ybrutout         ###   ########.fr        #
+#    Updated: 2022/03/30 11:29:54 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJS		=	$(SRC:%.cpp=%.o)
 
 all: $(NAME)
 
-$(NAME):
+$(NAME):	$(OBJS)
 			@$(CXX) $(CPPFLAGS) $(SRC) -o $(NAME)
 			@echo "The executable \033[38;2;39;154;186m$(NAME)\033[0m is ready"
 

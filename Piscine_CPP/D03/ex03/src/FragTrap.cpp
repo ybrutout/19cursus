@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 16:26:22 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/24 15:49:02 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2022/03/30 13:40:37 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,21 @@
 
 FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
+	this->hit_p = 100;
 	this->energy_p = 100;
-	this->damage = 50;
+	this->damage = 30;
 	std::cout << "FragTrap " << this->name;
 	std::cout << " is born." << std::endl;
+	//this->show_the_value();
 }
 
 FragTrap::FragTrap() : ClapTrap()
 {
+	this->hit_p = 100;
 	this->energy_p = 100;
-	this->damage = 50;
+	this->damage = 30;
 	std::cout << "The FragTrap is born, by default constructor." << std::endl;
+	//this->show_the_value();
 }
 
 FragTrap::~FragTrap(void)

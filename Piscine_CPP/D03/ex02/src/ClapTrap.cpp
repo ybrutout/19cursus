@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:29:03 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/24 15:48:01 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2022/03/30 13:37:41 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ClapTrap.hpp"
 
-ClapTrap::ClapTrap(std::string name) : name(name), hit_p(100), energy_p(50), damage(20)
+ClapTrap::ClapTrap(std::string name) : name(name), hit_p(10), energy_p(10), damage(0)
 {
 	std::cout << "ClapTrap of " << name;
 	std::cout << " is born." << std::endl;

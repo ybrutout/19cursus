@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:29:03 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/24 15:48:01 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2022/03/30 13:39:18 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ClapTrap.hpp"
 
-ClapTrap::ClapTrap(std::string name) : name(name), hit_p(100), energy_p(50), damage(20)
+ClapTrap::ClapTrap(std::string name) : name(name), hit_p(10), energy_p(10), damage(0)
 {
 	std::cout << "ClapTrap of " << name;
 	std::cout << " is born." << std::endl;
+
+	//this->show_the_value();
 }
 
 ClapTrap::ClapTrap() : name("default"), hit_p(100), energy_p(50), damage(20)
@@ -89,3 +91,11 @@ void			ClapTrap::no_hit_no_energy(void) const
 		std::cout << "The ClapTrap " << this->name << " he has no energy left." << std::endl;
 }
 
+
+void			ClapTrap::show_the_value(void)const
+{
+	std::cout << this->name << " value :" << std::endl;
+	std::cout << "Hit point : " << this->hit_p << std::endl;
+	std::cout << "Energy point : " << this->energy_p<< std::endl;
+	std::cout << "damage : " << this->damage << std::endl;
+}

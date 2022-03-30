@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:19:57 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/24 15:44:38 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2022/03/30 12:10:29 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 class ClapTrap{
 	public:
-		
+
 		ClapTrap();
 		ClapTrap(std::string name);
 		ClapTrap(ClapTrap const & clap);
@@ -28,6 +28,8 @@ class ClapTrap{
 		void attack(const std::string& target);
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
+
+		void	show_the_value(void)const;
 
 	protected:
 

@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/23 13:51:35 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/30 13:21:35 by ybrutout         ###   ########.fr       */
+/*   Created: 2022/03/30 16:33:05 by ybrutout          #+#    #+#             */
+/*   Updated: 2022/03/30 16:41:47 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
+#ifndef ANIMAL_HPP
+# define ANIMAL_HPP
 
-# include "ClapTrap.hpp"
+# include <iostream>
 
-class ScavTrap : virtual public ClapTrap
+class Animal
 {
 	public:
+		void			makeSound(void);
+	protected:
+		std::string		type;
+}
 
-		ScavTrap();
-		ScavTrap(std::string name);
-		ScavTrap(ScavTrap const & scav);
-		~ScavTrap(void);
+class Dog : public Animal
+{
+	public :
+		void			makeSound(void);
+}
 
-		ScavTrap	&	operator=(ScavTrap const & scav);
-
-		void			guardGate(void);
-		void 			attack(const std::string& target);
-
-	protected :
-		void			no_hit_no_energy(void)const;
-};
+class Cat : public Animal
+{
+	public:
+		void			makeSound(void)
+}
 
 #endif

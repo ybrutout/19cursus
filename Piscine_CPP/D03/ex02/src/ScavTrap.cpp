@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 13:51:29 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/24 15:50:19 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2022/03/30 13:39:12 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,17 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
 	std::cout << "ScavTrap " << this->name;
 	std::cout << " is born." << std::endl;
+	this->hit_p = 100;
+	this->energy_p = 50;
+	this->damage = 20;
 }
 
 ScavTrap::ScavTrap() : ClapTrap()
 {
 	std::cout << "The ScavTrap is born, by default constructor." << std::endl;
+	this->hit_p = 100;
+	this->energy_p = 50;
+	this->damage = 20;
 }
 
 ScavTrap::~ScavTrap(void)
