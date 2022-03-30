@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:21:56 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/23 16:07:43 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:43:48 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ int	main(void)
 	std::cout << "------Test for constructor-----" << std::endl;
 	ClapTrap	Simone("Simone");
 	ClapTrap	Josiane("Josiane");
+	ClapTrap	Alix;
 	ScavTrap	Nicole("Nicole");
 	ScavTrap	Nicole_b(Nicole);
 	ScavTrap	Murielle("Murielle");
+	ScavTrap	Genevieve;
 	std::cout << std::endl;
 
 	std::cout << "------Test for operator = -----" << std::endl;

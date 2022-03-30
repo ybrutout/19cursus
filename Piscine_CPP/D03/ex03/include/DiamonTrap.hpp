@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.hpp                                       :+:      :+:    :+:   */
+/*   DiamonTrap.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/23 16:26:03 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/24 15:44:46 by yannahbruto      ###   ########.fr       */
+/*   Created: 2022/03/24 16:24:31 by yannahbruto       #+#    #+#             */
+/*   Updated: 2022/03/24 16:33:33 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRAGTRAP_HPP
-# define FRAGTRAP_HPP
+#ifndef	DIAMONTRAP_HPP
+# define DIAMONTRAP_HPP
 
-# include "ClapTrap.hpp"
+# include "FragTrap.hpp"
+# include "ScavTrap.hpp"
 
-class FragTrap : public ClapTrap
+class DiamonTrap : public FragTrap, public ScavTrap
 {
-	public:
+	public :
 
-		FragTrap();
-		FragTrap(std::string name);
-		FragTrap(FragTrap const & scav);
-		~FragTrap(void);
+		DiamonTrap();
+		DiamonTrap(std::string name);
+		DiamonTrap(DiamonTrap const & diamon);
+		~DiamonTrap(void);
 
-		FragTrap	&	operator=(FragTrap const & scav);
-
-		void 			highFivesGuys(void);
-		void 			attack(const std::string& target);
-
-	protected :
-		void			no_hit_no_energy(void)const;
+		DiamonTrap	&	operator=(DiamonTrap const & diamon);
+	
 };
+
+
 
 #endif

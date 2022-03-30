@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:29:03 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/23 16:12:30 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:41:57 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,12 @@
 ClapTrap::ClapTrap(std::string name) : name(name), hit_p(100), energy_p(50), damage(20)
 {
 	std::cout << "ClapTrap of " << name;
-	std::cout << " constructor by default called." << std::endl;
+	std::cout << " is born." << std::endl;
+}
+
+ClapTrap::ClapTrap() : name("default"), hit_p(100), energy_p(50), damage(20)
+{
+	std::cout << "The ClapTrap is born, by default constructor." << std::endl;
 }
 
 ClapTrap::ClapTrap(ClapTrap const & clap)
