@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 16:33:05 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/30 17:15:55 by ybrutout         ###   ########.fr       */
+/*   Created: 2022/03/30 17:13:35 by ybrutout          #+#    #+#             */
+/*   Updated: 2022/03/30 17:24:15 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#include "../include/Animal.hpp"
 
-# include <iostream>
-
-class Animal
+Animal::Animal() : type("animal")
 {
-	public:
-		Animal();
-		Animal(Animal const & animal);
-		~Animal();
+	std::cout << "Animal default constructor called" << std::endl;
+}
 
-		Animal	&		operator=(Animal const & scav);
+Animal::Animal(Animal const & animal)
+{
+	this->type = animal.type;
+	std::cout << "Animal copy constructor called" << std::endl;
+}
 
-		void			makeSound(void);
-	protected:
-		std::string		type;
-};
+Animal::~Animal()
+{
+	std::cout << "Animal deconstructor called" << std::endl;
+}
 
-#endif

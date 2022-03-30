@@ -1,32 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 16:33:05 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/30 17:15:55 by ybrutout         ###   ########.fr       */
+/*   Created: 2022/03/30 17:13:12 by ybrutout          #+#    #+#             */
+/*   Updated: 2022/03/30 17:14:04 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
-
-# include <iostream>
-
-class Animal
-{
-	public:
-		Animal();
-		Animal(Animal const & animal);
-		~Animal();
-
-		Animal	&		operator=(Animal const & scav);
-
-		void			makeSound(void);
-	protected:
-		std::string		type;
-};
-
-#endif
+#include "include/Dog.hpp"
+#include "include/Cat.hpp"
