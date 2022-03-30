@@ -6,23 +6,13 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 13:18:10 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/22 14:29:34 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/03/30 09:11:02 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/Point.hpp"
 
 int		main(void){
-	// float const	fl1 = 19.125f;
-	// float const	fl2 = 42.25f;
-
-	// Point	a;
-	// Point	b(fl1, fl2);
-	// Point	c(b);
-
-	// std::cout << "B class (" << b.get_x() << "," << b.get_y() << ")" << std::endl;
-	// std::cout << "C class (" << c.get_x() << "," << c.get_y() << ")" << std::endl;
-	// std::cout << "A class (" << a.get_x() << "," << a.get_y() << ")" << std::endl;
 
 	Point	A1(10, 7);
 	Point	A2(3.5f, 3);

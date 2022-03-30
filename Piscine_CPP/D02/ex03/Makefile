@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 13:13:41 by ybrutout          #+#    #+#              #
-#    Updated: 2022/03/03 14:46:31 by ybrutout         ###   ########.fr        #
+#    Updated: 2022/03/30 08:58:08 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC =	src/bsp.cpp			\
 		src/Point.cpp	\
 		main.cpp		\
 
-OBJS		=	$(SRCS:%.cpp=%.o)
+OBJS		=	$(SRC:%.cpp=%.o)
 
 all: $(NAME)
 

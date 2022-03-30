@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 15:17:56 by ybrutout          #+#    #+#              #
-#    Updated: 2022/03/03 10:26:07 by ybrutout         ###   ########.fr        #
+#    Updated: 2022/03/30 08:58:08 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 SRC =	sources/PhoneBook.cpp \
 		sources/Contact.cpp \
 
-OBJS		=	$(SRCS:%.cpp=%.o)
+OBJS		=	$(SRC:%.cpp=%.o)
 
 all: $(NAME)
 
