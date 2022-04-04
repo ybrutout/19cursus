@@ -6,11 +6,11 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 16:30:59 by ybrutout          #+#    #+#              #
-#    Updated: 2022/04/04 09:20:42 by ybrutout         ###   ########.fr        #
+#    Updated: 2022/04/04 15:33:35 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		= Animal
+NAME 		= Brain
 
 CXX 		= c++
 
@@ -20,6 +20,7 @@ SRC 		=	main.cpp		\
 				src/Animal.cpp	\
 				src/Dog.cpp		\
 				src/Cat.cpp		\
+				src/Brain.cpp	\
 
 OBJS		=	$(SRC:%.cpp=%.o)
 
