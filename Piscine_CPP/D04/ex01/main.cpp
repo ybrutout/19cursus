@@ -6,13 +6,12 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:13:12 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/04 11:40:40 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/04 10:39:04 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/Dog.hpp"
 #include "include/Cat.hpp"
-#include "include/WrongCat.hpp"
 
 // int		main(void)
 // {
@@ -46,30 +45,18 @@
 // 	return (0);
 // }
 
-// int main()
-// {
-// const Animal* meta = new Animal();
-// const Animal* j = new Dog();
-// const Animal* i = new Cat();
-// std::cout << j->getType() << " " << std::endl;
-// std::cout << i->getType() << " " << std::endl;
-// i->makeSound(); //will output the cat sound!
-// j->makeSound();
-// meta->makeSound();
-// // delete meta;
-// // delete j;
-// // delete i;
-// return 0;
-// }
-
 int main()
 {
-const WrongAnimal* meta = new WrongAnimal();
-const WrongAnimal* i = new WrongCat();
+const Animal* meta = new Animal();
+const Animal* j = new Dog();
+const Animal* i = new Cat();
+std::cout << j->getType() << " " << std::endl;
 std::cout << i->getType() << " " << std::endl;
 i->makeSound(); //will output the cat sound!
+j->makeSound();
 meta->makeSound();
 // delete meta;
+// delete j;
 // delete i;
 return 0;
 }
