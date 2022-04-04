@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 17:12:48 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/04 09:27:16 by ybrutout         ###   ########.fr       */
+/*   Created: 2022/04/04 09:17:23 by ybrutout          #+#    #+#             */
+/*   Updated: 2022/04/04 09:27:20 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Dog.hpp"
+#include "../include/Cat.hpp"
 
-Dog::Dog() : Animal()
+Cat::Cat() : Animal()
 {
-	this->type = "Dog";
-	std::cout << "Dog default constructor called" << std::endl;
+	this->type = "Cat";
+	std::cout << "Cat default constructor called" << std::endl;
 }
 
-Dog::Dog(Dog const & dog) : Animal()
+Cat::Cat(Cat const & cat) : Animal()
 {
-	this->type = dog.type;
-	std::cout << "Dog copy constructor called" << std::endl;
+	this->type = cat.type;
+	std::cout << "Cat copy constructor called" << std::endl;
 }
 
-Dog::~Dog()
+Cat::~Cat()
 {
-	std::cout << "Dog deconstructor called" << std::endl;
+	std::cout << "Cat deconstructor called" << std::endl;
 }
 
-void		Dog::makeSound()const
+void		Cat::makeSound()const
 {
-	std::cout << "Woof woof" << std::endl;
+	std::cout << "Meow meow" << std::endl;
 }
 
-Dog	&	Dog::operator=(Dog const & dog)
+Cat	&	Cat::operator=(Cat const & cat)
 {
 	std::cout << "Operator = called" << std::endl;
-	this->type = dog.type;
+	this->type = cat.type;
 	return(*this);
 }
