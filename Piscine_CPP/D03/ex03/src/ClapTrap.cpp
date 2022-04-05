@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:29:03 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/30 13:39:18 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/05 12:04:22 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void			ClapTrap::takeDamage(unsigned int amount)
 	this->hit_p = this->hit_p - amount;
 	std:: cout << " points of damage. He still have " << this->hit_p;
 	std::cout << " hit point."<< std::endl;
-	this->energy_p--;
 }
 
 void			ClapTrap::beRepaired(unsigned int amount)
