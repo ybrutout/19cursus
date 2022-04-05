@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   DiamonTrap.hpp                                     :+:      :+:    :+:   */
+/*   DiamondTrap.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,22 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	DIAMONTRAP_HPP
-# define DIAMONTRAP_HPP
+#ifndef	DIAMONDTRAP_HPP
+# define DIAMONDTRAP_HPP
 
 # include "FragTrap.hpp"
 # include "ScavTrap.hpp"
 
-class DiamonTrap : public ScavTrap, public FragTrap
+class DiamondTrap : public ScavTrap, public FragTrap
 {
 	public :
 
-		DiamonTrap();
-		DiamonTrap(std::string name);
-		DiamonTrap(DiamonTrap const & diamon);
-		~DiamonTrap(void);
+		DiamondTrap();
+		DiamondTrap(std::string name);
+		DiamondTrap(DiamondTrap const & diamon);
+		~DiamondTrap(void);
 
-		DiamonTrap	&	operator=(DiamonTrap const & diamon);
+		DiamondTrap	&	operator=(DiamondTrap const & diamon);
 		void 			attack(const std::string& target);
 		void			whoAmI(void);
 

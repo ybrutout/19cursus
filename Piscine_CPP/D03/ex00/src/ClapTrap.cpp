@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:29:03 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/24 15:37:37 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2022/04/05 11:54:10 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void			ClapTrap::takeDamage(unsigned int amount)
 	this->hit_p = this->hit_p - amount;
 	std:: cout << " points of damage. He still have " << this->getHit();
 	std::cout << " hit point."<< std::endl;
-	this->energy_p--;
 }
 
 void			ClapTrap::beRepaired(unsigned int amount)

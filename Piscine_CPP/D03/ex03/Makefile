@@ -6,11 +6,11 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 11:18:50 by ybrutout          #+#    #+#              #
-#    Updated: 2022/03/30 11:33:15 by ybrutout         ###   ########.fr        #
+#    Updated: 2022/04/05 11:51:29 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		= DiamonTrap
+NAME 		= DiamondTrap
 
 CXX 		= c++
 
@@ -20,7 +20,7 @@ SRC 		=	main.cpp \
 				src/ClapTrap.cpp \
 				src/ScavTrap.cpp \
 				src/FragTrap.cpp \
-				src/DiamonTrap.cpp \
+				src/DiamondTrap.cpp \
 
 OBJS		=	$(SRC:%.cpp=%.o)
 

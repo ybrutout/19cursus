@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:13:12 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/04 11:40:40 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/05 09:51:50 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,30 +46,31 @@
 // 	return (0);
 // }
 
+int main()
+{
+	const Animal* meta = new Animal();
+	const Animal* j = new Dog();
+	const Animal* i = new Cat();
+	std::cout << j->getType() << " " << std::endl;
+	std::cout << i->getType() << " " << std::endl;
+	i->makeSound(); //will output the cat sound!
+	j->makeSound();
+	meta->makeSound();
+	// delete meta;
+	// delete j;
+	// delete i;
+	Animal	julie(NULL);
+	return 0;
+}
+
 // int main()
 // {
-// const Animal* meta = new Animal();
-// const Animal* j = new Dog();
-// const Animal* i = new Cat();
-// std::cout << j->getType() << " " << std::endl;
+// const WrongAnimal* meta = new WrongAnimal();
+// const WrongAnimal* i = new WrongCat();
 // std::cout << i->getType() << " " << std::endl;
 // i->makeSound(); //will output the cat sound!
-// j->makeSound();
 // meta->makeSound();
 // // delete meta;
-// // delete j;
 // // delete i;
 // return 0;
 // }
-
-int main()
-{
-const WrongAnimal* meta = new WrongAnimal();
-const WrongAnimal* i = new WrongCat();
-std::cout << i->getType() << " " << std::endl;
-i->makeSound(); //will output the cat sound!
-meta->makeSound();
-// delete meta;
-// delete i;
-return 0;
-}

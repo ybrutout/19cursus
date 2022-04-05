@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:53:53 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/04 15:39:46 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/04 15:56:48 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Brain::Brain()
 	std::cout << "Brain default constructor called" << std::endl;
 }
 
-Brain::Brain(Brain const & brain)
+Brain::Brain(const Brain & brain)
 {
 	if (this != &brain)
 	{

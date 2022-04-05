@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
+/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:21:56 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/24 15:40:34 by yannahbruto      ###   ########.fr       */
+/*   Updated: 2022/04/05 11:56:36 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ int	main(void)
 	std::cout<<std::endl;
 	Simone.beRepaired(12);
 	Nicole.beRepaired(3);
+
+	for (int i = 0; i < 11; i++)
+	{
+		Simone.attack("Murielle");
+		Nicole.attack("Vincent");
+	}
 
 	std::cout<<std::endl;
 

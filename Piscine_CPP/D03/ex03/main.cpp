@@ -6,21 +6,21 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:21:56 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/03/30 13:28:00 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/05 11:51:29 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/ScavTrap.hpp"
 #include "include/FragTrap.hpp"
-#include "include/DiamonTrap.hpp"
+#include "include/DiamondTrap.hpp"
 
 int	main(void)
 {
 	std::cout << "------Test for constructor-----" << std::endl;
-	DiamonTrap	Clotilde("Clotilde");
-	DiamonTrap	Clotilde_b(Clotilde);
-	DiamonTrap	Paulette("Paulette");
-	DiamonTrap	Madeleine;
+	DiamondTrap	Clotilde("Clotilde");
+	DiamondTrap	Clotilde_b(Clotilde);
+	DiamondTrap	Paulette("Paulette");
+	DiamondTrap	Madeleine;
 
 	std::cout << std::endl;
 
