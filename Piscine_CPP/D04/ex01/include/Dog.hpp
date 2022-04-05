@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:10:28 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/05 10:39:12 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/05 13:24:47 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ class Dog : public Animal
 
 		void			makeSound(void)const;
 		Brain			*getBrain(void)const;
+		std::string		getIdea(int i)const;
+
+		void			setIdea(std::string	idea);
 	private:
 		Brain			*_brain;
 };

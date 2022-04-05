@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 09:17:23 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/05 10:58:21 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/05 13:51:26 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ Cat	&	Cat::operator=(Cat const & cat)
 {
 	std::cout << "Operator = called" << std::endl;
 	this->type = cat.type;
+	delete this->_brain;
+	this->_brain = new	Brain(*cat._brain);
 	return(*this);
 }
 
