@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:13:12 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/05 14:31:49 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/08 10:07:12 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int		main(void) //my test
 	std::cout << std::endl;
 
 	std::cout << "	-Test ask in the subject-" << std::endl;
-	Animal	*compagnie[10];
+	AAnimal	*compagnie[10];
 
 	for (int i = 0; i < 10; i++)
 	{

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:12:48 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/05 14:51:59 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/08 10:03:52 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,9 @@ std::string	Dog::getIdea(int i)const
 void		Dog::setIdea(std::string idea)
 {
 	this->_brain->setIdea(idea);
+}
+
+std::string	Dog::getType(void)const
+{
+	return this->type;
 }

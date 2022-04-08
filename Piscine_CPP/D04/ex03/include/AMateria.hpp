@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   AMateria.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 17:10:26 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/08 10:03:00 by ybrutout         ###   ########.fr       */
+/*   Created: 2022/04/08 14:47:50 by ybrutout          #+#    #+#             */
+/*   Updated: 2022/04/08 15:37:08 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-# define CAT_HPP
+#ifndef AMATERIA_HPP
+# define AMATERIA_HPP
 
-# include "Animal.hpp"
-# include "Brain.hpp"
+# include <iostream>
 
-class Cat : public AAnimal
+class AMateria
 {
+	protected:
+		std::string		_type;
+
 	public:
-		Cat();
-		Cat(Cat const & cat);
-		virtual ~Cat();
+		AMateria(std::string const & type);
+		AMateria();
+		AMateria(AMateria const & rhs);
+		~AMateria();
 
-		Cat		&		operator=(Cat const & cat);
+		AMateria	&			operator=(AMateria const & rhs);
 
-		void			makeSound(void)const;
-		Brain			*getBrain(void)const;
-		std::string		getIdea(int i)const;
-		std::string		getType(void)const;
-
-		void			setIdea(std::string	idea);
-
-	private:
-		Brain			*_brain;
+		std::string const & 	getType() const;
+		virtual AMateria* 		clone() const = 0;
+		//virtual void 			use(ICharacter & target);
 };
+
 
 #endif

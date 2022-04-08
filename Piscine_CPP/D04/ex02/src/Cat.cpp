@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 09:17:23 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/05 14:50:51 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/08 10:03:34 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,9 @@ std::string	Cat::getIdea(int i)const
 void		Cat::setIdea(std::string idea)
 {
 	this->_brain->setIdea(idea);
+}
+
+std::string	Cat::getType(void)const
+{
+	return this->type;
 }

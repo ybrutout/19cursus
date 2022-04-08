@@ -5,20 +5,20 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/01/24 14:16:27 by ybrutout          #+#    #+#              #
-#    Updated: 2022/04/08 10:46:45 by ybrutout         ###   ########.fr        #
+#    Created: 2022/03/30 16:30:59 by ybrutout          #+#    #+#              #
+#    Updated: 2022/04/08 14:44:02 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = brain
+NAME 		= AMateria
 
-CPP = c++
+CPP 		= c++
 
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
 
-SRC =	main.cpp \
+SRC 		=	
 
-OBJS =	$(SRC:%.cpp=%.o)
+OBJS		=	$(SRC:%.cpp=%.o)
 
 all: $(NAME)
 

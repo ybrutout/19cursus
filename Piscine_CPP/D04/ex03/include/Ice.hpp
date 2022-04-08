@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Ice.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 17:10:26 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/08 10:03:00 by ybrutout         ###   ########.fr       */
+/*   Created: 2022/04/08 15:34:22 by ybrutout          #+#    #+#             */
+/*   Updated: 2022/04/08 15:39:25 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-# define CAT_HPP
+#ifndef ICE_HPP
+# define ICE_HPP
 
-# include "Animal.hpp"
-# include "Brain.hpp"
+# include "AMateria.hpp"
 
-class Cat : public AAnimal
+class Ice : public AMateria
 {
 	public:
-		Cat();
-		Cat(Cat const & cat);
-		virtual ~Cat();
+		Ice();
+		Ice(Ice const & rhs);
+		Ice(std::string type);
 
-		Cat		&		operator=(Cat const & cat);
-
-		void			makeSound(void)const;
-		Brain			*getBrain(void)const;
-		std::string		getIdea(int i)const;
-		std::string		getType(void)const;
-
-		void			setIdea(std::string	idea);
-
-	private:
-		Brain			*_brain;
 };
+
 
 #endif
