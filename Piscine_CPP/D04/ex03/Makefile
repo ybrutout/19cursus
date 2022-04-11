@@ -6,7 +6,7 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 16:30:59 by ybrutout          #+#    #+#              #
-#    Updated: 2022/04/08 14:44:02 by ybrutout         ###   ########.fr        #
+#    Updated: 2022/04/11 14:41:48 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,12 @@ CPP 		= c++
 
 CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
 
-SRC 		=	
+SRC 		=	src/AMateria.cpp		\
+				src/Character.cpp		\
+				src/Cure.cpp			\
+				src/Ice.cpp				\
+				src/MateriaSource.cpp	\
+				main.cpp				\
 
 OBJS		=	$(SRC:%.cpp=%.o)
 
