@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:42:51 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/13 13:01:53 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/13 14:19:00 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class Bureaucrate
 			public:
 				virtual const char* what() const throw()
 				{
-					return "Grade is too high. Max grade is 1.";
+					return "grade is too high. Max grade is 1.";
 				}
 		};
 
@@ -37,7 +37,7 @@ class Bureaucrate
 			public:
 				virtual const char* what() const throw()
 				{
-					return "Grade is too Low. Min grade is 150.";
+					return "grade is too Low. Min grade is 150.";
 				}
 		};
 
@@ -54,6 +54,6 @@ class Bureaucrate
 		int					_grade;
 };
 
-std::ostream & operator<<(::std::ostream & o, Bureaucrate const & rhs);
+std::ostream & operator<<(std::ostream & o, Bureaucrate const & rhs);
 
 #endif
