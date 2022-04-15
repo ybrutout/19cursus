@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:53:39 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/15 13:55:57 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/15 16:20:16 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,14 @@ RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("RobotForm"
 
 RobotomyRequestForm::~RobotomyRequestForm(){}
 
-void		RobotomyRequestForm::execute(Bureaucrat const &executor)
+void		RobotomyRequestForm::action(Bureaucrat const &executor)const
 {
-	//a faire
+	this->execute(executor);
+	std::cout << "*Drilling noises*" << std::endl;
+	if (rand() < RAND_MAX / 2)
+		std::cout << this->getTarget() << " has been robotomized successfully." << std::endl;
+	else
+		std::cout << "Robotomy on " << this->getTarget() << " has failed." << std::endl;
 }
 
 RobotomyRequestForm	&	RobotomyRequestForm::operator=(RobotomyRequestForm const & rhs)

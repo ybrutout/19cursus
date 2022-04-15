@@ -35,8 +35,8 @@ class AForm
 		const std::string		getTarget()const;
 
 		void					beSigned(Bureaucrat const & bureaucrat);
-		void					execute(Bureaucrat const & executor);
-		virtual void			action() = 0;
+		void					execute(Bureaucrat const & executor)const;
+		virtual void			action(Bureaucrat const & executor)const = 0;
 
 		class GradeTooHighException : public std::exception
 		{
@@ -61,7 +61,7 @@ class AForm
 			public:
 				virtual const char* what() const throw()
 				{
-					return "The form isn't sign.";
+					return "The form isn't sign so he can't be execute.";
 				}
 		};
 

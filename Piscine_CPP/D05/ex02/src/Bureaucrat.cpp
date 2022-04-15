@@ -79,7 +79,7 @@ void					Bureaucrat::decrementingGrade()
 		this->_grade++;
 }
 
-void					Bureaucrat::signForm(Form & form)const
+void					Bureaucrat::signForm(AForm & form)const
 {
 	if (form.getStatus())
 	{
@@ -91,10 +91,24 @@ void					Bureaucrat::signForm(Form & form)const
 		form.beSigned(*this);
 		std::cout << this->_name << " signed " << form.getName() << "form." << std::endl;
 	}
-	catch (const Form::GradeTooLowException& e)
+	catch (const AForm::GradeTooLowException& e)
 	{
 		std::cout << this->_name << e.what() << std::endl;
 	}
+}
+
+void					Bureaucrat::executeForm(AForm const & form)const
+{
+	try
+	{
+		form.action(*this);
+		std::cout << this->_name << " execute " << form.getName() << "." << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
 }
 
 std::ostream	&		operator<<(std::ostream	&	o, Bureaucrat const & rhs)

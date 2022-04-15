@@ -6,12 +6,14 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:41:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/15 11:50:25 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/15 16:26:44 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/Bureaucrat.hpp"
-#include "include/Form.hpp"
+#include "include/ShrubberyCreationForm.hpp"
+#include "include/PresidentialPardonForm.hpp"
+#include "include/RobotomyRequestForm.hpp"
 
 int		main(void)
 {
@@ -19,27 +21,18 @@ int		main(void)
 	Bureaucrat	Pierre(150, "Pierre");
 	Bureaucrat	Maxime(50, "Maxime");
 
-	Form		A52("A52", 65, 10);
-	Form		B789("B789", 150, 150);
-	Form		Z12("Z12", 1, 66);
+	ShrubberyCreationForm	Shrubb("Home");
+	RobotomyRequestForm		Robot("Steve");
+	PresidentialPardonForm	Presidential("Macron");
 
-	std::cout << A52.getName() << " status is " << A52.getStatus() << "." << std::endl;
-	std::cout << B789.getName() << " status is " << B789.getStatus() << "." << std::endl;
-	std::cout << Z12.getName() << " status is " << Z12.getStatus() << "." << std::endl;
+	Pierre.signForm(Shrubb);
+	Simone.signForm(Shrubb);
+	Pierre.executeForm(Shrubb);
+	Maxime.executeForm(Shrubb);
 
-	Pierre.signForm(A52);
-	Maxime.signForm(A52);
+	Simone.signForm(Robot);
+	Simone.executeForm(Robot);
 
-	Pierre.signForm(B789);
-	Maxime.signForm(B789);
-	Simone.signForm(B789);
-
-	std::cout << A52.getName() << " status is " << A52.getStatus() << "." << std::endl;
-	std::cout << B789.getName() << " status is " << B789.getStatus() << "." << std::endl;
-	std::cout << Z12.getName() << " status is " << Z12.getStatus() << "." << std::endl;
-
-	Pierre.signForm(Z12);
-	Maxime.signForm(Z12);
-	Simone.signForm(Z12);
-
+	Simone.signForm(Presidential);
+	Simone.executeForm(Presidential);
 }

@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:46:47 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/15 13:52:08 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/15 16:20:28 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PRESIDENTIALPARDONFORM_HPP
 
 # include "AForm.hpp"
+# include <fstream>
 
 class PresidentialPardonForm : public AForm
 {
@@ -21,11 +22,11 @@ class PresidentialPardonForm : public AForm
 		PresidentialPardonForm();
 		PresidentialPardonForm(PresidentialPardonForm const & rhs);
 		PresidentialPardonForm(std::string name);
-		~PresidentialPardonForm();
+		virtual ~PresidentialPardonForm();
 
 		PresidentialPardonForm	&	operator=(PresidentialPardonForm const & rhs);
 
-		void						execute(Bureaucrat const &executor);
+		void						action(Bureaucrat const &executor)const;
 };
 
 #endif

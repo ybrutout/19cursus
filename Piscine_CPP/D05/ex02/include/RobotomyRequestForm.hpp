@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:45:06 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/15 13:46:17 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/15 16:20:09 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ROBOTOMYREQUESTFORM_HPP
 
 # include "AForm.hpp"
+# include <fstream>
 
 class RobotomyRequestForm : public AForm
 {
@@ -21,11 +22,11 @@ class RobotomyRequestForm : public AForm
 		RobotomyRequestForm();
 		RobotomyRequestForm(RobotomyRequestForm const & rhs);
 		RobotomyRequestForm(std::string name);
-		~RobotomyRequestForm();
+		virtual ~RobotomyRequestForm();
 
 		RobotomyRequestForm	&	operator=(RobotomyRequestForm const & rhs);
 
-		void						execute(Bureaucrat const &executor);
+		void						action(Bureaucrat const &executor)const;
 };
 
 #endif

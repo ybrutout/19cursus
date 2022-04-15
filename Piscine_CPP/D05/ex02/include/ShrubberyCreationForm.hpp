@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:47:53 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/15 14:26:01 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/15 15:45:44 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,11 @@ class ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm();
 		ShrubberyCreationForm(ShrubberyCreationForm const & rhs);
 		ShrubberyCreationForm(std::string name);
-		~ShrubberyCreationForm();
+		virtual ~ShrubberyCreationForm();
 
 		ShrubberyCreationForm	&	operator=(ShrubberyCreationForm const & rhs);
 
-		void						action(Bureaucrat const &executor);
+		virtual void				action(Bureaucrat const &executor)const;
 };
 
 #endif
-
-//         _-_
-//      /~~   ~~\
-//   /~~         ~~\
-//  {               }
-//   \  _-     -_  /
-//     ~  \   /  ~
-//  _- -   | | _- _
-//    _ -  | |   -_
-//        /   \

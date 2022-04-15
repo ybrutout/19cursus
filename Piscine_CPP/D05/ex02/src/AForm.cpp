@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:59:26 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/15 14:30:57 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/15 16:18:36 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,15 @@ void				AForm::beSigned(Bureaucrat const & bureaucrat)
 	}
 }
 
-void				AForm::execute(Bureaucrat const & executor)
+void				AForm::execute(Bureaucrat const & executor)const
 {
 	if (this->_status == false)
 		throw AForm::NotSignException();
-	//ICI il faut que l'executeur compare son grade a l'execution du form.
-
+	if (this->_execute < executor.getGrade())
+	{
+		std::cout << executor.getName();
+		throw AForm::GradeTooLowException();
+	}
 }
 
 std::ostream	&	operator<<(std::ostream & o, AForm const & rhs)
