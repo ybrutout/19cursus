@@ -6,11 +6,11 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 16:30:59 by ybrutout          #+#    #+#              #
-#    Updated: 2022/04/13 15:36:58 by ybrutout         ###   ########.fr        #
+#    Updated: 2022/04/15 10:00:15 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		= Bureaucrat
+NAME 		= Bureaucrat_with_Form
 
 CPP 		= c++
 
@@ -18,6 +18,7 @@ CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
 
 SRC 		=	main.cpp			\
 				src/Bureaucrat.cpp	\
+				src/Form.cpp		\
 
 OBJS		=	$(SRC:%.cpp=%.o)
 

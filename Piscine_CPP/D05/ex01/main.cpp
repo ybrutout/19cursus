@@ -6,75 +6,40 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:41:36 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/13 15:36:58 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/15 11:50:25 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/Bureaucrat.hpp"
+#include "include/Form.hpp"
 
 int		main(void)
 {
-	Bureaucrat 	*Albert;
-	Bureaucrat		*Steve;
-	Bureaucrat		*Michael;
-	Bureaucrat		*Johny;
-	Bureaucrat		*Bob;
-	Bureaucrat		*Joseline;
-	std::cout << "	-Test : Constructeur Low grade-" << std::endl;
-	try
-	{
-		Albert = new Bureaucrat(150, "Albert");
-		Steve = new Bureaucrat(100, "Steve");
-		Joseline = new Bureaucrat(50, "Joseline");
-		Michael = new Bureaucrat(1, "Michael");
-		Johny = new Bureaucrat(151, "Johny");
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	std::cout << std::endl;
+	Bureaucrat	Simone(1, "Simone");
+	Bureaucrat	Pierre(150, "Pierre");
+	Bureaucrat	Maxime(50, "Maxime");
 
-	std::cout << "	-Test : Constructeur High grade-" << std::endl;
-	try
-	{
-		Bob = new Bureaucrat(0, "Bob");
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	std::cout << std::endl;
+	Form		A52("A52", 65, 10);
+	Form		B789("B789", 150, 150);
+	Form		Z12("Z12", 1, 66);
 
-	std::cout << "	-Test : Incrementation-" << std::endl;
-	try
-	{
-		Steve->incrementingGrade();
-		Michael->incrementingGrade();
-		Joseline->incrementingGrade();
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	std::cout << *Steve;
-	std::cout << *Joseline;
-	std::cout << std::endl;
+	std::cout << A52.getName() << " status is " << A52.getStatus() << "." << std::endl;
+	std::cout << B789.getName() << " status is " << B789.getStatus() << "." << std::endl;
+	std::cout << Z12.getName() << " status is " << Z12.getStatus() << "." << std::endl;
 
+	Pierre.signForm(A52);
+	Maxime.signForm(A52);
 
-	std::cout << "	-Test : Decrementation-" << std::endl;
-	try
-	{
-		Steve->decrementingGrade();
-		Albert->decrementingGrade();
-		Joseline->decrementingGrade();
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	std::cout << *Steve;
-	std::cout << *Joseline;
-	std::cout << std::endl;
+	Pierre.signForm(B789);
+	Maxime.signForm(B789);
+	Simone.signForm(B789);
+
+	std::cout << A52.getName() << " status is " << A52.getStatus() << "." << std::endl;
+	std::cout << B789.getName() << " status is " << B789.getStatus() << "." << std::endl;
+	std::cout << Z12.getName() << " status is " << Z12.getStatus() << "." << std::endl;
+
+	Pierre.signForm(Z12);
+	Maxime.signForm(Z12);
+	Simone.signForm(Z12);
 
 }

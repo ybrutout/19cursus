@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:18:37 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/13 15:41:01 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/15 11:38:17 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <iostream>
 # include "Bureaucrat.hpp"
+
+class Bureaucrat;
 
 class Form
 {
@@ -28,18 +30,17 @@ class Form
 
 		const std::string		getName()const;
 		bool					getStatus()const;
-		const int				getSigne()const;
-		const int				getExecute()const;
+		int						getSigne()const;
+		int						getExecute()const;
 
 		void					beSigned(Bureaucrat const & bureaucrat);
-		void					signForm(Bureaucrat const & bureaucrat);
 
 		class GradeTooHighException : public std::exception
 		{
 			public:
 				virtual const char* what() const throw()
 				{
-					return "grade is too high. Max grade is 1.";
+					return "'s grade is too high for this form.";
 				}
 		};
 
@@ -48,19 +49,17 @@ class Form
 			public:
 				virtual const char* what() const throw()
 				{
-					return "grade is too Low. Min grade is 150.";
+					return "'s grade is too low for this form.";
 				}
 		};
 
 	private:
 		const std::string		_name;
 		bool					_status;
-		const int				_signe;
-		const int				_execute;
+		int const				_signe;
+		int const				_execute;
 };
 
 std::ostream	&	operator<<(std::ostream & o, Form const & rhs);
-
-
 
 #endif
