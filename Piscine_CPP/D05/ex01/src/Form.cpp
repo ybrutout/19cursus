@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:59:26 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/15 11:43:09 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/19 13:10:43 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ Form::Form() : _name("FakeForm"), _status(false), _signe(150), _execute(150)
 
 Form::Form(std::string name, int sign, int execute) : _name(name), _status(false), _signe(sign), _execute(execute)
 {
+	if (sign < 1 || execute < 1)
+		throw Form::GradeTooHighException();
+	else if (sign > 150 || execute > 150)
+		throw Form::GradeTooLowException();
 }
 
 Form::Form(Form const & rhs) : _name(rhs._name), _status(rhs._status), _signe(rhs._signe), _execute(rhs._execute)
@@ -59,10 +63,7 @@ void				Form::beSigned(Bureaucrat const & bureaucrat)
 	if (bureaucrat.getGrade() <= this->_signe)
 		this->_status = true;
 	else
-	{
-		std::cout << this->_name;
 		throw Form::GradeTooLowException();
-	}
 }
 
 std::ostream	&	operator<<(std::ostream & o, Form const & rhs)

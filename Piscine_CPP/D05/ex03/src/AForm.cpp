@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:59:26 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/19 11:53:14 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/19 13:04:25 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ AForm::AForm() : _name("FakeAForm"), _status(false), _signe(150), _execute(150),
 
 AForm::AForm(std::string name, std::string target, int sign, int execute) : _name(name), _status(false), _signe(sign), _execute(execute), _target(target)
 {
+	if (sign < 1 || execute < 1)
+		throw AForm::GradeTooHighException();
+	else if (sign > 150 || execute > 150)
+		throw AForm::GradeTooLowException();
 }
 
 AForm::AForm(AForm const & rhs) : _name(rhs._name), _status(rhs._status), _signe(rhs._signe), _execute(rhs._execute), _target(rhs._target)

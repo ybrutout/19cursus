@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:18:37 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/15 11:38:17 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/19 13:01:17 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ class Form
 			public:
 				virtual const char* what() const throw()
 				{
-					return "'s grade is too high for this form.";
+					return "Grade is too high.";
 				}
 		};
 
@@ -49,7 +49,7 @@ class Form
 			public:
 				virtual const char* what() const throw()
 				{
-					return "'s grade is too low for this form.";
+					return "Grade is too low.";
 				}
 		};
 
