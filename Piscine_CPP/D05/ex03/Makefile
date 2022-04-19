@@ -6,11 +6,11 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 16:30:59 by ybrutout          #+#    #+#              #
-#    Updated: 2022/04/15 16:21:31 by ybrutout         ###   ########.fr        #
+#    Updated: 2022/04/19 11:32:05 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		= Bureaucrat_with_Form
+NAME 		= Intern
 
 CPP 		= c++
 
@@ -22,6 +22,7 @@ SRC 		=	main.cpp						\
 				src/ShrubberyCreationForm.cpp	\
 				src/RobotomyRequestForm.cpp		\
 				src/PresidentialPardonForm.cpp	\
+				src/Intern.cpp					\
 
 OBJS		=	$(SRC:%.cpp=%.o)
 

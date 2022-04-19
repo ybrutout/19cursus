@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 16:32:43 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/15 16:37:08 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/19 11:02:22 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,15 @@
 class Intern
 {
 	public:
-		AForm	*makeForm(std::string name, std::string target);
-}
+
+		Intern();
+		Intern(Intern const & cpy);
+		~Intern();
+
+		Intern	&	operator=(Intern const & rhs);
+		AForm		*makeForm(std::string name, std::string target);
+
+
+};
 
 #endif
