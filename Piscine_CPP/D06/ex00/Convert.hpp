@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 15:00:42 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/21 13:14:59 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:51:11 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define CONVERT_HPP
 
 # include <iostream>
+# include <iomanip>
 # include <stdlib.h>
+# include <math.h>
 
 class Convert
 {
@@ -39,16 +41,29 @@ class Convert
 					return "Bad input.";
 				}
 		};
+		class Non_displayable : public std::exception
+		{
+			public:
+				virtual const char* what() const throw()
+				{
+					return "Non displayable";
+				}
+		};
+		class Impossible : public std::exception
+		{
+			public:
+				virtual const char* what() const throw()
+				{
+					return "Impossible";
+				}
+		};
 
 	private:
 		char					_ch;
 		int						_in;
 		float					_fl;
 		double					_do;
-		void					sinceChar();
-		void					sinceInt();
-		void					sinceFloat();
-		void					sinceDouble();
+		int						_type;
 };
 
 std::ostream & operator<<(std::ostream & o, Convert const & rhs);

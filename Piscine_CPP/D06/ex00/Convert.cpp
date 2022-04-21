@@ -6,19 +6,18 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 15:05:25 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/21 13:15:36 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:04:02 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Convert.hpp"
 
-Convert::Convert() : _ch("0"), _in(0), _fl(0), _do(0) {}
+Convert::Convert() : _ch('0'), _in(0), _fl(0), _do(0), _type(0){}
 
 Convert::Convert(std::string value)
 {
 	char	*ret;
-	long	tmp;
-	int		type;
+	long	l_tmp;
 
 	if (value.empty())
 		throw Convert::Bad_input();
@@ -27,36 +26,36 @@ Convert::Convert(std::string value)
 		if (isdigit(value[0]))
 		{
 			this->_in	= static_cast<int>(strtol(value.c_str(), &ret, 10));
-			type = 1;
+			this->_type = 1;
 		}
 		else
 		{
 			this->_ch = value[0];
-			type = 0;
+			this->_type = 0;
 		}
 	}
 	else
 	{
-		tmp = strtol(value.c_str(), &ret, 10);
-		if (!ret)
+		l_tmp = strtol(value.c_str(), &ret, 10);
+		if (!ret[0])
 		{
-			if (tmp > INT_MAX || tmp < INT_MIN)
+			if (l_tmp > INT_MAX || l_tmp < INT_MIN)
 				throw Convert::Bad_input();
 			else
 			{
-				this->_in = tmp;
-				type = 1;
+				this->_in = l_tmp;
+				this->_type = 1;
 			}
 		}
 		else
 		{
 			double	d_tmp = strtod(value.c_str(), &ret);
-			if (ret)
+			if (ret[0])
 			{
-				if (*ret == 'f')
+				if (ret[0] == 'f')
 				{
 					this->_fl = static_cast<float>(d_tmp);
-					type = 2;
+					this->_type = 2;
 				}
 				else
 					throw Convert::Bad_input();
@@ -64,26 +63,9 @@ Convert::Convert(std::string value)
 			else
 			{
 				this->_do = d_tmp;
-				type = 3;
+				this->_type = 3;
 			}
 		}
-	}
-	switch (type)
-	{
-		case 0:
-			this->sinceChar();
-			break;
-		case 1:
-			this->sinceInt();
-			break;
-		case 2:
-			this->sinceFloat();
-			break;
-		case 3:
-			this->sinceDouble();
-			break;
-		default:
-			break;
 	}
 }
 
@@ -100,32 +82,120 @@ Convert 		&	Convert::operator=(Convert const & rhs)
 
 int					Convert::getInt()const
 {
-	return this->_in;
+	switch (this->_type)
+	{
+	case 0:
+		return static_cast<int>(this->_ch);
+	case 1:
+		return this->_in;
+	case 2:
+		if (isnan(this->_fl) || isinf(this->_fl)
+			|| this->_fl > INT_MAX || this->_fl < INT_MIN)
+			throw Convert::Impossible();
+		else
+			return static_cast<int>(this->_fl);
+	case 3:
+		if (isnan(this->_do) || isinf(this->_do)
+			|| this->_do > INT_MAX || this->_do < INT_MIN)
+			throw Convert::Impossible();
+		else
+			return static_cast<int>(this->_do);
+	default :
+		break;
+	}
+	return 0;
 }
 
 char					Convert::getChar()const
 {
-	return this->_ch;
+	switch (this->_type)
+	{
+		case 0:
+			return this->_ch;
+		case 1:
+			if (this->_in < 0 || this->_in > 126)
+				throw Convert::Impossible();
+			if (this->_in >= 0 && this->_in <= 31)
+				throw Convert::Non_displayable();
+			else
+				return static_cast<char>(this->_in);
+		case 2:
+			if (this->_fl < 0 || this->_fl > 126 \
+			|| isnan(this->_fl) || isinf(this->_fl))
+				throw Convert::Impossible();
+			if (this->_fl >= 0 && this->_fl <= 31)
+				throw Convert::Non_displayable();
+			else
+				return static_cast<char>(this->_fl);
+		case 3:
+			if (this->_do < 0 || this->_do > 126 \
+			|| isnan(this->_do) || isinf(this->_do))
+				throw Convert::Impossible();
+			if (this->_do >= 0 && this->_do <= 31)
+				throw Convert::Non_displayable();
+			else
+				return static_cast<char>(this->_do);
+		default :
+			break;
+	}
+	return '0';
 }
 
 float					Convert::getFloat()const
 {
-	return this->_fl;
+	switch (this->_type)
+	{
+		case 0:
+			return static_cast<float>(this->_ch);
+		case 1:
+			return static_cast<float>(this->_in);
+		case 2:
+			return this->_fl;
+		case 3:
+			return static_cast<float>(this->_do);
+		default :
+			break;
+	}
+	return 0;
 }
 
 double					Convert::getDouble()const
 {
-	return this->_do;
-}
-
-void					Convert::sinceChar()
-{
-	
+	switch (this->_type)
+	{
+		case 0:
+			return static_cast<double>(this->_ch);
+		case 1:
+			return static_cast<double>(this->_in);
+		case 2:
+			return static_cast<double>(this->_fl);
+		case 3:
+			return this->_do;
+		default :
+			break;
+	}
+	return 0;
 }
 
 std::ostream	&	operator<<(std::ostream & o, Convert const & rhs)
 {
-	o << "char : " << rhs.getChar() << std::endl;
-	o << "integer : " << rhs.getInt() << std::endl;
+	try
+	{
+		o << "char : " << rhs.getChar() << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		o << e.what() << std::endl;
+	}
+	try
+	{
+		o << "integer : " << rhs.getInt() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		o << e.what() << std::endl;
+	}
+	o << "float : " << rhs.getFloat() << "f" << std::endl;
+	o << "double : " << rhs.getDouble() << std::endl;
 	return o;
 }

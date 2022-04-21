@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Data.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 14:26:09 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/21 16:03:41 by ybrutout         ###   ########.fr       */
+/*   Created: 2022/04/21 16:47:49 by ybrutout          #+#    #+#             */
+/*   Updated: 2022/04/21 17:03:30 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Convert.hpp"
+#ifndef DATA_HPP
+# define DATA_HPP
 
-int main(int argc, char **argv)
+# include <iostream>
+
+class Data
 {
-	if (argc != 2)
-	{
-		std::cout << "Usage is ./Scalar_type argument1" << std::endl;
-		return 0;
-	}
+	public:
+		Data();
+		Data(Data const & cpy);
+		Data(std::string name);
+		~Data();
 
-	try
-	{
-		Convert	essai(argv[1]);
-		std::cout << std::fixed << std::setprecision(1);
-		std::cout << essai;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-		return 1;
-	}
-	return 0;
-}
+		Data		&	operator=(Data const & rhs);
+
+		std::string		getName()const;
+	private:
+		std::string		_name;
+};
+
+uintptr_t	serialize(Data* ptr);
+Data	*	deserialize(uintptr_t raw);
+
+#endif

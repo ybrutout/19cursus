@@ -5,31 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 14:26:09 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/21 16:03:41 by ybrutout         ###   ########.fr       */
+/*   Created: 2022/04/21 17:02:23 by ybrutout          #+#    #+#             */
+/*   Updated: 2022/04/21 17:18:49 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Convert.hpp"
+#include "Data.hpp"
 
-int main(int argc, char **argv)
+int main(void)
 {
-	if (argc != 2)
-	{
-		std::cout << "Usage is ./Scalar_type argument1" << std::endl;
-		return 0;
-	}
+	Data		*test = new Data("test");
+	uintptr_t	tmp;
 
-	try
-	{
-		Convert	essai(argv[1]);
-		std::cout << std::fixed << std::setprecision(1);
-		std::cout << essai;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-		return 1;
-	}
+	std::cout << test << std::endl;
+	std::cout << "The name of data is " << test->getName() << "." << std::endl;
+	tmp = serialize(test);
+	std::cout << &tmp << std::endl;
+	test = deserialize(tmp);
+	std::cout << test << std::endl;
+	std::cout << "The name of data is " << test->getName() << "." << std::endl;
 	return 0;
 }

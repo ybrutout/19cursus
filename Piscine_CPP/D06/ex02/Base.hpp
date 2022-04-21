@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Base.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 14:26:09 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/21 16:03:41 by ybrutout         ###   ########.fr       */
+/*   Created: 2022/04/21 17:21:59 by ybrutout          #+#    #+#             */
+/*   Updated: 2022/04/21 17:50:58 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Convert.hpp"
+#ifndef BASE_HPP
+# define BASE_HPP
 
-int main(int argc, char **argv)
+# include <stdlib.h>
+# include <iostream>
+
+class Base
 {
-	if (argc != 2)
-	{
-		std::cout << "Usage is ./Scalar_type argument1" << std::endl;
-		return 0;
-	}
+	public:
+		virtual ~Base(void){};
+};
 
-	try
-	{
-		Convert	essai(argv[1]);
-		std::cout << std::fixed << std::setprecision(1);
-		std::cout << essai;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-		return 1;
-	}
-	return 0;
-}
+class A : public Base {};
+class B : public Base {};
+class C : public Base {};
+
+#endif
