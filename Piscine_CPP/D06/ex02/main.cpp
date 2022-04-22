@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
+/*   By: yannahbrutout <yannahbrutout@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 17:29:06 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/21 18:03:45 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/22 10:06:20 by yannahbruto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,45 +15,41 @@
 Base * generate(void)
 {
 	int i = rand() % 3;
-	Base	*nw;
 
 	switch (i)
 	{
 		case 0:
-			nw = new A;
 			std::cout << "A is born." << std::endl;
-			break;
+			return new A;
 		case 1:
-			nw = new B;
 			std::cout << "B is born." << std::endl;
-			break;
+			return new B;
 		case 2:
-			nw = new C;
 			std::cout << "C is born." << std::endl;
+			return new C;
 		default :
 			return NULL;
 	}
-	return nw;
+	return NULL;
 }
 
 void identify(Base* p)
 {
-	if (dynamic_cast<A*>(p))
+	if (dynamic_cast<A *>(p))
 		std::cout << "Base de type A." << std::endl;
-	else if (dynamic_cast<B*>(p))
+	if (dynamic_cast<B *>(p))
 		std::cout << "Base de type B." << std::endl;
-	else if (dynamic_cast<C*>(p))
+	if (dynamic_cast<C *>(p))
 		std::cout << "Base de type C." << std::endl;
-	else
-		std::cout << "I don't know this type.";
 }
 
 void identify(Base& p)
 {
 	try
 	{
-		A	&	tmp = static_cast<A>(p);
+		A	&	tmp = dynamic_cast<A&>(p);
 		std::cout << "Base de type A." << std::endl;
+		static_cast<void>(tmp);
 	}
 	catch(std::bad_cast &e)
 	{
@@ -61,8 +57,9 @@ void identify(Base& p)
 	}
 	try
 	{
-		B	&	tmpb = static_cast<B>(p);
+		B	&	tmpb = dynamic_cast<B&>(p);
 		std::cout << "Base de type B." << std::endl;
+		static_cast<void>(tmpb);
 	}
 	catch(std::bad_cast &e)
 	{
@@ -70,21 +67,24 @@ void identify(Base& p)
 	}
 	try
 	{
-		C	&	tmpc = static_cast<C>(p);
+		C	&	tmpc = dynamic_cast<C&>(p);
 		std::cout << "Base de type C." << std::endl;
+		static_cast<void>(tmpc);
 	}
 	catch(std::bad_cast &e)
 	{
 		;
-	}
-
+	}	
 }
 
 int	main(void)
 {
-	Base	*test;
-
-	test = generate();
-	identify(test);
-	delete test;
+	for (int i = 0; i < 10; i++)
+	{
+		Base	*test = generate();
+		identify(test);
+		identify(*test);
+		delete test;
+	}
+	return 0;
 }
