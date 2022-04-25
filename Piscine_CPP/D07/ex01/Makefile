@@ -6,11 +6,11 @@
 #    By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 16:30:59 by ybrutout          #+#    #+#              #
-#    Updated: 2022/04/25 11:57:30 by ybrutout         ###   ########.fr        #
+#    Updated: 2022/04/25 12:27:58 by ybrutout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		= Template
+NAME 		= Iter
 
 CPP 		= c++
 

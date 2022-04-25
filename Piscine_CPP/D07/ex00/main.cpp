@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 12:02:08 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/25 12:26:20 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/25 12:30:15 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 // 	std::cout << "a = " << c << ", b = " << d << std::endl;
 // 	std::cout << "a = " << e << ", b = " << f << std::endl;
 // 	std::cout << std::endl;
+//	return 0;
 // }
 
 int main( void )//main of the subject
