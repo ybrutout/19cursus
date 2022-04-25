@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 14:19:57 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/25 16:36:02 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:53:09 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,13 @@ class Array
 {
 	public:
 		Array() : _n(0), _array(new T[0]) {}
-		Array(unsigned n) :  _n(n), _array(new T[n]) {}
+		Array(int n)
+		{
+			if (n < 0)
+				throw Array::BadIndex();
+			this->_n = n;
+			this->_array = new T[n];
+		}
 		Array(Array const & cpy)
 		{
 			this->_n = cpy._n;
@@ -44,13 +50,13 @@ class Array
 				this->_array[i] = rhs._array[i];
 			return *this;
 		}
-		T		&		operator[](unsigned int index)
+		T		&		operator[](int index)
 		{
 			if (index >= this->_n || index < 0)
 				throw Array::BadIndex();
 			return (this->_array[index]);
 		}
-		unsigned int	size()const {return this->_n;}
+		int	size()const {return this->_n;}
 
 		class BadIndex : public std::exception
 		{
@@ -62,7 +68,7 @@ class Array
 		};
 
 	private:
-		unsigned int	_n;
+		int				_n;
 		T				*_array;
 };
 
