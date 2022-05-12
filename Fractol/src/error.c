@@ -70,5 +70,5 @@ void	ft_error(int message)
 	}
 	else if (message == END)
 		printf("Goodbye !\n");
-	exit(EXIT_SUCCESS)
+	exit(EXIT_SUCCESS);
 }

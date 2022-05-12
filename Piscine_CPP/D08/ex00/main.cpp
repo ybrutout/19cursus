@@ -6,7 +6,7 @@
 /*   By: ybrutout <ybrutout@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:20:44 by ybrutout          #+#    #+#             */
-/*   Updated: 2022/04/26 14:04:52 by ybrutout         ###   ########.fr       */
+/*   Updated: 2022/05/03 11:55:42 by ybrutout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int main(void)
 
 	try
 	{
-		std::cout << *easyfind(lst, 4) << std::endl;
+		std::cout << *easyfind(lst, 10) << std::endl;
 	}
 	catch(const std::exception& e)
 	{
