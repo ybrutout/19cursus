@@ -217,7 +217,8 @@ namespace	ft
 				this->_alloc.construct(&this->_data[i], val);
 		}
 
-		/*Adds a new element at the end of the vector, after its current last element. The content of val is copied (or moved) to the new element.*/
+		/*Adds a new element at the end of the vector, after its current last element. The content of val is copied
+		(or moved) to the new element.*/
 		void push_back (const value_type& val)
 		{
 			if (this->_size == this->_capacity)
@@ -274,6 +275,14 @@ namespace	ft
 			this->_size= tmp->_size;
 			for (size_t i = 0; i < this->_size; i++)
 				this->_alloc.construct(&this->_data[i], tmp->_data[i]);
+		}
+
+		/*Removes all elements from the vector (which are destroyed), leaving the container with a size of 0.*/
+		void clear()
+		{
+			for (size_t i = 0; i < this->_size; i++)
+				this->_alloc.destroy(&this->_data[i])
+			this->_size = 0;
 		}
 	};
 };
