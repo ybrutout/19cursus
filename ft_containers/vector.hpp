@@ -40,19 +40,19 @@ namespace	ft
 		** CONSTRUCTOR **
 		\***************/
 
-		//Default constructor, constructs an empty container, with any element.
+		/*Default constructor, constructs an empty container, with any element.*/
 		explicit vector (const allocator_type& alloc = allocator_type()) : _data(NULL), _alloc(alloc), _capacity(0), _size(0)
 		{}
 
-		//Constructs a container with n elements. Each element is a copy of val.
-		//Rem : pas de gestion pour savoir si l'allocation de mémoire a été faite proprement ou non car std::allocator::allocate le fait lui même.
+		/*Constructs a container with n elements. Each element is a copy of val.
+		Rem : pas de gestion pour savoir si l'allocation de mémoire a été faite proprement ou non car std::allocator::allocate le fait lui même.*/
 		explicit vector (size_type n, const value_type& val = value_type(),const allocator_type& alloc = allocator_type()) : _alloc(alloc), _capacity(n), _size(n)
 		{
 			if (n < 0)
 				throw(std::out_of_range("vector"));
 			this->_data = this->_alloc.allocate(n);
 			for (size_t i = 0; i < n; i++)
-				this->_data[i] = val;
+				this->_alloc.construct(&this->_data[i], val);
 		}
 
 		//Constructs a container with as many elements as the range [first,last), with each element constructed from its corresponding
@@ -61,12 +61,12 @@ namespace	ft
         // vector (InputIterator first, InputIterator last,const allocator_type& alloc = allocator_type())
 		// {}
 
-		//Constructs a container with a copy of each of the elements in x, in the same order.
+		/*Constructs a container with a copy of each of the elements in x, in the same order.*/
 		vector (const vector& x) : _alloc(x._alloc), _capacity(x._capacity), _size(x._size)
 		{
 			this->_data = this->_alloc.allocate(this->_size);
 			for (int i = 0; i < this->_size; i++)
-				this->_data[i] = x._data[i];
+				this->_alloc.construct(&this->_data[i], x._data[i]);
 		}
 
 		/*****************\
@@ -87,7 +87,7 @@ namespace	ft
 			this->_alloc.deallocate(this->_data, this->_capacity);
 			this->_data = this->_alloc.allocate(x._capacity);
 			for (size_type i = 0; i < x._size; i++)
-				this->_data[i] = this->_data[i];
+				this->_alloc.construct(this->_data[i], x._data[i]);
 			return (*this);
 		}
 
@@ -95,8 +95,10 @@ namespace	ft
 		** CAPACITY **
 		\************/
 
+		/*Return the number of element present in the vector. It's not the same than the capacity.*/
 		size_type		size() const{ return this->_size; }
 
+		/*return the maximum number than the system accept or the library.*/
 		size_type		max_size() const {return this->_alloc.max_size();}
 
 		/*If n is also greater than the current container capacity, an automatic reallocation of the allocated storage space takes place.*/
@@ -105,8 +107,10 @@ namespace	ft
 		// {
 		// }
 
+		/*Return the actualy capacity in the vector.*/
 		size_type capacity() const { return this->_capacity;}
 
+		/*Return true if the vector is empty.*/
 		bool empty() const
 		{
 			if (this->_size == 0)
@@ -193,7 +197,8 @@ namespace	ft
 		// {
 		// }
 
-		//Tu dois créer tes objets avec allocator.destroy / construct partout, même dans les constructeurs 
+		/*(Fill version) Assigns new contents to the vector, replacing its current contents, and modifying its size accordingly.
+		The new contents are n elements, each initialized to a copy of val.*/
 		void assign (size_type n, const value_type& val)
 		{
 			if (n > this->_capacity)
@@ -202,8 +207,73 @@ namespace	ft
 				this->_data = this->_alloc.allocate(n);
 				this->_capacity = n;
 			}
+			else
+			{
+				for (size_t i = 0; i < this->_size; i++)
+					this->_alloc.destroy(&this->_data[i]);
+			}
 			this->_size = n;
+			for (size_t i = 0; i < n; i++)
+				this->_alloc.construct(&this->_data[i], val);
+		}
 
+		/*Adds a new element at the end of the vector, after its current last element. The content of val is copied (or moved) to the new element.*/
+		void push_back (const value_type& val)
+		{
+			if (this->_size == this->_capacity)
+			{
+				pointer	tmp = this->_alloc.allocate(this->_size * 2);
+				for (size_t i = 0; i < this->_size; i++)
+				{
+					this->_alloc.construct(&tmp[i], this->_data[i]);
+					this->_alloc.destroy(&this->_data[i]);
+				}
+				this->_alloc.deallocate(this->_data, this->_capacity);
+				this->_data = tmp;
+				this->_capacity = this->_size * 2;
+			}
+			this->_alloc.construct(&this->_data[this->_size], val);
+			this->_size++;
+		}
+
+		/*Removes the last element in the vector, effectively reducing the container size by one.*/
+		/*There no check if is an empty vector and the size is decrement so its a big number.*/
+		void pop_back()
+		{
+			if (this->_size > 0)
+				this->_alloc.destroy(&this->_data[this->_size - 1]);
+			this->_size--;
+		}
+
+		// single element (1)
+		// iterator insert (iterator position, const value_type& val);
+		// fill (2)
+    	// void insert (iterator position, size_type n, const value_type& val);
+		// range (3)
+		// template <class InputIterator>
+    	// void insert (iterator position, InputIterator first, InputIterator last);
+		//need iterator
+
+		//need iterator too
+		// iterator erase (iterator position);
+		// iterator erase (iterator first, iterator last);
+
+		void swap (vector& x)
+		{
+			vector	tmp(x);
+
+			x._alloc = this->_alloc;
+			x._alloc.deallocate(x._data, x._capacity);
+			x._data = x._alloc.allocate(this->_capacity);
+			x._size = this->_size;
+			for (size_t i = 0; i < x._size; i++)
+				x._alloc.construct(&x._data[i], this->_data[i]);
+			this->_alloc = tmp->_alloc;
+			this->_alloc.deallocate(this->_data, this->_capacity);
+			this->_data = this->_alloc.allocate(tmp._capacity);
+			this->_size= tmp->_size;
+			for (size_t i = 0; i < this->_size; i++)
+				this->_alloc.construct(&this->_data[i], tmp->_data[i]);
 		}
 	};
 };
