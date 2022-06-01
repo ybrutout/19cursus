@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "vector.hpp"
+#include <iterator>
 
 int		main(void)
 {
@@ -16,7 +17,7 @@ int		main(void)
 	ft::vector<std::string>		my_string1(56, "coucou");
 	ft::vector<std::string>		my_string2;
 
-	
+	std::iterator_traits		i;
 
 
 
