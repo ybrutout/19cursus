@@ -17,7 +17,7 @@ int		main(void)
 	ft::vector<std::string>		my_string1(56, "coucou");
 	ft::vector<std::string>		my_string2;
 
-	std::iterator_traits		i;
+	// std::iterator_traits		i;
 
 
 
