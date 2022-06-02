@@ -2,6 +2,13 @@
 	"files.associations": {
 		"__string": "cpp",
 		"__tree": "cpp",
-		"string": "cpp"
+		"string": "cpp",
+		"array": "cpp",
+		"deque": "cpp",
+		"iterator": "cpp",
+		"list": "cpp",
+		"map": "cpp",
+		"string_view": "cpp",
+		"vector": "cpp"
 	}
 }

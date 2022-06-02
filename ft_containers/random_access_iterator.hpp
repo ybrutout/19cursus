@@ -15,12 +15,12 @@ namespace	ft
 		typedef typename	ft::iterator<random_access_iterator_tag, T>::reference			reference;
 		typedef typename	ft::iterator<random_access_iterator_tag, T>::iterator_category	iterator_category;
 
-		private:
+		protected:
 		pointer		_p;
 
 		public:
 		/*----------------------------------------Canonical Form-----------------------------------------------------*/
-		Random_access_iterator(){}
+		Random_access_iterator() : _p() {}
 
 		Random_access_iterator(pointer p) : _p(p) {}
 
