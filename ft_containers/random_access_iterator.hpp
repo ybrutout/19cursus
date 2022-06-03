@@ -20,15 +20,15 @@ namespace	ft
 
 		public:
 		/*----------------------------------------Canonical Form-----------------------------------------------------*/
-		Random_access_iterator() : _p() {}
+		random_access_iterator() {this->_p = NULL;}
 
-		Random_access_iterator(pointer p) : _p(p) {}
+		random_access_iterator(pointer p) : _p(p) {}
 
-		Random_access_iterator(const random_access_iterator& other) : _p(other._p)
+		random_access_iterator(const random_access_iterator& other) : _p(other._p) {}
 
-		~Random_access_iterator() {}
+		~random_access_iterator() {}
 
-		Random_access_iterator&	operator=(const random_access_iterator& it)
+		random_access_iterator&	operator=(const random_access_iterator& it)
 		{
 			this->_p = it._p;
 			return (*this);
