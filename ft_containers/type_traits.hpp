@@ -100,6 +100,16 @@ namespace ft
 	{
 		static const bool	value = true;
 	};
+
+
+	/*If the bool existe */
+	template <bool, class T = void>
+	struct enable_if
+	{};
+
+	template <class T>
+	struct enable_if<true, T>
+	{ typedef T type; };
 };
 
 #endif

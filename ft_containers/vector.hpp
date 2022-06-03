@@ -6,6 +6,7 @@
 # include <exception>
 # include "random_access_iterator.hpp"
 # include "reverse_iterator.hpp"
+# include "type_traits.hpp"
 
 namespace	ft
 {
@@ -57,13 +58,17 @@ namespace	ft
 
 		/*Constructs the container with the contents of the range [first, last).*/
 		template< class InputIt >
-		vector( InputIt first, InputIt last, const allocator_type& alloc = allocator_type() ) : _alloc(alloc)
+		vector( InputIt first, InputIt last, const allocator_type& alloc = allocator_type(),
+		typename ft::enable_if<!ft::is_integral<InputIt>::value >::type* = NULL) : _alloc(alloc)
 		{
-			InputIt tmp = first - last + 1;
-			this->_size = (size_type)tmp;
+			size_type	tmp_size = 0;
+			for (InputIt it = first; it != last; it++)
+				tmp_size++;
+			this->_size = tmp_size;
+			this->_capacity = tmp_size;
 			this->_data = this->_alloc.allocate(this->_size);
 			for (size_t i = 0; i < this->_size; i++)
-				this->_alloc.construct(&this->_data[i], first++);
+				this->_alloc.construct(&this->_data[i], *first++);
 		}
 
 		/*Constructs a container with a copy of each of the elements in x, in the same order.*/
