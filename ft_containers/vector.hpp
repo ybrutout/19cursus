@@ -316,7 +316,9 @@ namespace	ft
 		//A mettre en privée
 		void		reallocation(size_type n)
 		{
-			pointer tmp = this->_alloc.allocate(n);
+			while (this->_capacity < this->_size + n)
+				this->_capacity *= 2;
+			pointer tmp = this->_alloc.allocate(this->_capacity);
 			for (size_t i = 0; i < this->_size; i++)
 			{
 				this->_alloc.construct(&tmp[i], this->_data[i]);
@@ -324,7 +326,6 @@ namespace	ft
 			}
 			this->_alloc.deallocate(this->_data, this->_capacity);
 			this->_data = tmp;
-			this->_capacity = (this->_size * 2) + 1;
 		}
 
 
@@ -334,7 +335,7 @@ namespace	ft
 		iterator insert (iterator position, const value_type& val)
 		{
 			if (this->_size == this->_capacity)
-				reallocation((this->_size * 2) + 1);
+				reallocation(1);
 			if (this->_size == 0)
 			{
 				this->_alloc.construct(&this->_data[0], val);
@@ -358,17 +359,7 @@ namespace	ft
     	void insert (iterator position, size_type n, const value_type& val)
 		{
 			if (this->_size + n > this->_capacity)
-			{
-				pointer tmp = this->_alloc.allocate((this->_size * 2) + n);
-				for (size_t i = 0; i < this->_size; i++)
-				{
-					this->_alloc.construct(&tmp[i], this->_data[i]);
-					this->_alloc.destroy(&this->_data[i]);
-				}
-				this->_alloc.deallocate(this->_data, this->_capacity);
-				this->_data = tmp;
-				this->_capacity = (this->_size * 2) + n;
-			}
+				reallocation(n);
 			if (this->_size == 0)
 			{
 				for (size_type i = 0; i < n; i++)
@@ -389,10 +380,29 @@ namespace	ft
 			return ;
 		}
 
-		// range (3)
-		// template <class InputIterator>
-    	// void insert (iterator position, InputIterator first, InputIterator last);
-		//need iterator
+		/*range (3)
+		inserts elements from range [first, last) before position. He return a pointer on the first element inserted.*/
+		template <class InputIt>
+    	void insert (iterator position, InputIt first, InputIt last,
+		typename ft::enable_if<!ft::is_integral<InputIt>::value >::type* = NULL)
+		{
+			difference_type	distance = last - first;
+			std::cout << "Distance == " << distance << std::endl;
+			if (this->_size + distance > this->_capacity)
+				reallocation((this->_size * 2) + distance);
+			reverse_iterator	it = this->rbegin();
+			for (size_type i = this->_size - 1; it != position + distance; i--)
+			{
+				this->_alloc.construct(it, this->_data[i];
+				this->_alloc.destroy(&this->_data[i]);
+			}
+			for (it; last >= first; it++)
+			{
+				this->_alloc.construct(it, *last--);
+			}
+			return position;
+
+		}
 
 		//need iterator too
 		// iterator erase (iterator position);
