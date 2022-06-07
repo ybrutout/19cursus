@@ -282,12 +282,14 @@ namespace	ft
 		}
 
 		/*Adds a new element at the end of the vector, after its current last element. The content of val is copied
-		(or moved) to the new element.*/
+		(or moved) to the new element.
+		When the capacity is egal to size, there is a allocation but, we do an allocation with size * 2 + 1 because id size and capacity
+		egal zero, we need one capacity.*/
 		void push_back (const value_type& val)
 		{
 			if (this->_size == this->_capacity)
 			{
-				pointer	tmp = this->_alloc.allocate(this->_size * 2);
+				pointer	tmp = this->_alloc.allocate((this->_size * 2) + 1);
 				for (size_t i = 0; i < this->_size; i++)
 				{
 					this->_alloc.construct(&tmp[i], this->_data[i]);
@@ -295,7 +297,7 @@ namespace	ft
 				}
 				this->_alloc.deallocate(this->_data, this->_capacity);
 				this->_data = tmp;
-				this->_capacity = this->_size * 2;
+				this->_capacity = (this->_size * 2) + 1;
 			}
 			this->_alloc.construct(&this->_data[this->_size], val);
 			this->_size++;
@@ -310,8 +312,31 @@ namespace	ft
 			this->_size--;
 		}
 
-		// single element (1)
-		// iterator insert (iterator position, const value_type& val);
+		/*single element (1)
+		Insert the element val before the position pos
+		There is an reallocation if the new will be greater than the old capacity.*/
+		iterator insert (iterator position, const value_type& val)
+		{
+			if (this->_size == this->_capacity)
+			{
+				pointer tmp = this->_alloc.allocate((this->_size * 2) + 1);
+				for (size_t i = 0; i < this->_size; i++)
+				{
+					this->_alloc.construct(&tmp[i], this->_data[i]);
+					this->_alloc.destroy(&this->_data[i]);
+				}
+				this->_alloc.deallocate(this->_data, this->_capacity);
+				this->_data = tmp;
+				this->_capacity = (this->_size * 2) + 1;
+			}
+			for (size_t i = this->_size; this->_data[i] != *position; i--)
+			{
+				this->_alloc.construct(&this->_data[i], this->_data[i - 1]);
+				this->_alloc.destroy(&this->_data[i - 1]);
+			}
+			this->_alloc.construct(position, val);
+			return position;
+		}
 		// fill (2)
     	// void insert (iterator position, size_type n, const value_type& val);
 		// range (3)
