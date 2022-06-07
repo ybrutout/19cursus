@@ -1,5 +1,5 @@
-#ifndef	VECTOR_HPP
-# define VECTOR_HPP
+#ifndef	FT_VECTOR_HPP
+# define FT_VECTOR_HPP
 
 # include <iostream>
 # include <memory>
@@ -312,14 +312,54 @@ namespace	ft
 			this->_size--;
 		}
 
+		//Double la capacité car elle est trop petite par rapport au nombre besoin.
+		//A mettre en privée
+		void		reallocation(size_type n)
+		{
+			pointer tmp = this->_alloc.allocate(n);
+			for (size_t i = 0; i < this->_size; i++)
+			{
+				this->_alloc.construct(&tmp[i], this->_data[i]);
+				this->_alloc.destroy(&this->_data[i]);
+			}
+			this->_alloc.deallocate(this->_data, this->_capacity);
+			this->_data = tmp;
+			this->_capacity = (this->_size * 2) + 1;
+		}
+
+
 		/*single element (1)
 		Insert the element val before the position pos
 		There is an reallocation if the new will be greater than the old capacity.*/
 		iterator insert (iterator position, const value_type& val)
 		{
 			if (this->_size == this->_capacity)
+				reallocation((this->_size * 2) + 1);
+			if (this->_size == 0)
 			{
-				pointer tmp = this->_alloc.allocate((this->_size * 2) + 1);
+				this->_alloc.construct(&this->_data[0], val);
+				this->_size++;
+				return position;
+			}
+			size_type tmp;
+			for (size_t i = this->_size; this->_data[i] != *position; i--)
+			{
+				this->_alloc.construct(&this->_data[i], this->_data[i - 1]);
+				this->_alloc.destroy(&this->_data[i - 1]);
+				tmp = i;
+			}
+			this->_alloc.construct(&this->_data[--tmp], val);
+			this->_size++;
+			return position;
+		}
+
+		/*fill (2)
+		Insert n copie of val before position, and he return nothing.*/
+    	void insert (iterator position, size_type n, const value_type& val)
+		{
+			if (this->_size + n > this->_capacity)
+			{
+				pointer tmp = this->_alloc.allocate((this->_size * 2) + n);
 				for (size_t i = 0; i < this->_size; i++)
 				{
 					this->_alloc.construct(&tmp[i], this->_data[i]);
@@ -327,18 +367,28 @@ namespace	ft
 				}
 				this->_alloc.deallocate(this->_data, this->_capacity);
 				this->_data = tmp;
-				this->_capacity = (this->_size * 2) + 1;
+				this->_capacity = (this->_size * 2) + n;
 			}
-			for (size_t i = this->_size; this->_data[i] != *position; i--)
+			if (this->_size == 0)
 			{
-				this->_alloc.construct(&this->_data[i], this->_data[i - 1]);
-				this->_alloc.destroy(&this->_data[i - 1]);
+				for (size_type i = 0; i < n; i++)
+					this->_alloc.construct(&this->_data[i], val);
+				this->_size += n;
+				return ;
 			}
-			this->_alloc.construct(position, val);
-			return position;
+			size_type tmp;
+			this->_size += n;
+			for (size_t i = this->_size - 1; this->_data[i - n + 1] != *position; i--)
+			{
+				this->_alloc.construct(&this->_data[i], this->_data[i - n]);
+				this->_alloc.destroy(&this->_data[i - n]);
+				tmp = i;
+			}
+			for (size_type i = 0; i < n; i++)
+				this->_alloc.construct(&this->_data[--tmp], val);
+			return ;
 		}
-		// fill (2)
-    	// void insert (iterator position, size_type n, const value_type& val);
+
 		// range (3)
 		// template <class InputIterator>
     	// void insert (iterator position, InputIterator first, InputIterator last);
