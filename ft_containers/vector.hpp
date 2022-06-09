@@ -369,16 +369,16 @@ namespace	ft
 			}
 			size_type tmp;
 			this->_size += n;
-			for (size_t i = this->_size - 1; this->_data[i - n + 1] != *position; i--)
+			for (size_t i = this->_size - 1; this->_data[i - n + 1] != *position; tmp = i, i--)
 			{
 				this->_alloc.construct(&this->_data[i], this->_data[i - n]);
 				this->_alloc.destroy(&this->_data[i - n]);
-				tmp = i;
 			}
 			for (size_type i = 0; i < n; i++)
 				this->_alloc.construct(&this->_data[--tmp], val);
 			return ;
 		}
+		//voir si si il y a deux fois la meme valeur dans le vector le vector ne s'arrete pas au premier
 
 		/*range (3)
 		inserts elements from range [first, last) before position. He return a pointer on the first element inserted.*/
@@ -387,21 +387,25 @@ namespace	ft
 		typename ft::enable_if<!ft::is_integral<InputIt>::value >::type* = NULL)
 		{
 			difference_type	distance = last - first;
-			std::cout << "Distance == " << distance << std::endl;
+			size_type index = end() - position;
+			//std::cout << "Distance == " << distance << std::endl;
 			if (this->_size + distance > this->_capacity)
 				reallocation((this->_size * 2) + distance);
-			reverse_iterator	it = this->rbegin();
-			for (size_type i = this->_size - 1; it != position + distance; i--)
+			iterator it = end() + distance - 1;
+			iterator bis = end() - 1;
+			for (size_type i = 0; i < index; bis--, it--, i++)
 			{
-				this->_alloc.construct(it, this->_data[i];
-				this->_alloc.destroy(&this->_data[i]);
+				this->_alloc.construct(it.base(), *bis);
+				this->_alloc.destroy(bis.base());
 			}
-			for (it; last >= first; it++)
+			--last;
+			while (last.base() + 1 != first.base())
 			{
-				this->_alloc.construct(it, *last--);
+				this->_alloc.construct(it.base(), *last);
+				it--;
+				last--;
 			}
-			return position;
-
+			this->_size += distance;
 		}
 
 		//need iterator too
