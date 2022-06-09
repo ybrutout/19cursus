@@ -96,11 +96,11 @@ namespace ft
 
 		/*Returns an iterator which is advanced by n position */
 		reverse_iterator operator+( difference_type n ) const
-		{ return riverse_iterator(this->_current - n);}
+		{ return reverse_iterator(this->_current - n);}
 
 		/*Return an iterator which is advanced by -n position*/
 		reverse_iterator operator-( difference_type n ) const
-		{ return riverse_iterator(this->_current + n);}
+		{ return reverse_iterator(this->_current + n);}
 
 		/*Advances the iterator by n position*/
 		reverse_iterator& operator+=( difference_type n )
