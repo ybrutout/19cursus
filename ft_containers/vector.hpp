@@ -7,6 +7,7 @@
 # include "random_access_iterator.hpp"
 # include "reverse_iterator.hpp"
 # include "type_traits.hpp"
+//# include "utils.hpp"
 
 namespace	ft
 {
@@ -35,6 +36,22 @@ namespace	ft
 			allocator_type			_alloc;
 			size_type				_capacity;
 			size_type				_size;
+
+			void		reallocation(size_type n)
+			{
+				if (this->_capacity == 0)
+					this->_capacity = 2;
+				while (this->_capacity < this->_size + n)
+					this->_capacity *= 2;
+				pointer tmp = this->_alloc.allocate(this->_capacity);
+				for (size_t i = 0; i < this->_size; i++)
+				{
+					this->_alloc.construct(&tmp[i], this->_data[i]);
+					this->_alloc.destroy(&this->_data[i]);
+				}
+				this->_alloc.deallocate(this->_data, this->_capacity);
+				this->_data = tmp;
+			}
 
 		public:
 
@@ -75,7 +92,7 @@ namespace	ft
 		vector (const vector& x) : _alloc(x._alloc), _capacity(x._capacity), _size(x._size)
 		{
 			this->_data = this->_alloc.allocate(this->_size);
-			for (int i = 0; i < this->_size; i++)
+			for (size_type i = 0; i < this->_size; i++)
 				this->_alloc.construct(&this->_data[i], x._data[i]);
 		}
 
@@ -97,7 +114,7 @@ namespace	ft
 			this->_alloc.deallocate(this->_data, this->_capacity);
 			this->_data = this->_alloc.allocate(x._capacity);
 			for (size_type i = 0; i < x._size; i++)
-				this->_alloc.construct(this->_data[i], x._data[i]);
+				this->_alloc.construct(&this->_data[i], x._data[i]);
 			return (*this);
 		}
 
@@ -148,11 +165,36 @@ namespace	ft
 		/*return the maximum number than the system accept or the library.*/
 		size_type		max_size() const {return this->_alloc.max_size();}
 
-		/*If n is also greater than the current container capacity, an automatic reallocation of the allocated storage space takes place.*/
-		//Refaire quand erase sera fait et insert
-		// void			resize (size_type n, value_type val = value_type())
-		// {
-		// }
+		/*Resizes the container so that it contains n elements.
+		If n is smaller than the current container size, the content is reduced to its first n elements,
+		removing those beyond (and destroying them).
+
+		If n is greater than the current container size, the content is expanded by inserting at the end as
+		many elements as needed to reach a size of n. If val is specified, the new elements are initialized
+		as copies of val, otherwise, they are value-initialized.
+
+		If n is also greater than the current container capacity, an automatic reallocation of the allocated
+		storage space takes place.
+
+		Notice that this function changes the actual content of the container by inserting or erasing elements from it.*/
+		void			resize (size_type n, value_type val = value_type())
+		{
+			if (n == this->_size)
+				return;
+			else if (n < this->_size)
+			{
+				this->_size = n;
+				erase(&this->_data[n], end());
+			}
+			else
+			{
+				if (this->_capacity < n)
+					reallocation(n);
+				size_type tmp = n - this->_size;
+				insert(end(), tmp, val);
+			}
+			return ;
+		}
 
 		/*Return the actualy capacity in the vector.*/
 		size_type capacity() const { return this->_capacity;}
@@ -169,7 +211,6 @@ namespace	ft
 		If n is greater than the current vector capacity, the function causes the container to reallocate its storage
 		increasing its capacity to n (or greater).In all other cases, the function call does not cause a reallocation
 		and the vector capacity is not affected.This function has no effect on the vector size and cannot alter its elements.*/
-		//vérifier que cela fait bien plus de place.
 		void reserve (size_type n)
 		{
 			if (n > this->_capacity)
@@ -241,10 +282,15 @@ namespace	ft
 
 		/*Replaces the contents with copies of those in the range [first, last). The behavior is undefined if either argument is an
 		iterator into *this.*/
-		template <class InputIterator>
-		void assign (InputIterator first, InputIterator last)
+		template <class InputIt>
+		void assign (InputIt first, InputIt last,
+		typename ft::enable_if<!ft::is_integral<InputIt>::value >::type* = NULL)
 		{
-			InputIterator n = last - first + 1;
+			//size_type n = ft::distance(first, last);
+			//pour le momnent mais voir avec simon pour distance
+			size_type n = 0;
+			for (InputIt tmp = first; tmp != last; tmp++)
+				n++;
 			if (n > this->_capacity)
 			{
 				this->_alloc.deallocate(this->_data, this->_capacity);
@@ -258,7 +304,10 @@ namespace	ft
 			}
 			this->_size = n;
 			for (size_t i = 0; i < n; i++)
-				this->_alloc.construct(this->_data[i], first++);
+			{
+				this->_alloc.construct(&this->_data[i], *first);
+				first++;
+			}
 		}
 
 		/*(Fill version) Assigns new contents to the vector, replacing its current contents, and modifying its size accordingly.
@@ -312,23 +361,6 @@ namespace	ft
 			this->_size--;
 		}
 
-		//Double la capacité car elle est trop petite par rapport au nombre besoin.
-		//A mettre en privée
-		void		reallocation(size_type n)
-		{
-			while (this->_capacity < this->_size + n)
-				this->_capacity *= 2;
-			pointer tmp = this->_alloc.allocate(this->_capacity);
-			for (size_t i = 0; i < this->_size; i++)
-			{
-				this->_alloc.construct(&tmp[i], this->_data[i]);
-				this->_alloc.destroy(&this->_data[i]);
-			}
-			this->_alloc.deallocate(this->_data, this->_capacity);
-			this->_data = tmp;
-		}
-
-
 		/*single element (1)
 		Insert the element val before the position pos
 		There is an reallocation if the new will be greater than the old capacity.*/
@@ -358,27 +390,30 @@ namespace	ft
 		Insert n copie of val before position, and he return nothing.*/
     	void insert (iterator position, size_type n, const value_type& val)
 		{
+			size_type index = end() - position;
 			if (this->_size + n > this->_capacity)
 				reallocation(n);
 			if (this->_size == 0)
 			{
 				for (size_type i = 0; i < n; i++)
+				{
 					this->_alloc.construct(&this->_data[i], val);
+				}
 				this->_size += n;
 				return ;
 			}
-			size_type tmp;
-			this->_size += n;
-			for (size_t i = this->_size - 1; this->_data[i - n + 1] != *position; tmp = i, i--)
+			iterator	it = end() + n - 1;
+			iterator	bis = end() - 1;
+			for (size_type i = 0; i < index; i++, it--, bis--)
 			{
-				this->_alloc.construct(&this->_data[i], this->_data[i - n]);
-				this->_alloc.destroy(&this->_data[i - n]);
+				this->_alloc.construct(it.base(), *bis);
+				this->_alloc.destroy(bis.base());
 			}
-			for (size_type i = 0; i < n; i++)
-				this->_alloc.construct(&this->_data[--tmp], val);
+			for (size_type i = 0; i < n; i++, it--)
+				this->_alloc.construct(it.base(), val);
+			this->_size += n;
 			return ;
 		}
-		//voir si si il y a deux fois la meme valeur dans le vector le vector ne s'arrete pas au premier
 
 		/*range (3)
 		inserts elements from range [first, last) before position. He return a pointer on the first element inserted.*/
@@ -386,11 +421,14 @@ namespace	ft
     	void insert (iterator position, InputIt first, InputIt last,
 		typename ft::enable_if<!ft::is_integral<InputIt>::value >::type* = NULL)
 		{
-			difference_type	distance = last - first;
+			//distance (simon max ?)
+			//difference_type	distance = last - first;
+			size_type distance = 0;
+			for (InputIt tmp = first; tmp != last; tmp++)
+				distance++;
 			size_type index = end() - position;
-			//std::cout << "Distance == " << distance << std::endl;
 			if (this->_size + distance > this->_capacity)
-				reallocation((this->_size * 2) + distance);
+				reallocation(distance);
 			iterator it = end() + distance - 1;
 			iterator bis = end() - 1;
 			for (size_type i = 0; i < index; bis--, it--, i++)
@@ -399,7 +437,7 @@ namespace	ft
 				this->_alloc.destroy(bis.base());
 			}
 			--last;
-			while (last.base() + 1 != first.base())
+			while ((last.base()) + 1 != first.base())
 			{
 				this->_alloc.construct(it.base(), *last);
 				it--;
@@ -408,9 +446,63 @@ namespace	ft
 			this->_size += distance;
 		}
 
-		//need iterator too
-		// iterator erase (iterator position);
-		// iterator erase (iterator first, iterator last);
+		/*Remove from the vector a single element that is at position and reduce the size. He return the following iterator
+		of the last element deleted. If the last element deleted is the end, the end() ietrator is return.*/
+		iterator erase (iterator position)
+		{
+			pointer	tmp = this->_alloc.allocate(this->_capacity);
+			size_type i = 0;
+			iterator ret;
+			for (iterator it = begin(); it != end(); it++)
+			{
+				if (it == position)
+					ret = &tmp[i + 1];
+				else
+				{
+					this->_alloc.construct(&tmp[i], *it);
+					this->_alloc.destroy(it.base());
+					i++;
+				}
+			}
+			this->_alloc.deallocate(this->_data, this->_capacity);
+			this->_data = tmp;
+			this->_size--;
+			return ret;
+		}
+
+		/*Remove from the vector a range [first, last] of element. He return the following iterator
+		of the last element deleted. If the last element deleted is the end, the end() ietrator is return.*/
+		iterator erase (iterator first, iterator last)
+		{
+			pointer	tmp = this->_alloc.allocate(this->_capacity);
+			iterator	it = begin();
+			size_type	i = 0;
+			iterator	ret;
+			while (it != first && it != end())
+			{
+				this->_alloc.construct(&tmp[i], *it);
+				this->_alloc.destroy(it.base());
+				i++;
+				it++;
+			}
+			while (it != last && it != end())
+			{
+				this->_alloc.destroy(it.base());
+				it++;
+				ret = it;
+			}
+			while (it != end())
+			{
+				this->_alloc.construct(&tmp[i], *it);
+				this->_alloc.destroy(it.base());
+				it++;
+				i++;
+			}
+			this->_alloc.deallocate(this->_data, this->_capacity);
+			this->_data = tmp;
+			this->_size = i;
+			return ret;
+		}
 
 		void swap (vector& x)
 		{
