@@ -370,6 +370,7 @@ namespace	ft
 		There is an reallocation if the new will be greater than the old capacity.*/
 		iterator insert (iterator position, const value_type& val)
 		{
+			size_type index = end() - position;
 			if (this->_size == this->_capacity)
 				reallocation(1);
 			if (this->_size == 0)
@@ -378,16 +379,16 @@ namespace	ft
 				this->_size++;
 				return position;
 			}
-			size_type tmp;
-			for (size_t i = this->_size; this->_data[i] != *position; i--)
+			iterator it = end();
+			iterator bis = end() - 1;
+			for (size_type i = 0; i < index; i++, it--, bis--)
 			{
-				this->_alloc.construct(&this->_data[i], this->_data[i - 1]);
-				this->_alloc.destroy(&this->_data[i - 1]);
-				tmp = i;
+				this->_alloc.construct(it.base(), *bis);
+				this->_alloc.destroy(bis.base());
 			}
-			this->_alloc.construct(&this->_data[--tmp], val);
+			this->_alloc.construct(it.base(), val);
 			this->_size++;
-			return position;
+			return it;
 		}
 
 		/*fill (2)
@@ -461,7 +462,7 @@ namespace	ft
 			for (iterator it = begin(); it != end(); it++)
 			{
 				if (it == position)
-					ret = &tmp[i + 1];
+					ret = &tmp[i];
 				else
 				{
 					this->_alloc.construct(&tmp[i], *it);
@@ -490,11 +491,11 @@ namespace	ft
 				i++;
 				it++;
 			}
+			ret = &tmp[i];
 			while (it != last && it != end())
 			{
 				this->_alloc.destroy(it.base());
 				it++;
-				ret = it;
 			}
 			while (it != end())
 			{

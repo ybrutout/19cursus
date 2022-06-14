@@ -137,7 +137,7 @@ namespace	ft
 	template <class Iterator1, class Iterator2>
 	bool operator<=(const random_access_iterator<Iterator1>& lhs, const random_access_iterator<Iterator2>& rhs)
 	{
-		return !(lhs < rhs);
+		return (lhs.base() <= rhs.base());
 	}
 
 	template <class Iterator1, class Iterator2>
@@ -149,7 +149,7 @@ namespace	ft
 	template <class Iterator1, class Iterator2>
 	bool operator>=(const random_access_iterator<Iterator1>& lhs, const random_access_iterator<Iterator2>& rhs)
 	{
-		return !(lhs > rhs);
+		return lhs.base() >= rhs.base();
 	}
 
 	template <class Iterator>
