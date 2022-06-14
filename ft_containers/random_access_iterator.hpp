@@ -2,6 +2,9 @@
 # define RANDOM_ACCESS_ITERATOR_HPP
 
 # include "iterator_traits.hpp"
+# include "reverse_iterator.hpp"
+# include <iostream>
+# include <memory>
 
 namespace	ft
 {
@@ -25,6 +28,8 @@ namespace	ft
 		random_access_iterator(pointer p) : _p(p) {}
 
 		random_access_iterator(const random_access_iterator& other) : _p(other._p) {}
+
+		operator random_access_iterator<const T>() const { return this->_p; }
 
 		~random_access_iterator() {}
 
@@ -71,10 +76,15 @@ namespace	ft
 			return *this;
 		}
 
-		random_access_iterator operator-(difference_type n) const
+		random_access_iterator	operator-(difference_type n) const
 		{
-			pointer tmp = this->_p - n;
+			pointer	tmp = this->_p - n;
 			return tmp;
+		}
+
+		difference_type		operator-(random_access_iterator const & b)
+		{
+			return (this->base() - b.base());
 		}
 
 		random_access_iterator& operator--()

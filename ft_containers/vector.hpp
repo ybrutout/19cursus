@@ -7,7 +7,7 @@
 # include "random_access_iterator.hpp"
 # include "reverse_iterator.hpp"
 # include "type_traits.hpp"
-//# include "utils.hpp"
+# include "utils.hpp"
 
 namespace	ft
 {
@@ -111,8 +111,12 @@ namespace	ft
 
 		vector& operator=(const vector& x)
 		{
+			for (size_t i = 0; i < this->_size; i++)
+				this->_alloc.destroy(&this->_data[i]);
 			this->_alloc.deallocate(this->_data, this->_capacity);
 			this->_data = this->_alloc.allocate(x._capacity);
+			this->_capacity = x._capacity;
+			this->_size = x._size;
 			for (size_type i = 0; i < x._size; i++)
 				this->_alloc.construct(&this->_data[i], x._data[i]);
 			return (*this);
@@ -140,11 +144,11 @@ namespace	ft
 
 		/*Return a reverse iterator to the first element for a reverse_iterator so to the last element.*/
 		reverse_iterator rbegin()
-		{ return (this->_data + this->_size - 1); }
+		{ return (reverse_iterator)(this->_data + this->_size - 1); }
 
 		/*Return a const reverse iterator to the first element for a reverse_iterator so to the last element.*/
 		const_reverse_iterator rbegin() const
-		{ return (this->_data + this->_size - 1); }
+		{ return (const_reverse_iterator)(this->_data + this->_size - 1); }
 
 		/*Return a reverse_iterator to the element folowing the last element for a reverse_iterator so to the element before the first element.*/
 		reverse_iterator rend()
@@ -437,7 +441,8 @@ namespace	ft
 				this->_alloc.destroy(bis.base());
 			}
 			--last;
-			while ((last.base()) + 1 != first.base())
+			InputIt tmp = last;
+			for (tmp++; tmp.base() != first.base(); tmp--)
 			{
 				this->_alloc.construct(it.base(), *last);
 				it--;
@@ -506,20 +511,23 @@ namespace	ft
 
 		void swap (vector& x)
 		{
-			vector	tmp(x);
+			vector	tmp;
+			tmp._data = x._data;
+			tmp._alloc = x._alloc;
+			tmp._size = x._size;
+			tmp._capacity = x._capacity;
+
+			// x = *this;
+			// *this = tmp;
 
 			x._alloc = this->_alloc;
-			x._alloc.deallocate(x._data, x._capacity);
-			x._data = x._alloc.allocate(this->_capacity);
+			x._data = this->_data;
 			x._size = this->_size;
-			for (size_t i = 0; i < x._size; i++)
-				x._alloc.construct(&x._data[i], this->_data[i]);
-			this->_alloc = tmp->_alloc;
-			this->_alloc.deallocate(this->_data, this->_capacity);
-			this->_data = this->_alloc.allocate(tmp._capacity);
-			this->_size= tmp->_size;
-			for (size_t i = 0; i < this->_size; i++)
-				this->_alloc.construct(&this->_data[i], tmp->_data[i]);
+			x._capacity = this->_capacity;
+			this->_alloc = tmp._alloc;
+			this->_data = tmp._data;
+			this->_size= tmp._size;
+			this->_capacity = tmp._capacity;
 		}
 
 		/*Removes all elements from the vector (which are destroyed), leaving the container with a size of 0.*/
@@ -538,6 +546,55 @@ namespace	ft
 		allocator_type get_allocator() const
 		{ return this->_alloc; }
 	};
+
+	template <class T, class Alloc>
+  	bool	operator==(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+		if (lhs.size() != rhs.size())
+			return false;
+		if (!(ft::equal(lhs.begin(), lhs.end(), rhs.begin())))
+			return false;
+		return true;
+	}
+
+	template <class T, class Alloc>
+	bool	operator!=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+		if (ft::equal(lhs.begin(), lhs.end(), rhs.begin()))
+			return false;
+		return true;
+	}
+
+	template <class T, class Alloc>
+	bool	operator<(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+		return (lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	}
+
+	template <class T, class Alloc>
+	bool	operator>(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+		return (lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end()));
+	}
+
+	template <class T, class Alloc>
+	bool	operator<=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+		return !(rhs < lhs);
+	}
+
+	template <class T, class Alloc>
+	bool operator>=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+		return !(lhs < rhs);
+	}
+
+	template <class T, class Alloc>
+	void	swap(vector<T,Alloc>& x, vector<T,Alloc>& y)
+	{
+		x.swap(y);
+	}
+
 };
 
 #endif

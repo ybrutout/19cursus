@@ -22,17 +22,24 @@ namespace ft
 		public:
 		/*----------------------------------------Canonical Form-----------------------------------------------------*/
 		/*Default constructor*/
-		reverse_iterator() {this->_current = NULL;}
+		reverse_iterator()
+		{this->_current = NULL;}
 
 		/*Copy constructor with an original iterator*/
-		explicit reverse_iterator( iterator_type x ) : _current(x) {}
+		explicit reverse_iterator( iterator_type x ) : _current(x)
+		{}
 
 		/*Copy constructor with an other revrese_iterator*/
 		template< class U >
-		reverse_iterator( const reverse_iterator<U>& other ) : _current(other.base()) {}
+		reverse_iterator( const reverse_iterator<U>& other ) : _current(other.base())
+		{}
+
+		operator reverse_iterator<const Iterator>() const
+		{ return this->_current; }
 
 		/*Deconstructor*/
-		~reverse_iterator() {}
+		~reverse_iterator()
+		{}
 
 		/*Overload operator for assignement*/
 		reverse_iterator&	operator=(const reverse_iterator& it)
@@ -101,6 +108,11 @@ namespace ft
 		/*Return an iterator which is advanced by -n position*/
 		reverse_iterator operator-( difference_type n ) const
 		{ return reverse_iterator(this->_current + n);}
+
+		difference_type		operator-(reverse_iterator const & b)
+		{
+			return (b._p.base() - this->_p.base());
+		}
 
 		/*Advances the iterator by n position*/
 		reverse_iterator& operator+=( difference_type n )
