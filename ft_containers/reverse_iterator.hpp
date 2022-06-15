@@ -41,12 +41,12 @@ namespace ft
 		~reverse_iterator()
 		{}
 
-		/*Overload operator for assignement*/
-		reverse_iterator&	operator=(const reverse_iterator& it)
-		{
-			this->_current = it._current;
-			return *this;
-		}
+		// /*Overload operator for assignement*/
+		// reverse_iterator&	operator=(const reverse_iterator& it)
+		// {
+		// 	this->_current = it._current;
+		// 	return *this;
+		// }
 		/*-----------------------------------------------------------------------------------------------------------*/
 
 		/*-------------------------------------------Operator--------------------------------------------------------*/
@@ -111,7 +111,7 @@ namespace ft
 
 		difference_type		operator-(reverse_iterator const & b)
 		{
-			return (b._p.base() - this->_p.base());
+			return (b._current.base() - this->_current.base());
 		}
 
 		/*Advances the iterator by n position*/

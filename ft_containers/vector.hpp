@@ -26,7 +26,7 @@ namespace	ft
 			typedef typename	ft::random_access_iterator<value_type>				iterator;
 			typedef typename	ft::random_access_iterator<const value_type>		const_iterator;
 			typedef typename	ft::reverse_iterator<iterator>						reverse_iterator;
-			typedef typename	ft::reverse_iterator<const iterator>				const_reverse_iterator;
+			typedef typename	ft::reverse_iterator<const_iterator>				const_reverse_iterator;
 			typedef typename	ft::iterator_traits<iterator>::difference_type		difference_type;
 			typedef				size_t												size_type;
 
@@ -102,6 +102,8 @@ namespace	ft
 
 		~vector()
 		{
+			for (size_type i = 0; i < this->_size; i++)
+				this->_alloc.destroy(&this->_data[i]);
 			this->_alloc.deallocate(this->_data, this->_capacity);
 		}
 
@@ -144,15 +146,15 @@ namespace	ft
 
 		/*Return a reverse iterator to the first element for a reverse_iterator so to the last element.*/
 		reverse_iterator rbegin()
-		{ return (reverse_iterator)(this->_data + this->_size - 1); }
+		{ return (reverse_iterator)(end().base()); }
 
 		/*Return a const reverse iterator to the first element for a reverse_iterator so to the last element.*/
 		const_reverse_iterator rbegin() const
-		{ return (const_reverse_iterator)(this->_data + this->_size - 1); }
+		{ return (const_reverse_iterator)(end().base()); }
 
 		/*Return a reverse_iterator to the element folowing the last element for a reverse_iterator so to the element before the first element.*/
 		reverse_iterator rend()
-		{ return (this->_data - 1); }
+		{ return (reverse_iterator)(begin().base()); }
 
 		/*Return a const reverse_iterator to the element folowing the last element
 		for a reverse_iterator so to the element before the first element.*/
@@ -512,23 +514,27 @@ namespace	ft
 
 		void swap (vector& x)
 		{
-			vector	tmp;
-			tmp._data = x._data;
-			tmp._alloc = x._alloc;
-			tmp._size = x._size;
-			tmp._capacity = x._capacity;
+			allocator_type alloc_tmp;
+			pointer		data_tmp = NULL;
+			size_type	size_tmp = 0;
+			size_type	capacity_tmp = 0;
+			if (this->_alloc == x._alloc && this->_data == x._data
+			&& this->_size == x._size && this->_capacity == x._capacity)
+				return ;
+			alloc_tmp = this->_alloc;
+			data_tmp = this->_data;
+			size_tmp = this->_size;
+			capacity_tmp = this->_capacity;
 
-			// x = *this;
-			// *this = tmp;
+			this->_alloc = x._alloc;
+			this->_data = x._data;
+			this->_size = x._size;
+			this->_capacity = x._capacity;
 
-			x._alloc = this->_alloc;
-			x._data = this->_data;
-			x._size = this->_size;
-			x._capacity = this->_capacity;
-			this->_alloc = tmp._alloc;
-			this->_data = tmp._data;
-			this->_size= tmp._size;
-			this->_capacity = tmp._capacity;
+			x._alloc = alloc_tmp;
+			x._data = data_tmp;
+			x._size = size_tmp;
+			x._capacity = capacity_tmp;
 		}
 
 		/*Removes all elements from the vector (which are destroyed), leaving the container with a size of 0.*/
@@ -560,11 +566,7 @@ namespace	ft
 
 	template <class T, class Alloc>
 	bool	operator!=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
-	{
-		if (ft::equal(lhs.begin(), lhs.end(), rhs.begin()))
-			return false;
-		return true;
-	}
+	{ return !(lhs == rhs); }
 
 	template <class T, class Alloc>
 	bool	operator<(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
@@ -593,7 +595,7 @@ namespace	ft
 	template <class T, class Alloc>
 	void	swap(vector<T,Alloc>& x, vector<T,Alloc>& y)
 	{
-		x.swap(y);
+		y.swap(x);
 	}
 
 };
