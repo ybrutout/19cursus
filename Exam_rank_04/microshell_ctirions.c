@@ -70,7 +70,7 @@ int	main(int argc, char **argv, char **env)
 					if (chdir(av[1]))
 						ft_error("error: cd: cannot change directory ", av[1]);
 				}
-				else if (execve(av[0], av, env))
+				if (execve(av[0], av, env))
 					ft_error("error: cannot execute ", av[0]);
 				exit (0);
 			}

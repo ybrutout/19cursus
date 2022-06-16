@@ -159,7 +159,7 @@ namespace	ft
 	}
 
 	template <class Iterator>
-	typename random_access_iterator<Iterator>::difference_type operator- (const random_access_iterator<Iterator>& lhs, const random_access_iterator<Iterator>& rhs)
+	typename random_access_iterator<Iterator>::difference_type operator-(const random_access_iterator<Iterator>& lhs, const random_access_iterator<Iterator>& rhs)
 	{
 		return lhs.base() - rhs.base();
 	}

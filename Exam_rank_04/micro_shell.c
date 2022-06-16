@@ -2,18 +2,18 @@
 #include <string.h>
 #include <stdlib.h>
 
-int	ft_strlen(char *str)
+int		ft_strlen(char *str)
 {
 	int i = 0;
 	while (str[i])
 		i++;
-	return (i);
+	return i;
 }
 
 void	ft_error(char *str1, char *str2)
 {
 	write(2, str1, ft_strlen(str1));
-	if(str2)
+	if (str2)
 	{
 		write(2, str2, ft_strlen(str2));
 		write(2, "\n", 1);
@@ -27,16 +27,19 @@ char	**sub_argv(char **argv, int start, int end)
 	char	**av = malloc(sizeof(char *) * (end - start + 1));
 
 	while (start < end)
+	{
 		av[i++] = argv[start++];
+	}
 	av[i] = NULL;
 	return (av);
 }
 
-int	main(int argc, char **argv, char **env)
+int main (int argc, char **argv, char**env)
 {
-	int i = 1, pos, start, end, fd_in, fd[2];
-	pid_t	pid;
-	char	**av;
+	int i = 1, pos, end, start, fd[2],fd_in;
+	pid_t pid;
+	char **av;
+
 	while (i < argc)
 	{
 		pos = start = end = i;
@@ -60,9 +63,9 @@ int	main(int argc, char **argv, char **env)
 					ft_error("error: fatal\n", NULL);
 				if (end < pos && dup2(fd[1], 1) == -1)
 					ft_error("error: fatal\n", NULL);
-				close(fd_in);
 				close(fd[0]);
 				close(fd[1]);
+				close(fd_in);
 				if (!strcmp(av[0], "cd"))
 				{
 					if (end - start != 2)
@@ -70,7 +73,7 @@ int	main(int argc, char **argv, char **env)
 					if (chdir(av[1]))
 						ft_error("error: cd: cannot change directory ", av[1]);
 				}
-				else if (execve(av[0], av, env))
+				if (execve(av[0], av, env))
 					ft_error("error: cannot execute ", av[0]);
 				exit (0);
 			}
@@ -87,5 +90,5 @@ int	main(int argc, char **argv, char **env)
 		close(fd_in);
 		i = pos + 1;
 	}
-	return (0);
+	return 0;
 }
