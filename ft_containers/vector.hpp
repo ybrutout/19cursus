@@ -30,7 +30,7 @@ namespace	ft
 			typedef typename	ft::iterator_traits<iterator>::difference_type		difference_type;
 			typedef				size_t												size_type;
 
-		private:
+		protected:
 
 			pointer					_data;
 			allocator_type			_alloc;
