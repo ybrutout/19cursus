@@ -299,7 +299,7 @@ namespace	ft
 				n++;
 			if (n > this->_capacity)
 			{
-				this->_alloc.deallocate(this->_data, this->_capacity);
+				this->_alloc.deallocate(this->_data, this->_capacity);njelds 
 				this->_data = this->_alloc.allocate(n);
 				this->_capacity = n;
 			}
