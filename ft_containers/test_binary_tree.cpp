@@ -6,14 +6,18 @@
 
 int main(void)
 {
-	ft::Binary_Tree<int, std::string>		 first;
+	ft::Binary_Tree<int, int>		 first;
 
-	first.insert(3, "hey");
-	first.insert(5, "comment");
-	first.insert(1, "ca");
-	first.insert(4, "va");
-	first.insert(4, "moi");
-	first.insert(4, "ca");
-	first.insert(4, "va");
+	first.insert(17, 17);
+	first.insert(13, 13);
+	first.insert(3, 3);
+	first.insert(15, 15);
+	first.insert(14, 14);
+	first.insert(16, 16);
+	first.insert(2, 2);
+	first.insert(6, 6);
+	first.print();
+	first.erase(13);
+
 	first.print();
 }

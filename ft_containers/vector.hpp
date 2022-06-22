@@ -454,6 +454,8 @@ namespace	ft
 			this->_size += distance;
 		}
 
+		//changer les erase car je peux pas d'office reallocer il faut que justement j'utilise la même allocation de mémoire et
+		//que je supprime juste les objects de la fin.
 		/*Remove from the vector a single element that is at position and reduce the size. He return the following iterator
 		of the last element deleted. If the last element deleted is the end, the end() ietrator is return.*/
 		iterator erase (iterator position)

@@ -28,7 +28,7 @@ namespace	ft
 			pair (const first_type& a, const second_type& b) : _first(a), _second(b)
 			{}
 
-			/*Overload for the operator ==*/
+			/*Overload for the operator =*/
 			pair& operator= (const pair& pr)
 			{
 				this->_first = pr._first;
@@ -60,6 +60,10 @@ namespace	ft
 	template <class T1, class T2>
 	bool operator>= (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs)
 	{ return !(lhs < rhs); }
+
+	template <class T1,class T2>
+	pair<T1,T2> make_pair (T1 x, T2 y)
+	{ return ( pair<T1,T2>(x,y) );}
 };
 
 #endif
