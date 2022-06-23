@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include "pair.hpp"
+# include "tree_iterator.hpp"
 
 # include <functional>//a enlever
 # include <memory> // je crois pas qu'il faut l'enlever a voir
@@ -94,8 +95,8 @@ namespace ft
 			typedef	typename	allocator_type::reference			reference;
 			typedef typename	allocator_type::const_reference		const_reference;
 			typedef typename	allocator_type::pointer				pointer;
-			typedef typename	allocator_type::const_pointer		const_pointer;
-			//iterator
+			typedef typename	allocator_type::const_pointer						const_pointer;
+			typedef typename	ft::tree_iterator<Node<key_type, mapped_type> >		iterator;
 			//const_iterator
 			//reverse_iterator
 			//const_reverse_iterator
@@ -138,6 +139,12 @@ namespace ft
 					this->_size--;
 				}
 			}
+		}
+
+		//faire un first retourne le plus petit iterateur
+		iterator	begin()
+		{
+			return 
 		}
 
 		void	insert(key_type ke, mapped_type value)

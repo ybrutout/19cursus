@@ -21,4 +21,7 @@ int main(void)
 	first.print();
 	first.clear();
 	first.print();
+
+	ft::Binary_Tree<int,int>::iterator	ite;
+	
 }
