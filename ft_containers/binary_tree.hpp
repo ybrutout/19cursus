@@ -202,11 +202,11 @@ namespace ft
 			return &(tmp->value);
 		}
 
-		size_type		erase(const key_type& k)
+		private:
+		//private fonction to erase
+		pair<node *, int>		find_the_object_to_erase(node	*tmp, const key_type& k)
 		{
-			node	*tmp = this->_root;
-
-			int		i = 0;
+			int i = 0;
 			while (k != tmp->value._first)
 			{
 				if (k < tmp->value._first && tmp->left)
@@ -220,8 +220,28 @@ namespace ft
 					i = 2;
 				}
 				else
-					return 0;
+					return make_pair(tmp, 0);
 			}
+			return make_pair(tmp, i);
+		}
+
+		//private fonction to erase a do the changement between all the node before the erase of the object
+		// void	erase_if_one_child(int i, )
+		// {}
+
+
+
+		public:
+		size_type		erase(const key_type& k)
+		{
+			node	*tmp = this->_root;
+			int		i = 0;
+
+			pair<node *, int> pr = find_the_object_to_erase(tmp, k);
+			i = pr._second;
+			tmp = pr._first;
+			if (i == 0)
+				return 0;
 			if (tmp->right == NULL && tmp->left == NULL)
 			{
 				if (i == 1)
@@ -236,6 +256,7 @@ namespace ft
 					if (i == 0)
 					{
 						this->_root = tmp->left;
+						tmp->left->parent = NULL;
 						tmp->parent = NULL;
 					}
 					else if (i == 1)
@@ -254,6 +275,7 @@ namespace ft
 					if (i == 0)
 					{
 						this->_root = tmp->right;
+						tmp->right->parent = NULL;
 						tmp->parent = NULL;
 					}
 					else if (i == 1)
@@ -285,6 +307,8 @@ namespace ft
 						bis->right = tmp->right;
 						bis->parent->right = NULL;
 						bis->parent = tmp->parent;
+						bis->right->parent = bis;
+						bis->left->parent = bis;
 					}
 					else if (i == 2)
 					{
@@ -293,6 +317,8 @@ namespace ft
 						bis->right = tmp->right;
 						bis->parent->right = NULL;
 						bis->parent = tmp->parent;
+						bis->right->parent = bis;
+						bis->left->parent = bis;
 					}
 					else if (i == 0)
 					{
@@ -301,14 +327,48 @@ namespace ft
 						bis->right = tmp->right;
 						bis->parent->right = NULL;
 						bis->parent = tmp->parent;
+						bis->left->parent = bis;
+						bis->right->parent = bis;
 					}
 				}
 			}
-
 			delete tmp;
 			this->_size--;
 			return 1;
 		}
+
+		template <class InputIterator>
+		void insert (InputIterator first, InputIterator last)
+		{}
+
+		void	clear()
+		{
+			node	*tmp = this->_root;
+
+			while (this->_size != 0)
+			{
+				if (tmp->right)
+					tmp = tmp->right;
+				else if (tmp->left)
+					tmp = tmp->left;
+				else
+				{
+					node	*bis = tmp;
+					if (tmp->parent)
+					{
+						tmp = tmp->parent;
+						if (bis == tmp->left)
+							tmp->left = NULL;
+						else
+							tmp->right = NULL;
+					}
+					delete bis;
+					this->_size--;
+				}
+			}
+			this->_root = NULL;
+		}
+
 	};
 };
 

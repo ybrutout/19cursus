@@ -18,6 +18,7 @@ int main(void)
 	first.insert(6, 6);
 	first.print();
 	first.erase(13);
-
+	first.print();
+	first.clear();
 	first.print();
 }

@@ -292,8 +292,6 @@ namespace	ft
 		void assign (InputIt first, InputIt last,
 		typename ft::enable_if<!ft::is_integral<InputIt>::value >::type* = NULL)
 		{
-			//size_type n = ft::distance(first, last);
-			//pour le momnent mais voir avec simon pour distance
 			size_type n = 0;
 			for (InputIt tmp = first; tmp != last; tmp++)
 				n++;
