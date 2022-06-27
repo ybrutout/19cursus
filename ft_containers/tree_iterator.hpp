@@ -12,7 +12,7 @@ namespace ft
 	class tree_iterator
 	{
 		public:
-		typedef	typename	T::node				node;
+		typedef				T					node;
 		typedef				node*				pointer;
 		typedef				node&				reference;
 
@@ -29,7 +29,7 @@ namespace ft
 				while (tmp->left)
 					tmp = tmp->left;
 			}
-			else
+			else if (tmp->parent)
 			{
 				pointer	bis = tmp->parent;
 				while (tmp == bis->right)
@@ -37,8 +37,30 @@ namespace ft
 					tmp = bis;
 					bis = bis->parent;
 				}
-				if (tmp->right != bis)
+				tmp = bis;
+			}
+			return tmp;
+		}
+
+		pointer	decrement()
+		{
+			pointer	tmp = this->_node;
+
+			if (tmp->left)
+			{
+				tmp = tmp->left;
+				while (tmp->right)
+					tmp = tmp->right;
+			}
+			else if (tmp->parent)
+			{
+				pointer bis = tmp->parent;
+				while(tmp == bis->left)
+				{
 					tmp = bis;
+					bis = bis->parent;
+				}
+				tmp = bis;
 			}
 			return tmp;
 		}
@@ -72,6 +94,7 @@ namespace ft
 
 		pointer	const& base() const
 		{
+			std::cout << "je suis ici" << std::endl;
 			return this->_node;
 		}
 
@@ -84,29 +107,25 @@ namespace ft
 			return *this;
 		}
 
-		/*
-		random_access_iterator&	operator++()
+		tree_iterator	operator++(int)
 		{
-			++this->_p;
+			tree_iterator	tmp = *this;
+			this->_node = incremente();
+			return tmp;
+		}
+
+		tree_iterator&	operator--()
+		{
+			this->_node = decrement();
 			return *this;
 		}
 
-		random_access_iterator	operator++(int)
+		tree_iterator	operator--(int)
 		{
-			return this->_p++;
+			tree_iterator	tmp = *this;
+			this->_node = decrement();
+			return tmp;
 		}
-
-		random_access_iterator& operator--()
-		{
-			--this->_p;
-			return *this;
-		}
-
-		random_access_iterator  operator--(int)
-		{
-			return this->_p--;
-		}
-		*/
 
 	};
 }

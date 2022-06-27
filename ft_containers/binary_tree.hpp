@@ -144,7 +144,30 @@ namespace ft
 		//faire un first retourne le plus petit iterateur
 		iterator	begin()
 		{
-			return 
+			node	*tmp = this->_root;
+
+			while (1)
+			{
+				if (tmp->left)
+					tmp = tmp->left;
+				else
+					return tmp;
+			}
+			return tmp;
+		}
+
+		iterator	end()
+		{
+			node	*tmp = this->_root;
+
+			while (1)
+			{
+				if (tmp->right)
+					tmp = tmp->right;
+				else
+					return tmp;
+			}
+			return tmp;
 		}
 
 		void	insert(key_type ke, mapped_type value)
@@ -346,7 +369,9 @@ namespace ft
 
 		template <class InputIterator>
 		void insert (InputIterator first, InputIterator last)
-		{}
+		{
+			
+		}
 
 		void	clear()
 		{
