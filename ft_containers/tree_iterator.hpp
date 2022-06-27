@@ -9,7 +9,7 @@ namespace ft
 
 
 	template <typename T>
-	class tree_iterator
+	class tree_iterator : public ft::iterator<ft::bidirectional_iterator_tag, T>
 	{
 		public:
 		typedef				T					node;
@@ -94,7 +94,6 @@ namespace ft
 
 		pointer	const& base() const
 		{
-			std::cout << "je suis ici" << std::endl;
 			return this->_node;
 		}
 
@@ -128,6 +127,18 @@ namespace ft
 		}
 
 	};
+
+	template <class Iterator1, class Iterator2>
+	bool operator==(const tree_iterator<Iterator1>& lhs, const tree_iterator<Iterator2>& rhs)
+	{
+		return lhs.base() == rhs.base();
+	}
+
+	template <class Iterator1, class Iterator2>
+	bool operator!=(const tree_iterator<Iterator1>& lhs, const tree_iterator<Iterator2>& rhs)
+	{
+		return lhs.base() != rhs.base();
+	}
 }
 
 #endif

@@ -27,11 +27,11 @@ namespace ft
 			{}
 
 			/*Construct a node which has a parent and a value, but no child.*/
-			Node(Node *parent, value_type val) : parent(parent), left(NULL), right(NULL), key(val)
+			Node(Node *parent, value_type val) : parent(parent), left(NULL), right(NULL), value(val)
 			{}
 
 			/*Construct a top of the tree node.*/
-			Node(value_type val) : parent(NULL), left(NULL), right(NULL), key(val)
+			Node(value_type val) : parent(NULL), left(NULL), right(NULL), value(val)
 			{}
 
 			Node(key first, T second) : parent(NULL), left(NULL), right(NULL)
@@ -90,7 +90,6 @@ namespace ft
 			typedef				T									mapped_type;
 			typedef				pair<key_type, mapped_type>			value_type;
 			typedef				Compare								key_compare;
-			//value_compare see value_comp
 			typedef				Alloc								allocator_type;
 			typedef	typename	allocator_type::reference			reference;
 			typedef typename	allocator_type::const_reference		const_reference;
@@ -112,7 +111,24 @@ namespace ft
 
 		public:
 
-		Binary_Tree(): _size(0), _root(NULL), _key_cmp(key_compare()) {}
+		/*Default constructor*/
+		Binary_Tree(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+		: _size(0), _root(NULL), _key_cmp(comp), _alloc(alloc)
+		{}
+
+		//ajouter l'insert the range
+		// template <class IteratorTree>
+		// Binary_Tree(IteratorTree first, IteratorTree last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+		// : _size(0), _root(NULL), _key_cmp(comp), _alloc(alloc)
+		// {
+		// 	IteratorTree	tmp = first;
+		// 	while (tmp != last)
+		// 	{
+		// 		this->_size++;
+		// 		tmp++;
+		// 	}
+		// 	std::cout << "size == " << this->_size << std::endl;
+		// }
 
 		~Binary_Tree()
 		{
@@ -141,7 +157,16 @@ namespace ft
 			}
 		}
 
-		//faire un first retourne le plus petit iterateur
+		Binary_Tree& operator=(Binary_Tree& rhs)
+		{
+			this->clear();
+			this->_alloc = rhs._alloc;
+			this->_key_cmp = rhs._key_cmp;
+			insert(rhs.begin(), rhs.end());
+			return *this;
+		}
+
+		/*Return an iterator on the smallest node(pair)*/
 		iterator	begin()
 		{
 			node	*tmp = this->_root;
@@ -165,16 +190,28 @@ namespace ft
 				if (tmp->right)
 					tmp = tmp->right;
 				else
-					return tmp;
+					return ++tmp;
 			}
 			return tmp;
 		}
 
-		void	insert(key_type ke, mapped_type value)
+		//pas sure que ce soit utile
+		template <class InputIterator>
+		void insert (InputIterator first, InputIterator last)
+		{
+			while (first != last)
+			{
+				insert(first._node->value);
+				first++;
+			}
+		}
+
+		void	insert(value_type val)
 		{
 			if (this->_size == 0)
 			{
-				node	*tmp = new node(ke, value);
+				std::cout << "je suis ici " << std::endl;
+				node	*tmp = new node(val);
 				this->_root = tmp;
 				this->_size++;
 			}
@@ -183,11 +220,11 @@ namespace ft
 				node *tmp = this->_root;
 				while (1)
 				{
-					if (this->_key_cmp(ke, tmp->value._first))
+					if (this->_key_cmp(val._first, tmp->value._first))
 					{
 						if (tmp->left == NULL)
 						{
-							node	*nw = new node(ke, value);
+							node	*nw = new node(val);
 							nw->parent = tmp;
 							this->_size++;
 							tmp->left = nw;
@@ -198,9 +235,11 @@ namespace ft
 					}
 					else
 					{
+						if (!this->_key_cmp(tmp->value._first, val._first))
+							return ;
 						if (tmp->right == NULL)
 						{
-							node	*nw = new node(ke, value);
+							node	*nw = new node(val);
 							nw->parent = tmp;
 							this->_size++;
 							tmp->right = nw;
@@ -213,6 +252,7 @@ namespace ft
 				}
 			}
 		}
+
 
 		//fonction pour afficher
 		void print(void) { printRBTRec("", this->_root, false); };
@@ -254,12 +294,6 @@ namespace ft
 			}
 			return make_pair(tmp, i);
 		}
-
-		//private fonction to erase a do the changement between all the node before the erase of the object
-		// void	erase_if_one_child(int i, )
-		// {}
-
-
 
 		public:
 		size_type		erase(const key_type& k)
@@ -367,11 +401,6 @@ namespace ft
 			return 1;
 		}
 
-		template <class InputIterator>
-		void insert (InputIterator first, InputIterator last)
-		{
-			
-		}
 
 		void	clear()
 		{
