@@ -104,6 +104,8 @@ namespace ft
 			typedef				Node<key, T>						node;
 
 		protected:
+
+			node				*_more_last;
 			allocator_type		_alloc;
 			key_compare			_key_cmp;
 			size_t				_size;
@@ -111,10 +113,21 @@ namespace ft
 
 		public:
 
+		//fonction pour implémenter le dernier node apres le dernier. Voir si il faut pas mettre se truc en privé
+		//si il y a plusieurs constructeur il furda l'utiliser dans chaque constructeur.
+		node		*just_more_last()
+		{
+			node *tmp = new node;
+			return tmp;
+		}
+
+
 		/*Default constructor*/
 		Binary_Tree(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
 		: _size(0), _root(NULL), _key_cmp(comp), _alloc(alloc)
-		{}
+		{
+			this->_more_last = just_more_last();
+		}
 
 		//ajouter l'insert the range
 		// template <class IteratorTree>
@@ -136,7 +149,7 @@ namespace ft
 
 			while (this->_size != 0)
 			{
-				if (tmp->right)
+				if (tmp->right && tmp->right != this->_more_last)
 					tmp = tmp->right;
 				else if (tmp->left)
 					tmp = tmp->left;
@@ -155,14 +168,34 @@ namespace ft
 					this->_size--;
 				}
 			}
+			delete this->_more_last;
 		}
 
+		private:
+		// void	recursive_for_discover(node *rhs, node* last)
+		// {
+
+		// 	if (rhs.left)
+		// 		recursive_for_discover(rhs.left, last);
+		// 	if (rhs.right && rhs.right != last)
+		// 		recursive_for_discover(rhs.right, last);
+		// }
+
+		public:
+
+		//ca va pas 
 		Binary_Tree& operator=(Binary_Tree& rhs)
 		{
 			this->clear();
 			this->_alloc = rhs._alloc;
 			this->_key_cmp = rhs._key_cmp;
-			insert(rhs.begin(), rhs.end());
+			this->_more_last = just_more_last();
+			// recursive_for_discover(rhs._root, rhs._more_last);
+			node *tmp = this->_root;
+			while (tmp->right)
+				tmp = tmp->right;
+			tmp->right = this->_more_last;
+			this->_more_last = tmp;
 			return *this;
 		}
 
@@ -183,37 +216,32 @@ namespace ft
 
 		iterator	end()
 		{
-			node	*tmp = this->_root;
-
-			while (1)
-			{
-				if (tmp->right)
-					tmp = tmp->right;
-				else
-					return ++tmp;
-			}
-			return tmp;
+			return this->_more_last;
 		}
 
 		//pas sure que ce soit utile
 		template <class InputIterator>
 		void insert (InputIterator first, InputIterator last)
 		{
-			while (first != last)
+			InputIterator tmp = first;
+			size_type distance = 0;
+			while (tmp != last)
 			{
-				insert(first._node->value);
-				first++;
+				++tmp;
+				distance++;
 			}
+			for (size_type i = 0; i < distance; i++, first++)
+				insert(first._node->value);
 		}
 
 		void	insert(value_type val)
 		{
 			if (this->_size == 0)
 			{
-				std::cout << "je suis ici " << std::endl;
 				node	*tmp = new node(val);
 				this->_root = tmp;
 				this->_size++;
+				this->_root->right = this->_more_last;
 			}
 			else
 			{
@@ -237,11 +265,16 @@ namespace ft
 					{
 						if (!this->_key_cmp(tmp->value._first, val._first))
 							return ;
-						if (tmp->right == NULL)
+						if (tmp->right == NULL || tmp->right == this->_more_last)
 						{
 							node	*nw = new node(val);
 							nw->parent = tmp;
 							this->_size++;
+							if (tmp->right == this->_more_last)
+							{
+								nw->right = this->_more_last;
+								this->_more_last->parent = nw;
+							}
 							tmp->right = nw;
 							break;
 						}
@@ -274,6 +307,7 @@ namespace ft
 
 		private:
 		//private fonction to erase
+		//renvoi une pair qui contient le node a supprimé et un int qui permet de savoir de quel cote est il pour le node parent.
 		pair<node *, int>		find_the_object_to_erase(node	*tmp, const key_type& k)
 		{
 			int i = 0;
@@ -304,14 +338,30 @@ namespace ft
 			pair<node *, int> pr = find_the_object_to_erase(tmp, k);
 			i = pr._second;
 			tmp = pr._first;
-			if (i == 0)
-				return 0;
 			if (tmp->right == NULL && tmp->left == NULL)
 			{
 				if (i == 1)
 					tmp->parent->left = NULL;
 				else if (i == 2)
 					tmp->parent->right = NULL;
+			}
+			else if (tmp->right == this->_more_last)
+			{
+				if (tmp->parent)
+				{
+					tmp->parent->right = this->_more_last;
+					this->_more_last = tmp->parent;
+				}
+				else
+				{
+					node *bis = tmp->left;
+					this->_root = tmp->left;
+					tmp->left->parent = NULL;
+					while (bis->right)
+						bis = bis->right;
+					bis->right = this->_more_last;
+					this->_more_last->parent = bis;
+				}
 			}
 			else
 			{
@@ -323,14 +373,12 @@ namespace ft
 						tmp->left->parent = NULL;
 						tmp->parent = NULL;
 					}
-					else if (i == 1)
+					else
 					{
-						tmp->parent->left = tmp->left;
-						tmp->left->parent = tmp->parent;
-					}
-					else if (i == 2)
-					{
-						tmp->parent->right = tmp->left;
+						if (i == 1)
+							tmp->parent->left = tmp->left;
+						if (i == 2)
+							tmp->parent->right = tmp->left;
 						tmp->left->parent = tmp->parent;
 					}
 				}
@@ -342,14 +390,12 @@ namespace ft
 						tmp->right->parent = NULL;
 						tmp->parent = NULL;
 					}
-					else if (i == 1)
+					else
 					{
-						tmp->parent->left = tmp->right;
-						tmp->right->parent = tmp->parent;
-					}
-					else if (i == 2)
-					{
-						tmp->parent->right = tmp->right;
+						if (i == 1)
+							tmp->parent->left = tmp->right;
+						if (i == 2)
+							tmp->parent->right = tmp->right;
 						tmp->right->parent = tmp->parent;
 					}
 				}
@@ -365,35 +411,17 @@ namespace ft
 						bis->parent->right = bis->left;
 					}
 					if (i == 1)
-					{
 						tmp->parent->left = bis;
-						bis->left = tmp->left;
-						bis->right = tmp->right;
-						bis->parent->right = NULL;
-						bis->parent = tmp->parent;
-						bis->right->parent = bis;
-						bis->left->parent = bis;
-					}
 					else if (i == 2)
-					{
 						tmp->parent->right = bis;
-						bis->left = tmp->left;
-						bis->right = tmp->right;
-						bis->parent->right = NULL;
-						bis->parent = tmp->parent;
-						bis->right->parent = bis;
-						bis->left->parent = bis;
-					}
 					else if (i == 0)
-					{
 						this->_root = bis;
-						bis->left = tmp->left;
-						bis->right = tmp->right;
-						bis->parent->right = NULL;
-						bis->parent = tmp->parent;
-						bis->left->parent = bis;
-						bis->right->parent = bis;
-					}
+					bis->left = tmp->left;
+					bis->right = tmp->right;
+					bis->parent->right = NULL;
+					bis->parent = tmp->parent;
+					bis->right->parent = bis;
+					bis->left->parent = bis;
 				}
 			}
 			delete tmp;
@@ -428,6 +456,7 @@ namespace ft
 				}
 			}
 			this->_root = NULL;
+			this->_more_last->parent = NULL;
 		}
 
 	};

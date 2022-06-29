@@ -28,7 +28,9 @@ int main(void)
 	first.print();
 
 	sec.print();
+
 }
+
 
 // int 	main()
 // {

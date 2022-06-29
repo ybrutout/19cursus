@@ -37,8 +37,10 @@ namespace ft
 					tmp = bis;
 					bis = bis->parent;
 				}
+
 				tmp = bis;
 			}
+
 			return tmp;
 		}
 
