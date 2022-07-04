@@ -256,6 +256,7 @@ namespace ft
 				re_color(p);
 				if (g == this->_root)
 					re_color(g);
+
 			}
 
 			void	g_right_p_right(node *p, node *g)
@@ -287,6 +288,10 @@ namespace ft
 			}
 
 		public:
+		//Le probleme c'est que j'ai des réatcions en chaine et donc mon changement doit se faire dans un while et donc mon tmp ne soit pas chercher
+		//qu'est qui doit etre insérer mais il doit chercher ou est l'erreur.
+
+		//Voir si on peut juste faire 'implementation donne.
 			void	insert(value_type val)
 			{
 				node	*tmp;
