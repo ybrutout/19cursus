@@ -165,7 +165,7 @@ namespace ft
 				this->_root->color = true;
 			}
 
-			node	*where_is_the_insert(value_type val)
+			node	*where_is_the_value(value_type val)
 			{
 				node	*tmp = this->_root;
 				while (1)
@@ -249,14 +249,14 @@ namespace ft
 					x->color = true;
 			}
 
-			void	p_red_and_u_red(node *u, node *p, node *g)
+			node	*p_red_and_u_red(node *u, node *p, node *g)
 			{
 				re_color(u);
 				re_color(g);
 				re_color(p);
 				if (g == this->_root)
 					re_color(g);
-
+				return g;
 			}
 
 			void	g_right_p_right(node *p, node *g)
@@ -288,35 +288,32 @@ namespace ft
 			}
 
 		public:
-		//Le probleme c'est que j'ai des réatcions en chaine et donc mon changement doit se faire dans un while et donc mon tmp ne soit pas chercher
-		//qu'est qui doit etre insérer mais il doit chercher ou est l'erreur.
-
-		//Voir si on peut juste faire 'implementation donne.
 			void	insert(value_type val)
 			{
 				node	*tmp;
-				node	*p;
-				node	*g;
+				node	*p;//parent
+				node	*g;//grand-parent
+				//node	*u;//uncle
 				if (this->_size == 0)
 					return its_empty(val);
-				tmp = where_is_the_insert(val);
+				tmp = where_is_the_value(val);
 				if (!tmp)
 					return ;//gestion de quand on veut insérer une valeur qui existe déjà
-				p = tmp->parent;
-				if (p->color == false)
+				while (tmp->parent && tmp->parent->color == false)
 				{
+					p = tmp->parent;
 					g = p->parent;
 					if (g->right == p && g->left && g->left->color == false)
-						p_red_and_u_red(g->left, p, g);
+						tmp = p_red_and_u_red(g->left, p, g);
 					else if (g->left == p && g->right &&g->right->color == false)
-						p_red_and_u_red(g->right, p, g);
+						tmp = p_red_and_u_red(g->right, p, g);
 					else if (g->right == p)
 					{
 						if (p->right && p->right == tmp)
 							g_right_p_right(p, g);
 						else if (p->left && p->left == tmp)
 							g_right_p_left(p);
-
+						tmp = tmp->parent;
 					}
 					else if (g->left == p)
 					{
@@ -324,6 +321,128 @@ namespace ft
 							g_left_p_left(p);
 						else if (p->right && p->right == tmp)
 							g_left_p_right(p);
+						tmp = tmp->parent;
+					}
+				}
+			}
+
+		private:
+		node	*find_the_value(value_type val)
+		{
+			node	*tmp = this->_root;
+
+			std::cout << "val ==" << val.first <<std::endl;
+			while (tmp && tmp != this->_end && tmp->value.first != val.first)
+			{
+				if (this->_key_cmp(val.first, tmp->value.first))
+					tmp = tmp->left;
+				else
+					tmp = tmp->right;
+			}
+			return tmp;
+		}
+
+		node	*BST_delete(value_type val)
+		{
+			node	*tmp = this->_root;
+
+			tmp = find_the_value(val);
+			if (!tmp->left && (!tmp->right || tmp->right == this->_end))
+			{
+				if (tmp->parent->right == tmp)
+					tmp->parent->right = tmp->right;
+				else
+					tmp->parent->left = NULL;
+			}
+			else if ((!tmp->left && tmp->right) || (tmp->left && (!tmp->right || tmp->right == this->_end)))
+			{
+				if (!tmp->left)
+				{
+					if (tmp->parent->right == tmp)
+						tmp->parent->right = tmp->right;
+					else
+						tmp->parent->left = tmp->right;
+				}
+			}
+
+		}
+
+		public:
+			void	to_delete(value_type val)
+			{
+				node	*tmp;
+				node	*p;
+				node	*s;
+				if (this->_size == 0)
+					return ;
+				tmp = find_the_value(val);
+				if (!tmp || tmp == this->_end)
+					return ; //gestion si la valeur existe pas dans l'arbre
+				//bstdelete
+				while (tmp != this->_root && tmp->color == true)
+				{
+					p = tmp->parent;
+					if (p && tmp == p->left)
+					{
+						s = p->right;
+						if (s->color == false)
+						{
+							s->color = true;
+							p->color = false;
+							rotation_left(p, p->right, p->parent);
+							s = p->right;
+						}
+						if (s->left->color == true && s->right->color == true)
+						{
+							s->color = false;
+							tmp = tmp->parent;
+						}
+						else if (s->right->color == true)
+						{
+							s->left->color = true;
+							s->color = false;
+							rotation_right(s, s->parent, s->parent->parent);
+							s = tmp->parent->right;
+						}
+						else
+						{
+							s->color = tmp->parent->right;
+							p->color= true;
+							s->right->color = true;
+							rotation_left(p, p->right, p->parent);
+							tmp = this->_root;
+						}
+					}
+					else
+					{
+						s = p->left;
+						if (s->color == false)
+						{
+							s->color = true;
+							p->color = false;
+							rotation_left(p, p->left, p->parent);
+							s = p->left;
+						}
+						if (s->right->color == true && s->left->color == true)
+						{
+							s->color = false;
+							tmp = tmp->parent;
+						}
+						else if (s->left->color == true)
+						{
+							s->right->color = true;
+							s->color = false;
+							rotation_right(s, s->parent, s->parent->parent);
+							s = tmp->parent->left;
+						}
+						else
+						{
+							s->color = tmp->parent->left;
+							p->color= true;
+							s->left->color = true;
+							rotation_left(p, p->left, p->parent);
+							tmp = this->_root;
+						}
 					}
 				}
 			}
@@ -336,3 +455,4 @@ namespace ft
 };
 
 #endif
+
