@@ -8,13 +8,10 @@ int main(void)
 	for (int i = 0; i < 41; i++)
 	{
 		first.insert(ft::make_pair(i, i));
-		//first.print();
 	}
+	first.insert(ft::make_pair(41, 41));
 	first.print();
-	for (int i = 41; i > -1; i--)
-	{
-		first.to_delete(ft::make_pair(i, i));
-		first.print();
-	}
+	first.to_delete(ft::make_pair(37,37));
+	first.print();
 	return 0;
 }

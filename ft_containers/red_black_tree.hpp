@@ -4,6 +4,9 @@
 # include <iostream>
 # include "pair.hpp"
 
+# define RED false
+# define BLACK true
+
 namespace ft
 {
 	//Par définition j'ai mis la couleur du node à rouge dès le départ puisque à chaque insertion(sauf la première) le node est d'abord mis en rouge.
@@ -17,23 +20,23 @@ namespace ft
 			Node					*left;
 			Node					*right;
 			value_type				value;
-			bool					color;//true == noir et false == rouge
+			bool					color;//true == noir et RED == rouge
 
 			/*Default constructor, Construct an empty node*/
-			Node() : parent(NULL), left(NULL), right(NULL), color(false)
+			Node() : parent(NULL), left(NULL), right(NULL), color(RED)
 			{}
 
 			/*Construct a node which has a parent and a value, but no child.*/
 			//pas sure que ce soit utile, a voir
-			Node(Node *parent, value_type val) : parent(parent), left(NULL), right(NULL), value(val), color(false)
+			Node(Node *parent, value_type val) : parent(parent), left(NULL), right(NULL), value(val), color(RED)
 			{}
 
 			/*Construct a top of the tree node.*/
-			Node(value_type val) : parent(NULL), left(NULL), right(NULL), value(val), color(false)
+			Node(value_type val) : parent(NULL), left(NULL), right(NULL), value(val), color(RED)
 			{}
 
 			//pas sure que ce soit utile a voir
-			Node(key first, T second) : parent(NULL), left(NULL), right(NULL), color(false)
+			Node(key first, T second) : parent(NULL), left(NULL), right(NULL), color(RED)
 			{
 				this->value._first = first;
 				this->value._second = second;
@@ -68,8 +71,8 @@ namespace ft
 				std::cout << "\033[31m" << node->value.first << "\033[0m" << std::endl;
 
 			// enter the next tree level - left and right branch
-			printRBTRec(prefix + (isLeft ? "│   " : "    "), node->right, true);
-			printRBTRec(prefix + (isLeft ? "│   " : "    "), node->left, false);
+			printRBTRec(prefix + (isLeft ? "│   " : "    "), node->right, BLACK);
+			printRBTRec(prefix + (isLeft ? "│   " : "    "), node->left, RED);
 		}
 		else
 		{
@@ -108,20 +111,16 @@ namespace ft
 			size_t				_size;
 			node				*_root;
 
-		private:
-			node		*just_the_end()
-			{
-				node *tmp = new node;
-				return tmp;
-			}
-
 		public:
 			/*Default constructor*/
 			RBTree(const key_compare& comp = key_compare(),const allocator_type& alloc = allocator_type())
 			: _alloc(alloc), _key_cmp(comp), _size(0), _root(NULL)
 			{
-				_end = just_the_end();
-				_end->color = true;
+				_end = new node;
+				_end->color = BLACK;
+				_end->left = NULL;
+				_end->right = NULL;
+				_end->parent = NULL;
 			}
 
 			//Copie Constructor
@@ -137,7 +136,7 @@ namespace ft
 				{
 					if (tmp->right && tmp->right != this->_end)
 						tmp = tmp->right;
-					else if (tmp->left)
+					else if (tmp->left && tmp->left != this->_end)
 						tmp = tmp->left;
 					else
 					{
@@ -162,7 +161,8 @@ namespace ft
 				this->_root = new node(val);
 				this->_size++;
 				this->_root->right = this->_end;
-				this->_root->color = true;
+				this->_root->left = this->_end;
+				this->_root->color = BLACK;
 			}
 
 			node	*where_is_the_value(value_type val)
@@ -173,12 +173,14 @@ namespace ft
 					//Si la clé est plus petite que lq clé de tmp
 					if (this->_key_cmp(val.first, tmp->value.first))
 					{
-						if (tmp->left)
+						if (tmp->left && tmp->left != this->_end)
 							tmp = tmp->left;
 						else
 						{
 							node	*nw = new node(val);
 							tmp->left = nw;
+							nw->right = this->_end;
+							nw->left = this->_end;
 							nw->parent = tmp;
 							tmp = tmp->left; // a chaque fois que je break il faut que tmp soit égal à la dernière node inséré.Z
 							break;
@@ -194,12 +196,9 @@ namespace ft
 						else
 						{
 							node *nw = new node(val);
-							if (tmp->right)
-							{
-								nw->right = this->_end;
-								this->_end->parent = nw;
-							}
 							tmp->right = nw;
+							nw->right = _end;
+							nw->left = _end;
 							nw->parent = tmp;
 							tmp = tmp->right;
 							break;
@@ -243,10 +242,10 @@ namespace ft
 
 			void	re_color(node *x)
 			{
-				if (x->color == true)
-					x->color = false;
+				if (x->color == BLACK)
+					x->color = RED;
 				else
-					x->color = true;
+					x->color = BLACK;
 			}
 
 			node	*p_red_and_u_red(node *u, node *p, node *g)
@@ -299,13 +298,13 @@ namespace ft
 				tmp = where_is_the_value(val);
 				if (!tmp)
 					return ;//gestion de quand on veut insérer une valeur qui existe déjà
-				while (tmp->parent && tmp->parent->color == false)
+				while (tmp->parent && tmp->parent->color == RED)
 				{
 					p = tmp->parent;
 					g = p->parent;
-					if (g->right == p && g->left && g->left->color == false)
+					if (g->right == p && g->left && g->left->color == RED)
 						tmp = p_red_and_u_red(g->left, p, g);
-					else if (g->left == p && g->right &&g->right->color == false)
+					else if (g->left == p && g->right &&g->right->color == RED)
 						tmp = p_red_and_u_red(g->right, p, g);
 					else if (g->right == p)
 					{
@@ -331,8 +330,7 @@ namespace ft
 		{
 			node	*tmp = this->_root;
 
-			std::cout << "val ==" << val.first <<std::endl;
-			while (tmp && tmp != this->_end && tmp->value.first != val.first)
+			while (tmp != this->_end && tmp->value.first != val.first)
 			{
 				if (this->_key_cmp(val.first, tmp->value.first))
 					tmp = tmp->left;
@@ -342,113 +340,156 @@ namespace ft
 			return tmp;
 		}
 
-		node	*BST_delete(value_type val)
+		void	replace_node(node *to_replace, node *replacor)
 		{
-			node	*tmp = this->_root;
-
-			tmp = find_the_value(val);
-			if (!tmp->left && (!tmp->right || tmp->right == this->_end))
+			if(!to_replace->parent)
+				this->_root = replacor;
+			else if(to_replace->parent->right == to_replace)
+				to_replace->parent->right = replacor;
+			else if (to_replace->parent->left == to_replace)
 			{
-				if (tmp->parent->right == tmp)
-					tmp->parent->right = tmp->right;
-				else
-					tmp->parent->left = NULL;
+				to_replace->parent->left = replacor;
 			}
-			else if ((!tmp->left && tmp->right) || (tmp->left && (!tmp->right || tmp->right == this->_end)))
+			replacor->parent = to_replace->parent;
+		}
+
+		node	*BSTMinval(node *tmp)
+		{
+			while (tmp->left != this->_end)
+				tmp = tmp->left;
+			return tmp;
+		}
+
+		node	*BST_delete(node *tmp)
+		{
+			bool	todelete_color = tmp->color;
+			node	*x;
+			node	*y;
+			node	*todelete = tmp;
+
+			if (todelete->left == this->_end)
 			{
-				if (!tmp->left)
+				x = todelete->right;
+				replace_node(todelete, todelete->right);
+			}
+			else if (todelete->right == this->_end)
+			{
+				x = todelete->left;
+				replace_node(todelete, todelete->left);
+			}
+			else
+			{
+				y = BSTMinval(todelete->right);
+				todelete_color = y->color;
+				x = y->right;
+				if (y->parent && y->parent == todelete)
+					x->parent = y;
+				else
 				{
-					if (tmp->parent->right == tmp)
-						tmp->parent->right = tmp->right;
+					replace_node(y, y->right);
+					y->right = todelete->right;
+					y->right->parent = y;
+				}
+				replace_node(todelete, y);
+				y->left = todelete->left;
+				y->left->parent = y;
+				y->color = todelete->color;
+			}
+			delete todelete;
+			if (todelete_color == BLACK)
+				return x;
+			return NULL;
+		}
+
+		node	*rebalanced_delete(node *tmp)
+		{
+			node	*x = tmp;
+			node	*s;
+			while (x != this->_root && x->color == BLACK)
+			{
+				if (x == x->parent->left)
+				{
+					s = x->parent->right;
+					if (s->color == RED)
+					{
+						re_color(s);
+						x->parent->color = RED;
+						rotation_left(x->parent, x->parent->right, x->parent->parent);
+						s = x->parent->right;
+					}
+					if (s->left->color == BLACK && s->right->color == BLACK)
+					{
+						s->color = RED;
+						x = x->parent;
+					}
 					else
-						tmp->parent->left = tmp->right;
+					{
+						if (s->right->color == BLACK)
+						{
+							s->left->color = BLACK;
+							s->color = RED;
+							rotation_right(s, s->parent, s->parent->parent);
+							s = x->parent->right;
+						}
+						s->right->color = BLACK;
+						s->color = x->parent->color;
+						x->parent->color = BLACK;
+						rotation_left(x->parent, x->parent->right, x->parent->parent);
+						x = this->_root;
+					}
+				}
+				else
+				{
+					s = x->parent->left;
+					if (s->color == RED)
+					{
+						re_color(s);
+						x->parent->color = RED;
+						rotation_right(x->parent, x->parent->left, x->parent->parent);
+						s = x->parent->left;
+					}
+					if (s->right->color == BLACK && s->left->color == BLACK)
+					{
+						s->color = RED;
+						x = x->parent;
+					}
+					else
+					{
+						if (s->left->color == BLACK)
+						{
+							s->right->color = BLACK;
+							s->color = RED;
+							rotation_left(s, s->parent, s->parent->parent);
+							s = x->parent->left;
+						}
+						s->left->color = BLACK;
+						s->color = x->parent->color;
+						x->parent->color = BLACK;
+						rotation_right(x->parent, x->parent->left, x->parent->parent);
+						x = this->_root;
+					}
 				}
 			}
-
+			x->color = BLACK;
+			return x;
 		}
 
 		public:
 			void	to_delete(value_type val)
 			{
 				node	*tmp;
-				node	*p;
-				node	*s;
-				if (this->_size == 0)
-					return ;
+				node	*bis;
+
 				tmp = find_the_value(val);
-				if (!tmp || tmp == this->_end)
-					return ; //gestion si la valeur existe pas dans l'arbre
-				//bstdelete
-				while (tmp != this->_root && tmp->color == true)
-				{
-					p = tmp->parent;
-					if (p && tmp == p->left)
-					{
-						s = p->right;
-						if (s->color == false)
-						{
-							s->color = true;
-							p->color = false;
-							rotation_left(p, p->right, p->parent);
-							s = p->right;
-						}
-						if (s->left->color == true && s->right->color == true)
-						{
-							s->color = false;
-							tmp = tmp->parent;
-						}
-						else if (s->right->color == true)
-						{
-							s->left->color = true;
-							s->color = false;
-							rotation_right(s, s->parent, s->parent->parent);
-							s = tmp->parent->right;
-						}
-						else
-						{
-							s->color = tmp->parent->right;
-							p->color= true;
-							s->right->color = true;
-							rotation_left(p, p->right, p->parent);
-							tmp = this->_root;
-						}
-					}
-					else
-					{
-						s = p->left;
-						if (s->color == false)
-						{
-							s->color = true;
-							p->color = false;
-							rotation_left(p, p->left, p->parent);
-							s = p->left;
-						}
-						if (s->right->color == true && s->left->color == true)
-						{
-							s->color = false;
-							tmp = tmp->parent;
-						}
-						else if (s->left->color == true)
-						{
-							s->right->color = true;
-							s->color = false;
-							rotation_right(s, s->parent, s->parent->parent);
-							s = tmp->parent->left;
-						}
-						else
-						{
-							s->color = tmp->parent->left;
-							p->color= true;
-							s->left->color = true;
-							rotation_left(p, p->left, p->parent);
-							tmp = this->_root;
-						}
-					}
-				}
+				if (tmp == this->_end)
+					return ;//gestion de quand l'object n'existe pas dans l'arbre
+				bis = BST_delete(tmp);
+				if (bis)
+					bis = rebalanced_delete(bis);
 			}
 
 			//fonction pour imprimé.
-			void print(void) { printRBTRec("", this->_root, false); };
+			void print(void) { printRBTRec("", this->_root, RED); };
 
 
 	};
