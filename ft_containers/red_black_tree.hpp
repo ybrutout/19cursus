@@ -54,7 +54,7 @@ namespace ft
 			}
 	};
 
-	//fondtion pour afficher donc à enlever
+	//fonction pour afficher donc à enlever
 	template <class key, class T>
 	void printRBTRec(const std::string &prefix, const Node<key, T> *node, bool isLeft)
 	{
@@ -485,7 +485,10 @@ namespace ft
 					return ;//gestion de quand l'object n'existe pas dans l'arbre
 				bis = BST_delete(tmp);
 				if (bis)
+				{
+					std::cout << "bis == " << bis->value.first << std::endl;
 					bis = rebalanced_delete(bis);
+				}
 			}
 
 			//fonction pour imprimé.
