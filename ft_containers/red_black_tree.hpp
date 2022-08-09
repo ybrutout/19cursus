@@ -170,7 +170,7 @@ namespace ft
 				node	*tmp = this->_root;
 				while (1)
 				{
-					//Si la clé est plus petite que lq clé de tmp
+					//Si la clé est plus petite que la clé de tmp
 					if (this->_key_cmp(val.first, tmp->value.first))
 					{
 						if (tmp->left && tmp->left != this->_end)
@@ -347,9 +347,7 @@ namespace ft
 			else if(to_replace->parent->right == to_replace)
 				to_replace->parent->right = replacor;
 			else if (to_replace->parent->left == to_replace)
-			{
 				to_replace->parent->left = replacor;
-			}
 			replacor->parent = to_replace->parent;
 		}
 
@@ -445,9 +443,10 @@ namespace ft
 					{
 						re_color(s);
 						x->parent->color = RED;
-						rotation_right(x->parent, x->parent->left, x->parent->parent);
+						rotation_right(x->parent->left, x->parent, x->parent->parent);
 						s = x->parent->left;
 					}
+
 					if (s->right->color == BLACK && s->left->color == BLACK)
 					{
 						s->color = RED;
