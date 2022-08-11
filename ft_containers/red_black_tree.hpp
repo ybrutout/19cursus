@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include "pair.hpp"
+# include "tree_iterator.hpp"
 
 # define RED false
 # define BLACK true
@@ -16,6 +17,7 @@ namespace ft
 		public:
 			typedef		ft::pair<key, T>		value_type;
 
+			Node					*end;
 			Node					*parent;
 			Node					*left;
 			Node					*right;
@@ -23,7 +25,7 @@ namespace ft
 			bool					color;//true == noir et RED == rouge
 
 			/*Default constructor, Construct an empty node*/
-			Node() : parent(NULL), left(NULL), right(NULL), color(RED)
+			Node() : end(NULL), parent(NULL), left(NULL), right(NULL), color(RED)
 			{}
 
 			/*Construct a node which has a parent and a value, but no child.*/
@@ -49,8 +51,16 @@ namespace ft
 				this->parent = rhs.parent;
 				this->left = rhs.left;
 				this->right = rhs.right;
-				this->key = rhs.key;
+				this->value = rhs.value;
 				this->color = rhs->color;
+				this->end = rhs->end;
+			}
+
+			bool	is_leaf()
+			{
+				if (this->right == NULL && this->left == NULL)
+					return 1;
+				return 0;
 			}
 	};
 
@@ -86,22 +96,22 @@ namespace ft
 	class RBTree
 	{
 		public:
-			typedef				key									key_type;
-			typedef				T									mapped_type;
-			typedef				pair<key_type, mapped_type>			value_type;
-			typedef				Compare								key_compare;
-			typedef				Alloc								allocator_type;
-			typedef	typename	allocator_type::reference			reference;
-			typedef typename	allocator_type::const_reference		const_reference;
-			typedef typename	allocator_type::pointer				pointer;
+			typedef				key													key_type;
+			typedef				T													mapped_type;
+			typedef				pair<key_type, mapped_type>							value_type;
+			typedef				Compare												key_compare;
+			typedef				Alloc												allocator_type;
+			typedef	typename	allocator_type::reference							reference;
+			typedef typename	allocator_type::const_reference						const_reference;
+			typedef typename	allocator_type::pointer								pointer;
 			typedef typename	allocator_type::const_pointer						const_pointer;
-			//typedef typename	ft::tree_iterator<Node<key_type, mapped_type> >		iterator;
+			typedef typename	ft::tree_iterator<Node<key_type, mapped_type> >		iterator;
 			//const_iterator
 			//reverse_iterator
 			//const_reverse_iterator
-			typedef				ptrdiff_t							difference_type;
-			typedef				size_t								size_type;
-			typedef				Node<key, T>						node;
+			typedef				ptrdiff_t											difference_type;
+			typedef				size_t												size_type;
+			typedef				Node<key, T>										node;
 
 		protected:
 
@@ -121,9 +131,23 @@ namespace ft
 				_end->left = NULL;
 				_end->right = NULL;
 				_end->parent = NULL;
+				_end->end = this->_end;
 			}
 
-			//Copie Constructor
+			/*TO DO : Copie Constructor*/
+			RBTree(RBTree const &cpy) : _alloc(cpy._alloc), _key_cmp(cpy._key_cmp), _size(0)
+			{
+				iterator	it(cpy.RBTMinVal());
+
+				while (!it._node->is_leaf())
+				{
+					
+					insert(it._node->value);
+					it++;
+				}
+			}
+
+
 
 			//Constructeur de range (pas sure d'en avoir besoin directement dans le redblack tree)
 
@@ -163,11 +187,14 @@ namespace ft
 				this->_root->right = this->_end;
 				this->_root->left = this->_end;
 				this->_root->color = BLACK;
+				this->_root->end = this->_end;
 			}
 
-			node	*where_is_the_value(value_type val)
+			pair<iterator, bool>	where_is_the_value(value_type val)
 			{
 				node	*tmp = this->_root;
+				pair<iterator, bool>	ret;
+
 				while (1)
 				{
 					//Si la clé est plus petite que la clé de tmp
@@ -177,12 +204,14 @@ namespace ft
 							tmp = tmp->left;
 						else
 						{
-							node	*nw = new node(val);
+							node *nw = new node(val);
 							tmp->left = nw;
-							nw->right = this->_end;
-							nw->left = this->_end;
+							nw->right = _end;
+							nw->left = _end;
 							nw->parent = tmp;
+							nw->end = _end;
 							tmp = tmp->left; // a chaque fois que je break il faut que tmp soit égal à la dernière node inséré.Z
+							this->_size++;
 							break;
 						}
 					}
@@ -190,7 +219,11 @@ namespace ft
 					{
 						//faire la gestion de si on veut insérer une valeur qui existe déjà.
 						if (!this->_key_cmp(tmp->value.first, val.first))
-							return NULL;
+						{
+							ret.first = tmp;
+							ret.second = false;
+							return ret;
+						}
 						if (tmp->right && tmp->right != this->_end)
 							tmp = tmp->right;
 						else
@@ -200,12 +233,16 @@ namespace ft
 							nw->right = _end;
 							nw->left = _end;
 							nw->parent = tmp;
+							nw->end = _end;
 							tmp = tmp->right;
+							this->_size++;
 							break;
 						}
 					}
 				}
-				return tmp;
+				ret.first = tmp;
+				ret.second = true;
+				return ret;
 			}
 
 			void	rotation_left(node *x, node *y, node *p) // on reçoit celui qui va descendre(x) celui qui va monter(y) et le parent de base.
@@ -287,17 +324,26 @@ namespace ft
 			}
 
 		public:
-			void	insert(value_type val)
+			ft::pair<iterator, bool>	insert(value_type val)
 			{
-				node	*tmp;
-				node	*p;//parent
-				node	*g;//grand-parent
-				//node	*u;//uncle
+				ft::pair<iterator, bool>	ret;
+				node		*tmp;
+				node		*p;//parent
+				node		*g;//grand-parent
+
 				if (this->_size == 0)
-					return its_empty(val);
-				tmp = where_is_the_value(val);
-				if (!tmp)
-					return ;//gestion de quand on veut insérer une valeur qui existe déjà
+				{
+					its_empty(val);
+					ret.first = this->_root;
+					ret.second = true;
+					return ret;
+				}
+				ret = where_is_the_value(val);
+				if (!ret.second)
+				{
+					return ret;//gestion de quand on veut insérer une valeur qui existe déjà
+				}
+				tmp = ret.first._node;
 				while (tmp->parent && tmp->parent->color == RED)
 				{
 					p = tmp->parent;
@@ -323,16 +369,17 @@ namespace ft
 						tmp = tmp->parent;
 					}
 				}
+				return ret;
 			}
 
 		private:
-		node	*find_the_value(value_type val)
+		node	*find_the_value(key_type val)
 		{
 			node	*tmp = this->_root;
 
-			while (tmp != this->_end && tmp->value.first != val.first)
+			while (tmp != this->_end && tmp->value.first != val)
 			{
-				if (this->_key_cmp(val.first, tmp->value.first))
+				if (this->_key_cmp(val, tmp->value.first))
 					tmp = tmp->left;
 				else
 					tmp = tmp->right;
@@ -351,7 +398,7 @@ namespace ft
 			replacor->parent = to_replace->parent;
 		}
 
-		node	*BSTMinval(node *tmp)
+		node	*FindMinval(node *tmp)
 		{
 			while (tmp->left != this->_end)
 				tmp = tmp->left;
@@ -377,7 +424,7 @@ namespace ft
 			}
 			else
 			{
-				y = BSTMinval(todelete->right);
+				y = FindMinval(todelete->right);
 				todelete_color = y->color;
 				x = y->right;
 				if (y->parent && y->parent == todelete)
@@ -394,6 +441,7 @@ namespace ft
 				y->color = todelete->color;
 			}
 			delete todelete;
+			this->_size--;
 			if (todelete_color == BLACK)
 				return x;
 			return NULL;
@@ -474,28 +522,72 @@ namespace ft
 		}
 
 		public:
-			void	to_delete(value_type val)
+			size_type	to_delete(key_type val)
 			{
 				node	*tmp;
 				node	*bis;
 
 				tmp = find_the_value(val);
 				if (tmp == this->_end)
-					return ;//gestion de quand l'object n'existe pas dans l'arbre
+					return 0;//gestion de quand l'object n'existe pas dans l'arbre
 				bis = BST_delete(tmp);
 				if (bis)
-				{
-					std::cout << "bis == " << bis->value.first << std::endl;
 					bis = rebalanced_delete(bis);
-				}
+				return 1;
+			}
+
+			node	*RBTMinVal() const
+			{
+				node *tmp = this->_root;
+
+				while (tmp->left != this->_end)
+					tmp = tmp->left;
+				return tmp;
+			}
+
+			node	*RBTMaxVal()
+			{
+				node *tmp = this->_root;
+
+				while (tmp->right != this->_end)
+					tmp = tmp->right;
+				return tmp;
 			}
 
 			//fonction pour imprimé.
 			void print(void) { printRBTRec("", this->_root, RED); };
 
+			//a enlever
+			size_type	get_size()
+			{
+				return this->_size;
+			}
+
+			void	swap(RBTree rhs)
+			{
+				std::swap(this->_end, rhs._end);
+				std::swap(this->_root, rhs._root);
+				std::swap(this->_alloc, rhs._alloc);
+				std::swap(this->_key_cmp, rhs._key_cmp);
+				std::swap(this->_size, rhs._size);
+			}
+
+			// node				*_end;
+			// allocator_type		_alloc;
+			// key_compare			_key_cmp;
+			// size_t				_size;
+			// node				*_root;
 
 	};
+
+	template < class T>
+	struct less : public std::binary_function <T,T,bool>
+	{
+		bool operator()(const T& x, const T& y) const { return x < y; }
+	};
 };
+
+
 
 #endif
 

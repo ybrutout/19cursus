@@ -6,8 +6,6 @@
 
 namespace ft
 {
-
-
 	template <typename T>
 	class tree_iterator : public ft::iterator<ft::bidirectional_iterator_tag, T>
 	{
@@ -22,49 +20,50 @@ namespace ft
 
 		pointer	incremente()
 		{
-			pointer	tmp = this->_node;
-			if (tmp->right)
+			pointer tmp = this->_node;
+			pointer	bis = tmp->parent;
+
+			if (tmp->is_leaf())
+				return tmp;
+			if (tmp->right && !tmp->right->is_leaf())
 			{
 				tmp = tmp->right;
-				while (tmp->left)
+				while (tmp->left && !tmp->left->is_leaf())
 					tmp = tmp->left;
+				return tmp;
 			}
-			else if (tmp->parent)
+			while (bis && tmp == bis->right)
 			{
-				pointer	bis = tmp->parent;
-				while (tmp == bis->right)
-				{
-					tmp = bis;
-					bis = bis->parent;
-				}
-
 				tmp = bis;
+				bis = bis->parent;
 			}
-
-			return tmp;
+			if (bis && tmp == bis->left)
+				return bis;
+			return _node->end;
 		}
 
 		pointer	decrement()
 		{
-			pointer	tmp = this->_node;
+			pointer tmp = _node;
+			pointer bis = tmp->parent;
 
-			if (tmp->left)
+			if (tmp->is_leaf())
+				return tmp;
+			if (tmp->left && !tmp->left->is_leaf())
 			{
 				tmp = tmp->left;
-				while (tmp->right)
+				while (tmp->right && !tmp->right->is_leaf())
 					tmp = tmp->right;
+				return tmp;
 			}
-			else if (tmp->parent)
+			while(bis && tmp == bis->left)
 			{
-				pointer bis = tmp->parent;
-				while(tmp == bis->left)
-				{
-					tmp = bis;
-					bis = bis->parent;
-				}
 				tmp = bis;
+				bis = bis->parent;
 			}
-			return tmp;
+			if (bis && tmp == bis->right)
+				return bis;
+			return _node->end;
 		}
 
 		public:
