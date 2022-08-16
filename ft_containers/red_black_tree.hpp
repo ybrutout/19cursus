@@ -121,10 +121,9 @@ namespace ft
 			size_t				_size;
 			node				*_root;
 
-		public:
-			/*Default constructor*/
-			RBTree(const key_compare& comp = key_compare(),const allocator_type& alloc = allocator_type())
-			: _alloc(alloc), _key_cmp(comp), _size(0), _root(NULL)
+		private:
+			/*Créer le noeud NULL*/
+			void	this_is_end()
 			{
 				_end = new node;
 				_end->color = BLACK;
@@ -134,20 +133,26 @@ namespace ft
 				_end->end = this->_end;
 			}
 
+		public:
+			/*Default constructor*/
+			RBTree(const key_compare& comp = key_compare(),const allocator_type& alloc = allocator_type())
+			: _alloc(alloc), _key_cmp(comp), _size(0), _root(NULL)
+			{
+				this_is_end();
+			}
+
 			/*TO DO : Copie Constructor*/
-			RBTree(RBTree const &cpy) : _alloc(cpy._alloc), _key_cmp(cpy._key_cmp), _size(0)
+			RBTree(RBTree const &cpy) : _alloc(cpy._alloc), _key_cmp(cpy._key_cmp), _size(0), _root(NULL)
 			{
 				iterator	it(cpy.RBTMinVal());
 
+				this_is_end();
 				while (!it._node->is_leaf())
 				{
-					
 					insert(it._node->value);
 					it++;
 				}
 			}
-
-
 
 			//Constructeur de range (pas sure d'en avoir besoin directement dans le redblack tree)
 

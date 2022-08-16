@@ -38,12 +38,12 @@ int		main(void)
 	it = tree.RBTMaxVal();
 	for (size_t i = 22; i > 0; i--)
 	{
-		std::cout << "IT->" << i << " == " << (*it).value.first << std::endl;
+		// std::cout << "IT->" << i << " == " << (*it).value.first << std::endl;
 		it--;
 	}
-	tree.print();
+	// tree.print();
 	ft::RBTree<int, int>							second_tree(tree);
-	second_tree.print();
+	//second_tree.print();
 
 		// ret = tree.insert(ft::make_pair(5, 5));
 		// std::cout << "Ret_first == " << (ret.first)._node->value.first << " | Ret_second == " << ret.second << std::endl;
