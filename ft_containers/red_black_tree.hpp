@@ -563,25 +563,36 @@ namespace ft
 			void print(void) { printRBTRec("", this->_root, RED); };
 
 			//a enlever
-			size_type	get_size()
+			size_type	get_size() const
 			{
 				return this->_size;
 			}
 
-			void	swap(RBTree rhs)
+			allocator_type	get_alloc() const
 			{
-				std::swap(this->_end, rhs._end);
-				std::swap(this->_root, rhs._root);
-				std::swap(this->_alloc, rhs._alloc);
-				std::swap(this->_key_cmp, rhs._key_cmp);
-				std::swap(this->_size, rhs._size);
+				return this->_alloc;
 			}
 
-			// node				*_end;
-			// allocator_type		_alloc;
-			// key_compare			_key_cmp;
-			// size_t				_size;
-			// node				*_root;
+			void	swap(RBTree *rhs)
+			{
+				node	*tmp_end = this->_end;
+				node	*tmp_root = this->_root;
+				allocator_type	tmp_alloc = this->_alloc;
+				key_compare		tmp_compare = this->_key_cmp;
+				size_t			tmp_size = this->_size;
+
+				this->_end = rhs->_end;
+				this->_root = rhs->_root;
+				this->_alloc = rhs->_alloc;
+				this->_key_cmp = rhs->_key_cmp;
+				this->_size = rhs->_size;
+
+				rhs->_end = tmp_end;
+				rhs->_root = tmp_root;
+				rhs->_alloc = tmp_alloc;
+				rhs->_key_cmp = tmp_compare;
+				rhs->_size = tmp_size;
+			}
 
 	};
 

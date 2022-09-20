@@ -40,10 +40,10 @@ namespace ft
 		public:
 		///TO DO
 		/// A enlever
-		tree_type	get_tree()
+		tree_type	*get_tree()
 		{
 			// tree_type tmp(_tree); Faire un constructeur par de2faut si je veux une réelle copie.
-			return _tree;
+			return &_tree;
 		}
 		/*----------------------------------------Canonical Form-----------------------------------------------------*/
 		/*Default constructor*/
@@ -52,21 +52,13 @@ namespace ft
 
 		/*Range constructor*/
 		//TO DO : The insertion first before the range
-		// template <class InputIterator>
-		// map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
-		// : _tree(comp, alloc)
-		// {
-		// 	while (first != last)
-		// 	{
-		// 		this->_tree.insert(*first);
-		// 		first++;
-		// 	}
-		// }
+		template <class InputIterator>
+		map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+		: _tree(comp, alloc)
+		{ }
 
-		// /*Copy constructor*/
-		// TO DO : Insertion
-		// map (const map& x) : _tree(x._tree)
-		// {}
+		map (const map& x) : _tree(x._tree)
+		{}
 
 		/*Deconstructor*/
 		~map()
@@ -87,22 +79,24 @@ namespace ft
 		//TO DO
 		//const_iterator begin() const;
 
+
+
 		/*-----------------------------------------------------------------------------------------------------------*/
 
 		/*-------------------------------------------Modifiers-------------------------------------------------------*/
-		pair<iterator,bool> insert(const value_type& val)
+		pair<iterator,bool>	insert(const value_type& val)
 		{
 			return _tree.insert(val);
 		}
 
-		iterator insert(iterator position, const value_type& val)
+		iterator	insert(iterator position, const value_type& val)
 		{
 			(void)position;
 			return _tree.insert(val).first;
 		}
 
 		template <class InputIterator>
-		void insert (InputIterator first, InputIterator last)
+		void	insert (InputIterator first, InputIterator last)
 		{
 			while (first != last)
 			{
@@ -112,18 +106,24 @@ namespace ft
 		}
 
 		//Je sais pas si ca va car je supprime un element qui a la meme clé que l'iterateur qu'on m'a envoye mais si c'est un autre ...
-		void erase (iterator position)
+		void	erase (iterator position)
 		{
+			std::cout << "Val == " << (*position).value.first << std::endl;
 			_tree.to_delete((*position).value.first);
 		}
 
-		size_type erase (const key_type& k)
+		//erase fonctionne pas je sais pas pourquoi
+		// 	second.get_tree()->print();
+		// for (size_t i = 0; i < 15; i++)
+		// 	second.erase(i);
+		// second.get_tree()->print();
+		size_type	erase (const key_type& k)
 		{
 			return _tree.to_delete(k);
 		}
 
-		//meme probleme qu'avec el erase iterator
-		void erase (iterator first, iterator last)
+		//meme probleme qu'avec le erase iterator
+		void	erase (iterator first, iterator last)
 		{
 			iterator tmp;
 
@@ -135,10 +135,45 @@ namespace ft
 			}
 		}
 
-		void swap (map& x)
+		void	swap (map& x)
 		{
-			_tree.swap(x._tree);
+			_tree.swap(&x._tree);
 		}
+
+		// TO DO later quand les iterateur seront fait et surtout que je pourrais les supprimer un a un
+		void	clear()
+		{
+
+		}
+
+		/*-----------------------------------------------------------------------------------------------------------*/
+		/*-------------------------------------------Capacity--------------------------------------------------------*/
+
+		bool empty() const
+		{
+			if (_tree.get_size() > 0)
+				return false;
+			return true;
+		}
+
+		size_type size() const
+		{
+			return _tree.get_size();
+		}
+
+		size_type max_size() const
+		{
+			return _tree.get_alloc().max_size();
+		}
+		/*-----------------------------------------------------------------------------------------------------------*/
+		/*-------------------------------------------Allocator-------------------------------------------------------*/
+
+		allocator_type get_allocator() const
+		{
+			allocator_type	tmp(_tree.get_alloc());
+			return tmp;
+		}
+
 		/*-----------------------------------------------------------------------------------------------------------*/
 	};
 };
