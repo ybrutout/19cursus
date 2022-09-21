@@ -12,11 +12,22 @@ namespace ft
 	class map
 	{
 		public:
+		//Je comprends le principe, je comprends pas encore l'utilité
+		class	value_compare : std::binary_function<pair<const Key, T>, pair<const Key, T>, bool>
+		{
+			friend class map<Key, T, Compare, Alloc>;
+			protected:
+				Compare _comp;
+				value_compare(Compare c) : _comp(c) {return ;}
+
+			public:
+				bool operator()(const pair<const Key, T>& x, const pair<const Key, T>& y) const { return _comp(x.first, y.first); }
+		};
+
 		typedef				Key									key_type;
 		typedef				T									mapped_type;
 		typedef				ft::pair<key_type, mapped_type>		value_type;
 		typedef				Compare								key_compare;
-		//key_compare class je sais pas quoi ... j'ai pas compris
 		typedef				Alloc								allocator_type;
 		typedef typename	allocator_type::reference			reference;
 		typedef typename	allocator_type::const_reference		const_reference;
@@ -47,15 +58,21 @@ namespace ft
 		}
 		/*----------------------------------------Canonical Form-----------------------------------------------------*/
 		/*Default constructor*/
-		explicit map (const key_compare& comp = key_compare(),const allocator_type& alloc = allocator_type()) : _tree(comp, alloc)
+		explicit map (const key_compare& comp = key_compare(),const allocator_type& alloc = allocator_type())
+		: _tree(comp, alloc)
 		{}
 
 		/*Range constructor*/
-		//TO DO : The insertion first before the range
 		template <class InputIterator>
 		map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
 		: _tree(comp, alloc)
-		{ }
+		{
+			while (first != last)
+			{
+				insert((*first).value);
+				first++;
+			}
+		}
 
 		map (const map& x) : _tree(x._tree)
 		{}
@@ -64,8 +81,11 @@ namespace ft
 		~map()
 		{}
 
+		//A faire plus tard car besoin du clean et pour le clean besoin des iterateurs
 		// map& operator= (const map& x)
-		// {}
+		// {
+
+		// }
 		/*-----------------------------------------------------------------------------------------------------------*/
 
 		/*-------------------------------------------Iterators-------------------------------------------------------*/
@@ -78,6 +98,12 @@ namespace ft
 
 		//TO DO
 		//const_iterator begin() const;
+
+		iterator	end()
+		{
+			iterator	it(_tree.get_the_end());
+			return it;
+		}
 
 
 

@@ -568,6 +568,11 @@ namespace ft
 				return this->_size;
 			}
 
+			node	*get_the_end() const
+			{
+				return this->_end;
+			}
+
 			allocator_type	get_alloc() const
 			{
 				return this->_alloc;
