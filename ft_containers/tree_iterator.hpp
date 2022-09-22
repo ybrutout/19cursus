@@ -13,6 +13,7 @@ namespace ft
 		typedef				T					node;
 		typedef				node*				pointer;
 		typedef				node&				reference;
+		typedef				tree_iterator<T>	himself;
 
 		pointer	_node;
 
@@ -89,8 +90,6 @@ namespace ft
 			this->_node = rhs._node;
 			return *this;
 		}
-
-		operator tree_iterator<const T>() const { return this->_node; }
 		/*-----------------------------------------------------------------------------------------------------------*/
 
 		pointer	const& base() const
@@ -127,16 +126,161 @@ namespace ft
 			return tmp;
 		}
 
+		bool	operator==(const himself& x) const
+		{
+			return _node == x._node;
+		}
+
+		bool	operator!=(const himself& x) const
+		{
+			return _node != x._node;
+		}
+
 	};
 
-	template <class Iterator1, class Iterator2>
-	bool operator==(const tree_iterator<Iterator1>& lhs, const tree_iterator<Iterator2>& rhs)
+	template <typename T>
+	class const_tree_iterator : public ft::iterator<ft::bidirectional_iterator_tag, T>
+	{
+		public:
+		typedef				T						node;
+		typedef	const		node*					pointer;
+		typedef	const		node&					reference;
+		typedef				const_tree_iterator<T>	himself;
+		typedef				tree_iterator<T>		iterator;
+		typedef	typename	iterator::pointer		ite_pntr;
+
+		pointer	_node;
+
+		private:
+
+		pointer	incremente(ite_pntr nd)
+		{
+			ite_pntr tmp = nd;
+			ite_pntr	bis = tmp->parent;
+
+			if (tmp->is_leaf())
+				return tmp;
+			if (tmp->right && !tmp->right->is_leaf())
+			{
+				tmp = tmp->right;
+				while (tmp->left && !tmp->left->is_leaf())
+					tmp = tmp->left;
+				return tmp;
+			}
+			while (bis && tmp == bis->right)
+			{
+				tmp = bis;
+				bis = bis->parent;
+			}
+			if (bis && tmp == bis->left)
+				return bis;
+			return _node->end;
+		}
+
+		pointer	decrement(ite_pntr nd)
+		{
+			ite_pntr tmp = nd;
+			ite_pntr bis = tmp->parent;
+
+			if (tmp->is_leaf())
+				return tmp;
+			if (tmp->left && !tmp->left->is_leaf())
+			{
+				tmp = tmp->left;
+				while (tmp->right && !tmp->right->is_leaf())
+					tmp = tmp->right;
+				return tmp;
+			}
+			while(bis && tmp == bis->left)
+			{
+				tmp = bis;
+				bis = bis->parent;
+			}
+			if (bis && tmp == bis->right)
+				return bis;
+			return _node->end;
+		}
+
+		public:
+		/*----------------------------------------Canonical Form-----------------------------------------------------*/
+		/*Default constructor for an empty tree_iterator*/
+		const_tree_iterator() : _node(NULL)
+		{}
+
+		/*Constructor with a value*/
+		const_tree_iterator(pointer x) : _node(x)
+		{}
+
+		/*Copy constructor*/
+		const_tree_iterator(const_tree_iterator const& cpy) : _node(cpy._node)
+		{}
+
+		/*Destructor*/
+		~const_tree_iterator()
+		{}
+
+		const_tree_iterator		&operator=(const_tree_iterator rhs)
+		{
+			this->_node = rhs._node;
+			return *this;
+		}
+
+		/*-----------------------------------------------------------------------------------------------------------*/
+
+		pointer	const& base() const
+		{
+			return this->_node;
+		}
+
+		reference	operator*() const
+		{ return *this->_node; }
+
+		const_tree_iterator&	operator++()
+		{
+			this->_node = incremente(const_cast<typename iterator::pointer>(_node));
+			return *this;
+		}
+
+		const_tree_iterator		operator++(int)
+		{
+			const_tree_iterator	tmp = *this;
+			this->_node = incremente(const_cast<typename iterator::pointer>(_node));
+			return tmp;
+		}
+
+		const_tree_iterator&	operator--()
+		{
+			this->_node = decrement(const_cast<typename iterator::pointer>(_node));
+			return *this;
+		}
+
+		const_tree_iterator		operator--(int)
+		{
+			const_tree_iterator	tmp = *this;
+			this->_node = decrement(const_cast<typename iterator::pointer>(_node));
+			return tmp;
+		}
+
+		bool	operator==(const himself& x) const
+		{
+			return _node == x._node;
+		}
+
+		bool	operator!=(const himself& x) const
+		{
+			return _node != x._node;
+		}
+
+	};
+
+	template <class T>
+	bool operator==(const tree_iterator<T>& lhs, const const_tree_iterator<T>& rhs)
 	{
 		return lhs.base() == rhs.base();
 	}
 
-	template <class Iterator1, class Iterator2>
-	bool operator!=(const tree_iterator<Iterator1>& lhs, const tree_iterator<Iterator2>& rhs)
+	template <class T>
+	bool operator!=(const tree_iterator<T>& lhs, const const_tree_iterator<T>& rhs)
 	{
 		return lhs.base() != rhs.base();
 	}

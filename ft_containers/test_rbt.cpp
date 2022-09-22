@@ -16,7 +16,7 @@ int main(void)
 
 	for (size_t i = 0; i < 15; i++)
 		first_map.insert(ft::make_pair(i, i));
-	ft::map<int, int>	second(first_map.begin(), first_map.end());
+	ft::map<int, int> second(first_map.begin(), first_map.end());
 	first_map.get_tree()->print();
 	second.get_tree()->print();
 	second.insert(ft::make_pair(-2, -2));

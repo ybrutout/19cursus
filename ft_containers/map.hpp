@@ -13,37 +13,37 @@ namespace ft
 	{
 		public:
 		//Je comprends le principe, je comprends pas encore l'utilité
-		class	value_compare : std::binary_function<pair<const Key, T>, pair<const Key, T>, bool>
-		{
-			friend class map<Key, T, Compare, Alloc>;
-			protected:
-				Compare _comp;
-				value_compare(Compare c) : _comp(c) {return ;}
+		// class	value_compare : std::binary_function<pair<const Key, T>, pair<const Key, T>, bool>
+		// {
+		// 	friend class map<Key, T, Compare, Alloc>;
+		// 	protected:
+		// 		Compare _comp;
+		// 		value_compare(Compare c) : _comp(c) {return ;}
 
-			public:
-				bool operator()(const pair<const Key, T>& x, const pair<const Key, T>& y) const { return _comp(x.first, y.first); }
-		};
+		// 	public:
+		// 		bool operator()(const pair<const Key, T>& x, const pair<const Key, T>& y) const { return _comp(x.first, y.first); }
+		// };
 
-		typedef				Key									key_type;
-		typedef				T									mapped_type;
-		typedef				ft::pair<key_type, mapped_type>		value_type;
-		typedef				Compare								key_compare;
-		typedef				Alloc								allocator_type;
-		typedef typename	allocator_type::reference			reference;
-		typedef typename	allocator_type::const_reference		const_reference;
-		typedef typename	allocator_type::pointer				pointer;
-		typedef typename	allocator_type::const_pointer		const_pointer;
+		typedef				Key																	key_type;
+		typedef				T																	mapped_type;
+		typedef				ft::pair<key_type, mapped_type>										value_type;
+		typedef				Compare																key_compare;
+		typedef				Alloc																allocator_type;
+		typedef typename	allocator_type::reference											reference;
+		typedef typename	allocator_type::const_reference										const_reference;
+		typedef typename	allocator_type::pointer												pointer;
+		typedef typename	allocator_type::const_pointer										const_pointer;
 
 		private:
 		typedef typename	ft::RBTree<key_type, mapped_type, key_compare, allocator_type>		tree_type;
 
 		public:
-		typedef typename	tree_type::iterator					iterator;
-		//const iterator
+		typedef typename	tree_type::iterator													iterator;
+		typedef typename	tree_type::const_iterator											const_iterator;
 		//reverse
 		//const reverse
-		typedef				ptrdiff_t							difference_type;
-		typedef				size_t								size_type;
+		typedef				ptrdiff_t															difference_type;
+		typedef				size_t																size_type;
 
 		private:
 		tree_type		_tree;
@@ -67,11 +67,7 @@ namespace ft
 		map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
 		: _tree(comp, alloc)
 		{
-			while (first != last)
-			{
-				insert((*first).value);
-				first++;
-			}
+			insert(first, last);
 		}
 
 		map (const map& x) : _tree(x._tree)
@@ -96,12 +92,21 @@ namespace ft
 			return it;
 		}
 
-		//TO DO
-		//const_iterator begin() const;
+		const_iterator begin() const
+		{
+			const_iterator	it(_tree.RBTMinVal());
+			return it;
+		}
 
 		iterator	end()
 		{
 			iterator	it(_tree.get_the_end());
+			return it;
+		}
+
+		const_iterator	end() const
+		{
+			const_iterator	it(_tree.get_the_end());
 			return it;
 		}
 
@@ -126,7 +131,7 @@ namespace ft
 		{
 			while (first != last)
 			{
-				_tree.insert(first._node->value);
+				_tree.insert(*first);
 				first++;
 			}
 		}
