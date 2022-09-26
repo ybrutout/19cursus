@@ -17,6 +17,7 @@ int main(void)
 		first++;
 		std::cout << "hiiiiiiii" << std::endl;
 		first_map.erase((*tmp).first);
+		// first_map.get_tree()->print();
 	}
 	// std::cout << first.base()->value.first << std::endl;
 	// std::cout << first_map.begin()._node->value.first << std::endl;

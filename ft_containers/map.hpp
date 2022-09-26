@@ -154,8 +154,8 @@ namespace ft
 		{
 			std::cout << "K == " << k << std::endl;
 			_tree.to_delete(k);
-			if (k == 4)
-				exit(EXIT_SUCCESS);
+			// if (k == 4)
+			// 	exit(EXIT_SUCCESS);
 			_tree.print();
 			return 1;
 		}

@@ -276,6 +276,8 @@ namespace ft
 
 			void	rotation_right(node *x, node *y, node *p)// on reçoit celui qui va monter(x) celui qui va descendre(y) et le parent de base.
 			{
+				print();
+				std::cout << "x == " << x->value.first << " y == " << y->value.first << " p == " << y->parent << std::endl;
 				if (!p)
 					this->_root = x;
 				else if (y == p->left)
@@ -425,6 +427,9 @@ namespace ft
 			node	*y;
 			node	*todelete = tmp;
 
+			std::cout << "Color BST ==" << tmp->color <<  std::endl;
+			std::cout << "First value BST ==" << tmp->value.first <<  std::endl;
+
 			if (todelete->left == this->_end)
 			{
 				x = todelete->right;
@@ -464,10 +469,14 @@ namespace ft
 		{
 			node	*x = tmp;
 			node	*s;
+			std::cout << "Color ==" << tmp->color <<  std::endl;
+			std::cout << "First value ==" << tmp->value.first <<  std::endl;
+			print();
 			while (x != this->_root && x->color == BLACK)
 			{
 				if (x == x->parent->left)
 				{
+					std::cout << "X == " << x->value.first << " parent == " << x->parent->value.first << std::endl;
 					s = x->parent->right;
 					if (s->color == RED)
 					{
@@ -485,8 +494,10 @@ namespace ft
 					{
 						if (s->right->color == BLACK)
 						{
+
 							s->left->color = BLACK;
 							s->color = RED;
+							//C'est ici que ca foire
 							rotation_right(s, s->parent, s->parent->parent);
 							s = x->parent->right;
 						}
@@ -548,7 +559,7 @@ namespace ft
 					bis = rebalanced_delete(bis);
 				if (val == 4)
 					exit(EXIT_SUCCESS);
-				print();
+				// print();
 				return 1;
 			}
 
