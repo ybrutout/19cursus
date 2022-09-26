@@ -5,6 +5,7 @@
 # include <memory>
 # include "red_black_tree.hpp"
 # include "pair.hpp"
+# include <cstdlib>
 
 namespace ft
 {
@@ -77,11 +78,12 @@ namespace ft
 		~map()
 		{}
 
-		//A faire plus tard car besoin du clean et pour le clean besoin des iterateurs
-		// map& operator= (const map& x)
-		// {
-
-		// }
+		map& operator= (const map& x)
+		{
+			clear();
+			insert(x.begin(), x.end());
+			return *this;
+		}
 		/*-----------------------------------------------------------------------------------------------------------*/
 
 		/*-------------------------------------------Iterators-------------------------------------------------------*/
@@ -150,7 +152,12 @@ namespace ft
 		// second.get_tree()->print();
 		size_type	erase (const key_type& k)
 		{
-			return _tree.to_delete(k);
+			std::cout << "K == " << k << std::endl;
+			_tree.to_delete(k);
+			if (k == 4)
+				exit(EXIT_SUCCESS);
+			_tree.print();
+			return 1;
 		}
 
 		//meme probleme qu'avec le erase iterator
@@ -162,7 +169,7 @@ namespace ft
 			{
 				tmp = first;
 				first++;
-				_tree.to_delete((*tmp).value.first);
+				_tree.to_delete((*tmp).first);
 			}
 		}
 
@@ -171,10 +178,9 @@ namespace ft
 			_tree.swap(&x._tree);
 		}
 
-		// TO DO later quand les iterateur seront fait et surtout que je pourrais les supprimer un a un
 		void	clear()
 		{
-
+			erase(begin(), end());
 		}
 
 		/*-----------------------------------------------------------------------------------------------------------*/

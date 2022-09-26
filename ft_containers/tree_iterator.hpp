@@ -97,19 +97,32 @@ namespace ft
 			return this->_node;
 		}
 
-		reference	operator*() const
-		{ return *this->_node; }
+		typename T::value_type_ptr operator->() const
+		{
+			typename T::value_type_ptr val = &_node->value;
+			return val;
+		}
+
+		typename T::value_type_ref	operator*() const
+		{
+			typename T::value_type_ref val = _node->value;
+			return val;
+		}
 
 		tree_iterator&	operator++()
 		{
+			std::cout << "Before node == " << _node->value.first << std::endl;
 			this->_node = incremente();
+			std::cout << "After node == " << _node->value.first << std::endl;
 			return *this;
 		}
 
 		tree_iterator	operator++(int)
 		{
+			std::cout << "Before node == " << _node->value.first << std::endl;
 			tree_iterator	tmp = *this;
 			this->_node = incremente();
+			std::cout << "After node == " << _node->value.first << std::endl;
 			return tmp;
 		}
 
@@ -232,9 +245,10 @@ namespace ft
 			return this->_node;
 		}
 
-		reference	operator*() const
-		{ return *this->_node; }
-
+		typename T::const_value_type_ref	operator*() const
+		{
+			return _node->value;
+		}
 		const_tree_iterator&	operator++()
 		{
 			this->_node = incremente(const_cast<typename iterator::pointer>(_node));
@@ -259,6 +273,11 @@ namespace ft
 			const_tree_iterator	tmp = *this;
 			this->_node = decrement(const_cast<typename iterator::pointer>(_node));
 			return tmp;
+		}
+
+		typename T::const_value_type_ptr operator->() const
+		{
+			return &_node->value;
 		}
 
 		bool	operator==(const himself& x) const

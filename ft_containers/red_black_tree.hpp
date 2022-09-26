@@ -16,8 +16,11 @@ namespace ft
 	{
 		public:
 			typedef			ft::pair<key, T>		value_type;
+			typedef	const	ft::pair<key, T>		const_value_type;
+			typedef			value_type&				value_type_ref;
+			typedef	const	value_type&				const_value_type_ref;
 			typedef			value_type*				value_type_ptr;
-			typedef const	value_type*			const_value_type_ptr;
+			typedef const	value_type*				const_value_type_ptr;
 
 			Node					*end;
 			Node					*parent;
@@ -232,7 +235,10 @@ namespace ft
 							return ret;
 						}
 						if (tmp->right && tmp->right != this->_end)
+						{
 							tmp = tmp->right;
+							// std::cout << "tmp right == " << tmp->right->value.first << std::endl;
+						}
 						else
 						{
 							node *nw = new node(val);
@@ -540,6 +546,9 @@ namespace ft
 				bis = BST_delete(tmp);
 				if (bis)
 					bis = rebalanced_delete(bis);
+				if (val == 4)
+					exit(EXIT_SUCCESS);
+				print();
 				return 1;
 			}
 

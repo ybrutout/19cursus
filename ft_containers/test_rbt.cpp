@@ -5,29 +5,46 @@
 
 int main(void)
 {
-	ft::map<int, int>	first_map;
-	ft::pair<ft::map<int, int>::iterator, bool>	p;
-	ft::map<int,int>::iterator	it;
-	ft::map<int,int>::iterator	itc;
-	ft::map<int,int>::iterator	ite;
-	// ft::map<int, int>	second;
-	// ft::map<int, int>	empty;
-	ft::map<int, int>::allocator_type	all;
+	ft::map<int,int>	first_map;
 
-	for (size_t i = 0; i < 15; i++)
+	for(int i = 0; i < 15; i++)
 		first_map.insert(ft::make_pair(i, i));
-	ft::map<int, int> second(first_map.begin(), first_map.end());
 	first_map.get_tree()->print();
-	second.get_tree()->print();
-	second.insert(ft::make_pair(-2, -2));
-	first_map.insert(ft::make_pair(100, 100));
-	first_map.get_tree()->print();
-	second.get_tree()->print();
-	// first_map.erase(first_map.begin());
-	// std::cout << empty.size() << std::endl;
-	// std::cout << first_map.size() << std::endl;
-	// std::cout << empty.max_size() << std::endl;
-	// std::cout << first_map.max_size() << std::endl;
-	// all = first_map.get_allocator();
-	return 0;
+	ft::map<int, int>::iterator first = first_map.begin();
+	while (first != first_map.end())
+	{
+		ft::map<int, int>::iterator tmp(first);
+		first++;
+		std::cout << "hiiiiiiii" << std::endl;
+		first_map.erase((*tmp).first);
+	}
+	// std::cout << first.base()->value.first << std::endl;
+	// std::cout << first_map.begin()._node->value.first << std::endl;
 }
+
+	// ft::map<int, int>	first_map;
+	// ft::pair<ft::map<int, int>::iterator, bool>	p;
+	// ft::map<int,int>::iterator	it;
+	// ft::map<int,int>::iterator	itc;
+	// ft::map<int,int>::iterator	ite;
+	// // ft::map<int, int>	second;
+	// // ft::map<int, int>	empty;
+	// ft::map<int, int>::allocator_type	all;
+
+	// for (size_t i = 0; i < 15; i++)
+	// 	first_map.insert(ft::make_pair(i, i));
+	// ft::map<int, int> second(first_map.begin(), first_map.end());
+	// first_map.get_tree()->print();
+	// second.get_tree()->print();
+	// second.insert(ft::make_pair(-2, -2));
+	// first_map.insert(ft::make_pair(100, 100));
+	// first_map.get_tree()->print();
+	// second.get_tree()->print();
+	// second = first_map;
+	// // first_map.erase(first_map.begin());
+	// // std::cout << empty.size() << std::endl;
+	// // std::cout << first_map.size() << std::endl;
+	// // std::cout << empty.max_size() << std::endl;
+	// // std::cout << first_map.max_size() << std::endl;
+	// // all = first_map.get_allocator();
+	// return 0;
