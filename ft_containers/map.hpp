@@ -119,6 +119,7 @@ namespace ft
 		/*-------------------------------------------Modifiers-------------------------------------------------------*/
 		pair<iterator,bool>	insert(const value_type& val)
 		{
+			_tree.print();
 			return _tree.insert(val);
 		}
 

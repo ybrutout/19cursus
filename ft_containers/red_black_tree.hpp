@@ -358,17 +358,21 @@ namespace ft
 				{
 					return ret;//gestion de quand on veut insérer une valeur qui existe déjà
 				}
+				print();
+				std::cout << "val == " << val.first << std::endl;
 				tmp = ret.first._node;
+				std::cout << "tmp == " << tmp->value.first << std::endl;
 				while (tmp->parent && tmp->parent->color == RED)
 				{
 					p = tmp->parent;
 					g = p->parent;
 					if (g->right == p && g->left && g->left->color == RED)
 						tmp = p_red_and_u_red(g->left, p, g);
-					else if (g->left == p && g->right &&g->right->color == RED)
+					else if (g->left == p && g->right && g->right->color == RED)
 						tmp = p_red_and_u_red(g->right, p, g);
 					else if (g->right == p)
 					{
+						std::cout << "tmp == " << tmp->value.first << std::endl;
 						if (p->right && p->right == tmp)
 							g_right_p_right(p, g);
 						else if (p->left && p->left == tmp)
