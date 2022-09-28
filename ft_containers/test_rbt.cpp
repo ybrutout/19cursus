@@ -8,17 +8,11 @@ int main(void)
 	ft::map<int,int>	first_map;
 
 	for(int i = 0; i < 15; i++)
-		first_map.insert(ft::make_pair(i, i));
+	{
+		first_map.insert(ft::make_pair(i, i+1));
+	}
 	first_map.get_tree()->print();
-	ft::map<int, int>::iterator first = first_map.begin();
-	// while (first != first_map.end())
-	// {
-	// 	ft::map<int, int>::iterator tmp(first);
-	// 	first++;
-	// 	std::cout << "hiiiiiiii" << std::endl;
-	// 	first_map.erase((*tmp).first);
-	// 	// first_map.get_tree()->print();
-	// }
+	std::cout << "essais " << first_map[19] << std::endl;
 	// std::cout << first.base()->value.first << std::endl;
 	// std::cout << first_map.begin()._node->value.first << std::endl;
 }

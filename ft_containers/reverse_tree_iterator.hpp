@@ -1,5 +1,5 @@
-#ifndef TREE_ITERATOR_HPP
-# define TREE_ITERATOR_HPP
+#ifndef REVERSE_TREE_ITERATOR_HPP
+# define REVERSE_TREE_ITERATOR_HPP
 
 #include <iostream>
 #include "iterator_traits.hpp"
@@ -7,13 +7,13 @@
 namespace ft
 {
 	template <typename T>
-	class tree_iterator : public ft::iterator<ft::bidirectional_iterator_tag, T>
+	class reverse_tree_iterator : public ft::iterator<ft::bidirectional_iterator_tag, T>
 	{
 		public:
-		typedef				T					node;
-		typedef				node*				pointer;
-		typedef				node&				reference;
-		typedef				tree_iterator<T>	himself;
+		typedef				T							node;
+		typedef				node*						pointer;
+		typedef				node&						reference;
+		typedef				reverse_tree_iterator<T>	himself;
 
 		pointer	_node;
 
@@ -41,7 +41,7 @@ namespace ft
 			return tmp;
 		}
 
-		pointer	incremente()
+		pointer	decremente()
 		{
 			pointer tmp = this->_node;
 			pointer	bis = tmp->parent;
@@ -65,7 +65,7 @@ namespace ft
 			return _node->end;
 		}
 
-		pointer	decrement()
+		pointer	incremente()
 		{
 			pointer tmp = _node;
 			pointer bis = tmp->parent;
@@ -92,22 +92,22 @@ namespace ft
 		public:
 		/*----------------------------------------Canonical Form-----------------------------------------------------*/
 		/*Default constructor for an empty tree_iterator*/
-		tree_iterator() : _node(NULL)
+		reverse_tree_iterator() : _node(NULL)
 		{}
 
 		/*Constructor with a value*/
-		tree_iterator(pointer x) : _node(x)
+		reverse_tree_iterator(pointer x) : _node(x)
 		{}
 
 		/*Copy constructor*/
-		tree_iterator(tree_iterator const& cpy) : _node(cpy._node)
+		reverse_tree_iterator(reverse_tree_iterator const& cpy) : _node(cpy._node)
 		{}
 
 		/*Destructor*/
-		~tree_iterator()
+		~reverse_tree_iterator()
 		{}
 
-		tree_iterator		&operator=(tree_iterator rhs)
+		reverse_tree_iterator		&operator=(reverse_tree_iterator rhs)
 		{
 			this->_node = rhs._node;
 			return *this;
@@ -131,29 +131,29 @@ namespace ft
 			return val;
 		}
 
-		tree_iterator&	operator++()
+		reverse_tree_iterator&	operator++()
 		{
 			this->_node = incremente();
 			return *this;
 		}
 
-		tree_iterator	operator++(int)
+		reverse_tree_iterator	operator++(int)
 		{
-			tree_iterator	tmp = *this;
+			reverse_tree_iterator	tmp = *this;
 			this->_node = incremente();
 			return tmp;
 		}
 
-		tree_iterator&	operator--()
+		reverse_tree_iterator&	operator--()
 		{
-			this->_node = decrement();
+			this->_node = decremente();
 			return *this;
 		}
 
-		tree_iterator	operator--(int)
+		reverse_tree_iterator	operator--(int)
 		{
-			tree_iterator	tmp = *this;
-			this->_node = decrement();
+			reverse_tree_iterator	tmp = *this;
+			this->_node = decremente();
 			return tmp;
 		}
 
@@ -170,13 +170,13 @@ namespace ft
 	};
 
 	template <typename T>
-	class const_tree_iterator : public ft::iterator<ft::bidirectional_iterator_tag, T>
+	class const_reverse_tree_iterator : public ft::iterator<ft::bidirectional_iterator_tag, T>
 	{
 		public:
 		typedef				T						node;
 		typedef	const		node*					pointer;
 		typedef	const		node&					reference;
-		typedef				const_tree_iterator<T>	himself;
+		typedef				const_reverse_tree_iterator<T>	himself;
 		typedef				tree_iterator<T>		iterator;
 		typedef	typename	iterator::pointer		ite_pntr;
 
@@ -184,7 +184,7 @@ namespace ft
 
 		private:
 
-		pointer	incremente(ite_pntr nd)
+		pointer	decrement(ite_pntr nd)
 		{
 			ite_pntr tmp = nd;
 			ite_pntr	bis = tmp->parent;
@@ -208,7 +208,7 @@ namespace ft
 			return _node->end;
 		}
 
-		pointer	decrement(ite_pntr nd)
+		pointer	increment(ite_pntr nd)
 		{
 			ite_pntr tmp = nd;
 			ite_pntr bis = tmp->parent;
@@ -235,22 +235,22 @@ namespace ft
 		public:
 		/*----------------------------------------Canonical Form-----------------------------------------------------*/
 		/*Default constructor for an empty tree_iterator*/
-		const_tree_iterator() : _node(NULL)
+		const_reverse_tree_iterator() : _node(NULL)
 		{}
 
 		/*Constructor with a value*/
-		const_tree_iterator(pointer x) : _node(x)
+		const_reverse_tree_iterator(pointer x) : _node(x)
 		{}
 
 		/*Copy constructor*/
-		const_tree_iterator(const_tree_iterator const& cpy) : _node(cpy._node)
+		const_reverse_tree_iterator(const_reverse_tree_iterator const& cpy) : _node(cpy._node)
 		{}
 
 		/*Destructor*/
-		~const_tree_iterator()
+		~const_reverse_tree_iterator()
 		{}
 
-		const_tree_iterator		&operator=(const_tree_iterator rhs)
+		const_reverse_tree_iterator		&operator=(const_reverse_tree_iterator rhs)
 		{
 			this->_node = rhs._node;
 			return *this;
@@ -267,28 +267,28 @@ namespace ft
 		{
 			return _node->value;
 		}
-		const_tree_iterator&	operator++()
+		const_reverse_tree_iterator&	operator++()
 		{
 			this->_node = incremente(const_cast<typename iterator::pointer>(_node));
 			return *this;
 		}
 
-		const_tree_iterator		operator++(int)
+		const_reverse_tree_iterator		operator++(int)
 		{
-			const_tree_iterator	tmp = *this;
+			const_reverse_tree_iterator	tmp = *this;
 			this->_node = incremente(const_cast<typename iterator::pointer>(_node));
 			return tmp;
 		}
 
-		const_tree_iterator&	operator--()
+		const_reverse_tree_iterator&	operator--()
 		{
 			this->_node = decrement(const_cast<typename iterator::pointer>(_node));
 			return *this;
 		}
 
-		const_tree_iterator		operator--(int)
+		const_reverse_tree_iterator		operator--(int)
 		{
-			const_tree_iterator	tmp = *this;
+			const_reverse_tree_iterator	tmp = *this;
 			this->_node = decrement(const_cast<typename iterator::pointer>(_node));
 			return tmp;
 		}
@@ -311,13 +311,13 @@ namespace ft
 	};
 
 	template <class T>
-	bool operator==(const tree_iterator<T>& lhs, const const_tree_iterator<T>& rhs)
+	bool operator==(const reverse_tree_iterator<T>& lhs, const const_reverse_tree_iterator<T>& rhs)
 	{
 		return lhs.base() == rhs.base();
 	}
 
 	template <class T>
-	bool operator!=(const tree_iterator<T>& lhs, const const_tree_iterator<T>& rhs)
+	bool operator!=(const reverse_tree_iterator<T>& lhs, const const_reverse_tree_iterator<T>& rhs)
 	{
 		return lhs.base() != rhs.base();
 	}

@@ -48,6 +48,7 @@ namespace ft
 
 		private:
 		tree_type		_tree;
+		allocator_type	_alloc;
 
 		public:
 		///TO DO
@@ -60,18 +61,18 @@ namespace ft
 		/*----------------------------------------Canonical Form-----------------------------------------------------*/
 		/*Default constructor*/
 		explicit map (const key_compare& comp = key_compare(),const allocator_type& alloc = allocator_type())
-		: _tree(comp, alloc)
+		: _tree(comp, alloc), _alloc(alloc)
 		{}
 
 		/*Range constructor*/
 		template <class InputIterator>
 		map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
-		: _tree(comp, alloc)
+		: _tree(comp, alloc), _alloc(alloc)
 		{
 			insert(first, last);
 		}
 
-		map (const map& x) : _tree(x._tree)
+		map (const map& x) : _tree(x._tree), _alloc(x.get_allocator())
 		{}
 
 		/*Deconstructor*/
@@ -87,19 +88,25 @@ namespace ft
 		/*-----------------------------------------------------------------------------------------------------------*/
 
 		/*-------------------------------------------Iterators-------------------------------------------------------*/
-
 		iterator	begin()
 		{
+			iterator	ite(_tree.get_the_end());
+
+			if (empty())
+				return ite;
 			iterator	it(_tree.RBTMinVal());
 			return it;
 		}
 
 		const_iterator begin() const
 		{
+			const_iterator	ite(_tree.get_the_end());
+			if (empty())
+				return ite;
 			const_iterator	it(_tree.RBTMinVal());
 			return it;
 		}
-
+		
 		iterator	end()
 		{
 			iterator	it(_tree.get_the_end());
@@ -111,15 +118,25 @@ namespace ft
 			const_iterator	it(_tree.get_the_end());
 			return it;
 		}
+		/*-----------------------------------------------------------------------------------------------------------*/
 
+		/*----------------------------------------Element-Access-----------------------------------------------------*/
 
+		mapped_type& operator[](const key_type& k)
+		{
+			typename tree_type::node	*tmp = _tree.find_the_value(k);
+			if (tmp != _tree.get_the_end())
+				return tmp->value.second;
+			insert(ft::pair<key_type, mapped_type>(k, mapped_type()));
+			tmp = _tree.find_the_value(k);
+			return tmp->value.second;
+		}
 
 		/*-----------------------------------------------------------------------------------------------------------*/
 
 		/*-------------------------------------------Modifiers-------------------------------------------------------*/
 		pair<iterator,bool>	insert(const value_type& val)
 		{
-			_tree.print();
 			return _tree.insert(val);
 		}
 
@@ -142,8 +159,7 @@ namespace ft
 		//Je sais pas si ca va car je supprime un element qui a la meme clé que l'iterateur qu'on m'a envoye mais si c'est un autre ...
 		void	erase (iterator position)
 		{
-			std::cout << "Val == " << (*position).value.first << std::endl;
-			_tree.to_delete((*position).value.first);
+			_tree.to_delete((*position).first);
 		}
 
 		//erase fonctionne pas je sais pas pourquoi
@@ -153,11 +169,9 @@ namespace ft
 		// second.get_tree()->print();
 		size_type	erase (const key_type& k)
 		{
-			std::cout << "K == " << k << std::endl;
+			if (_tree.find_the_value(k) == _tree.get_the_end())
+				return 0;
 			_tree.to_delete(k);
-			// if (k == 4)
-			// 	exit(EXIT_SUCCESS);
-			_tree.print();
 			return 1;
 		}
 
@@ -201,7 +215,7 @@ namespace ft
 
 		size_type max_size() const
 		{
-			return _tree.get_alloc().max_size();
+			return _alloc.max_size();
 		}
 		/*-----------------------------------------------------------------------------------------------------------*/
 		/*-------------------------------------------Allocator-------------------------------------------------------*/
