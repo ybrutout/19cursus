@@ -11,17 +11,18 @@ namespace ft
 	{
 		public:
 		typedef				T					node;
-		typedef				node*				pointer;
-		typedef				node&				reference;
+		typedef	typename	T::value_type_ptr	pointer;
+		typedef	typename	T::value_type_ref	reference;
+		typedef				node*				node_ptr;
 		typedef				tree_iterator<T>	himself;
 
-		pointer	_node;
+		node_ptr	_node;
 
 		private:
 
-		pointer	biggest()
+		node_ptr	biggest()
 		{
-			pointer	tmp = _node;
+			node_ptr	tmp = _node;
 
 			while (tmp->parent)
 				tmp = tmp->parent;
@@ -30,9 +31,9 @@ namespace ft
 			return tmp;
 		}
 
-		pointer	smallest()
+		node_ptr	smallest()
 		{
-			pointer	tmp = _node;
+			node_ptr	tmp = _node;
 
 			while (tmp->parent)
 				tmp = tmp->parent;
@@ -41,10 +42,10 @@ namespace ft
 			return tmp;
 		}
 
-		pointer	incremente()
+		node_ptr	incremente()
 		{
-			pointer tmp = this->_node;
-			pointer	bis = tmp->parent;
+			node_ptr tmp = this->_node;
+			node_ptr	bis = tmp->parent;
 
 			if (tmp->is_leaf())
 				return smallest();
@@ -65,10 +66,10 @@ namespace ft
 			return _node->end;
 		}
 
-		pointer	decrement()
+		node_ptr	decrement()
 		{
-			pointer tmp = _node;
-			pointer bis = tmp->parent;
+			node_ptr tmp = _node;
+			node_ptr bis = tmp->parent;
 
 			if (tmp->is_leaf())
 				return biggest();
@@ -96,7 +97,7 @@ namespace ft
 		{}
 
 		/*Constructor with a value*/
-		tree_iterator(pointer x) : _node(x)
+		tree_iterator(node_ptr x) : _node(x)
 		{}
 
 		/*Copy constructor*/
@@ -114,7 +115,7 @@ namespace ft
 		}
 		/*-----------------------------------------------------------------------------------------------------------*/
 
-		pointer	const& base() const
+		node_ptr	const& base() const
 		{
 			return this->_node;
 		}
@@ -174,17 +175,18 @@ namespace ft
 	{
 		public:
 		typedef				T						node;
-		typedef	const		node*					pointer;
-		typedef	const		node&					reference;
+		typedef	typename	T::const_value_type_ptr	pointer;
+		typedef	typename	T::const_value_type_ref	reference;
+		typedef	const		node*					node_ptr;
 		typedef				const_tree_iterator<T>	himself;
 		typedef				tree_iterator<T>		iterator;
-		typedef	typename	iterator::pointer		ite_pntr;
+		typedef	typename	iterator::node_ptr		ite_pntr;
 
-		pointer	_node;
+		node_ptr	_node;
 
 		private:
 
-		pointer	incremente(ite_pntr nd)
+		node_ptr	incremente(ite_pntr nd)
 		{
 			ite_pntr tmp = nd;
 			ite_pntr	bis = tmp->parent;
@@ -208,7 +210,7 @@ namespace ft
 			return _node->end;
 		}
 
-		pointer	decrement(ite_pntr nd)
+		node_ptr	decrement(ite_pntr nd)
 		{
 			ite_pntr tmp = nd;
 			ite_pntr bis = tmp->parent;
@@ -239,11 +241,14 @@ namespace ft
 		{}
 
 		/*Constructor with a value*/
-		const_tree_iterator(pointer x) : _node(x)
+		const_tree_iterator(node_ptr x) : _node(x)
 		{}
 
 		/*Copy constructor*/
 		const_tree_iterator(const_tree_iterator const& cpy) : _node(cpy._node)
+		{}
+
+		const_tree_iterator(iterator const& cpy) : _node(cpy._node)
 		{}
 
 		/*Destructor*/
@@ -258,7 +263,7 @@ namespace ft
 
 		/*-----------------------------------------------------------------------------------------------------------*/
 
-		pointer	const& base() const
+		node_ptr	const& base() const
 		{
 			return this->_node;
 		}
@@ -267,29 +272,30 @@ namespace ft
 		{
 			return _node->value;
 		}
+
 		const_tree_iterator&	operator++()
 		{
-			this->_node = incremente(const_cast<typename iterator::pointer>(_node));
+			this->_node = incremente(const_cast<typename iterator::node_ptr>(_node));
 			return *this;
 		}
 
 		const_tree_iterator		operator++(int)
 		{
 			const_tree_iterator	tmp = *this;
-			this->_node = incremente(const_cast<typename iterator::pointer>(_node));
+			this->_node = incremente(const_cast<typename iterator::node_ptr>(_node));
 			return tmp;
 		}
 
 		const_tree_iterator&	operator--()
 		{
-			this->_node = decrement(const_cast<typename iterator::pointer>(_node));
+			this->_node = decrement(const_cast<typename iterator::node_ptr>(_node));
 			return *this;
 		}
 
 		const_tree_iterator		operator--(int)
 		{
 			const_tree_iterator	tmp = *this;
-			this->_node = decrement(const_cast<typename iterator::pointer>(_node));
+			this->_node = decrement(const_cast<typename iterator::node_ptr>(_node));
 			return tmp;
 		}
 

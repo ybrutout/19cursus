@@ -4,7 +4,7 @@
 # include <iostream>
 # include "pair.hpp"
 # include "tree_iterator.hpp"
-# include "reverse_tree_iterator.hpp"
+# include "reverse_iterator.hpp"
 
 # define RED false
 # define BLACK true
@@ -113,8 +113,8 @@ namespace ft
 			typedef typename	allocator_type::const_pointer									const_pointer;
 			typedef typename	ft::tree_iterator<Node<key_type, mapped_type> >					iterator;
 			typedef typename	ft::const_tree_iterator<Node<key_type, mapped_type> >			const_iterator;
-			typedef	typename	ft::reverse_tree_iterator<Node<key_type, mapped_type> >			reverse_iterator;
-			typedef	typename	ft::const_reverse_tree_iterator<Node<key_type, mapped_type> >	const_reverse_iterator;
+			typedef	typename	ft::reverse_iterator<iterator>									reverse_iterator;
+			typedef	typename	ft::reverse_iterator<const_iterator>							const_reverse_iterator;
 			typedef				ptrdiff_t														difference_type;
 			typedef				size_t															size_type;
 			typedef				Node<key, T>													node;

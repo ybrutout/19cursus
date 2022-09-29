@@ -5,6 +5,7 @@
 # include <memory>
 # include "red_black_tree.hpp"
 # include "pair.hpp"
+# include "reverse_iterator.hpp"
 # include <cstdlib>
 
 namespace ft
@@ -41,8 +42,8 @@ namespace ft
 		public:
 		typedef typename	tree_type::iterator													iterator;
 		typedef typename	tree_type::const_iterator											const_iterator;
-		//reverse
-		//const reverse
+		typedef	typename	tree_type::reverse_iterator											reverse_iterator;
+		typedef	typename	tree_type::const_reverse_iterator									const_reverse_iterator;
 		typedef				ptrdiff_t															difference_type;
 		typedef				size_t																size_type;
 
@@ -90,33 +91,50 @@ namespace ft
 		/*-------------------------------------------Iterators-------------------------------------------------------*/
 		iterator	begin()
 		{
-			iterator	ite(_tree.get_the_end());
-
 			if (empty())
-				return ite;
-			iterator	it(_tree.RBTMinVal());
-			return it;
+				return iterator(_tree.get_the_end());
+			return iterator(_tree.RBTMinVal());
 		}
 
 		const_iterator begin() const
 		{
-			const_iterator	ite(_tree.get_the_end());
 			if (empty())
-				return ite;
-			const_iterator	it(_tree.RBTMinVal());
-			return it;
+				return const_iterator(_tree.get_the_end());
+			return const_iterator(_tree.RBTMinVal());
 		}
-		
+
 		iterator	end()
 		{
-			iterator	it(_tree.get_the_end());
-			return it;
+			return iterator(_tree.get_the_end());
 		}
 
 		const_iterator	end() const
 		{
-			const_iterator	it(_tree.get_the_end());
-			return it;
+			return const_iterator(_tree.get_the_end());
+		}
+
+		reverse_iterator rbegin()
+		{
+			return reverse_iterator(_tree.get_the_end());
+		}
+
+		const_reverse_iterator rbegin() const
+		{
+			return const_reverse_iterator(_tree.get_the_end());
+		}
+
+		reverse_iterator rend()
+		{
+			if (empty())
+				return reverse_iterator(_tree.get_the_end());
+			return reverse_iterator(_tree.RBTMinVal());
+		}
+
+		const_reverse_iterator rend() const
+		{
+			if (empty())
+				return const_reverse_iterator(_tree.get_the_end());
+			return reverse_iterator(_tree.RBTMinVal());
 		}
 		/*-----------------------------------------------------------------------------------------------------------*/
 
