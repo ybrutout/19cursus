@@ -186,13 +186,35 @@ namespace ft
 
 		private:
 
+		node_ptr	biggest()
+		{
+			node_ptr	tmp = _node;
+
+			while (tmp->parent)
+				tmp = tmp->parent;
+			while (!tmp->right->is_leaf())
+				tmp = tmp->right;
+			return tmp;
+		}
+
+		node_ptr	smallest()
+		{
+			node_ptr	tmp = _node;
+
+			while (tmp->parent)
+				tmp = tmp->parent;
+			while (!tmp->left->is_leaf())
+				tmp = tmp->left;
+			return tmp;
+		}
+
 		node_ptr	incremente(ite_pntr nd)
 		{
 			ite_pntr tmp = nd;
 			ite_pntr	bis = tmp->parent;
 
 			if (tmp->is_leaf())
-				return tmp;
+				return smallest();
 			if (tmp->right && !tmp->right->is_leaf())
 			{
 				tmp = tmp->right;
@@ -216,7 +238,7 @@ namespace ft
 			ite_pntr bis = tmp->parent;
 
 			if (tmp->is_leaf())
-				return tmp;
+				return biggest();
 			if (tmp->left && !tmp->left->is_leaf())
 			{
 				tmp = tmp->left;

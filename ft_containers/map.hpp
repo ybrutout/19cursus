@@ -115,7 +115,8 @@ namespace ft
 
 		reverse_iterator rbegin()
 		{
-			return reverse_iterator(_tree.get_the_end());
+			reverse_iterator tmp(_tree.get_the_end());
+			return tmp;
 		}
 
 		const_reverse_iterator rbegin() const

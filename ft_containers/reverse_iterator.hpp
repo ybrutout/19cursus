@@ -27,9 +27,7 @@ namespace ft
 
 		/*Copy constructor with an original iterator*/
 		explicit reverse_iterator( iterator_type x ) : _current(x)
-		{
-			std::cout << "x == " << x->first << std::endl;
-		}
+		{}
 
 		/*Copy constructor with an other revrese_iterator*/
 		template< class U >
