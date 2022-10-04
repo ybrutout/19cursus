@@ -27,7 +27,9 @@ namespace ft
 			while (tmp->parent)
 				tmp = tmp->parent;
 			while (!tmp->right->is_leaf())
+			{
 				tmp = tmp->right;
+			}
 			return tmp;
 		}
 

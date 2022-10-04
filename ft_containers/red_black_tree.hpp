@@ -199,6 +199,7 @@ namespace ft
 				this->_root->left = this->_end;
 				this->_root->color = BLACK;
 				this->_root->end = this->_end;
+				this->_end->parent = this->_root;///J'ai rajouté cela pour les itérateurs puissent gérer les smaller and bigger
 			}
 
 			pair<iterator, bool>	where_is_the_value(value_type val)
@@ -269,7 +270,7 @@ namespace ft
 					p->right = y;
 				y->parent = p;
 				x->right = y->left;
-				if (x->right)
+				if (!x->right->is_leaf() )
 					x->right->parent = x;
 				y->left = x;
 				x->parent = y;
@@ -285,7 +286,7 @@ namespace ft
 					p->right = x;
 				x->parent = p;
 				y->left = x->right;
-				if (y->left)
+				if (!y->left->is_leaf())
 					y->left->parent = y;
 				x->right = y;
 				y->parent = x;
@@ -388,8 +389,10 @@ namespace ft
 				return ret;
 			}
 
-			node	*find_the_value(key_type val)
+			node	*find_the_value(key_type val)const
 			{
+				if (_size == 0)
+					return _end;
 				node	*tmp = this->_root;
 
 				while (tmp != this->_end && tmp->value.first != val)
@@ -415,9 +418,10 @@ namespace ft
 			replacor->parent = to_replace->parent;
 		}
 
-		node	*FindMinval(node *tmp)
+		node	*FindMinval(node *tmp)const
 		{
-			while (tmp->left != this->_end)
+
+			while (tmp != _end && tmp->left != this->_end)
 				tmp = tmp->left;
 			return tmp;
 		}
@@ -512,7 +516,6 @@ namespace ft
 						rotation_right(x->parent->left, x->parent, x->parent->parent);
 						s = x->parent->left;
 					}
-
 					if (s->right->color == BLACK && s->left->color == BLACK)
 					{
 						s->color = RED;
@@ -524,13 +527,13 @@ namespace ft
 						{
 							s->right->color = BLACK;
 							s->color = RED;
-							rotation_left(s, s->parent, s->parent);
+							rotation_left(s, s->right, s->parent);
 							s = x->parent->left;
 						}
-						s->left->color = BLACK;
 						s->color = x->parent->color;
 						x->parent->color = BLACK;
-						rotation_right(x->parent, x->parent->left, x->parent->parent);
+						s->left->color = BLACK;
+						rotation_right(x->parent->left, x->parent, x->parent->parent);
 						x = this->_root;
 					}
 				}
@@ -570,6 +573,60 @@ namespace ft
 				while (tmp->right != this->_end)
 					tmp = tmp->right;
 				return tmp;
+			}
+
+			node	*LowerBound(key_type k)const
+			{
+				node 	*tmp = _root;
+				node	*previous;
+				while (tmp != _end)
+				{
+					previous = tmp;
+					if (tmp->value.first == k)
+						return tmp;
+					else if (tmp->value.first < k)
+						tmp = tmp->left;
+					else
+						tmp = tmp->right;
+				}
+				if (previous->value.first > k)
+					return previous;
+				else
+				{
+					if (previous == RBTMaxVal())
+						return _end;
+					while (previous->parent->right == previous)
+						previous = previous->parent;
+				}
+				return previous->parent;
+			}
+
+			node	*upperBound(key_type k)const
+			{
+				node 	*tmp = _root;
+				node	*previous;
+				while (tmp != _end)
+				{
+					previous = tmp;
+					if (tmp->value.first == k)
+						break;
+					else if (tmp->value.first < k)
+						tmp = tmp->left;
+					else
+						tmp = tmp->right;
+				}
+				if (!previous)
+					return FindMinval(tmp->right);
+				if (previous->value.first > k)
+					return previous;
+				else
+				{
+					if (previous == RBTMaxVal())
+						return _end;
+					while (previous->parent->right == previous)
+						previous = previous->parent;
+				}
+				return previous->parent;
 			}
 
 			//fonction pour imprimé.

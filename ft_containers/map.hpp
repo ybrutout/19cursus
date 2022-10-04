@@ -6,6 +6,7 @@
 # include "red_black_tree.hpp"
 # include "pair.hpp"
 # include "reverse_iterator.hpp"
+# include "utils.hpp"
 # include <cstdlib>
 
 namespace ft
@@ -61,26 +62,26 @@ namespace ft
 		}
 		/*----------------------------------------Canonical Form-----------------------------------------------------*/
 		/*Default constructor*/
-		explicit map (const key_compare& comp = key_compare(),const allocator_type& alloc = allocator_type())
+		explicit map(const key_compare& comp = key_compare(),const allocator_type& alloc = allocator_type())
 		: _tree(comp, alloc), _alloc(alloc)
 		{}
 
 		/*Range constructor*/
 		template <class InputIterator>
-		map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+		map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
 		: _tree(comp, alloc), _alloc(alloc)
 		{
 			insert(first, last);
 		}
 
-		map (const map& x) : _tree(x._tree), _alloc(x.get_allocator())
+		map(const map& x) : _tree(x._tree), _alloc(x.get_allocator())
 		{}
 
 		/*Deconstructor*/
 		~map()
 		{}
 
-		map& operator= (const map& x)
+		map& operator=(const map& x)
 		{
 			clear();
 			insert(x.begin(), x.end());
@@ -166,7 +167,7 @@ namespace ft
 		}
 
 		template <class InputIterator>
-		void	insert (InputIterator first, InputIterator last)
+		void	insert(InputIterator first, InputIterator last)
 		{
 			while (first != last)
 			{
@@ -176,7 +177,7 @@ namespace ft
 		}
 
 		//Je sais pas si ca va car je supprime un element qui a la meme clé que l'iterateur qu'on m'a envoye mais si c'est un autre ...
-		void	erase (iterator position)
+		void	erase(iterator position)
 		{
 			_tree.to_delete((*position).first);
 		}
@@ -186,7 +187,7 @@ namespace ft
 		// for (size_t i = 0; i < 15; i++)
 		// 	second.erase(i);
 		// second.get_tree()->print();
-		size_type	erase (const key_type& k)
+		size_type	erase(const key_type& k)
 		{
 			if (_tree.find_the_value(k) == _tree.get_the_end())
 				return 0;
@@ -195,7 +196,7 @@ namespace ft
 		}
 
 		//meme probleme qu'avec le erase iterator
-		void	erase (iterator first, iterator last)
+		void	erase(iterator first, iterator last)
 		{
 			iterator tmp;
 
@@ -237,6 +238,45 @@ namespace ft
 			return _alloc.max_size();
 		}
 		/*-----------------------------------------------------------------------------------------------------------*/
+		/*-------------------------------------------Opérations------------------------------------------------------*/
+
+		iterator find(const key_type& k)
+		{
+			return iterator(_tree.find_the_value(k));
+		}
+
+		const_iterator find(const key_type& k) const
+		{
+			return const_iterator(_tree.find_the_value(k));
+		}
+
+		size_type count(const key_type& k) const
+		{
+			if (_tree.find_the_value(k) == _tree.get_the_end())
+				return 0;
+			return 1;
+		}
+
+		iterator		lower_bound(const key_type& k)
+		{
+			return iterator(_tree.LowerBound(k));
+		}
+
+		const_iterator	lower_bound(const key_type& k) const
+		{
+			return const_iterator(_tree.LowerBound(k));
+		}
+
+		iterator		upper_bound(const key_type& k)
+		{
+			return iterator(_tree.upperBound(k));
+		}
+		const_iterator	upper_bound(const key_type& k) const
+		{
+			return const_iterator(_tree.upperBound(k));
+		}
+
+		/*-----------------------------------------------------------------------------------------------------------*/
 		/*-------------------------------------------Allocator-------------------------------------------------------*/
 
 		allocator_type get_allocator() const
@@ -247,6 +287,47 @@ namespace ft
 
 		/*-----------------------------------------------------------------------------------------------------------*/
 	};
+
+	/*-----------------------------------------No Member Function----------------------------------------------------*/
+
+	template <class Key, class T, class Compare, class Alloc>
+  	bool	operator==(const map<Key, T, Compare, Alloc>& lhs, const map<Key, T, Compare, Alloc>& rhs)
+	{
+		if (lhs.size() != rhs.size())
+			return false;
+		if (!(ft::equal(lhs.begin(), lhs.end(), rhs.begin())))
+			return false;
+		return true;
+	}
+
+	template <class Key, class T, class Compare, class Alloc>
+	bool	operator!=(const map<Key, T, Compare, Alloc>& lhs, const map<Key, T, Compare, Alloc>& rhs)
+	{ return !(lhs == rhs); }
+
+	template <class Key, class T, class Compare, class Alloc>
+	bool	operator<(const map<Key, T, Compare, Alloc>& lhs, const map<Key, T, Compare, Alloc>& rhs)
+	{
+		return (lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	}
+
+	template <class Key, class T, class Compare, class Alloc>
+	bool	operator>(const map<Key, T, Compare, Alloc>& lhs, const map<Key, T, Compare, Alloc>& rhs)
+	{
+		return (lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end()));
+	}
+
+	template <class Key, class T, class Compare, class Alloc>
+	bool	operator<=(const map<Key, T, Compare, Alloc>& lhs, const map<Key, T, Compare, Alloc>& rhs)
+	{
+		return !(rhs < lhs);
+	}
+
+	template <class Key, class T, class Compare, class Alloc>
+	bool operator>=(const map<Key, T, Compare, Alloc>& lhs, const map<Key, T, Compare, Alloc>& rhs)
+	{
+		return !(lhs < rhs);
+	}
+	/*---------------------------------------------------------------------------------------------------------------*/
 };
 
 #endif
