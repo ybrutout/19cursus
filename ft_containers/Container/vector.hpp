@@ -1,13 +1,10 @@
 #ifndef	FT_VECTOR_HPP
 # define FT_VECTOR_HPP
 
-# include <iostream>
-# include <memory>
-# include <exception>
-# include "random_access_iterator.hpp"
-# include "reverse_iterator.hpp"
-# include "type_traits.hpp"
-# include "utils.hpp"
+# include "../Iterator/random_access_iterator.hpp"
+# include "../Iterator/reverse_iterator.hpp"
+# include "../Utils/type_traits.hpp"
+# include "../Utils/utils.hpp"
 
 namespace	ft
 {
@@ -15,8 +12,6 @@ namespace	ft
 	class	vector
 	{
 		public:
-			/*Typedef is an alias, example: When we'll ask for a value_type, it will be the type of the template ask*/
-
 			typedef				T													value_type;
 			typedef				Alloc												allocator_type;
 			typedef typename	allocator_type::reference							reference;
@@ -55,15 +50,10 @@ namespace	ft
 
 		public:
 
-		/***************\
-		** CONSTRUCTOR **
-		\***************/
-
 		/*Constructs an empty container with the given allocator alloc.*/
 		explicit vector (const allocator_type& alloc = allocator_type()) : _data(NULL), _alloc(alloc), _capacity(0), _size(0) {}
 
-		/*Constructs a container with n elements. Each element is a copy of val.
-		Rem : pas de gestion pour savoir si l'allocation de mémoire a été faite proprement ou non car std::allocator::allocate le fait lui même.*/
+		/*Constructs a container with n elements. Each element is a copy of val.*/
 		explicit vector (size_type n, const value_type& val = value_type(),const allocator_type& alloc = allocator_type()) : _alloc(alloc), _capacity(n), _size(n)
 		{
 			if (n < 0)
@@ -96,20 +86,12 @@ namespace	ft
 				this->_alloc.construct(&this->_data[i], x._data[i]);
 		}
 
-		/*****************\
-		** DECONSTRUCTOR **
-		\*****************/
-
 		~vector()
 		{
 			for (size_type i = 0; i < this->_size; i++)
 				this->_alloc.destroy(&this->_data[i]);
 			this->_alloc.deallocate(this->_data, this->_capacity);
 		}
-
-		/**************\
-		** OPERATOR = **
-		\**************/
 
 		vector& operator=(const vector& x)
 		{
@@ -123,10 +105,6 @@ namespace	ft
 				this->_alloc.construct(&this->_data[i], x._data[i]);
 			return (*this);
 		}
-
-		/************\
-		** ITERATOR **
-		\************/
 
 		/*Return an iterator to the first element.*/
 		iterator begin()
@@ -160,10 +138,6 @@ namespace	ft
 		for a reverse_iterator so to the element before the first element.*/
 		const_reverse_iterator rend() const
 		{ return (this->_data - 1); }
-
-		/************\
-		** CAPACITY **
-		\************/
 
 		/*Return the number of element present in the vector. It's not the same than the capacity.*/
 		size_type		size() const{ return this->_size; }
@@ -234,10 +208,6 @@ namespace	ft
 			return ;
 		}
 
-		/******************\
-		** ELEMENT ACCESS **
-		\******************/
-
 		reference operator[] (size_type n)
 		{
 			return this->_data[n];
@@ -281,10 +251,6 @@ namespace	ft
 		{
 			return this->_data[this->_size - 1];
 		}
-
-		/*************\
-		** MODIFIERS **
-		\*************/
 
 		/*Replaces the contents with copies of those in the range [first, last). The behavior is undefined if either argument is an
 		iterator into *this.*/
@@ -357,7 +323,6 @@ namespace	ft
 		}
 
 		/*Removes the last element in the vector, effectively reducing the container size by one.*/
-		/*There no check if is an empty vector and the size is decrement so its a big number.*/
 		void pop_back()
 		{
 			if (this->_size > 0)
@@ -426,8 +391,6 @@ namespace	ft
     	void insert (iterator position, InputIt first, InputIt last,
 		typename ft::enable_if<!ft::is_integral<InputIt>::value >::type* = NULL)
 		{
-			//distance (simon max ?)
-			//difference_type	distance = last - first;
 			size_type distance = 0;
 			for (InputIt tmp = first; tmp != last; tmp++)
 				distance++;
@@ -452,8 +415,6 @@ namespace	ft
 			this->_size += distance;
 		}
 
-		//changer les erase car je peux pas d'office reallocer il faut que justement j'utilise la même allocation de mémoire et
-		//que je supprime juste les objects de la fin.
 		/*Remove from the vector a single element that is at position and reduce the size. He return the following iterator
 		of the last element deleted. If the last element deleted is the end, the end() ietrator is return.*/
 		iterator erase (iterator position)
@@ -544,10 +505,6 @@ namespace	ft
 				this->_alloc.destroy(&this->_data[i]);
 			this->_size = 0;
 		}
-
-		/*************\
-		** ALLOCATOR **
-		\*************/
 
 		/*Returns a copy of the allocator object associated with the vector.*/
 		allocator_type get_allocator() const

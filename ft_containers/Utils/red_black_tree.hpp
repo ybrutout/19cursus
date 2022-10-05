@@ -1,17 +1,16 @@
 #ifndef RED_BLACK_TREE_HPP
 # define RED_BLACK_TREE_HPP
 
-# include <iostream>
 # include "pair.hpp"
-# include "tree_iterator.hpp"
-# include "reverse_iterator.hpp"
+# include "../Iterator/tree_iterator.hpp"
+# include "../Iterator/reverse_iterator.hpp"
+# include <iostream>
 
 # define RED false
 # define BLACK true
 
 namespace ft
 {
-	//Par définition j'ai mis la couleur du node à rouge dès le départ puisque à chaque insertion(sauf la première) le node est d'abord mis en rouge.
 	template <class key, class T>
 	class Node
 	{
@@ -28,14 +27,13 @@ namespace ft
 			Node					*left;
 			Node					*right;
 			value_type				value;
-			bool					color;//true == noir et RED == rouge
+			bool					color;
 
 			/*Default constructor, Construct an empty node*/
 			Node() : end(NULL), parent(NULL), left(NULL), right(NULL), color(RED)
 			{}
 
 			/*Construct a node which has a parent and a value, but no child.*/
-			//pas sure que ce soit utile, a voir
 			Node(Node *parent, value_type val) : parent(parent), left(NULL), right(NULL), value(val), color(RED)
 			{}
 
@@ -43,7 +41,6 @@ namespace ft
 			Node(value_type val) : parent(NULL), left(NULL), right(NULL), value(val), color(RED)
 			{}
 
-			//pas sure que ce soit utile a voir
 			Node(key first, T second) : parent(NULL), left(NULL), right(NULL), color(RED)
 			{
 				this->value._first = first;
@@ -70,23 +67,18 @@ namespace ft
 			}
 	};
 
-	//fonction pour afficher donc à enlever
+	/*Display Function just for vizualisation
 	template <class key, class T>
 	void printRBTRec(const std::string &prefix, const Node<key, T> *node, bool isLeft)
 	{
 		if (node != nullptr)
 		{
 			std::cout << prefix;
-
 			std::cout << (isLeft ? "├──" : "└──");
-
-			// print the value of the node
 			if (node->color)
 				std::cout << node->value.first << std::endl;
 			else
 				std::cout << "\033[31m" << node->value.first << "\033[0m" << std::endl;
-
-			// enter the next tree level - left and right branch
 			printRBTRec(prefix + (isLeft ? "│   " : "    "), node->right, BLACK);
 			printRBTRec(prefix + (isLeft ? "│   " : "    "), node->left, RED);
 		}
@@ -96,7 +88,7 @@ namespace ft
 			std::cout << (isLeft ? "├──" : "└──");
 			std::cout << std::endl;
 		}
-	}
+	}*/
 
 	template <class key, class T, class Compare = std::less<key>, class Alloc =  std::allocator<ft::pair<key, T> > >
 	class RBTree
@@ -128,7 +120,6 @@ namespace ft
 			node				*_root;
 
 		private:
-			/*Créer le noeud NULL*/
 			void	this_is_end()
 			{
 				_end = new node;
@@ -147,7 +138,6 @@ namespace ft
 				this_is_end();
 			}
 
-			/*TO DO : Copie Constructor*/
 			RBTree(RBTree const &cpy) : _alloc(cpy._alloc), _key_cmp(cpy._key_cmp), _size(0), _root(NULL)
 			{
 				iterator	it(cpy.RBTMinVal());
@@ -159,8 +149,6 @@ namespace ft
 					it++;
 				}
 			}
-
-			//Constructeur de range (pas sure d'en avoir besoin directement dans le redblack tree)
 
 			/*Deconstructor*/
 			~RBTree()
@@ -199,7 +187,7 @@ namespace ft
 				this->_root->left = this->_end;
 				this->_root->color = BLACK;
 				this->_root->end = this->_end;
-				this->_end->parent = this->_root;///J'ai rajouté cela pour les itérateurs puissent gérer les smaller and bigger
+				this->_end->parent = this->_root;
 			}
 
 			pair<iterator, bool>	where_is_the_value(value_type val)
@@ -209,7 +197,6 @@ namespace ft
 
 				while (1)
 				{
-					//Si la clé est plus petite que la clé de tmp
 					if (this->_key_cmp(val.first, tmp->value.first))
 					{
 						if (tmp->left && tmp->left != this->_end)
@@ -222,14 +209,13 @@ namespace ft
 							nw->left = _end;
 							nw->parent = tmp;
 							nw->end = _end;
-							tmp = tmp->left; // a chaque fois que je break il faut que tmp soit égal à la dernière node inséré.Z
+							tmp = tmp->left;
 							this->_size++;
 							break;
 						}
 					}
 					else
 					{
-						//faire la gestion de si on veut insérer une valeur qui existe déjà.
 						if (!this->_key_cmp(tmp->value.first, val.first))
 						{
 							ret.first = tmp;
@@ -237,10 +223,7 @@ namespace ft
 							return ret;
 						}
 						if (tmp->right && tmp->right != this->_end)
-						{
 							tmp = tmp->right;
-							// std::cout << "tmp right == " << tmp->right->value.first << std::endl;
-						}
 						else
 						{
 							node *nw = new node(val);
@@ -260,7 +243,7 @@ namespace ft
 				return ret;
 			}
 
-			void	rotation_left(node *x, node *y, node *p) // on reçoit celui qui va descendre(x) celui qui va monter(y) et le parent de base.
+			void	rotation_left(node *x, node *y, node *p)
 			{
 				if (!p)
 					this->_root = y;
@@ -276,7 +259,7 @@ namespace ft
 				x->parent = y;
 			}
 
-			void	rotation_right(node *x, node *y, node *p)// on reçoit celui qui va monter(x) celui qui va descendre(y) et le parent de base.
+			void	rotation_right(node *x, node *y, node *p)
 			{
 				if (!p)
 					this->_root = x;
@@ -343,8 +326,8 @@ namespace ft
 			{
 				ft::pair<iterator, bool>	ret;
 				node		*tmp;
-				node		*p;//parent
-				node		*g;//grand-parent
+				node		*p;
+				node		*g;
 
 				if (this->_size == 0)
 				{
@@ -356,9 +339,8 @@ namespace ft
 				ret = where_is_the_value(val);
 				if (!ret.second)
 				{
-					return ret;//gestion de quand on veut insérer une valeur qui existe déjà
+					return ret;
 				}
-				// std::cout << "val == " << val.first << std::endl;
 				tmp = ret.first._node;
 				while (tmp->parent && tmp->parent->color == RED)
 				{
@@ -370,7 +352,6 @@ namespace ft
 						tmp = p_red_and_u_red(g->right, p, g);
 					else if (g->right == p)
 					{
-						// std::cout << "tmp == " << tmp->value.first << std::endl;
 						if (p->right && p->right == tmp)
 							g_right_p_right(p, g);
 						else if (p->left && p->left == tmp)
@@ -550,7 +531,7 @@ namespace ft
 
 				tmp = find_the_value(val);
 				if (tmp == this->_end)
-					return 0;//gestion de quand l'object n'existe pas dans l'arbre
+					return 0;
 				bis = BST_delete(tmp);
 				if (bis)
 					bis = rebalanced_delete(bis);
@@ -579,12 +560,13 @@ namespace ft
 			{
 				node 	*tmp = _root;
 				node	*previous;
+
 				while (tmp != _end)
 				{
 					previous = tmp;
 					if (tmp->value.first == k)
 						return tmp;
-					else if (tmp->value.first < k)
+					else if (tmp->value.first > k)
 						tmp = tmp->left;
 					else
 						tmp = tmp->right;
@@ -610,7 +592,7 @@ namespace ft
 					previous = tmp;
 					if (tmp->value.first == k)
 						break;
-					else if (tmp->value.first < k)
+					else if (tmp->value.first > k)
 						tmp = tmp->left;
 					else
 						tmp = tmp->right;
@@ -629,10 +611,10 @@ namespace ft
 				return previous->parent;
 			}
 
-			//fonction pour imprimé.
-			void print(void) { printRBTRec("", this->_root, RED); };
+			/*
+			Display function just to vizualisation
+			void print(void) { printRBTRec("", this->_root, RED); };*/
 
-			//a enlever
 			size_type	get_size() const
 			{
 				return this->_size;

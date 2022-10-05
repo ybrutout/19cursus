@@ -3,8 +3,6 @@
 
 # include "iterator_traits.hpp"
 # include "reverse_iterator.hpp"
-# include <iostream>
-# include <memory>
 
 namespace	ft
 {
@@ -39,7 +37,6 @@ namespace	ft
 			return (*this);
 		}
 		/*-----------------------------------------------------------------------------------------------------------*/
-
 		/*-------------------------------------------Operator--------------------------------------------------------*/
 
 		pointer const& base() const
@@ -47,7 +44,6 @@ namespace	ft
 			return this->_p;
 		}
 
-		/*Return a reference to the element pointed by the itreator*/
 		reference	operator*() const
 		{
 			return *this->_p;
@@ -114,8 +110,9 @@ namespace	ft
 			pointer	tmp = this->_p + n;
 			return *tmp;
 		}
+		/*-----------------------------------------------------------------------------------------------------------*/
 	};
-
+	/*------------------------------------------No member functions--------------------------------------------------*/
 	template <class Iterator1, class Iterator2>
 	bool operator==(const random_access_iterator<Iterator1>& lhs, const random_access_iterator<Iterator2>& rhs)
 	{
@@ -163,6 +160,7 @@ namespace	ft
 	{
 		return lhs.base() - rhs.base();
 	}
+	/*---------------------------------------------------------------------------------------------------------------*/
 };
 
 #endif

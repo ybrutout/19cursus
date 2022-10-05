@@ -1,7 +1,6 @@
 #ifndef TREE_ITERATOR_HPP
 # define TREE_ITERATOR_HPP
 
-#include <iostream>
 #include "iterator_traits.hpp"
 
 namespace ft

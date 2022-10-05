@@ -41,12 +41,12 @@ namespace ft
 		~reverse_iterator()
 		{}
 
-		// /*Overload operator for assignement*/
-		// reverse_iterator&	operator=(const reverse_iterator& it)
-		// {
-		// 	this->_current = it._current;
-		// 	return *this;
-		// }
+		/*Overload operator for assignement*/
+		reverse_iterator&	operator=(const reverse_iterator& it)
+		{
+			this->_current = it._current;
+			return *this;
+		}
 		/*-----------------------------------------------------------------------------------------------------------*/
 
 		/*-------------------------------------------Operator--------------------------------------------------------*/
@@ -162,5 +162,6 @@ namespace ft
 	template< class Iterator >
 	typename reverse_iterator<Iterator>::difference_type operator-( const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs )
 	{ return rhs.base() - lhs.base();}
+	/*---------------------------------------------------------------------------------------------------------------*/
 };
 #endif
