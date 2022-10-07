@@ -1,0 +1,18 @@
+RB-INSERT(T, k)
+     BST-INSERT(T, k) //normal BST insertion
+     while parent.color == RED
+         if parent == grand_parent.right
+            u = grand_parent.left //uncle
+             if u.color == RED // case 3.1
+                u.color = BLACK
+                parent.color = BLACK
+                grand_parent.color = RED
+                k = grand_parent
+             else if k == parent.left // case 3.3.1 and 3.3.2
+                    k = parent
+                    LEFT-ROTATE(T, k)
+                parent.color = BLACK
+                grand_parent.color = RED
+                RIGHT-ROTATE(T, grand_parent)
+        else (same as then clause with “left” and “right” exchanged)
+     T.root.color = BLACK

@@ -1,10 +1,11 @@
-NAME 		= Container
+NAME 		= Scalar_type
 
 CPP 		= c++
 
 CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
 
 SRC 		=	main.cpp	\
+				Convert.cpp	\
 
 OBJS		=	$(SRC:%.cpp=%.o)
 
@@ -22,6 +23,7 @@ clean:
 
 fclean:		clean
 			@rm -rf $(NAME)
+			@rm -rf *_shubbery
 
 re:			fclean all
 

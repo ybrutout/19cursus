@@ -1,4 +1,4 @@
-#ifndef RED_BLACK_TREE_HPP
+                                                                                                                                                                                                                             #ifndef RED_BLACK_TREE_HPP
 # define RED_BLACK_TREE_HPP
 
 # include "pair.hpp"
@@ -26,7 +26,7 @@ namespace ft
 			Node					*parent;
 			Node					*left;
 			Node					*right;
-			value_type				value;
+			value_type				value;                                                                      
 			bool					color;
 
 			/*Default constructor, Construct an empty node*/
@@ -67,7 +67,7 @@ namespace ft
 			}
 	};
 
-	/*Display Function just for vizualisation
+	///Display Function just for vizualisation
 	template <class key, class T>
 	void printRBTRec(const std::string &prefix, const Node<key, T> *node, bool isLeft)
 	{
@@ -88,7 +88,7 @@ namespace ft
 			std::cout << (isLeft ? "├──" : "└──");
 			std::cout << std::endl;
 		}
-	}*/
+	}
 
 	template <class key, class T, class Compare = std::less<key>, class Alloc =  std::allocator<ft::pair<key, T> > >
 	class RBTree
@@ -285,9 +285,9 @@ namespace ft
 
 			node	*p_red_and_u_red(node *u, node *p, node *g)
 			{
+				re_color(p);
 				re_color(u);
 				re_color(g);
-				re_color(p);
 				if (g == this->_root)
 					re_color(g);
 				return g;
@@ -329,6 +329,8 @@ namespace ft
 				node		*p;
 				node		*g;
 
+				if (val.first == 7367)
+					print();
 				if (this->_size == 0)
 				{
 					its_empty(val);
@@ -338,12 +340,14 @@ namespace ft
 				}
 				ret = where_is_the_value(val);
 				if (!ret.second)
-				{
 					return ret;
-				}
 				tmp = ret.first._node;
-				while (tmp->parent && tmp->parent->color == RED)
+				while (tmp && tmp->parent && tmp->parent->color == RED)
 				{
+					std::cout << "tmp == " << tmp->value.first << std::endl;
+					std::cout << "parent == " << tmp->parent->value.first << std::endl;
+					std::cout << "Grandparent == " << tmp->parent->parent->value.first << std::endl;
+
 					p = tmp->parent;
 					g = p->parent;
 					if (g->right == p && g->left && g->left->color == RED)
@@ -611,9 +615,9 @@ namespace ft
 				return previous->parent;
 			}
 
-			/*
-			Display function just to vizualisation
-			void print(void) { printRBTRec("", this->_root, RED); };*/
+
+			///Display function just to vizualisation
+			void print(void) { printRBTRec("", this->_root, RED); };
 
 			size_type	get_size() const
 			{

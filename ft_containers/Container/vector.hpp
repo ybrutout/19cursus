@@ -79,7 +79,7 @@ namespace	ft
 		}
 
 		/*Constructs a container with a copy of each of the elements in x, in the same order.*/
-		vector (const vector& x) : _alloc(x._alloc), _capacity(x._capacity), _size(x._size)
+		vector (const vector& x) : _alloc(x._alloc), _capacity(x._size), _size(x._size)
 		{
 			this->_data = this->_alloc.allocate(this->_size);
 			for (size_type i = 0; i < this->_size; i++)
@@ -99,7 +99,7 @@ namespace	ft
 				this->_alloc.destroy(&this->_data[i]);
 			this->_alloc.deallocate(this->_data, this->_capacity);
 			this->_data = this->_alloc.allocate(x._capacity);
-			this->_capacity = x._capacity;
+			this->_capacity = x._size;
 			this->_size = x._size;
 			for (size_type i = 0; i < x._size; i++)
 				this->_alloc.construct(&this->_data[i], x._data[i]);
