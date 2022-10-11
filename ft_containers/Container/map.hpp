@@ -277,7 +277,9 @@ namespace ft
 		}
 		pair<iterator,iterator>             equal_range (const key_type& k)
 		{
-			return make_pair(lower_bound(k), upper_bound(k));
+			iterator	lower = lower_bound(k);
+			iterator	upper = upper_bound(k);
+			return make_pair(lower, upper);
 		}
 
 		/*-----------------------------------------------------------------------------------------------------------*/

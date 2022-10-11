@@ -78,7 +78,14 @@ namespace ft
 			if (node->color)
 				std::cout << node->value.first << std::endl;
 			else
+			{
 				std::cout << "\033[31m" << node->value.first << "\033[0m" << std::endl;
+				// if (node->left->color == RED || node->right->color == RED)
+				// {
+				// 	std::cout << node->value.first << std::endl;
+				// 	exit(EXIT_SUCCESS);
+				// }
+			}
 			printRBTRec(prefix + (isLeft ? "│   " : "    "), node->right, BLACK);
 			printRBTRec(prefix + (isLeft ? "│   " : "    "), node->left, RED);
 		}
@@ -88,6 +95,29 @@ namespace ft
 			std::cout << (isLeft ? "├──" : "└──");
 			std::cout << std::endl;
 		}
+		// if (tmp)
+		// 	std::cout << "key == " << tmp << std::endl;
+	}
+
+	///TO DELETE !!!!!!
+	template <class key, class T>
+	void printRBTRec_without(const std::string &prefix, const Node<key, T> *node, bool isLeft)
+	{
+		if (node != nullptr)
+		{
+			if (node->color == RED)
+			{
+				if (node->left->color == RED || node->right->color == RED)
+				{
+					std::cout << node->value.first << std::endl;
+					exit(EXIT_SUCCESS);
+				}
+			}
+			printRBTRec_without(prefix + (isLeft ? "│   " : "    "), node->right, BLACK);
+			printRBTRec_without(prefix + (isLeft ? "│   " : "    "), node->left, RED);
+		}
+		// if (tmp)
+		// 	std::cout << "key == " << tmp << std::endl;
 	}
 
 	template <class key, class T, class Compare = std::less<key>, class Alloc =  std::allocator<ft::pair<key, T> > >
@@ -326,11 +356,9 @@ namespace ft
 			{
 				ft::pair<iterator, bool>	ret;
 				node		*tmp;
-				node		*p;
-				node		*g;
+				node		*tmp_tmp;
+				node		*u;
 
-				if (val.first == 7367)
-					print();
 				if (this->_size == 0)
 				{
 					its_empty(val);
@@ -344,32 +372,53 @@ namespace ft
 				tmp = ret.first._node;
 				while (tmp && tmp->parent && tmp->parent->color == RED)
 				{
-					std::cout << "tmp == " << tmp->value.first << std::endl;
-					std::cout << "parent == " << tmp->parent->value.first << std::endl;
-					std::cout << "Grandparent == " << tmp->parent->parent->value.first << std::endl;
-
-					p = tmp->parent;
-					g = p->parent;
-					if (g->right == p && g->left && g->left->color == RED)
-						tmp = p_red_and_u_red(g->left, p, g);
-					else if (g->left == p && g->right && g->right->color == RED)
-						tmp = p_red_and_u_red(g->right, p, g);
-					else if (g->right == p)
+					if (tmp->parent->parent->right == tmp->parent)
 					{
-						if (p->right && p->right == tmp)
-							g_right_p_right(p, g);
-						else if (p->left && p->left == tmp)
-							g_right_p_left(p);
-						tmp = tmp->parent;
+						u = tmp->parent->parent->left;
+						if (u->color == RED)
+						{
+							u->color = BLACK;
+							tmp->parent->color = BLACK;
+							tmp->parent->parent->color = RED;
+							tmp = tmp->parent->parent;
+						}
+						else 
+						{
+							if (tmp == tmp->parent->left)
+							{
+								tmp_tmp = tmp->parent;
+								rotation_right(tmp, tmp->parent, tmp->parent->parent);
+								tmp = tmp_tmp;
+							}
+							tmp->parent->color = BLACK;
+							tmp->parent->parent->color = RED;
+							rotation_left(tmp->parent->parent, tmp->parent->parent->right, tmp->parent->parent->parent);
+						}
 					}
-					else if (g->left == p)
+					else
 					{
-						if (p->left && p->left == tmp)
-							g_left_p_left(p);
-						else if (p->right && p->right == tmp)
-							g_left_p_right(p);
-						tmp = tmp->parent;
+						u = tmp->parent->parent->right;
+						if (u->color == RED)
+						{
+							u->color = BLACK;
+							tmp->parent->color = BLACK;
+							tmp->parent->parent->color = RED;
+							tmp = tmp->parent->parent;
+						}
+						else
+						{
+							if (tmp == tmp->parent->right)
+							{
+								tmp_tmp = tmp->parent;
+								rotation_left(tmp->parent, tmp, tmp->parent->parent);
+								tmp = tmp_tmp;							
+							}
+							tmp->parent->color = BLACK;
+							tmp->parent->parent->color = RED;
+							rotation_right(tmp->parent, tmp->parent->parent, tmp->parent->parent->parent);
+						}
 					}
+					_root->color = BLACK;
 				}
 				return ret;
 			}
@@ -462,6 +511,7 @@ namespace ft
 			{
 				if (x == x->parent->left)
 				{
+
 					s = x->parent->right;
 					if (s->color == RED)
 					{
@@ -470,23 +520,25 @@ namespace ft
 						rotation_left(x->parent, x->parent->right, x->parent->parent);
 						s = x->parent->right;
 					}
-					if (s->left->color == BLACK && s->right->color == BLACK)
+					if (s != _end && s->left->color == BLACK && s->right->color == BLACK)
 					{
 						s->color = RED;
 						x = x->parent;
 					}
 					else
 					{
-						if (s->right->color == BLACK)
+						if (s != _end && s->right->color == BLACK)
 						{
 							s->left->color = BLACK;
 							s->color = RED;
 							rotation_right(s->left, s, s->parent);
 							s = x->parent->right;
 						}
-						s->color = x->parent->color;
+						if (s != _end)
+							s->color = x->parent->color;
 						x->parent->color = BLACK;
-						s->right->color = BLACK;
+						if (s != _end)
+							s->right->color = BLACK;
 						rotation_left(x->parent, x->parent->right, x->parent->parent);
 						x = this->_root;
 					}
@@ -501,7 +553,7 @@ namespace ft
 						rotation_right(x->parent->left, x->parent, x->parent->parent);
 						s = x->parent->left;
 					}
-					if (s->right->color == BLACK && s->left->color == BLACK)
+					if (s != _end && s->right->color == BLACK && s->left->color == BLACK)
 					{
 						s->color = RED;
 						x = x->parent;
@@ -591,6 +643,8 @@ namespace ft
 			{
 				node 	*tmp = _root;
 				node	*previous;
+				if (k == 63077)
+					print();
 				while (tmp != _end)
 				{
 					previous = tmp;
@@ -601,23 +655,36 @@ namespace ft
 					else
 						tmp = tmp->right;
 				}
-				if (!previous)
+				if (previous == _root)
+				{
+					std::cout << "A" << std::endl;
 					return FindMinval(tmp->right);
+				}
 				if (previous->value.first > k)
+				{
+					std::cout << "B" << std::endl;
 					return previous;
+				}
 				else
 				{
 					if (previous == RBTMaxVal())
 						return _end;
-					while (previous->parent->right == previous)
+					while (previous->parent && previous->parent->right == previous)
+					{
+						std::cout << "CHECK" << std::endl;
 						previous = previous->parent;
+					}
+					if (!previous->parent)
+						return FindMinval(tmp->right);
 				}
 				return previous->parent;
 			}
 
 
 			///Display function just to vizualisation
-			void print(void) { printRBTRec("", this->_root, RED); };
+			void print(void) const { printRBTRec("", this->_root, RED); };
+			///TODELETE
+			void print_without(void) { printRBTRec_without("", this->_root, RED); };
 
 			size_type	get_size() const
 			{
