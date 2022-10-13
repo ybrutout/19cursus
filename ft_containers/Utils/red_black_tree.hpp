@@ -67,7 +67,7 @@ namespace ft
 			}
 	};
 
-	///Display Function just for vizualisation
+	//Display Function just for vizualisation
 	template <class key, class T>
 	void printRBTRec(const std::string &prefix, const Node<key, T> *node, bool isLeft)
 	{
@@ -80,11 +80,6 @@ namespace ft
 			else
 			{
 				std::cout << "\033[31m" << node->value.first << "\033[0m" << std::endl;
-				// if (node->left->color == RED || node->right->color == RED)
-				// {
-				// 	std::cout << node->value.first << std::endl;
-				// 	exit(EXIT_SUCCESS);
-				// }
 			}
 			printRBTRec(prefix + (isLeft ? "│   " : "    "), node->right, BLACK);
 			printRBTRec(prefix + (isLeft ? "│   " : "    "), node->left, RED);
@@ -95,29 +90,6 @@ namespace ft
 			std::cout << (isLeft ? "├──" : "└──");
 			std::cout << std::endl;
 		}
-		// if (tmp)
-		// 	std::cout << "key == " << tmp << std::endl;
-	}
-
-	///TO DELETE !!!!!!
-	template <class key, class T>
-	void printRBTRec_without(const std::string &prefix, const Node<key, T> *node, bool isLeft)
-	{
-		if (node != nullptr)
-		{
-			if (node->color == RED)
-			{
-				if (node->left->color == RED || node->right->color == RED)
-				{
-					std::cout << node->value.first << std::endl;
-					exit(EXIT_SUCCESS);
-				}
-			}
-			printRBTRec_without(prefix + (isLeft ? "│   " : "    "), node->right, BLACK);
-			printRBTRec_without(prefix + (isLeft ? "│   " : "    "), node->left, RED);
-		}
-		// if (tmp)
-		// 	std::cout << "key == " << tmp << std::endl;
 	}
 
 	template <class key, class T, class Compare = std::less<key>, class Alloc =  std::allocator<ft::pair<key, T> > >
@@ -311,44 +283,6 @@ namespace ft
 					x->color = RED;
 				else
 					x->color = BLACK;
-			}
-
-			node	*p_red_and_u_red(node *u, node *p, node *g)
-			{
-				re_color(p);
-				re_color(u);
-				re_color(g);
-				if (g == this->_root)
-					re_color(g);
-				return g;
-			}
-
-			void	g_right_p_right(node *p, node *g)
-			{
-				rotation_left(g, p, g->parent);
-				re_color(g);
-				re_color(p);
-			}
-
-			void	g_right_p_left(node *p)
-			{
-				rotation_right(p->left, p, p->parent);
-				g_right_p_right(p->parent, p->parent->parent);
-			}
-
-			void	g_left_p_left(node *p)
-			{
-				rotation_right(p, p->parent, p->parent->parent);
-				re_color(p);
-				re_color(p->right);
-			}
-
-			void	g_left_p_right(node *p)
-			{
-				rotation_left(p, p->right, p->parent);
-				rotation_right(p->parent, p->parent->parent, p->parent->parent->parent);
-				re_color(p->parent);
-				re_color(p->parent->right);
 			}
 
 		public:
@@ -643,8 +577,6 @@ namespace ft
 			{
 				node 	*tmp = _root;
 				node	*previous;
-				if (k == 63077)
-					print();
 				while (tmp != _end)
 				{
 					previous = tmp;
@@ -655,36 +587,31 @@ namespace ft
 					else
 						tmp = tmp->right;
 				}
-				if (previous == _root)
+				if (tmp != _end)
 				{
-					std::cout << "A" << std::endl;
-					return FindMinval(tmp->right);
-				}
-				if (previous->value.first > k)
-				{
-					std::cout << "B" << std::endl;
-					return previous;
+					if (tmp->right != _end)
+						return FindMinval(tmp->right);
+					if (tmp == RBTMaxVal())
+						return _end;
+					while (tmp->parent && tmp == tmp->parent->right)
+						tmp = tmp->parent;
+					return tmp->parent;
 				}
 				else
 				{
 					if (previous == RBTMaxVal())
-						return _end;
-					while (previous->parent && previous->parent->right == previous)
-					{
-						std::cout << "CHECK" << std::endl;
-						previous = previous->parent;
-					}
-					if (!previous->parent)
-						return FindMinval(tmp->right);
+				 		return _end;
+					if (previous == RBTMinVal())
+						return RBTMinVal();
+					while (tmp->parent && tmp == tmp->parent->right)
+						tmp = tmp->parent;
+					return tmp->parent;
 				}
-				return previous->parent;
 			}
 
 
-			///Display function just to vizualisation
+			//Display function just to vizualisation
 			void print(void) const { printRBTRec("", this->_root, RED); };
-			///TODELETE
-			void print_without(void) { printRBTRec_without("", this->_root, RED); };
 
 			size_type	get_size() const
 			{

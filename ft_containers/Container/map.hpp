@@ -247,6 +247,7 @@ namespace ft
 
 		size_type count(const key_type& k) const
 		{
+
 			if (_tree.find_the_value(k) == _tree.get_the_end())
 				return 0;
 			return 1;
@@ -313,13 +314,13 @@ namespace ft
 	template <class Key, class T, class Compare, class Alloc>
 	bool	operator<(const map<Key, T, Compare, Alloc>& lhs, const map<Key, T, Compare, Alloc>& rhs)
 	{
-		return (lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
 	}
 
 	template <class Key, class T, class Compare, class Alloc>
 	bool	operator>(const map<Key, T, Compare, Alloc>& lhs, const map<Key, T, Compare, Alloc>& rhs)
 	{
-		return (lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end()));
+		return (ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end()));
 	}
 
 	template <class Key, class T, class Compare, class Alloc>

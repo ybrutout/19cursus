@@ -1,11 +1,10 @@
-NAME 		= Scalar_type
+NAME 		= Container_tester
 
 CPP 		= c++
 
 CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
 
-SRC 		=	main.cpp	\
-				Convert.cpp	\
+SRC 		=	main_vector.cpp	\
 
 OBJS		=	$(SRC:%.cpp=%.o)
 
