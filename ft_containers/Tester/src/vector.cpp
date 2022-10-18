@@ -63,6 +63,9 @@ void	ft_iterator_vector()
 	ft::vector<int>		vect;
 	for (int i = 0; i < 100; i++)
 		vect.push_back(i);
+	
+	ft::vector<int>::iterator it = vect.begin();
+	ft::vector<int>::const_iterator	itconst = vect.begin();
 	std::cout << "************TEST FOR THE ITERATOR***********" <<std::endl;
 
 	std::cout << "------------Beguin-----------" << std::endl;
@@ -79,6 +82,10 @@ void	ft_iterator_vector()
 
 	std::cout << "-------------Rend------------" << std::endl;
 	std::cout << "Rend :" << *(--vect.rend()) << std::endl;
+	std::cout << "-----------------------------" << std::endl;
+
+	std::cout << "-----Comparaison-const-------" << std::endl;
+	std::cout <<  (it == itconst) << " | " << (++it != itconst) << std::endl;
 	std::cout << "-----------------------------" << std::endl;
 
 	std::cout << "********************************************" <<std::endl << std::endl;
@@ -283,12 +290,12 @@ void	ft_modifiers_vector()
 	for(int i = 0; i < 5; i++, it++, ite++)
 		std::cout << "	" << *it << "	|	" << *ite << std::endl;
 	std::cout << std::endl;
+	it = small.begin();
+	ite = big.begin();
 
 	small.swap(big);
 
-	it = small.begin();
-	ite = big.begin();
-	std::cout << "  small	 	|	big	" << std::endl;
+	std::cout << "    big		|	small	" << std::endl;
 	std::cout << "---------------------------------" << std::endl;
 	for(int i = 0; i < 5; i++, it++, ite++)
 		std::cout << "	" << *it << "	|	" << *ite << std::endl;

@@ -61,6 +61,8 @@ void	ft_iterator_vector()
 	std::vector<int>		vect;
 	for (int i = 0; i < 100; i++)
 		vect.push_back(i);
+	std::vector<int>::iterator it = vect.begin();
+	std::vector<int>::const_iterator	itconst = vect.begin();
 	std::cout << "************TEST FOR THE ITERATOR***********" <<std::endl;
 
 	std::cout << "------------Beguin-----------" << std::endl;
@@ -77,6 +79,10 @@ void	ft_iterator_vector()
 
 	std::cout << "-------------Rend------------" << std::endl;
 	std::cout << "Rend :" << *(--vect.rend()) << std::endl;
+	std::cout << "-----------------------------" << std::endl;
+
+	std::cout << "-----Comparaison-const-------" << std::endl;
+	std::cout <<  (it == itconst)<< std::endl;
 	std::cout << "-----------------------------" << std::endl;
 
 	std::cout << "********************************************" <<std::endl << std::endl;
