@@ -25,7 +25,7 @@ namespace	ft
 			typedef typename	ft::iterator_traits<iterator>::difference_type		difference_type;
 			typedef				size_t												size_type;
 
-		protected:
+		private:
 
 			pointer					_data;
 			allocator_type			_alloc;
@@ -475,24 +475,21 @@ namespace	ft
 
 		void swap (vector& x)
 		{
-			allocator_type alloc_tmp;
 			pointer		data_tmp = NULL;
 			size_type	size_tmp = 0;
 			size_type	capacity_tmp = 0;
 			if (this->_alloc == x._alloc && this->_data == x._data
 			&& this->_size == x._size && this->_capacity == x._capacity)
 				return ;
-			alloc_tmp = this->_alloc;
+
 			data_tmp = this->_data;
 			size_tmp = this->_size;
 			capacity_tmp = this->_capacity;
 
-			this->_alloc = x._alloc;
 			this->_data = x._data;
 			this->_size = x._size;
 			this->_capacity = x._capacity;
 
-			x._alloc = alloc_tmp;
 			x._data = data_tmp;
 			x._size = size_tmp;
 			x._capacity = capacity_tmp;

@@ -1,7 +1,6 @@
-#include <iostream>
-#include "Container/stack.hpp"
+#include "../ft_lib.hpp"
 
-int     main(void)
+int     stack_test(void)
 {
 	ft::stack<int>      stack;
 	ft::stack<int>      stack1;
@@ -59,4 +58,6 @@ int     main(void)
 	std::cout << " >= " << (stack >= stack1) << (stack1 >= stack2) << (stack >= stack2)<< std::endl;
 	std::cout << " <= " << (stack <= stack1) << (stack1 <= stack2) << (stack <= stack2)<< std::endl;
 	std::cout << "-------------------------" << std::endl;
+
+	return 0;
 }

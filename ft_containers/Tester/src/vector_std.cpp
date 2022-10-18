@@ -1,5 +1,4 @@
-#include <iostream>
-#include "Container/vector.hpp"
+#include "../std_lib.hpp"
 
 void    ft_cannonical_vector(void)
 {
@@ -7,7 +6,7 @@ void    ft_cannonical_vector(void)
 	std::cout << "**********TEST FOR THE CONSTRUCTOR**********" <<std::endl;
 	std::cout << "-----Default-Constructor-----" << std::endl;
 	
-	ft::vector<int>     ft_vect_default;
+	std::vector<int>     ft_vect_default;
 	std::cout << "Size :" << ft_vect_default.size() << std::endl;
 	std::cout << "Empty :" << ft_vect_default.empty() << std::endl;
 	
@@ -15,7 +14,7 @@ void    ft_cannonical_vector(void)
 	
 	std::cout << "-------Fill-Constructor------" << std::endl;
 	
-	ft::vector<int>		ft_vect_fill(200, 16);
+	std::vector<int>		ft_vect_fill(200, 16);
 	std::cout << "Size :" << ft_vect_fill.size() << std::endl;
 	std::cout << "Empty :" << ft_vect_fill.empty() << std::endl;
 	std::cout << "At :" << ft_vect_fill[19] << std::endl;
@@ -26,7 +25,7 @@ void    ft_cannonical_vector(void)
 	
 	for (int i = 0; i < 100; i++)
 		ft_vect_default.push_back(i);
-	ft::vector<int>		ft_vect_range(ft_vect_default.begin(), --ft_vect_default.end());
+	std::vector<int>		ft_vect_range(ft_vect_default.begin(), --ft_vect_default.end());
 	std::cout << "Size :" << ft_vect_range.size() << std::endl;
 	std::cout << "Empty :" << ft_vect_range.empty() << std::endl;
 	std::cout << "Default At :" << ft_vect_default[10] << std::endl;
@@ -38,7 +37,7 @@ void    ft_cannonical_vector(void)
 	
 	for (int i = 10000; i < 10100; i++)
 		ft_vect_default.push_back(i);
-	ft::vector<int>     ft_vect_copy(ft_vect_default);
+	std::vector<int>     ft_vect_copy(ft_vect_default);
 	std::cout << "Size :" << ft_vect_copy.size() << std::endl;
 	std::cout << "Empty :" << ft_vect_copy.empty() << std::endl;
 	std::cout << "Default At :" << ft_vect_default[125] << std::endl;
@@ -59,7 +58,7 @@ void    ft_cannonical_vector(void)
 
 void	ft_iterator_vector()
 {
-	ft::vector<int>		vect;
+	std::vector<int>		vect;
 	for (int i = 0; i < 100; i++)
 		vect.push_back(i);
 	std::cout << "************TEST FOR THE ITERATOR***********" <<std::endl;
@@ -86,9 +85,9 @@ void	ft_iterator_vector()
 void	ft_capacity_vector()
 {
 	std::cout << "************TEST FOR THE CAPACITY***********" <<std::endl;
-	ft::vector<int>		empty_vect;
-	ft::vector<int>		big_vect;
-	ft::vector<int>		small_vect;
+	std::vector<int>		empty_vect;
+	std::vector<int>		big_vect;
+	std::vector<int>		small_vect;
 	for (int i = 0; i < 100; i++)
 		big_vect.push_back(i);
 	for(int i = 0; i < 10; i++)
@@ -119,7 +118,7 @@ void	ft_capacity_vector()
 	std::cout << "Empty size :" << empty_vect.size() << " | Empty at :" << empty_vect.at(25) <<std::endl;
 	std::cout << "Big size :" << big_vect.size() << " | Big at :" << big_vect.at(25) <<std::endl;
 	std::cout << "Small size :" << small_vect.size() << " | Small at :" << small_vect.at(25) <<std::endl;
-	ft::vector<int>	tmp_empty;
+	std::vector<int>	tmp_empty;
 	tmp_empty.resize(10, 16);
 	std::cout << "Tmp_empty size :" << tmp_empty.size() << " | Tmp_empty at :" << tmp_empty.at(5) <<std::endl;
 	std::cout << "-----------------------------" << std::endl << std::endl;
@@ -142,7 +141,7 @@ void	ft_access_vector()
 {
 	std::cout << "************TEST FOR THE CAPACITY***********" <<std::endl;
 
-	ft::vector<int>		vect;
+	std::vector<int>		vect;
 	for(int i = 0; i < 100; i++)
 		vect.push_back(i * 10);
 	std::cout << "----------Operator[]---------" << std::endl;
@@ -166,12 +165,12 @@ void	ft_access_vector()
 
 void	ft_modifiers_vector()
 {
-	ft::vector<int>		vect;
+	std::vector<int>		vect;
 	for(int i = 0; i < 100; i++)
 		vect.push_back(i + 2);
-	ft::vector<int>		empty;
-	ft::vector<int>		big;
-	ft::vector<int>		small;
+	std::vector<int>		empty;
+	std::vector<int>		big;
+	std::vector<int>		small;
 	for(int i = 0; i < 10; i++)
 		small.push_back(i);
 	for(int i = 0; i < 10000; i++)
@@ -275,8 +274,8 @@ void	ft_modifiers_vector()
 		small.push_back(i);
 		big.push_back(i * 2);
 	}
-	ft::vector<int>::iterator	it = small.begin();
-	ft::vector<int>::iterator	ite = big.begin();
+	std::vector<int>::iterator	it = small.begin();
+	std::vector<int>::iterator	ite = big.begin();
 	std::cout << "  small	 	|	big	" << std::endl;
 	std::cout << "--------------------------------" << std::endl;
 	for(int i = 0; i < 5; i++, it++, ite++)
@@ -300,9 +299,9 @@ void	ft_modifiers_vector()
 
 void	ft_relationnel_operator()
 {
-	ft::vector<int>		vect;		
-	ft::vector<int>		vect1;
-	ft::vector<int>		vect2;
+	std::vector<int>		vect;		
+	std::vector<int>		vect1;
+	std::vector<int>		vect2;
 
 	for(int i = 0; i < 10; i++)
 	{
@@ -312,9 +311,9 @@ void	ft_relationnel_operator()
 	for(int i = 100; i < 200; i++)
 		vect2.push_back(i);
 
-	ft::vector<int>::iterator	it = vect.begin();
-	ft::vector<int>::iterator	ite = vect1.begin();
-	ft::vector<int>::iterator	iter = vect2.begin();
+	std::vector<int>::iterator	it = vect.begin();
+	std::vector<int>::iterator	ite = vect1.begin();
+	std::vector<int>::iterator	iter = vect2.begin();
 
 	std::cout << "	vect	|	vect1	|	vect2" << std::endl;
 	std::cout << "--------------------------------------------------------" << std::endl;
@@ -332,7 +331,7 @@ void	ft_relationnel_operator()
 }
 
 
-int main()
+int vector_test()
 {
 	ft_cannonical_vector();
 	ft_iterator_vector();
@@ -340,5 +339,5 @@ int main()
 	ft_access_vector();
 	ft_modifiers_vector();
 	ft_relationnel_operator();
-	
+	return 0;
 }

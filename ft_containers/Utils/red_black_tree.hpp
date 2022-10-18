@@ -68,39 +68,40 @@ namespace ft
 	};
 
 	//Display Function just for vizualisation
-	template <class key, class T>
-	void printRBTRec(const std::string &prefix, const Node<key, T> *node, bool isLeft)
-	{
-		if (node != nullptr)
-		{
-			std::cout << prefix;
-			std::cout << (isLeft ? "├──" : "└──");
-			if (node->color)
-				std::cout << node->value.first << std::endl;
-			else
-			{
-				std::cout << "\033[31m" << node->value.first << "\033[0m" << std::endl;
-			}
-			printRBTRec(prefix + (isLeft ? "│   " : "    "), node->right, BLACK);
-			printRBTRec(prefix + (isLeft ? "│   " : "    "), node->left, RED);
-		}
-		else
-		{
-			std::cout << prefix;
-			std::cout << (isLeft ? "├──" : "└──");
-			std::cout << std::endl;
-		}
-	}
+	// template <class key, class T>
+	// void printRBTRec(const std::string &prefix, const Node<key, T> *node, bool isLeft)
+	// {
+	// 	if (node != nullptr)
+	// 	{
+	// 		std::cout << prefix;
+	// 		std::cout << (isLeft ? "├──" : "└──");
+	// 		if (node->color)
+	// 			std::cout << node->value.first << std::endl;
+	// 		else
+	// 		{
+	// 			std::cout << "\033[31m" << node->value.first << "\033[0m" << std::endl;
+	// 		}
+	// 		printRBTRec(prefix + (isLeft ? "│   " : "    "), node->right, BLACK);
+	// 		printRBTRec(prefix + (isLeft ? "│   " : "    "), node->left, RED);
+	// 	}
+	// 	else
+	// 	{
+	// 		std::cout << prefix;
+	// 		std::cout << (isLeft ? "├──" : "└──");
+	// 		std::cout << std::endl;
+	// 	}
+	// }
 
 	template <class key, class T, class Compare = std::less<key>, class Alloc =  std::allocator<ft::pair<key, T> > >
 	class RBTree
 	{
 		public:
+			typedef				Node<key, T>													node;
 			typedef				key																key_type;
 			typedef				T																mapped_type;
 			typedef				pair<key_type, mapped_type>										value_type;
 			typedef				Compare															key_compare;
-			typedef				Alloc															allocator_type;
+			typedef				typename Alloc::template rebind<node>::other					allocator_type;
 			typedef	typename	allocator_type::reference										reference;
 			typedef typename	allocator_type::const_reference									const_reference;
 			typedef typename	allocator_type::pointer											pointer;
@@ -111,7 +112,6 @@ namespace ft
 			typedef	typename	ft::reverse_iterator<const_iterator>							const_reverse_iterator;
 			typedef				ptrdiff_t														difference_type;
 			typedef				size_t															size_type;
-			typedef				Node<key, T>													node;
 
 		protected:
 
@@ -124,7 +124,8 @@ namespace ft
 		private:
 			void	this_is_end()
 			{
-				_end = new node;
+				_end = _alloc.allocate(1);
+				_alloc.construct(_end, node());
 				_end->color = BLACK;
 				_end->left = NULL;
 				_end->right = NULL;
@@ -174,16 +175,19 @@ namespace ft
 							else
 								tmp->right = NULL;
 						}
-						delete bis;
+						_alloc.destroy(bis);
+						_alloc.deallocate(bis, 1);
 						this->_size--;
 					}
 				}
-				delete this->_end;
+				_alloc.destroy(_end);
+				_alloc.deallocate(_end, 1);
 			}
 		private:
 			void	its_empty(value_type val)
 			{
-				this->_root = new node(val);
+				this->_root = _alloc.allocate(1);
+				_alloc.construct(this->_root, node(val));
 				this->_size++;
 				this->_root->right = this->_end;
 				this->_root->left = this->_end;
@@ -205,7 +209,8 @@ namespace ft
 							tmp = tmp->left;
 						else
 						{
-							node *nw = new node(val);
+							node *nw = _alloc.allocate(1);
+							_alloc.construct(nw, node(val));
 							tmp->left = nw;
 							nw->right = _end;
 							nw->left = _end;
@@ -228,7 +233,8 @@ namespace ft
 							tmp = tmp->right;
 						else
 						{
-							node *nw = new node(val);
+							node *nw = _alloc.allocate(1);
+							_alloc.construct(nw, node(val));
 							tmp->right = nw;
 							nw->right = _end;
 							nw->left = _end;
@@ -429,7 +435,8 @@ namespace ft
 				y->left->parent = y;
 				y->color = todelete->color;
 			}
-			delete todelete;
+			_alloc.destroy(todelete);
+			_alloc.deallocate(todelete, 1);
 			this->_size--;
 			if (todelete_color == BLACK)
 				return x;
@@ -611,7 +618,7 @@ namespace ft
 
 
 			//Display function just to vizualisation
-			void print(void) const { printRBTRec("", this->_root, RED); };
+			// void print(void) const { printRBTRec("", this->_root, RED); };
 
 			size_type	get_size() const
 			{
@@ -632,20 +639,14 @@ namespace ft
 			{
 				node	*tmp_end = this->_end;
 				node	*tmp_root = this->_root;
-				allocator_type	tmp_alloc = this->_alloc;
-				key_compare		tmp_compare = this->_key_cmp;
 				size_t			tmp_size = this->_size;
 
 				this->_end = rhs->_end;
 				this->_root = rhs->_root;
-				this->_alloc = rhs->_alloc;
-				this->_key_cmp = rhs->_key_cmp;
 				this->_size = rhs->_size;
 
 				rhs->_end = tmp_end;
 				rhs->_root = tmp_root;
-				rhs->_alloc = tmp_alloc;
-				rhs->_key_cmp = tmp_compare;
 				rhs->_size = tmp_size;
 			}
 
